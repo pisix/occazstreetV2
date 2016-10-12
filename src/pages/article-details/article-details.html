@@ -1,0 +1,105 @@
+<ion-header>
+  <ion-navbar pixis >
+    <button ion-button menuToggle *ngIf="!selectedItem">
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Details</ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="searchArticle()">
+        <ion-icon name="search"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-buttons end>
+      <button ion-button (click)="option()">
+        <ion-icon isActive="true" name="heart"></ion-icon>
+      </button>
+    </ion-buttons> <ion-buttons end>
+      <button ion-button (click)="option($event)">
+        <ion-icon name="more"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <div class="art-detail-img">
+    <img src="{{url}}{{cheminImage}}{{article.images[0].cheminImage}}"/>
+  </div>
+
+  <ion-card>
+    <ion-card-content text-center>
+      <button ion-button  class="contact-btn-left" medium round color="secondary" >
+        <ion-icon   name="call" royal></ion-icon>
+      </button>
+      <button ion-button class="" medium round  color="danger">
+        <ion-icon   name="mail"></ion-icon>
+      </button>
+      <!--<button  ion-button  medium round color="dark" >
+        <ion-icon name="text" ></ion-icon>
+      </button>-->
+      <button  ion-button class="contact-btn-right" medium round color="primary2" >
+        <ion-icon name="chatbubbles" ></ion-icon>
+      </button>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header class="header-padding">
+      <ion-item>
+        Prix : {{article.prix}}
+        <ion-badge item-right>{{article.nombreDeVue}}</ion-badge>
+      </ion-item>
+    </ion-card-header>
+    <hr class="card-devider" />
+    <ion-card-content>
+      <h2 margin-bottom text-capitalize style="margin-bottom: 5px;">{{article.titre | titeCapitalize}}</h2>
+      <p margin-bottom text-justify>{{article.details}}</p>
+      <p *ngIf="article.dateModification === null">Ajouté : {{article.dateAjout | occasStreetTimer}}</p>
+      <p *ngIf="article.dateModification">Modifié : {{article.dateModification | occasStreetTimer}}</p>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header text-center>
+      Vendeur
+    </ion-card-header>
+    <hr class="card-devider" />
+    <ion-card-content>
+      <ion-item>
+        <ion-avatar item-left>
+          <img src="{{url}}{{cheminPhoto}}{{article.utilisateur.photo.cheminPhoto}}">
+        </ion-avatar>
+         {{article.utilisateur.prenom}} {{article.utilisateur.nom[0]}}
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card id="article-details-map">
+
+  </ion-card>
+
+  <ion-card text-center>
+    <ion-card-header class="header-padding">
+      Infos supplémentaires
+    </ion-card-header>
+    <hr class="card-devider" />
+    <ion-card-content no-margin>
+      <ion-icon margin class="social-media-icon" color="primary2" name="swap"></ion-icon>
+      <ion-icon margin class="social-media-icon"  name="chatbubbles"></ion-icon>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card text-center>
+    <ion-card-header class="header-padding">
+      Partager l'annonce
+    </ion-card-header>
+    <hr class="card-devider" />
+    <ion-card-content>
+      <ion-icon margin facebook class="social-media-icon" color="facebook" name="logo-facebook"></ion-icon>
+      <ion-icon margin twitter class="social-media-icon" color="twitter" name="logo-twitter"></ion-icon>
+      <ion-icon margin danger class="social-media-icon" color="mail"  name="mail"></ion-icon>
+      <ion-icon margin dark class="social-media-icon" color="sms" name="text"></ion-icon>
+      <ion-icon margin whatsapp class="social-media-icon" color="whatsapp"  name="logo-whatsapp"></ion-icon>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

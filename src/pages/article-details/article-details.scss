@@ -1,0 +1,39 @@
+page-article-details{
+  .contact-btn-right{
+    margin-right: -100px;
+    margin-left: 40px;}
+
+  .contact-btn-left{
+    margin-left: -100px;
+    margin-right: 40px;
+  }
+  .header-padding{
+    padding:10px;
+  }
+  .card-devider{
+    width: 221px;
+    margin-top: -2px;
+    margin-bottom: 3px;
+  }
+
+  #article-details-map{
+    width: 100%;
+    min-height: 200px;
+    max-height: 250px;
+  }
+
+  .social-media-icon{
+    font-size: 200%;
+  }
+
+  .artDetail-popover{
+
+  }
+
+  .popover-content{
+    top: 47px !important;
+    left: 268px !important;
+    width: 105px !important;
+  }
+
+}
