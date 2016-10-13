@@ -22,8 +22,12 @@
 </ion-header>
 
 <ion-content>
-  <div class="art-detail-img">
-    <img src="{{url}}{{cheminImage}}{{article.images[0].cheminImage}}"/>
+  <div>
+    <ion-slides [options]="imgSliderOption">
+      <ion-slide *ngFor="let img of article.images">
+        <img class="art-detail-img" src="{{url}}{{cheminImage}}{{img.cheminImage}}"/>
+      </ion-slide>
+    </ion-slides>
   </div>
 
   <ion-card>

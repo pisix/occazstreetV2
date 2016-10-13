@@ -15,9 +15,10 @@ import {GlobalsConstants} from "../../constants/globals.constants";
 })
 export class ArticleDetailsPage {
   public article: Article;
+  private imgSliderOption:any;
   public map;
-    public url=GlobalsConstants.urlServer+GlobalsConstants.port+'/';
-    public cheminImage=GlobalsConstants.cheminImage;
+  public url=GlobalsConstants.urlServer+GlobalsConstants.port+'/';
+  public cheminImage=GlobalsConstants.cheminImage;
 
   private PopoverOptions = {
     cssClass:'',
@@ -31,6 +32,12 @@ export class ArticleDetailsPage {
 
     // If we navigated to this page, we will have an item available as a nav param
     this.article = navParams.get('article');
+
+    this.imgSliderOption = {
+      initialSlide: 0,
+      pager:true
+    }
+
     // this.map = new GoogleMap('article-details-map',{
     //
     // });
