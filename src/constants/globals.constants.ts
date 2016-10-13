@@ -1,9 +1,10 @@
-services/**
+/**
  * Created by dana on 11/08/16.
  */
 
 export  class GlobalsConstants{
 
+    //static urlServer:string = "http://localhost:";
     static urlServer:string = "http://37.59.101.217:";
     static port:string = "1337";
     static cheminImage:string = "imagesArticle/";
@@ -14,6 +15,7 @@ export  class GlobalsConstants{
     static LOCAL_TOKEN_KEY:string = "userLogged";
     static URL_JSON_IP:string = "token";
     static PAGE:number = 6;
+    static PAGEEXPLORER:number = 16;
     static VERSION:string = "2.0.0";
     static APPPLAYSTORE:string = "https://play.google.com/store/apps/details?id=com.pisixlabs.occazstreet";
     static PSEUDOTWITTER:string = "@occazstreet";

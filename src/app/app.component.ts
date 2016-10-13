@@ -36,7 +36,7 @@ export class App {
       { title: 'Aide', component: ListPage, icon:'help-circle' }
     ];
 
-    if(!this.logged)
+    if(this.logged)
     {
       this.pages.push({ title: 'Se déconnecter', component: ListPage , icon:'log-out',logged:true});
     }

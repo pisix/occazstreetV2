@@ -15,10 +15,12 @@ import {TiteCapitalize} from "../../pipes/article-titre.pipe";
 })
 export class HomePage {
 
+    public homeTab;
     public title = GlobalsConstants.APPNAME;
     private skip = 0;
+    private skipExplorer = 0;
     private limit = GlobalsConstants.PAGE;
-
+    private limitExplorer=GlobalsConstants.PAGEEXPLORER;
     public articles1:Array<Article> = [];
     public articles2:Array<Article> = [];
     private offLine:boolean;
@@ -27,6 +29,7 @@ export class HomePage {
     public dateOrder:string = 'décroissantes';
     public url=GlobalsConstants.urlServer+GlobalsConstants.port+'/';
     public cheminImage=GlobalsConstants.cheminImage;
+    public  images:any = [];
 
 
   constructor(private articleService:ArticleService,
@@ -36,6 +39,8 @@ export class HomePage {
               private popoverCtrl: PopoverController) {
 
     this.getArticlesByLimit(this.skip,this.limit);
+    this.loadImageArticle(this.skip,this.limitExplorer);
+    this.homeTab="mur";
 
   }
 
@@ -48,12 +53,19 @@ export class HomePage {
 
 
   }
-
+    selectedMur(){
+        this.homeTab="mur";
+    }
+    selectedExplorer(){
+        this.homeTab="explorer";
+    }
+    selectedCollections(){
+        this.homeTab="collections";
+    }
   getArticlesByLimit(skip:number,limit:number){
-
     this.articleService.getArticlesByLimit(skip,limit).subscribe(res => {
+    this.skip=this.skip+res.length;
       this.offLine = false;
-
       let articles = res;
       let tab1, tab2;
       // console.log(articles)
@@ -74,6 +86,24 @@ export class HomePage {
     });
   }
 
+    loadImageArticle(skip:number,limit:number){
+        this.articleService.getArticlesByLimit(skip,limit).subscribe(res => {
+            this.skipExplorer=this.skipExplorer+res.length;
+            for(var i =0 ; i<res.length;i++)
+            {
+                console.log("images "+JSON.stringify(res[i]));
+                if(res[i].images.length>0)
+                {
+                   this.images.push({article:res[i],srcImage:this.url+this.cheminImage+res[i].images[0].cheminImage});
+                }else
+                {
+                   this.images.push({article:res[i],srcImage:null});
+                }
+            }
+            this.images=this.shuffle(this.images);
+
+        });
+    }
   articleDetails(event,item:Article){
     this.navCtrl.push(ArticleDetailsPage, {
       article: item
@@ -87,22 +117,42 @@ export class HomePage {
   }
 
   doRefresh(refresher) {
+      this.skip=0;
     this.articles1 = [];
     this.articles2 = [];
-    this.getArticlesByLimit(this.skip,this.limit);
+    this.getArticlesByLimit(this.skip,GlobalsConstants.PAGE);
     refresher.complete();
-
   }
 
+    doRefreshImages(refresher) {
+       this.images=[];
+        this.skipExplorer=0;
+        this.loadImageArticle(this.skipExplorer,GlobalsConstants.PAGEEXPLORER);
+        refresher.complete();
+    }
+
   doInfinite(infiniteScroll){
-    this.skip = this.limit;
-    this.limit +=6;
+      if(this.skip==0)
+      {
+          this.skip=GlobalsConstants.PAGE;
+      }
     setTimeout(()=>{
-      this.getArticlesByLimit(this.skip,this.limit);
+      this.getArticlesByLimit(this.skip,this.limit+this.limit);
       infiniteScroll.complete();
 
     },1000);
   }
+    doInfiniteImages(infiniteScroll){
+        if(this.skipExplorer==0)
+        {
+            this.skipExplorer=GlobalsConstants.PAGEEXPLORER;
+        }
+        setTimeout(()=>{
+            this.loadImageArticle(this.skipExplorer,this.limitExplorer+this.limitExplorer);
+            infiniteScroll.complete();
+
+        },1000);
+    }
 
   option(myEvent){
 
@@ -116,6 +166,25 @@ export class HomePage {
       this.prixOrder = data.prixOrder
     })
   }
+
+    shuffle(array)
+    {
+        var m = array.length, t, i;
+
+        // While there remain elements to shuffle?
+        while (m) {
+
+            // Pick a remaining element?
+            i = Math.floor(Math.random() * m--);
+
+            // And swap it with the current element.
+            t = array[m];
+            array[m] = array[i];
+            array[i] = t;
+        }
+
+        return array;
+    }
 }
 
 @Component({
