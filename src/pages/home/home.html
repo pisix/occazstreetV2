@@ -16,114 +16,117 @@
       </button>
     </ion-buttons>
   </ion-navbar>
-    <ion-toolbar no-border color="white" ligth style="background-color: white;">
-        <ion-segment [(ngModel)]="homeTab" primary>
-            <ion-segment-button value="mur"  (ionSelect)="selectedMur()">
-                Mur
-            </ion-segment-button>
-            <ion-segment-button value="explorer" (ionSelect)="selectedExplorer()">
-                Explorer
-            </ion-segment-button>
-            <ion-segment-button value="collections" (ionSelect)="selectedCollections()">
-                Collections
-            </ion-segment-button>
-        </ion-segment>
-    </ion-toolbar>
+  <ion-toolbar no-border color="white" ligth style="background-color: white;">
+    <ion-segment [(ngModel)]="homeTab" primary>
+      <ion-segment-button value="mur"  (ionSelect)="selectedMur()">
+        Mur
+      </ion-segment-button>
+      <ion-segment-button value="explorer" (ionSelect)="selectedExplorer()">
+        Explorer
+      </ion-segment-button>
+      <ion-segment-button value="collections" (ionSelect)="selectedCollections()">
+        Collections
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
 </ion-header>
 
 
 <ion-content padding>
-    <div *ngIf="homeTab=='mur'" class="getting-started">
-        <ion-refresher (ionRefresh)="doRefresh($event)">
-            <ion-refresher-content
-                    pullingIcon="arrow-dropdown"
-                    pullingText="Lachez pour raffraichir"
-                    refreshingSpinner="circles"
-                    refreshingText="chargement...">
-            </ion-refresher-content>
-        </ion-refresher>
+  <div *ngIf="homeTab=='mur'" class="getting-started">
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+      <ion-refresher-content
+        pullingIcon="arrow-dropdown"
+        pullingText="Lachez pour raffraichir"
+        refreshingSpinner="circles"
+        refreshingText="chargement...">
+      </ion-refresher-content>
+    </ion-refresher>
 
-        <ion-row *ngIf="offLine">
-            <ion-col text-center>
-                <div class="network-error">
-                    <img margin-bottom src="./img/cloud-computing.png"/>
-                    <h4>Impossible de charger les articles</h4>
-                    <p>Abscende de connexion internet. Veuillez v&eacute;rifier votre connexion et r&eacute;essayer</p>
-                    <button ion-button outline pixis (click)="getArticlesByLimit(0,6)">REESSAYER</button>
-                </div>
-            </ion-col>
-        </ion-row>
-
-        <ion-row *ngIf="!offLine">
-            <ion-col width-50 no-padding>
-                <ion-card *ngFor="let art1 of articles1"  (click)="articleDetails($event,art1)">
-                    <img *ngIf="art1?.images.length>0" src="{{url}}{{cheminImage}}{{art1?.images[0]?.cheminImage}}"/>
-                    <img *ngIf="art1?.images.length==0" src="../../assets/img/defaultImage.png"/>
-                    <ion-card-content text-center no-padding margin-bottom>
-                        <ion-card-title  class="price" >
-                            {{art1.prix | currency:'XAF':true}}}}
-                        </ion-card-title>
-                        <h6>{{art1.titre | titeCapitalize}}</h6>
-                    </ion-card-content>
-                    <section class="timer" text-right>
-                        <span *ngIf="art1.dateModification === null">Ajout&eacute; : {{art1.dateAjout | occasStreetTimer}}</span>
-                        <span *ngIf="art1.dateModification">Modifi&eacute; : {{art1.dateModification | occasStreetTimer}}</span>
-                    </section>
-                </ion-card>
-            </ion-col>
-
-            <ion-col width-50 no-padding>
-                <ion-card *ngFor="let art2 of articles2" (click)="articleDetails($event,art2)">
-                    <img *ngIf="art2?.images.length>0" src="{{url}}{{cheminImage}}{{art2?.images[0]?.cheminImage}}"/>
-                    <img *ngIf="art2?.images.length==0" src="../../assets/img/defaultImage.png"/>
-
-
-                    <ion-card-content text-center no-padding margin-bottom>
-                            <ion-card-title class="price">
-                                {{art2.prix | currency:'XAF':true}}
-                            </ion-card-title>
-                            <h6>{{art2.titre | titeCapitalize}}</h6>
-                        </ion-card-content>
-                        <section class="timer" text-right>
-                            <span *ngIf="art2.dateModification === null" >Ajout&eacute; : {{art2.dateAjout | occasStreetTimer}}</span>
-                            <span *ngIf="art2.dateModification">Modifi&eacute; : {{art2.dateModification | occasStreetTimer}}</span>
-                        </section>
-                    </ion-card>
-                </ion-col>
-              <!--  <button ion-button fab danger fab-fixed fab-bottom fab-right >
-                    <ion-icon name="add" is-active="false"></ion-icon>
-                </button>-->
-            </ion-row>
-            <ion-infinite-scroll *ngIf="!offLine" (ionInfinite)="doInfinite($event)">
-                <ion-infinite-scroll-content
-                        loadingSpinner="bubbles"
-                        loadingText="chargement...">
-                </ion-infinite-scroll-content>
-            </ion-infinite-scroll>
+    <ion-row *ngIf="offLine">
+      <ion-col text-center>
+        <div class="network-error">
+          <img margin-bottom src="./img/cloud-computing.png"/>
+          <h4>Impossible de charger les articles</h4>
+          <p>Abscende de connexion internet. Veuillez v&eacute;rifier votre connexion et r&eacute;essayer</p>
+          <button ion-button outline pixis (click)="getArticlesByLimit(0,6)">REESSAYER</button>
         </div>
-    <div *ngIf="homeTab=='explorer'">
-        <ion-refresher (ionRefresh)="doRefreshImages($event)">
-            <ion-refresher-content
-                    pullingIcon="arrow-dropdown"
-                    pullingText="Lachez pour raffraichir"
-                    refreshingSpinner="circles"
-                    refreshingText="chargement...">
-            </ion-refresher-content>
-        </ion-refresher>
-        <ion-col width-33 class="left" *ngFor="let image of images">
-            <div (click)="articleDetails($event,image.article)" class="image-explorer" [ngStyle]="{'background-image':'url('+ (image.srcImage !=null && image.srcImage || '../../assets/img/defaultImage.png') + ')'}" >
-            </div>
-        </ion-col>
-        <ion-infinite-scroll *ngIf="!offLine" (ionInfinite)="doInfiniteImages($event)">
-            <ion-infinite-scroll-content
-                    loadingSpinner="bubbles"
-                    loadingText="chargement...">
-            </ion-infinite-scroll-content>
-        </ion-infinite-scroll>
+      </ion-col>
+    </ion-row>
 
-    </div>
-    <div *ngIf="homeTab=='collections'" >
-        Collections
+    <ion-row *ngIf="!offLine">
+      <ion-col width-50 no-padding>
+        <ion-card *ngFor="let art1 of articles1"  (click)="articleDetails($event,art1)">
+          <img *ngIf="art1?.images.length>0" src="{{url}}{{cheminImage}}{{art1?.images[0]?.cheminImage}}"/>
+          <img *ngIf="art1?.images.length==0" src="../../assets/img/defaultImage.png"/>
+          <ion-card-content text-center no-padding>
+            <ion-card-title  class="price" >
+              {{art1.prix | currency:'XAF':true}}}}
+            </ion-card-title>
+            <h6>{{art1.titre | titeCapitalize}}</h6>
+          </ion-card-content>
+          <section class="timer" text-right>
+            <span *ngIf="art1.dateModification === null">Ajout&eacute; : {{art1.dateAjout | occasStreetTimer}}</span>
+            <span *ngIf="art1.dateModification">Modifi&eacute; : {{art1.dateModification | occasStreetTimer}}</span>
+          </section>
+        </ion-card>
+      </ion-col>
 
-    </div>
+      <ion-col width-50 no-padding>
+        <ion-card *ngFor="let art2 of articles2" (click)="articleDetails($event,art2)">
+          <img *ngIf="art2?.images.length>0" src="{{url}}{{cheminImage}}{{art2?.images[0]?.cheminImage}}"/>
+          <img *ngIf="art2?.images.length==0" src="../../assets/img/defaultImage.png"/>
+
+
+          <ion-card-content text-center no-padding>
+            <ion-card-title class="price">
+              {{art2.prix | currency:'XAF':true}}
+            </ion-card-title>
+            <h6>{{art2.titre | titeCapitalize}}</h6>
+          </ion-card-content>
+          <section class="timer" text-right>
+            <span *ngIf="art2.dateModification === null" >Ajout&eacute; : {{art2.dateAjout | occasStreetTimer}}</span>
+            <span *ngIf="art2.dateModification">Modifi&eacute; : {{art2.dateModification | occasStreetTimer}}</span>
+          </section>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-infinite-scroll *ngIf="!offLine" (ionInfinite)="doInfinite($event)">
+      <ion-infinite-scroll-content
+        loadingSpinner="bubbles"
+        loadingText="chargement...">
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </div>
+  <div *ngIf="homeTab=='explorer'">
+    <ion-refresher (ionRefresh)="doRefreshImages($event)">
+      <ion-refresher-content
+        pullingIcon="arrow-dropdown"
+        pullingText="Lachez pour raffraichir"
+        refreshingSpinner="circles"
+        refreshingText="chargement...">
+      </ion-refresher-content>
+    </ion-refresher>
+    <ion-col width-33 class="left" *ngFor="let image of images">
+      <div (click)="articleDetails($event,image.article)" class="image-explorer" [ngStyle]="{'background-image':'url('+ (image.srcImage !=null && image.srcImage || '../../assets/img/defaultImage.png') + ')'}" >
+      </div>
+    </ion-col>
+    <ion-infinite-scroll *ngIf="!offLine" (ionInfinite)="doInfiniteImages($event)">
+      <ion-infinite-scroll-content
+        loadingSpinner="bubbles"
+        loadingText="chargement...">
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+
+  </div>
+  <div *ngIf="homeTab=='collections'" >
+    Collections
+
+  </div>
+
+  <ion-fab bottom right *ngIf="homeTab=='mur'" >
+    <button ion-fab fab-fixed	>
+      <ion-icon name="add" is-active="false"></ion-icon>
+    </button>
+  </ion-fab>
 </ion-content>
