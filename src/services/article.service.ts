@@ -7,6 +7,7 @@ import {Http} from "@angular/http";
 import {Article} from "../components/article.component";
 import {GlobalsConstants} from "../constants/globals.constants";
 import 'rxjs/add/operator/map'
+import { Observable } from "rxjs/Observable";
 
 @Injectable()
 export class ArticleService{

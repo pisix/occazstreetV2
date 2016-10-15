@@ -13,7 +13,7 @@ import {GlobalsConstants} from "../../constants/globals.constants";
 })
 export class LoginModalPage {
 
-  private title = GlobalsConstants.APPNAME;
+  public title = GlobalsConstants.APPNAME;
 
   constructor(private navCtrl: NavController) {
 

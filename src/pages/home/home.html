@@ -34,14 +34,6 @@
 
 <ion-content padding>
   <div *ngIf="homeTab=='mur'" class="getting-started">
-    <ion-refresher (ionRefresh)="doRefresh($event)">
-      <ion-refresher-content
-        pullingIcon="arrow-dropdown"
-        pullingText="Lachez pour raffraichir"
-        refreshingSpinner="circles"
-        refreshingText="chargement...">
-      </ion-refresher-content>
-    </ion-refresher>
 
     <ion-row *ngIf="offLine">
       <ion-col text-center>
@@ -56,6 +48,14 @@
 
     <ion-row *ngIf="!offLine">
       <ion-col width-50 no-padding>
+        <ion-refresher (ionRefresh)="doRefresh($event)">
+          <ion-refresher-content
+            pullingIcon="arrow-dropdown"
+            pullingText="Lachez pour raffraichir"
+            refreshingSpinner="circles"
+            refreshingText="chargement...">
+          </ion-refresher-content>
+        </ion-refresher>
         <ion-card *ngFor="let art1 of articles1"  (click)="articleDetails($event,art1)">
           <img *ngIf="art1?.images.length>0" src="{{url}}{{cheminImage}}{{art1?.images[0]?.cheminImage}}"/>
           <img *ngIf="art1?.images.length==0" src="../../assets/img/defaultImage.png"/>

@@ -17,6 +17,7 @@ import {Categorie} from '../components/categorie.component';
 import {Devise} from '../components/devise.component';
 import {Utilisateur} from '../components/utilisateur.component';*/
 import {ArticleService} from '../services/article.service';
+import {MediaSharing} from "../services/mediaSharing.service";
 
 
 
@@ -51,6 +52,6 @@ import {ArticleService} from '../services/article.service';
     signalerModalPage,
     LoginModalPage
   ],
-  providers: [ArticleService]
+  providers: [ArticleService,MediaSharing]
 })
 export class AppModule {}

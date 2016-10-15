@@ -1,24 +1,24 @@
 import {Component} from '@angular/core';
 import {NavController, NavParams, PopoverController, ViewController, ModalController} from 'ionic-angular';
 import {Article} from "../../components/article.component";
-import {GoogleMap, GoogleMapsEvent} from "ionic-native";
 import {signalerModalPage} from "../signaler-article/signaler-article";
-import {TiteCapitalize} from "../../pipes/article-titre.pipe";
-import {OccasStreetTimer} from "../../pipes/timer.pipe";
 import {GlobalsConstants} from "../../constants/globals.constants";
+import {MediaSharing} from "../../services/mediaSharing.service";
 
 
+declare var window;
 
 @Component({
-    selector:'page-article-details',
-  templateUrl: 'article-details.html'
+  selector:'page-article-details',
+  templateUrl: 'article-details.html',
 })
 export class ArticleDetailsPage {
   public article: Article;
-  private imgSliderOption:any;
+  public imgSliderOption:any;
   public map;
   public url=GlobalsConstants.urlServer+GlobalsConstants.port+'/';
-  public cheminImage=GlobalsConstants.cheminImage;
+  public cheminImage = GlobalsConstants.cheminImage;
+  public cheminPhoto = GlobalsConstants.cheminPhoto;
 
   private PopoverOptions = {
     cssClass:'',
@@ -28,6 +28,7 @@ export class ArticleDetailsPage {
 
   constructor(private navCtrl: NavController,
               navParams: NavParams,
+              private mediaSharing:MediaSharing,
               private popoverCtrl: PopoverController) {
 
     // If we navigated to this page, we will have an item available as a nav param
@@ -38,14 +39,108 @@ export class ArticleDetailsPage {
       pager:true
     }
 
-    // this.map = new GoogleMap('article-details-map',{
-    //
-    // });
-    // this.map.on(GoogleMapsEvent.MAP_READY).subscribe(() => console.log('Map is ready!'));
     console.log(this.article)
 
   }
 
+  contactOwner(channel:string,event){
+    let message;
+
+    switch (channel){
+      case "tel":
+        window.location.href = "tel:"+this.article.utilisateur.telephone;
+        break;
+      case "email":
+        let subject = "Concernant votre annonce "+"\""+this.article.titre+"\"";
+
+        message = " ";
+        this.mediaSharing.shareViaEmail(message,subject,[this.article.utilisateur.email]).then((val) =>{
+
+        }).catch((err) =>{
+
+        });
+        break;
+      case "sms":
+
+        message = "Concernant votre annonce "+"\""+this.article.titre+"\"";
+
+        this.mediaSharing.shareViaSMS(message,this.article.utilisateur.telephone).then((val)=>{
+
+        }).catch((err)=>{
+          console.log(err);
+        });
+        break;
+      default:
+
+    }
+  }
+
+  share(channel:string){
+    /*Social Sharing*/
+    let message=this.article.titre +" : \n  sur OccazStreet \n pour voir le détails télécharger l'application en allant sur "+GlobalsConstants.APPPLAYSTORE;
+    let messageT=this.article.titre  +" : \n sur OccazStreet \n pour voir le détails, télécharger l'application en allant sur " +GlobalsConstants.APPPLAYSTORE;
+    let image= "<img src='"+GlobalsConstants.cheminImage +this.article.images[0].cheminImage+"'/>" ;
+    let imageLink = this.url+GlobalsConstants.cheminImage +this.article.images[0].cheminImage;
+    let link="";
+
+
+    switch (channel){
+
+      case 'facebook':
+
+        this.mediaSharing.shareViaFacebook(message,imageLink,'').then(()=>{
+          // share succesfull
+        }).catch((err)=>{
+          console.log(err);
+        });
+
+        break;
+
+      case 'twitter':
+
+        this.mediaSharing.shareTwitter(message+" "+GlobalsConstants.PSEUDOTWITTER,imageLink,'').then(()=>{
+          // share succesfull
+        }).catch((err)=>{
+          console.log(err);
+        });
+
+        break;
+
+      case 'mail':
+
+        let messageMail="Ce produit pourrait t\'interesser : "+this.article.titre+"\n"+this.article.details;
+        let subjectMail=this.article.titre +" sur Occazstreet";
+
+        this.mediaSharing.shareViaEmail(message,subjectMail,null,null,null,imageLink).then(()=>{
+          // share succesfull
+        }).catch((err)=>{
+          console.log(err);
+        });
+
+        break;
+
+      case 'whatsapp':
+
+        this.mediaSharing.shareViaWhatApp(message,imageLink).then(()=>{
+          // share succesfull
+        }).catch((err)=>{
+          console.log(err);
+        });
+
+        break;
+      case 'sms':
+
+        this.mediaSharing.shareViaSMS(message).then(()=>{
+          // share succesfull
+        }).catch((err)=>{
+          console.log(err);
+        });
+        break;
+      default:{
+        console.log('Impossible de partager cette annonce');
+      }
+    }
+  }
 
   option(myEvent){
     let popover = this.popoverCtrl.create(articleDetailtPopOver,{},this.PopoverOptions);
@@ -58,6 +153,7 @@ export class ArticleDetailsPage {
 @Component({
   template: '<p text-center (click)="close()">Signaler</p>'
 })
+
 class articleDetailtPopOver {
   constructor(private viewCtrl: ViewController,private modalController : ModalController) {}
 

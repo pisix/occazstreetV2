@@ -1,11 +1,9 @@
 import {Component, ViewChild} from '@angular/core';
-import {ionicBootstrap, Platform, MenuController, Nav} from 'ionic-angular';
+import { Platform, MenuController, Nav} from 'ionic-angular';
 import {StatusBar} from 'ionic-native';
 import {HomePage} from '../pages/home/home';
 import {ListPage} from '../pages/list/list';
 import {LoginModalPage} from '../pages/login/login';
-import {GlobalsConstants} from "../constants/globals.constants";
-import {OccasStreetTimer} from "../pipes/timer.pipe";
 
 
 @Component({
@@ -19,7 +17,8 @@ export class App {
   loggedPages: Array<{title: string, component: any,icon:any}>;
   logged:boolean =false;
 
-  loginPage=LoginModalPage;
+  loginPage = LoginModalPage;
+
   constructor(
     public platform: Platform,
     public menu: MenuController
@@ -29,16 +28,16 @@ export class App {
     // set our app's pages
     this.pages = [
       { title: 'Acceuil', component: HomePage, icon:'home'},
-      { title: 'Catégories', component: ListPage , icon:'list-box'},
+      { title: 'CatÃ©gories', component: ListPage , icon:'list-box'},
       { title: 'Mes Favoris', component: ListPage , icon:'heart'},
       { title: 'Invitez vos amis', component: ListPage, icon:'people' },
-      { title: 'Nouveau près de chez vous', component: ListPage, icon:'locate' },
+      { title: 'Nouveau prÃ¨s de chez vous', component: ListPage, icon:'locate' },
       { title: 'Aide', component: ListPage, icon:'help-circle' }
     ];
 
     if(this.logged)
     {
-      this.pages.push({ title: 'Se déconnecter', component: ListPage , icon:'log-out',logged:true});
+      this.pages.push({ title: 'Se dÃ©connecter', component: HomePage , icon:'log-out'});
     }
 
   }

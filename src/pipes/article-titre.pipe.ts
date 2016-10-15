@@ -7,7 +7,7 @@ import {Pipe, PipeTransform} from "@angular/core";
   name:'titeCapitalize'
 })
 export class TiteCapitalize implements PipeTransform{
-  transform(title: string, args: any): any {
+  transform(title: string): any {
     return title.replace(/\w\S*/g, function(txt){
       return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
     });
