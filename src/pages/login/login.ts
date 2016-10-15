@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, ModalController} from 'ionic-angular';
 import {GlobalsConstants} from "../../constants/globals.constants";
 import {ConnexionModalPage} from "../../pages/connexion/connexion";
+import {SignupPage} from '../../pages/signup/signup';
 
 /*
   Generated class for the LoginPage page.
@@ -30,7 +31,7 @@ export class LoginPage {
 
     signup()
     {
-
+        this.navCtrl.push(SignupPage)
     }
 
 }
