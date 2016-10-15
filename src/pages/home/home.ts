@@ -5,8 +5,8 @@ import {GlobalsConstants} from "../../constants/globals.constants";
 import {NavController, NavParams, ModalController, ViewController, PopoverController} from "ionic-angular";
 import {ArticleDetailsPage} from "../article-details/article-details";
 import {searchModalPage} from "../search-articles/search-articles";
-import {OccasStreetTimer} from "../../pipes/timer.pipe";
-import {TiteCapitalize} from "../../pipes/article-titre.pipe";
+import { Observable } from "rxjs/Observable";
+
 
 
 @Component({
@@ -26,7 +26,7 @@ export class HomePage {
     private offLine:boolean;
 
     public prixOrder:string = 'croissants';
-    public dateOrder:string = 'décroissantes';
+    public dateOrder:string = 'dÃ©croissantes';
     public url=GlobalsConstants.urlServer+GlobalsConstants.port+'/';
     public cheminImage=GlobalsConstants.cheminImage;
     public  images:any = [];
@@ -208,13 +208,13 @@ class articlesPopOver {
 
   trierParPix(order:string){
     console.log("trier par prix "+order)
-    this.prixOrder = this.prixOrder === 'croissants'?'décroissants':'croissants';
+    this.prixOrder = this.prixOrder === 'croissants'?'dÃ©croissants':'croissants';
     this.viewCtrl.dismiss({prixOrder:this.prixOrder,dateOrder:this.dateOrder});
   }
 
   trierParDate(order:string){
     console.log("trier par date "+order)
-    this.dateOrder = this.dateOrder === 'décroissantes'?'croissantes':'décroissantes';
+    this.dateOrder = this.dateOrder === 'dÃ©croissantes'?'croissantes':'dÃ©croissantes';
     this.viewCtrl.dismiss({prixOrder:this.prixOrder,dateOrder:this.dateOrder});
   }
   close() {

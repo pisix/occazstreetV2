@@ -64,7 +64,7 @@ export class OccasStreetTimer implements PipeTransform{
     },
   ];
 
-  transform(date: string, args: any): string {
+  transform(date: string): string {
 
     let seconde = Math.round(((new Date(Date.now()).getTime())- (new Date(date).getTime()))/1000);
 

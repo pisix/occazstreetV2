@@ -10,10 +10,23 @@ import {NavParams, ViewController} from "ionic-angular";
   templateUrl: 'search-articles.html'
 })
 export class searchModalPage{
+  public myInput:any;
 
   constructor(private params: NavParams,
               private viewCtrl: ViewController){}
 
+
+  Cancel(){
+
+  }
+
+  onInput(event){
+
+  }
+
+  onCancel(event){
+
+  }
   dismiss() {
   this.viewCtrl.dismiss();
 }

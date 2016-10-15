@@ -16,7 +16,7 @@ import {SignupPage} from '../../pages/signup/signup';
 })
 export class LoginPage {
 
-  private title = GlobalsConstants.APPNAME;
+  public title = GlobalsConstants.APPNAME;
 
   constructor(private navCtrl: NavController,private modalController:ModalController) {
 

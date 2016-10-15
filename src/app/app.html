@@ -1,35 +1,35 @@
-<ion-menu [content]="content" >
+(<ion-menu [content]="content" >
 
  <!-- <ion-toolbar>
     <ion-title>Menu</ion-title>
   </ion-toolbar>-->
 
-  <ion-content >
-    <ion-list >
-      <ion-list-header style="background-color:#B71C1C">
-        <section *ngIf=" !logged || !infoLoggedUser" class="profil-centre  expanded"  menu-close (click)="openPage(loginPage)" >
+  <ion-content style="background-color: #707070">
+    <ion-list>
+      <ion-list-header>
+        <section *ngIf="true" class="profil-centre dark-bg expanded"  menu-close (click)="openPage(loginPage)" >
           <ion-row>
-            <ion-col width-30><ion-icon name="contact" style="font-size: 500%;color: white"></ion-icon> </ion-col>
-            <ion-col center width-40 style="color: white;">
-              <section style="font-size: 100%"><b>Connectez-vous </b></section>
-              <section ><b>&agrave; Occazstreet </b></section>
+            <ion-col width-40><ion-icon name="contact" style="font-size: 500%"></ion-icon> </ion-col>
+            <ion-col center width-50 >
+              <section style="color: #e7e7e7; font-size: 100%"><b>Connectez-vous </b></section>
+              <section style="color: #575757"><b>Occazstreet </b></section>
             </ion-col>
           </ion-row>
         </section>
-        <section *ngIf="logged" class="profil-centre dark-bg expanded" menu-close>
-            <img [hidden]="infoLoggedUser?.photo.idPhoto !=1" src="../assets/img/default.png" alt="" class="img-circle">
-            <img [hidden]="infoLoggedUser?.photo.idPhoto==1 " src="{{url}}{{cheminPhoto}}{{infoLoggedUser?.photo.cheminPhoto}}" alt="" class="img-circle">
-            <section style="color: white">{{infoLoggedUser?.prenom}} {{infoLoggedUser?.nom}}</section>
+        <section *ngIf="false" class="profil-centre dark-bg expanded" menu-close>
+          <img src='./img/default.png' alt="" class="img-circle">
+          <!--<img *ngIf="offLine  || infoUserLogged.photo.idPhoto==1" src='./img/default.png' alt="" class="img-circle">-->
+          <section>Nom Prenom</section>
         </section>
       </ion-list-header>
-      <button ion-item *ngFor="let p of pages" (click)="openPage(p)">
-        <ion-icon name="{{p.icon}}" item-left style="color:#a1a1a1" ></ion-icon>
-        <span [innerHtml]="p.title"></span>
+      <button ion-item *ngFor="let p of pages" (click)="openPage(p)" style="background-color: #707070;color: white">
+        <ion-icon name="{{p.icon}}" item-left></ion-icon>
+        {{p.title}}
       </button>
-    <button *ngIf="logged" ion-item  (click)="doLogout()">
-        <ion-icon name="log-out" item-left style="color:#a1a1a1" ></ion-icon>
-        <span>Se d&#233;connecter</span>
-    </button>
+      <button ion-item *ngFor="let p of loggedPages" (click)="openPage(p)" style="background-color: #707070;color: white">
+        <ion-icon name="{{p.icon}}" item-left></ion-icon>
+        {{p.title}}
+      </button>
     </ion-list>
   </ion-content>
 
