@@ -9,7 +9,7 @@ import {ArticleDetailsPage} from '../pages/article-details/article-details';
 import {ListPage} from '../pages/list/list'
 import {searchModalPage} from '../pages/search-articles/search-articles';
 import {signalerModalPage} from '../pages/signaler-article/signaler-article';
-import {LoginModalPage} from '../pages/login/login'
+import {LoginPage} from '../pages/login/login'
 import {TiteCapitalize} from '../pipes/article-titre.pipe';
 import {OccasStreetTimer} from '../pipes/timer.pipe';
 /*import {Article} from '../components/article.component';
@@ -18,6 +18,8 @@ import {Devise} from '../components/devise.component';
 import {Utilisateur} from '../components/utilisateur.component';*/
 import {ArticleService} from '../services/article.service';
 import {MediaSharing} from "../services/mediaSharing.service";
+import {ResetPasswordModalPage} from "../pages/reset-password/reset-password";
+import {ConnexionModalPage} from "../pages/connexion/connexion";
 
 
 
@@ -32,7 +34,9 @@ import {MediaSharing} from "../services/mediaSharing.service";
     ListPage,
     searchModalPage,
     signalerModalPage,
-    LoginModalPage,
+    ResetPasswordModalPage,
+    ConnexionModalPage,
+    LoginPage,
     TiteCapitalize,
     OccasStreetTimer
   ],
@@ -49,8 +53,10 @@ import {MediaSharing} from "../services/mediaSharing.service";
     ArticleDetailsPage,
     ListPage,
     searchModalPage,
+    ResetPasswordModalPage,
+    ConnexionModalPage,
     signalerModalPage,
-    LoginModalPage
+    LoginPage
   ],
   providers: [ArticleService,MediaSharing]
 })
