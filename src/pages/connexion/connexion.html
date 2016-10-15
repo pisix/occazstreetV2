@@ -1,0 +1,34 @@
+<!--
+  Generated template for the Connexion page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+    <ion-navbar pixis color="primary2"  >
+        <ion-title>Connexion</ion-title>
+    </ion-navbar>
+</ion-header>
+
+
+<ion-content padding >
+    <ion-list no-lines>
+        <form  #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)" >
+
+                <ion-item>
+                    <ion-label floating>Email</ion-label>
+                    <ion-input [(ngModel)]="email" required  id="email" name="email" type="email"></ion-input>
+                </ion-item>
+
+                <ion-item>
+                    <ion-label floating>Mot de passe</ion-label>
+                    <ion-input [(ngModel)]="passsword" min="3" required type="password" id="password" name="password"></ion-input>
+                </ion-item>
+                <button ion-button full type="submit">Se connecter</button>
+        </form>
+        <hr>
+        <button ion-button full color="light" (click)="resetPassword()">Mot de passe oubli&#233; ?</button>
+        <hr>
+    </ion-list>
+
+</ion-content>

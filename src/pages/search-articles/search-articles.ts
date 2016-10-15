@@ -28,6 +28,6 @@ export class searchModalPage{
 
   }
   dismiss() {
-    this.viewCtrl.dismiss();
-  }
+  this.viewCtrl.dismiss();
+}
 }
