@@ -3,7 +3,7 @@ import { Platform, MenuController, Nav} from 'ionic-angular';
 import {StatusBar} from 'ionic-native';
 import {HomePage} from '../pages/home/home';
 import {ListPage} from '../pages/list/list';
-import {LoginModalPage} from '../pages/login/login';
+import {LoginPage} from '../pages/login/login';
 
 
 @Component({
@@ -17,7 +17,7 @@ export class App {
   loggedPages: Array<{title: string, component: any,icon:any}>;
   logged:boolean =false;
 
-  loginPage = LoginModalPage;
+  loginPage = LoginPage;
 
   constructor(
     public platform: Platform,

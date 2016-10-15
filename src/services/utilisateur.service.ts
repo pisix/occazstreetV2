@@ -7,6 +7,7 @@ import {Http} from "@angular/http";
 import {Utilisateur} from "../components/utilisateur.component";
 import {GlobalsConstants} from "../constants/globals.constants";
 import 'rxjs/add/operator/map';
+import { Observable } from "rxjs/Observable";
 import {NativeStorage } from 'ionic-native';
 
 @Injectable()

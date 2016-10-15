@@ -1,11 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController,ViewController, ToastController,ModalController,AlertController } from 'ionic-angular';
-import {Toast,NativeStorage} from 'ionic-native'
-import {FORM_DIRECTIVES, FormBuilder,  ControlGroup, Validators, AbstractControl,FormGroup} from '@angular/common';
 import {NgForm} from '@angular/forms';
 import {CustomValidators} from '../../validators/CustomValidators';
 import {UtilisateurService} from '../../services/utilisateur.service'
-import {GlobalsConstants} from "../../constants/globals.constants";
 
 
 @Component({

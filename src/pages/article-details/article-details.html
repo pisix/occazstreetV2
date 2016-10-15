@@ -32,7 +32,7 @@
 
   <ion-card>
     <ion-card-content text-center>
-      <button ion-button  class="contact-btn-left" medium round color="secondary" (click)="contactOwner('tel',$event)">
+      <button ion-button  class="contact-btn-left" medium round color="secondary" *ngIf="article.utilisateur.afficherTel" (click)="contactOwner('tel',$event)">
         <ion-icon   name="call" royal></ion-icon>
       </button>
       <button ion-button class="" medium round  color="danger" (click)="contactOwner('email',$event)">
