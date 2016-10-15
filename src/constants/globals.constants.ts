@@ -9,12 +9,12 @@ export  class GlobalsConstants{
     static port:string = "1337";
     static cheminImage:string = "imagesArticle/";
     static cheminPhoto:string = "photoUtilisateur/";
-    static GOOGLECLIENTID:string = "imagesArticle/";
-    static FACEBOOKCLIENTID:string = "448214499045-h5rf4q3tnp6he7r9mbj72espfplgc315.apps.googleusercontent.com";
-    static USER_LOGGED:string = "1703284276585375";
-    static LOCAL_TOKEN_KEY:string = "userLogged";
-    static URL_JSON_IP:string = "token";
-    static PAGE:number = 6;
+    static GOOGLECLIENTID:string = "448214499045-h5rf4q3tnp6he7r9mbj72espfplgc315.apps.googleusercontent.com";
+    static FACEBOOKCLIENTID:string = "1703284276585375";
+    static USER_LOGGED:string = "loggedUser";
+    static LOCAL_TOKEN_KEY:string = "token";
+    static URL_JSON_IP:string ="http://freegeoip.net/json";
+    static PAGE:number = 10;
     static PAGEEXPLORER:number = 16;
     static VERSION:string = "2.0.0";
     static APPPLAYSTORE:string = "https://play.google.com/store/apps/details?id=com.pisixlabs.occazstreet";

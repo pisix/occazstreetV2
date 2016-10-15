@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, ModalController} from 'ionic-angular';
 import {GlobalsConstants} from "../../constants/globals.constants";
+import {ConnexionModalPage} from "../../pages/connexion/connexion";
 
 /*
   Generated class for the LoginPage page.
@@ -9,14 +10,27 @@ import {GlobalsConstants} from "../../constants/globals.constants";
   Ionic pages and navigation.
 */
 @Component({
-  templateUrl: 'login.html',
+  selector:'page-login',
+  templateUrl: 'login.html'
 })
-export class LoginModalPage {
+export class LoginPage {
 
   private title = GlobalsConstants.APPNAME;
 
-  constructor(private navCtrl: NavController) {
+  constructor(private navCtrl: NavController,private modalController:ModalController) {
 
   }
+
+    connexion()
+    {
+        /*let modal=this.modalController.create(ConnexionModalPage);
+        modal.present();*/
+        this.navCtrl.push(ConnexionModalPage)
+    }
+
+    signup()
+    {
+
+    }
 
 }

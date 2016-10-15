@@ -9,14 +9,15 @@ import {ArticleDetailsPage} from '../pages/article-details/article-details';
 import {ListPage} from '../pages/list/list'
 import {searchModalPage} from '../pages/search-articles/search-articles';
 import {signalerModalPage} from '../pages/signaler-article/signaler-article';
-import {LoginModalPage} from '../pages/login/login'
+import {LoginPage} from '../pages/login/login';
+import {ConnexionModalPage} from '../pages/connexion/connexion';
+import {ResetPasswordModalPage} from '../pages/reset-password/reset-password';
 import {TiteCapitalize} from '../pipes/article-titre.pipe';
 import {OccasStreetTimer} from '../pipes/timer.pipe';
-/*import {Article} from '../components/article.component';
-import {Categorie} from '../components/categorie.component';
-import {Devise} from '../components/devise.component';
-import {Utilisateur} from '../components/utilisateur.component';*/
 import {ArticleService} from '../services/article.service';
+import {UtilisateurService} from '../services/utilisateur.service';
+import {CategoriePage} from '../pages/categorie/categorie';
+import {CategorieService}  from '../services/categorie.service';
 
 
 
@@ -31,9 +32,12 @@ import {ArticleService} from '../services/article.service';
     ListPage,
     searchModalPage,
     signalerModalPage,
-    LoginModalPage,
+    LoginPage,
+    ConnexionModalPage,
     TiteCapitalize,
-    OccasStreetTimer
+    OccasStreetTimer,
+    ResetPasswordModalPage,
+    CategoriePage
   ],
   imports: [
     IonicModule.forRoot(App)
@@ -49,8 +53,11 @@ import {ArticleService} from '../services/article.service';
     ListPage,
     searchModalPage,
     signalerModalPage,
-    LoginModalPage
+    LoginPage,
+    ConnexionModalPage,
+      ResetPasswordModalPage,
+      CategoriePage
   ],
-  providers: [ArticleService]
+  providers: [ArticleService,UtilisateurService,CategorieService]
 })
 export class AppModule {}

@@ -5,20 +5,69 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-  <ion-navbar pixis>
+  <ion-navbar pixis color="primary2">
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>{{title}}</ion-title>
+    <ion-title center>{{title}}</ion-title>
   </ion-navbar>
 </ion-header>
-<ion-content padding>
-  <ion-segment [(ngModel)]="relationship" primary>
-    <ion-segment-button value="friends" >
-      Friends
-    </ion-segment-button>
-    <ion-segment-button value="enemies" (ionSelect)="selectedEnemies()">
-      Enemies
-    </ion-segment-button>
-  </ion-segment>
+<ion-content padding style="overflow-y: hidden">
+    <ion-list no-lines>
+            <ion-row style="position: absolute; top: 10%; text-align: center">
+                <ion-item-divider style="background-color:white" >
+                    <span style="font-size: 200%; font-weight: bold; color:#616161"> Connectez-vous...</span><br/><br/>
+                    <span style="font-size: 100%;font-weight: bolder"> ...en quelques secondes !</span>
+
+                </ion-item-divider>
+            </ion-row>
+
+           <ion-row class="wrapper">
+               <button ion-button color="facebook" class="button-facebook" full>
+                   <ion-icon margin facebook class="social-media-icon"  name="logo-facebook"></ion-icon>
+                   Continuer avec Facebook
+               </button>
+           </ion-row>
+
+        <ion-row style="position: absolute; top: 40%; text-align: center">
+            <ion-item-divider style="background-color:white" >
+                <hr>
+                <span style="font-size: 100%; font-weight: bold;"> Ou </span>
+                <hr>
+            </ion-item-divider>
+        </ion-row>
+        <ion-row style="position: absolute; top: 50%; text-align: center">
+            <ion-item-divider style="background-color:white" >
+                <span style="font-size: 100%;font-weight: bolder"> Continuez avec votre e-mail !</span>
+
+            </ion-item-divider>
+        </ion-row>
+        <ion-row  class="button-login">
+            <ion-col >
+                <button ion-button  full (click)="connexion()" >
+                    <ion-icon right margin class="social-media-icon"  name="log-in" ></ion-icon>
+                    Se connecter
+                </button>
+            </ion-col>
+        </ion-row>
+        <ion-row style="position: absolute; top: 65%;">
+            <ion-col >
+                <button ion-button  full (click)="signin()">
+                    <ion-icon right margin  class="social-media-icon"  name="person-add" ></ion-icon>
+                    S'inscrire
+                </button>
+            </ion-col>
+        </ion-row>
+    </ion-list>
+   <!-- <ion-footer no-border>
+        <ion-segment [(ngModel)]="relationship" primary >
+            <ion-segment-button value="connexion" >
+                Se connecter
+            </ion-segment-button>
+            <ion-segment-button value="inscription" (ionSelect)="selectedEnemies()">
+                S'inscrire
+            </ion-segment-button>
+        </ion-segment>
+    </ion-footer>-->
 </ion-content>
+

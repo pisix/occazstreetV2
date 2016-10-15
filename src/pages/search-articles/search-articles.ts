@@ -15,6 +15,6 @@ export class searchModalPage{
               private viewCtrl: ViewController){}
 
   dismiss() {
-    this.viewCtrl.dismiss();
-  }
+  this.viewCtrl.dismiss();
+}
 }
