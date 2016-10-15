@@ -1,3 +1,4 @@
+
 import { NgModule } from '@angular/core';
 import { IonicApp, IonicModule } from 'ionic-angular';
 import { App } from './app.component';
@@ -18,6 +19,9 @@ import {ArticleService} from '../services/article.service';
 import {UtilisateurService} from '../services/utilisateur.service';
 import {CategoriePage} from '../pages/categorie/categorie';
 import {CategorieService}  from '../services/categorie.service';
+import {SignupPage} from '../pages/signup/signup';
+import {MediaSharing} from "../services/mediaSharing.service";
+
 
 
 
@@ -37,7 +41,8 @@ import {CategorieService}  from '../services/categorie.service';
     TiteCapitalize,
     OccasStreetTimer,
     ResetPasswordModalPage,
-    CategoriePage
+    CategoriePage,
+    SignupPage
   ],
   imports: [
     IonicModule.forRoot(App)
@@ -55,9 +60,11 @@ import {CategorieService}  from '../services/categorie.service';
     signalerModalPage,
     LoginPage,
     ConnexionModalPage,
-      ResetPasswordModalPage,
-      CategoriePage
+    ResetPasswordModalPage,
+    CategoriePage,
+    SignupPage
   ],
-  providers: [ArticleService,UtilisateurService,CategorieService]
+  providers: [ArticleService,UtilisateurService,CategorieService,MediaSharing]
 })
 export class AppModule {}
+
