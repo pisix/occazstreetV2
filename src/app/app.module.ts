@@ -1,3 +1,4 @@
+
 import { NgModule } from '@angular/core';
 import { IonicApp, IonicModule } from 'ionic-angular';
 import { App } from './app.component';
@@ -9,17 +10,18 @@ import {ArticleDetailsPage} from '../pages/article-details/article-details';
 import {ListPage} from '../pages/list/list'
 import {searchModalPage} from '../pages/search-articles/search-articles';
 import {signalerModalPage} from '../pages/signaler-article/signaler-article';
-import {LoginPage} from '../pages/login/login'
+import {LoginPage} from '../pages/login/login';
+import {ConnexionModalPage} from '../pages/connexion/connexion';
+import {ResetPasswordModalPage} from '../pages/reset-password/reset-password';
 import {TiteCapitalize} from '../pipes/article-titre.pipe';
 import {OccasStreetTimer} from '../pipes/timer.pipe';
-/*import {Article} from '../components/article.component';
-import {Categorie} from '../components/categorie.component';
-import {Devise} from '../components/devise.component';
-import {Utilisateur} from '../components/utilisateur.component';*/
 import {ArticleService} from '../services/article.service';
+import {UtilisateurService} from '../services/utilisateur.service';
+import {CategoriePage} from '../pages/categorie/categorie';
+import {CategorieService}  from '../services/categorie.service';
+import {SignupPage} from '../pages/signup/signup';
 import {MediaSharing} from "../services/mediaSharing.service";
-import {ResetPasswordModalPage} from "../pages/reset-password/reset-password";
-import {ConnexionModalPage} from "../pages/connexion/connexion";
+
 
 
 
@@ -34,11 +36,13 @@ import {ConnexionModalPage} from "../pages/connexion/connexion";
     ListPage,
     searchModalPage,
     signalerModalPage,
-    ResetPasswordModalPage,
-    ConnexionModalPage,
     LoginPage,
+    ConnexionModalPage,
     TiteCapitalize,
-    OccasStreetTimer
+    OccasStreetTimer,
+    ResetPasswordModalPage,
+    CategoriePage,
+    SignupPage
   ],
   imports: [
     IonicModule.forRoot(App)
@@ -53,11 +57,14 @@ import {ConnexionModalPage} from "../pages/connexion/connexion";
     ArticleDetailsPage,
     ListPage,
     searchModalPage,
-    ResetPasswordModalPage,
-    ConnexionModalPage,
     signalerModalPage,
-    LoginPage
+    LoginPage,
+    ConnexionModalPage,
+    ResetPasswordModalPage,
+    CategoriePage,
+    SignupPage
   ],
-  providers: [ArticleService,MediaSharing]
+  providers: [ArticleService,UtilisateurService,CategorieService,MediaSharing]
 })
 export class AppModule {}
+
