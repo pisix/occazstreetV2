@@ -69,7 +69,11 @@
             <span *ngIf="art1.dateModification === null">Ajout&eacute; : {{art1.dateAjout | occasStreetTimer}}</span>
             <span *ngIf="art1.dateModification">Modifi&eacute; : {{art1.dateModification | occasStreetTimer}}</span>
           </section>
+          <div class="sold" *ngIf="art1.etat=='Vendu'">
+            Vendu
+          </div>
         </ion-card>
+
       </ion-col>
 
       <ion-col width-50 no-padding>
@@ -88,7 +92,11 @@
             <span *ngIf="art2.dateModification === null" >Ajout&eacute; : {{art2.dateAjout | occasStreetTimer}}</span>
             <span *ngIf="art2.dateModification">Modifi&eacute; : {{art2.dateModification | occasStreetTimer}}</span>
           </section>
+          <div class="sold" *ngIf="art2.etat=='Vendu'">
+            <span style="margin-top: 1%">Vendu</span>
+          </div>
         </ion-card>
+
       </ion-col>
     </ion-row>
     <ion-infinite-scroll *ngIf="!offLine" (ionInfinite)="doInfinite($event)">
@@ -109,6 +117,9 @@
     </ion-refresher>
     <ion-col width-33 class="left" *ngFor="let image of images">
       <div (click)="articleDetails($event,image.article)" class="image-explorer" [ngStyle]="{'background-image':'url('+ (image.srcImage !=null && image.srcImage || '../../assets/img/defaultImage.png') + ')'}" >
+      </div>
+      <div class="sold-explorer" *ngIf="image.article.etat=='Vendu'">
+       <span >Vendu</span>
       </div>
     </ion-col>
     <ion-infinite-scroll *ngIf="!offLine" (ionInfinite)="doInfiniteImages($event)">

@@ -36,4 +36,34 @@ page-home {
   .left {
     float: left;
   }
+  .sold
+  {
+    font-size: 12px;
+    width: 20%;
+    height: 4.2%;
+    position: ABSOLUTE;
+    background-color: #ffe80a;
+    font-size: 12px;
+    color: #130808;
+    font-weight: bold;
+    text-align: center;
+    margin-top: -35%;
+    MARGIN-LEFT: 10%;
+
+  }
+  .sold-explorer
+  {
+    font-size: 12px;
+    width: 20%;
+    height: 4.2%;
+    position: ABSOLUTE;
+    background-color: #ffe80a;
+    font-size: 12px;
+    color: #130808;
+    font-weight: bold;
+    text-align: center;
+    margin-top: -10%;
+    MARGIN-LEFT: 4%;
+
+  }
 }
