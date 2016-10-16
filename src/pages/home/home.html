@@ -38,9 +38,9 @@
     <ion-row *ngIf="offLine">
       <ion-col text-center>
         <div class="network-error">
-          <img margin-bottom src="./img/cloud-computing.png"/>
+          <img margin-bottom src="../../assets/img/no-network.png"/>
           <h4>Impossible de charger les articles</h4>
-          <p>Abscende de connexion internet. Veuillez v&eacute;rifier votre connexion et r&eacute;essayer</p>
+          <p>Abscence de connexion internet. Veuillez v&eacute;rifier votre connexion et r&eacute;essayer</p>
           <button ion-button outline pixis (click)="getArticlesByLimit(0,6)">REESSAYER</button>
         </div>
       </ion-col>

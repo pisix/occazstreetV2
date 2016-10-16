@@ -1,8 +1,12 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.ionicframework.occazstreetv2770361" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-  <name>occazstreetV2</name>
-  <description>An awesome Ionic/Cordova app.</description>
-  <author email="hi@ionicframework" href="http://ionicframework.com/">Ionic Framework Team</author>
+<widget id="com.ionicframework.occazstreet" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+  <name>OccazstreetV2</name>
+  <description>
+    A Pisix Labs Project.
+  </description>
+  <author email="android@occazstreet.com" href="http://www.occazstreet.com/">
+    Occazstreet
+  </author>
   <content src="index.html" />
   <access origin="*" />
   <access origin="tel:*" launch-external="yes"/>

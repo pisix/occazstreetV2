@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-import { NavController,ViewController, ToastController,ModalController,AlertController } from 'ionic-angular';
+import { NavController,ViewController, ToastController,AlertController } from 'ionic-angular';
 import {NgForm} from '@angular/forms';
-import {CustomValidators} from '../../validators/CustomValidators';
 import {UtilisateurService} from '../../services/utilisateur.service'
 
 

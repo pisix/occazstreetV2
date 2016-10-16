@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-import {NavController, ViewController, ToastController, ModalController, Events, Loading} from 'ionic-angular';
+import {NavController, ViewController, ToastController, ModalController, Events,LoadingController} from 'ionic-angular';
 import {NgForm} from '@angular/forms';
-import {CustomValidators} from '../../validators/CustomValidators';
 import {UtilisateurService} from '../../services/utilisateur.service'
 import {ResetPasswordModalPage} from "../reset-password/reset-password";
 import {HomePage} from "../home/home";
@@ -24,9 +23,8 @@ export class ConnexionModalPage {
   public  connected:boolean =false;
   public infoLoggedUser=null;
   public logged:boolean=false;
-  constructor(public events:Events,private modalController:ModalController,private utilisateurService:UtilisateurService, public navCtrl: NavController,private viewCtrl: ViewController,private toastCtrl: ToastController) {
-
-
+ // private loading:LoadingController;
+  constructor(public events:Events,private modalController:ModalController,private utilisateurService:UtilisateurService,public loadingCtrl:LoadingController, public navCtrl: NavController,private viewCtrl: ViewController,private toastCtrl: ToastController) {
   }
 
   ionViewDidLoad() {
@@ -34,7 +32,7 @@ export class ConnexionModalPage {
   }
 
   onSubmit(f) {
-    //this.showLoader();
+
     let credentials={email:f.value.email,password:f.value.password};
     this.email=f.value.email;
     this.password=f.value.password;
@@ -42,20 +40,17 @@ export class ConnexionModalPage {
 
       if(!res.success)
       {
-        console.log(JSON.stringify(res));
+       // this.loading().dismiss();
         this.showToast("Le login ou le mot de passe est incorrect");
       }else if (res.success)
       {
-
-        //  this.showToast("Faites vous plaisir");
         this.connected=true;
         this.logged=true;
         this.infoLoggedUser=res.data;
-        this.events.publish('user:logged-data',eval(res.data));
+        this.events.publish('user:logged-data',res.data);
         this.events.publish('user:logged',true);
-        //sZ this.navCtrl.pop();
-        //   this.dismiss();
         this.navCtrl.setRoot(HomePage);
+        this.showToast("Faites vous plaisir");
       }
     })
 
@@ -66,17 +61,14 @@ export class ConnexionModalPage {
     this.viewCtrl.dismiss();
   }
 
-  // showLoader(){
-  //   let loading = Loading.create({
-  //     content: 'Please wait...'
-  //   });
-  //   this.nav.present(loading);
-  // }
-  //
-  // hideLoader()
-  // {
-  //   this.nav.dismissAll();
-  // }
+   /*showLoader(){
+      this.loading.present();
+   }
+
+   hideLoader()
+   {
+     this.loading.dismiss();
+   }*/
 
   showToast(message)
   {
@@ -88,9 +80,8 @@ export class ConnexionModalPage {
 
     let toast = this.toastCtrl.create({
       message: message,
-      duration: 4000,
-      position: 'top',
-      cssClass:'red-error'
+      duration: 3000,
+      position: 'bottom'
     });
 
     toast.onDidDismiss(() => {

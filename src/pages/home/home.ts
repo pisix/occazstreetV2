@@ -5,7 +5,6 @@ import {GlobalsConstants} from "../../constants/globals.constants";
 import {NavController, NavParams, ModalController, ViewController, PopoverController} from "ionic-angular";
 import {ArticleDetailsPage} from "../article-details/article-details";
 import {searchModalPage} from "../search-articles/search-articles";
-import { Observable } from "rxjs/Observable";
 
 
 
@@ -46,7 +45,7 @@ export class HomePage {
 
   loadAll(){
     this.articleService.getAllArticles().subscribe(res => {
-      let articles = res;
+    //  let articles = res;
 
       // console.log("Article =>",articles)
     })

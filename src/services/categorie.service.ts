@@ -4,10 +4,11 @@
 
 import {Injectable} from '@angular/core'
 import {Http} from "@angular/http";
-import {Utilisateur} from "../components/utilisateur.component";
 import {GlobalsConstants} from "../constants/globals.constants";
 import {Categorie} from '../components/categorie.component';
 import 'rxjs/add/operator/map';
+import {Observable} from "rxjs/Observable";
+
 
 @Injectable()
 export class CategorieService{

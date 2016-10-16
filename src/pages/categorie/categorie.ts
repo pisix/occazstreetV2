@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import {CategorieService} from '../../services/categorie.service';
-import {Component} from '../../components/categorie.component';
+import {Categorie} from '../../components/categorie.component'
 
 /*
   Generated class for the Categorie page.
