@@ -38,7 +38,7 @@
     <ion-row *ngIf="offLine">
       <ion-col text-center>
         <div class="network-error">
-          <img margin-bottom src="../../assets/img/no-network.png"/>
+          <img margin-bottom src="assets/img/no-network.png" width="100" height="100"/>
           <h4>Impossible de charger les articles</h4>
           <p>Abscence de connexion internet. Veuillez v&eacute;rifier votre connexion et r&eacute;essayer</p>
           <button ion-button outline pixis (click)="getArticlesByLimit(0,6)">REESSAYER</button>
@@ -58,7 +58,7 @@
         </ion-refresher>
         <ion-card *ngFor="let art1 of articles1"  (click)="articleDetails($event,art1)">
           <img *ngIf="art1?.images.length>0" src="{{url}}{{cheminImage}}{{art1?.images[0]?.cheminImage}}"/>
-          <img *ngIf="art1?.images.length==0" src="../../assets/img/defaultImage.png"/>
+          <img *ngIf="art1?.images.length==0" src="assets/img/defaultImage.png"/>
           <ion-card-content text-center no-padding>
             <ion-card-title  class="price" >
               {{art1.prix | currency:'XAF':true}}}}
@@ -79,7 +79,7 @@
       <ion-col width-50 no-padding>
         <ion-card *ngFor="let art2 of articles2" (click)="articleDetails($event,art2)">
           <img *ngIf="art2?.images.length>0" src="{{url}}{{cheminImage}}{{art2?.images[0]?.cheminImage}}"/>
-          <img *ngIf="art2?.images.length==0" src="../../assets/img/defaultImage.png"/>
+          <img *ngIf="art2?.images.length==0" src="assets/img/defaultImage.png"/>
 
 
           <ion-card-content text-center no-padding>
@@ -116,7 +116,7 @@
       </ion-refresher-content>
     </ion-refresher>
     <ion-col width-33 class="left" *ngFor="let image of images">
-      <div (click)="articleDetails($event,image.article)" class="image-explorer" [ngStyle]="{'background-image':'url('+ (image.srcImage !=null && image.srcImage || '../../assets/img/defaultImage.png') + ')'}" >
+      <div (click)="articleDetails($event,image.article)" class="image-explorer" [ngStyle]="{'background-image':'url('+ (image.srcImage !=null && image.srcImage || 'assets/img/defaultImage.png') + ')'}" >
       </div>
       <div class="sold-explorer" *ngIf="image.article.etat=='Vendu'">
        <span >Vendu</span>
