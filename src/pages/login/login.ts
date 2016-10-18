@@ -29,9 +29,9 @@ export class LoginPage {
         this.navCtrl.push(ConnexionModalPage)
     }
 
-    signup()
-    {
-        this.navCtrl.push(SignupPage)
-    }
+    // signup()
+    // {
+    //     this.navCtrl.push(SignupPage)
+    // }
 
 }

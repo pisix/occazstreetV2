@@ -29,11 +29,33 @@
       </ion-segment-button>
     </ion-segment>
   </ion-toolbar>
+  <ion-toolbar *ngIf="isSearch">
+    <ion-chip>
+      <button ion-button (click)="closeSearch()">
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-chip>
+    <ion-chip *ngFor="let p of searchChips">
+      <ion-label>{{p}}</ion-label>
+      <button ion-button >
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-chip>
+  </ion-toolbar>
+
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
   <div *ngIf="homeTab=='mur'" class="getting-started">
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+      <ion-refresher-content
+        pullingIcon="arrow-dropdown"
+        pullingText="Lachez pour raffraichir"
+        refreshingSpinner="circles"
+        refreshingText="chargement...">
+      </ion-refresher-content>
+    </ion-refresher>
 
     <ion-row *ngIf="offLine">
       <ion-col text-center>
@@ -46,16 +68,21 @@
       </ion-col>
     </ion-row>
 
+    <ion-row *ngIf="isSearch && (this.articles1.length == 0 || this.articles.length == 0)">
+      <ion-col text-center>
+        <div class="network-error">
+          <img margin-bottom src="../../assets/img/no-network.png"/>
+          <h4>Désolé</h4>
+          <p>Aucun article ne correspond à votre recherche !</p>
+          <button ion-button outline pixis (click)="searchArticle()">Nouvelle recherche</button>
+        </div>
+      </ion-col>
+    </ion-row>
+
     <ion-row *ngIf="!offLine">
+
       <ion-col width-50 no-padding>
-        <ion-refresher (ionRefresh)="doRefresh($event)">
-          <ion-refresher-content
-            pullingIcon="arrow-dropdown"
-            pullingText="Lachez pour raffraichir"
-            refreshingSpinner="circles"
-            refreshingText="chargement...">
-          </ion-refresher-content>
-        </ion-refresher>
+
         <ion-card *ngFor="let art1 of articles1"  (click)="articleDetails($event,art1)">
           <img *ngIf="art1?.images.length>0" src="{{url}}{{cheminImage}}{{art1?.images[0]?.cheminImage}}"/>
           <img *ngIf="art1?.images.length==0" src="../../assets/img/defaultImage.png"/>

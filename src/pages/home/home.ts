@@ -14,21 +14,24 @@ import {searchModalPage} from "../search-articles/search-articles";
 })
 export class HomePage {
 
-    public homeTab;
-    public title = GlobalsConstants.APPNAME;
-    private skip = 0;
-    private skipExplorer = 0;
-    private limit = GlobalsConstants.PAGE;
-    private limitExplorer=GlobalsConstants.PAGEEXPLORER;
-    public articles1:Array<Article> = [];
-    public articles2:Array<Article> = [];
-    private offLine:boolean;
+  public homeTab;
+  public title = GlobalsConstants.APPNAME;
+  private skip = 0;
+  private skipExplorer = 0;
+  private limit = GlobalsConstants.PAGE;
+  private limitExplorer=GlobalsConstants.PAGEEXPLORER;
+  public articles1:Array<Article> = [];
+  public articles2:Array<Article> = [];
+  private offLine:boolean;
+  private isSearch:boolean;
+  private searchParams:Object;
+  public searchChips = [];
 
-    public prixOrder:string = 'croissants';
-    public dateOrder:string = 'décroissantes';
-    public url=GlobalsConstants.urlServer+GlobalsConstants.port+'/';
-    public cheminImage=GlobalsConstants.cheminImage;
-    public  images:any = [];
+  public prixOrder:string = 'croissants';
+  public dateOrder:string = 'décroissantes';
+  public url=GlobalsConstants.urlServer+GlobalsConstants.port+'/';
+  public cheminImage=GlobalsConstants.cheminImage;
+  public  images:any = [];
 
 
   constructor(private articleService:ArticleService,
@@ -45,37 +48,35 @@ export class HomePage {
 
   loadAll(){
     this.articleService.getAllArticles().subscribe(res => {
-    //  let articles = res;
+      //  let articles = res;
 
       // console.log("Article =>",articles)
     })
 
 
   }
-    selectedMur(){
-        this.homeTab="mur";
-    }
-    selectedExplorer(){
-        this.homeTab="explorer";
-    }
-    selectedCollections(){
-        this.homeTab="collections";
-    }
+
+  selectedMur(){
+    this.homeTab="mur";
+  }
+  selectedExplorer(){
+    this.homeTab="explorer";
+  }
+  selectedCollections(){
+    this.homeTab="collections";
+  }
+
   getArticlesByLimit(skip:number,limit:number){
     this.articleService.getArticlesByLimit(skip,limit).subscribe(res => {
-    this.skip=this.skip+res.length;
+
+      this.loadImageArticle(res);
+
+      this.skip=this.skip+res.length;
+
       this.offLine = false;
-      let articles = res;
-      let tab1, tab2;
-      // console.log(articles)
-      tab1 = articles.splice(0,(articles.length/2));
-      tab2 = articles;
-      tab1.forEach(x => {
-        this.articles1.push(x);
-      });
-      tab2.forEach(x => {
-        this.articles2.push(x);
-      });
+      this.isSearch = false;
+
+     this.presentArticle(res);
 
     },err =>{
       console.log('err',err);
@@ -85,24 +86,22 @@ export class HomePage {
     });
   }
 
-    loadImageArticle(skip:number,limit:number){
-        this.articleService.getArticlesByLimit(skip,limit).subscribe(res => {
-            this.skipExplorer=this.skipExplorer+res.length;
-            for(var i =0 ; i<res.length;i++)
-            {
-                console.log("images "+JSON.stringify(res[i]));
-                if(res[i].images.length>0)
-                {
-                   this.images.push({article:res[i],srcImage:this.url+this.cheminImage+res[i].images[0].cheminImage});
-                }else
-                {
-                   this.images.push({article:res[i],srcImage:null});
-                }
-            }
-            this.images=this.shuffle(this.images);
-
-        });
+  loadImageArticle(res:any){
+    this.skipExplorer=this.skipExplorer+res.length;
+    for(var i =0 ; i<res.length;i++)
+    {
+      console.log("images "+JSON.stringify(res[i]));
+      if(res[i].images.length>0)
+      {
+        this.images.push({article:res[i],srcImage:this.url+this.cheminImage+res[i].images[0].cheminImage});
+      }else
+      {
+        this.images.push({article:res[i],srcImage:null});
+      }
     }
+    this.images=this.shuffle(this.images);
+  }
+
   articleDetails(event,item:Article){
     this.navCtrl.push(ArticleDetailsPage, {
       article: item
@@ -113,49 +112,89 @@ export class HomePage {
   searchArticle() {
     let modal = this.modalController.create(searchModalPage);
     modal.present();
+
+    modal.onDismiss(data => {
+      this.searchChips = [];
+      console.log('MODAL DATA', data);
+      this.searchParams = data;
+      this.getChipsList(data);
+      console.log( this.searchChips)
+
+      this.articleService.getArticleByParam(data).subscribe((res) => {
+
+        this.isSearch = true;
+        this.presentArticle(res);
+
+      });
+
+    });
   }
 
-  doRefresh(refresher) {
-      this.skip=0;
+  closeSearch(){
+    this.skip=0;
     this.articles1 = [];
     this.articles2 = [];
     this.getArticlesByLimit(this.skip,GlobalsConstants.PAGE);
+    this.isSearch = false;
+  }
+
+  doRefresh(refresher) {
+    this.skip=0;
+    this.articles1 = [];
+    this.articles2 = [];
+    if(this.isSearch){
+      this.articleService.getArticleByParam(this.searchParams).subscribe((res) => {
+
+        this.isSearch = true;
+        this.presentArticle(res);
+        refresher.complete();
+      });
+    }else {
+      this.getArticlesByLimit(this.skip,GlobalsConstants.PAGE);
+      refresher.complete();
+    }
+
+  }
+
+  doRefreshImages(refresher) {
+    this.images=[];
+    this.skipExplorer=0;
+    this.loadImageArticle(this.skipExplorer,GlobalsConstants.PAGEEXPLORER);
     refresher.complete();
   }
 
-    doRefreshImages(refresher) {
-       this.images=[];
-        this.skipExplorer=0;
-        this.loadImageArticle(this.skipExplorer,GlobalsConstants.PAGEEXPLORER);
-        refresher.complete();
-    }
-
   doInfinite(infiniteScroll){
+    if(this.isSearch){
+      infiniteScroll.complete();
+    }else {
       if(this.skip==0)
       {
-          this.skip=GlobalsConstants.PAGE;
+        this.skip=GlobalsConstants.PAGE;
       }
+      setTimeout(()=>{
+        this.getArticlesByLimit(this.skip,this.limit+this.limit);
+        infiniteScroll.complete();
+
+      },1000);
+    }
+
+  }
+
+  doInfiniteImages(infiniteScroll){
+    if(this.skipExplorer==0)
+    {
+      this.skipExplorer=GlobalsConstants.PAGEEXPLORER;
+    }
     setTimeout(()=>{
-      this.getArticlesByLimit(this.skip,this.limit+this.limit);
+      this.loadImageArticle(this.skipExplorer,this.limitExplorer+this.limitExplorer);
       infiniteScroll.complete();
 
     },1000);
   }
-    doInfiniteImages(infiniteScroll){
-        if(this.skipExplorer==0)
-        {
-            this.skipExplorer=GlobalsConstants.PAGEEXPLORER;
-        }
-        setTimeout(()=>{
-            this.loadImageArticle(this.skipExplorer,this.limitExplorer+this.limitExplorer);
-            infiniteScroll.complete();
-
-        },1000);
-    }
 
   option(myEvent){
 
-    let popover = this.popoverCtrl.create(articlesPopOver,{prixOrder:this.prixOrder,dateOrder:this.dateOrder});
+    let popover = this.popoverCtrl.create(ArticlesPopOver,{prixOrder:this.prixOrder,dateOrder:this.dateOrder});
     popover.present({
       ev: myEvent
     });
@@ -166,24 +205,60 @@ export class HomePage {
     })
   }
 
-    shuffle(array)
-    {
-        var m = array.length, t, i;
+  shuffle(array)
+  {
+    var m = array.length, t, i;
 
-        // While there remain elements to shuffle?
-        while (m) {
+    // While there remain elements to shuffle?
+    while (m) {
 
-            // Pick a remaining element?
-            i = Math.floor(Math.random() * m--);
+      // Pick a remaining element?
+      i = Math.floor(Math.random() * m--);
 
-            // And swap it with the current element.
-            t = array[m];
-            array[m] = array[i];
-            array[i] = t;
-        }
-
-        return array;
+      // And swap it with the current element.
+      t = array[m];
+      array[m] = array[i];
+      array[i] = t;
     }
+
+    return array;
+  }
+
+  presentArticle(art:any){
+    let articles = art;
+    let tab1, tab2;
+    // console.log(articles)
+    if(art.length === 0) {
+
+      this.articles1 = [];
+      this.articles2 = [];
+
+    }else if(art.length === 1){
+
+      this.articles1.push(x);
+
+    }
+    else if(art.length >= 2){
+      tab1 = articles.splice(0,(articles.length/2));
+      tab2 = articles;
+      tab1.forEach(x => {
+        this.articles1.push(x);
+      });
+      tab2.forEach(x => {
+        this.articles2.push(x);
+      });
+    }
+  }
+
+  getChipsList(param:Object){
+    Object.keys(param).forEach(key => {
+      if(!(param[key] === '')){
+         this.searchChips.push(param[key]);
+      }
+    });
+
+  }
+
 }
 
 @Component({
@@ -194,9 +269,9 @@ export class HomePage {
                 <ion-item  (click)="trierParDate(dateOrder)">
                    Date {{dateOrder}}
                 </ion-item>
-             </ion-list>`
+             </ion-list>`,
 })
-class articlesPopOver {
+export class ArticlesPopOver {
   private prixOrder:string;
   private dateOrder:string;
 

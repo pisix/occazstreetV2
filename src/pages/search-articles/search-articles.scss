@@ -1,4 +1,15 @@
-page-search-articles
-{
+.search-card-content{
+  padding-right: 5px;
+  padding-left: 5px;
+}
+.container{
+  display: flex;
+}
 
+.fixed{
+  width: 50%;
+}
+
+.flex-item{
+  flex-grow: 1;
 }

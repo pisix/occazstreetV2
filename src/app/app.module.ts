@@ -4,7 +4,7 @@ import { IonicApp, IonicModule } from 'ionic-angular';
 import { App } from './app.component';
 import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
-import { HomePage } from '../pages/home/home';
+import {HomePage, ArticlesPopOver} from '../pages/home/home';
 import {ItemDetailsPage} from '../pages/item-details/item-details';
 import {ArticleDetailsPage} from '../pages/article-details/article-details';
 import {ListPage} from '../pages/list/list'
@@ -19,7 +19,7 @@ import {ArticleService} from '../services/article.service';
 import {UtilisateurService} from '../services/utilisateur.service';
 import {CategoriePage} from '../pages/categorie/categorie';
 import {CategorieService}  from '../services/categorie.service';
-import {SignupPage} from '../pages/signup/signup';
+// import {SignupPage} from '../pages/signup/signup';
 import {MediaSharing} from "../services/mediaSharing.service";
 
 
@@ -42,7 +42,8 @@ import {MediaSharing} from "../services/mediaSharing.service";
     OccasStreetTimer,
     ResetPasswordModalPage,
     CategoriePage,
-    SignupPage
+    ArticlesPopOver
+    // SignupPage
   ],
   imports: [
     IonicModule.forRoot(App)
@@ -62,7 +63,8 @@ import {MediaSharing} from "../services/mediaSharing.service";
     ConnexionModalPage,
     ResetPasswordModalPage,
     CategoriePage,
-    SignupPage
+    ArticlesPopOver
+    // SignupPage
   ],
   providers: [ArticleService,UtilisateurService,CategorieService,MediaSharing]
 })

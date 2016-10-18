@@ -3,31 +3,67 @@
  */
 
 import {Component} from '@angular/core'
-import {NavParams, ViewController} from "ionic-angular";
+import { FormBuilder, Validators } from '@angular/forms';
+import {NavParams, ViewController, Platform} from "ionic-angular";
+import {CategorieService} from "../../services/categorie.service";
+import {Categorie} from "../../components/categorie.component";
+import {GoogleplaceDirective} from '../../../node_modules/angular2-google-map-auto-complete/directives/googleplace.directive';
 
 @Component({
-  selector: 'page-search-articles',
-  templateUrl: 'search-articles.html'
+  templateUrl: 'search-articles.html',
+  directives: [GoogleplaceDirective]
 })
 export class searchModalPage{
-  public myInput:any;
+
+  private categories:Array<Categorie>;
+  private searchForm:any;
+  public address : Object;
+  private result:Object;
 
   constructor(private params: NavParams,
-              private viewCtrl: ViewController){}
+              private viewCtrl: ViewController,
+              private categorieService:CategorieService,
+              private formBuilder: FormBuilder){
+    this.categories = [];
+
+    //TODO trouver une validator pour gerer le prix min et max contraindre au prix positif et aux entiers
+
+    this.searchForm = this.formBuilder.group({
+      'motcle':[''],
+      'ville':[''],
+      'categorie':[''],
+      'prixmin':[''],
+      'prixmax':[''],
+      'filterBy': ['prix asc']
+    });
 
 
-  Cancel(){
+    this.categorieService.getAllCategories().subscribe(res => {
+      console.log(res);
+      this.categories = res;
+
+    });
 
   }
 
-  onInput(event){
-
+  getAddress(place:Object) {
+    this.address = place['formatted_address'];
+    var location = place['geometry']['location'];
+    var lat =  location.lat();
+    var lng = location.lng();
+    console.log("Address Object", place);
   }
 
-  onCancel(event){
+  search(event){
+    if(this.searchForm.valid){
+      console.log(this.searchForm.value);
+      this.dismiss(this.searchForm.value);
 
+    }
   }
-  dismiss() {
-  this.viewCtrl.dismiss();
+
+  dismiss(data) {
+    this.viewCtrl.dismiss(data);
+  }
 }
-}
+

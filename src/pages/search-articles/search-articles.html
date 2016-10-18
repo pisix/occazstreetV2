@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar pixis>
+  <ion-toolbar pixis color="primary2">
     <ion-title>
       Que cherchez vous ?
     </ion-title>
@@ -14,12 +14,77 @@
 </ion-header>
 
 <ion-content>
-  <ion-searchbar
-    [(ngModel)]="myInput"
-    [cancelButtonText] ="Cancel"
-    [showCancelButton]="false"
-    (ionInput)="onInput($event)"
-    (ionCancel)="onCancel($event)">
-  </ion-searchbar>
-<h1>Search Modal</h1>
+
+  <form [formGroup]="searchForm" (ngSubmit)="search($event)">
+    <ion-searchbar formControlName="motcle" ></ion-searchbar>
+
+    <ion-card>
+      <ion-card-content>
+        <ion-item>
+          <ion-label floating>VIlle</ion-label>
+          <ion-input type="text" formControlName="ville" (setAddress) = "getAddress($event)" googleplace></ion-input>
+        </ion-item>
+        <hr class="card-devider" />
+        <ion-item>
+          <ion-label>Catégories</ion-label>
+          <ion-select formControlName="categorie">
+            <ion-option *ngFor="let cat of categories" [value]="cat.libelle">{{cat.libelle}}</ion-option>
+          </ion-select>
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
+
+
+    <ion-card>
+      <ion-card-header>
+        Prix
+      </ion-card-header>
+      <ion-card-content class="search-card-content container">
+        <div class="fixed">
+          <ion-item>
+            <ion-label floating>Min</ion-label>
+            <ion-input type="number" min="0"  formControlName="prixmin"></ion-input>
+          </ion-item>
+        </div>
+        <div class="flex-item">
+          <ion-item>
+            <ion-label floating>Max</ion-label>
+            <ion-input type="number" min="0" formControlName="prixmax"></ion-input>
+          </ion-item>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card>
+
+      <ion-card-content class="search-card-content">
+        <ion-list id="filterBy" radio-group formControlName="filterBy">
+          <ion-list-header>
+            Filtrer par
+          </ion-list-header>
+
+          <ion-item>
+            <ion-label>Prix Croissants</ion-label>
+            <ion-radio checked="true"  value="prix asc"></ion-radio>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>Prix decroissants</ion-label>
+            <ion-radio value="prix desc"></ion-radio>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>Derniers produits ajoutés</ion-label>
+            <ion-radio value="dateAjout desc"></ion-radio>
+          </ion-item>
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
+    <ion-fab bottom right>
+      <button ion-fab fab-fixed	type="submit" [disabled]="!searchForm.valid">
+        <ion-icon name="checkmark" is-active="false"></ion-icon>
+      </button>
+    </ion-fab>
+  </form>
+
 </ion-content>

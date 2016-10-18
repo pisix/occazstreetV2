@@ -3,37 +3,38 @@
  */
 
 import {Injectable} from '@angular/core'
-import {Http} from "@angular/http";
+import {Http, RequestOptions, Headers} from "@angular/http";
 import {Article} from "../components/article.component";
 import {GlobalsConstants} from "../constants/globals.constants";
 import 'rxjs/add/operator/map';
+import 'rxjs/Rx';
 import {Observable} from "rxjs/Observable";
 
 @Injectable()
-export class ArticleService{
+export class ArticleService {
 
-  constructor(private http: Http){
+  constructor(private http: Http) {
 
   }
 
-  getAllArticles(){
+  getAllArticles() {
 
-    return this.http.get(GlobalsConstants.urlServer+GlobalsConstants.port+'/article/getAllArticles')
-      .map((res)=>{
-        if(res.status === 200){
+    return this.http.get(GlobalsConstants.urlServer + GlobalsConstants.port + '/article/getAllArticles')
+      .map((res)=> {
+        if (res.status === 200) {
 
           return (res.json()).articles
         }
-        else{
+        else {
           throw new Error("Could not Articles");
         }
       })
-      .map((result:Array<Article>)=>{
-        let articles:Array<Article> =[];
+      .map((result: Array<Article>)=> {
+        let articles: Array<Article> = [];
 
-        if(result){
+        if (result) {
 
-          result.forEach((article)=>{
+          result.forEach((article)=> {
             articles.push(article);
           })
 
@@ -43,31 +44,62 @@ export class ArticleService{
       });
   }
 
-  getArticlesByLimit(skip,limit){
+  getArticlesByLimit(skip, limit) {
 
-      return this.http.get(GlobalsConstants.urlServer+GlobalsConstants.port+'/article/getArticlesByLimit?skip='+skip+'&limit='+limit)
-        .map((res) => {
-          if(res.status === 200){
+    return this.http.get(GlobalsConstants.urlServer + GlobalsConstants.port + '/article/getArticlesByLimit?skip=' + skip + '&limit=' + limit)
+      .map((res) => {
+        if (res.status === 200) {
 
-            return (res.json()).articles
-          }
-          else{
-            throw new Error("Could not Articles");
-          }
-        })
-        .map((result:Array<Article>)=>{
-          let articles:Array<Article> =[];
+          return (res.json()).articles
+        }
+        else {
+          throw new Error("Could not Articles");
+        }
+      })
+      .map((result: Array<Article>)=> {
+        let articles: Array<Article> = [];
 
-          if(result){
+        if (result) {
 
-            result.forEach((article)=>{
-              articles.push(article);
-            })
+          result.forEach((article)=> {
+            articles.push(article);
+          })
 
-          }
+        }
 
-          return articles;
-        });
+        return articles;
+      });
+  }
+
+  getArticleByParam(params: any) {
+
+    let data = params;
+    let headers = new Headers({'Content-Type': 'application/json'});
+    let options = new RequestOptions({headers: headers});
+
+    return this.http.post(GlobalsConstants.urlServer + GlobalsConstants.port + '/article/getArticlesByParam' , data, options)
+      .map((res) => {
+        if (res.status === 200) {
+
+          return (res.json()).articles
+        }
+        else {
+          throw new Error("Could not Articles");
+        }
+      })
+      .map((result: Array<Article>)=> {
+        let articles: Array<Article> = [];
+
+        if (result) {
+
+          result.forEach((article)=> {
+            articles.push(article);
+          })
+
+        }
+
+        return articles;
+      });
   }
 
 }
