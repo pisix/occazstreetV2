@@ -1,3 +1,71 @@
 page-signup {
 
+  .navbar {
+    .toolbar-background {
+      background: transparent;
+    }
+  }
+  .signup {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.84) -17%, #f1ecec 637%);
+    padding: 0;
+    margin: 0;
+    top: 0;
+    left: 0;
+  }
+  .signup_form {
+    position: absolute;
+    top: 25%;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    padding: 1.5rem 2.5rem;
+    text-align: center;
+  }
+  .signup_logo {
+    position: absolute;
+    top: 2rem;
+    left: 9.5rem;
+    width: 14rem;
+    height: 2.8rem;
+
+  }
+
+  .cont {
+    position: relative;
+    height: 100%;
+    background: -webkit-linear-gradient(top, rgba(146, 135, 187, 0.8) 0%, rgba(255, 255, 255, 0.8) 100%);
+    background-image: url("/assets/img/bg_login.jpg");
+    background-size: cover;
+    overflow: auto;
+    font-family: "Open Sans", Helvetica, Arial, sans-serif;
+  }
+
+  .signup_submit {
+    position: relative;
+    width: 100%;
+    height: 4rem;
+    font-size: 1.5rem;
+    border-radius: 3rem;
+    cursor: pointer;
+    overflow: hidden;
+    transition: width 0.3s 0.15s, font-size 0.1s 0.15s;
+    font-weight: bold;
+  }
+  .google_submit {
+    position: relative;
+    width: 100%;
+    height: 4rem;
+    margin: 1rem 0 2.2rem;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1.5rem;
+    border-radius: 3rem;
+    cursor: pointer;
+    overflow: hidden;
+    -webkit-transition: width 0.3s 0.15s, font-size 0.1s 0.15s;
+    transition: width 0.3s 0.15s, font-size 0.1s 0.15s;
+    font-weight: bold;
+  }
 }

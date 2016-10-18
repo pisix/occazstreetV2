@@ -4,16 +4,16 @@
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
   Ionic pages and navigation.
 -->
-<ion-header>
+<!--<ion-header>
   <ion-navbar pixis color="primary2">
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title center>{{title}}</ion-title>
   </ion-navbar>
-</ion-header>
-<ion-content padding style="overflow-y: hidden">
-    <ion-list no-lines>
+</ion-header>-->
+<ion-content padding class="cont">
+    <!--<ion-list no-lines>
             <ion-row style="position: absolute; top: 10%; text-align: center">
                 <ion-item-divider style="background-color:white" >
                     <span style="font-size: 200%; font-weight: bold; color:#616161"> Connectez-vous...</span><br/><br/>
@@ -23,7 +23,7 @@
             </ion-row>
 
            <ion-row class="wrapper">
-               <button ion-button color="facebook" class="button-facebook" full>
+               <button ion-button color="facebook" (click)="facebook()" class="button-facebook" full>
                    <ion-icon margin facebook class="social-media-icon"  name="logo-facebook"></ion-icon>
                    Continuer avec Facebook
                </button>
@@ -69,5 +69,27 @@
             </ion-segment-button>
         </ion-segment>
     </ion-footer>-->
+  <div class="login">
+    <div class="login_logo">
+      <img src="assets/img/icon_white.png">
+    </div>
+    <div class="login_form">
+      <ion-row >
+        <ion-col >
+          <button ion-button round outline  color="light"  (click)="connexion()" class="login_submit" >
+            Se connecter
+          </button>
+        </ion-col>
+      </ion-row>
+      <ion-row >
+        <ion-col >
+          <button ion-button  round outline  color="light"  (click)="signup()" class="signup_submit">
+            S'inscrire
+          </button>
+        </ion-col>
+      </ion-row>
+    </div>
+
+  </div>
 </ion-content>
 
