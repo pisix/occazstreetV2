@@ -4,15 +4,49 @@
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
   Ionic pages and navigation.
 -->
-<ion-header>
+<!--<ion-header>
     <ion-navbar pixis color="primary2"  >
         <ion-title>Connexion</ion-title>
     </ion-navbar>
-</ion-header>
+</ion-header>-->
 
 
-<ion-content padding >
-    <ion-list no-lines>
+<ion-content padding class="cont">
+  <div class="login">
+    <div class="login_logo">
+      <img src="assets/img/icon.png">
+    </div>
+    <div class="login_form">
+      <form  #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)" >
+        <ion-list >
+            <ion-item  style="background-color: inherit;border-top: none">
+            <ion-label floating>Email</ion-label>
+            <ion-input [(ngModel)]="email" required  id="email" name="email" type="email"></ion-input>
+          </ion-item>
+          <ion-item style="background-color: inherit;border-bottom: none">
+            <ion-label floating>Mot de passe</ion-label>
+            <ion-input [(ngModel)]="password" min="3" required type="password" id="password" name="password"></ion-input>
+          </ion-item>
+          <ion-item style="background-color: inherit;border-bottom: none;display:none">
+          </ion-item>
+
+        </ion-list>
+          <button ion-button round  color="light" type="submit" style="color: #B71C1C;"  class="login_submit">Se connecter</button>
+     </form>
+      <a href="#" (click)="resetPassword()" right style="color: #757272;font-weight: bold;text-decoration: none;float: right;">Mot de passe oubli&#233; ?</a>
+      <br/><br/>
+      <hr class="separator"><br/>
+      <button ion-button round  color="facebook" (click)="facebook()" class="login_submit">
+        <ion-icon name="logo-facebook" outline class="social-media-icon" margin left></ion-icon>
+        Facebook
+      </button>
+      <button ion-button round  color="mail" (click)="google()" class="google_submit">
+        <ion-icon name="logo-googleplus" class="social-media-icon" margin left></ion-icon>
+        Google
+      </button>
+    </div>
+  </div>
+   <!-- <ion-list no-lines>
         <form  #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)" >
 
                 <ion-item>
@@ -29,6 +63,6 @@
         <hr>
         <button ion-button full color="light" (click)="resetPassword()">Mot de passe oubli&#233; ?</button>
         <hr>
-    </ion-list>
+    </ion-list>-->
 
 </ion-content>

@@ -52,4 +52,15 @@ export class UtilisateurService{
         return res;
       });
   }
+  doOauth(token,userData) {
+    userData.token = token;
+    return this.http
+      .post(
+      GlobalsConstants.urlServer + GlobalsConstants.port + '/utilisateur/oauth',
+      userData)
+      .map(res => res.json())
+      .map((res) => {
+        return res;
+      });
+  }
 }

@@ -1,3 +1,7 @@
+18-10-2016
+----------
+Modification design login & Signup 
+
 16-10-2016
 ----------
 Module d'inscription 

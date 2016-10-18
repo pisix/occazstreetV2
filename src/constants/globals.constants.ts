@@ -4,13 +4,13 @@
 
 export  class GlobalsConstants{
 
-    // static urlServer:string = "http://192.168.1.44:";
+    //static urlServer:string = "http://192.168.1.44:";
     static urlServer:string = "http://37.59.101.217:";
     static port:string = "1337";
     static cheminImage:string = "imagesArticle/";
     static cheminPhoto:string = "photoUtilisateur/";
     static GOOGLECLIENTID:string = "448214499045-h5rf4q3tnp6he7r9mbj72espfplgc315.apps.googleusercontent.com";
-    static FACEBOOKCLIENTID:string = "1703284276585375";
+    static FACEBOOKCLIENTID:string = "360840357584353";
     static USER_LOGGED:string = "loggedUser";
     static LOCAL_TOKEN_KEY:string = "token";
     static URL_JSON_IP:string ="http://freegeoip.net/json";
