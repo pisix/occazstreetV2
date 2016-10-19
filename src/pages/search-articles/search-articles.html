@@ -16,7 +16,7 @@
 <ion-content>
 
   <form [formGroup]="searchForm" (ngSubmit)="search($event)">
-    <ion-searchbar formControlName="motcle" ></ion-searchbar>
+    <ion-searchbar formControlName="motcle" placeholder="Mot(s)-clé(s)"></ion-searchbar>
 
     <ion-card>
       <ion-card-content>
@@ -26,7 +26,7 @@
         </ion-item>
         <hr class="card-devider" />
         <ion-item>
-          <ion-label>Catégories</ion-label>
+          <ion-label>CatÃ©gories</ion-label>
           <ion-select formControlName="categorie">
             <ion-option *ngFor="let cat of categories" [value]="cat.libelle">{{cat.libelle}}</ion-option>
           </ion-select>
@@ -74,7 +74,7 @@
           </ion-item>
 
           <ion-item>
-            <ion-label>Derniers produits ajoutés</ion-label>
+            <ion-label>Derniers produits ajoutÃ©s</ion-label>
             <ion-radio value="dateAjout desc"></ion-radio>
           </ion-item>
         </ion-list>
