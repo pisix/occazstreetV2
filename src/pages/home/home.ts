@@ -113,12 +113,12 @@ export class HomePage {
     let modal = this.modalController.create(searchModalPage);
     modal.present();
 
-    modal.onDismiss(data => {
+    modal.onDidDismiss(data => {
       this.searchChips = [];
       console.log('MODAL DATA', data);
       this.searchParams = data;
       this.getChipsList(data);
-      console.log( this.searchChips)
+      console.log( this.searchChips);
 
       this.articleService.getArticleByParam(data).subscribe((res) => {
 
