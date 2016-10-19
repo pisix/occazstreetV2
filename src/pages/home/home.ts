@@ -23,7 +23,7 @@ export class HomePage {
   public articles1:Array<Article> = [];
   public articles2:Array<Article> = [];
   private offLine:boolean;
-  private isSearch:boolean;
+  public isSearch:boolean;
   private searchParams:Object;
   public searchChips = [];
 
@@ -68,9 +68,6 @@ export class HomePage {
 
   getArticlesByLimit(skip:number,limit:number){
     this.articleService.getArticlesByLimit(skip,limit).subscribe(res => {
-
-      this.loadImageArticle(res);
-
       this.skip=this.skip+res.length;
 
       this.offLine = false;
@@ -86,20 +83,23 @@ export class HomePage {
     });
   }
 
-  loadImageArticle(res:any){
-    this.skipExplorer=this.skipExplorer+res.length;
-    for(var i =0 ; i<res.length;i++)
-    {
-      console.log("images "+JSON.stringify(res[i]));
-      if(res[i].images.length>0)
+  loadImageArticle(skip:number,limit:number){
+    this.articleService.getArticlesByLimit(skip,limit).subscribe(res => {
+      this.skipExplorer=this.skipExplorer+res.length;
+      for(var i =0 ; i<res.length;i++)
       {
-        this.images.push({article:res[i],srcImage:this.url+this.cheminImage+res[i].images[0].cheminImage});
-      }else
-      {
-        this.images.push({article:res[i],srcImage:null});
+        console.log("images "+JSON.stringify(res[i]));
+        if(res[i].images.length>0)
+        {
+          this.images.push({article:res[i],srcImage:this.url+this.cheminImage+res[i].images[0].cheminImage});
+        }else
+        {
+          this.images.push({article:res[i],srcImage:null});
+        }
       }
-    }
-    this.images=this.shuffle(this.images);
+      this.images=this.shuffle(this.images);
+
+    });
   }
 
   articleDetails(event,item:Article){
@@ -235,7 +235,7 @@ export class HomePage {
 
     }else if(art.length === 1){
 
-      this.articles1.push(x);
+      this.articles1.push(art[0]);
 
     }
     else if(art.length >= 2){
@@ -272,8 +272,8 @@ export class HomePage {
              </ion-list>`,
 })
 export class ArticlesPopOver {
-  private prixOrder:string;
-  private dateOrder:string;
+  public prixOrder:string;
+  public dateOrder:string;
 
   constructor(private viewCtrl: ViewController,navParams: NavParams) {
     this.dateOrder = navParams.get('dateOrder');

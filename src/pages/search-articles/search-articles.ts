@@ -7,16 +7,16 @@ import { FormBuilder, Validators } from '@angular/forms';
 import {NavParams, ViewController, Platform} from "ionic-angular";
 import {CategorieService} from "../../services/categorie.service";
 import {Categorie} from "../../components/categorie.component";
-import {GoogleplaceDirective} from '../../../node_modules/angular2-google-map-auto-complete/directives/googleplace.directive';
+//import {GoogleplaceDirective} from '../../../node_modules/angular2-google-map-auto-complete/directives/googleplace.directive';
 
 @Component({
   templateUrl: 'search-articles.html',
-  directives: [GoogleplaceDirective]
+//  directives: [GoogleplaceDirective]
 })
 export class searchModalPage{
 
-  private categories:Array<Categorie>;
-  private searchForm:any;
+  public categories:Array<Categorie>;
+  public searchForm:any;
   public address : Object;
   private result:Object;
 
@@ -39,7 +39,6 @@ export class searchModalPage{
 
 
     this.categorieService.getAllCategories().subscribe(res => {
-      console.log(res);
       this.categories = res;
 
     });
@@ -51,7 +50,6 @@ export class searchModalPage{
     var location = place['geometry']['location'];
     var lat =  location.lat();
     var lng = location.lng();
-    console.log("Address Object", place);
   }
 
   search(event){
