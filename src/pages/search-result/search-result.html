@@ -16,24 +16,19 @@
       </button>
     </ion-buttons>
   </ion-navbar>
-  <ion-toolbar no-border color="white" ligth style="background-color: white;">
-    <ion-segment [(ngModel)]="homeTab" primary>
-      <ion-segment-button value="mur"  (ionSelect)="selectedMur()">
-        Mur
-      </ion-segment-button>
-      <ion-segment-button value="explorer" (ionSelect)="selectedExplorer()">
-        Explorer
-      </ion-segment-button>
-      <ion-segment-button value="collections" (ionSelect)="selectedCollections()">
-        Collections
-      </ion-segment-button>
-    </ion-segment>
+  <ion-toolbar >
+    <ion-chip *ngFor="let p of searchChips">
+      <ion-label>{{p}}</ion-label>
+      <button ion-button (click)="remove(p,$event)">
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-chip>
   </ion-toolbar>
 </ion-header>
 
 
 <ion-content>
-  <div *ngIf="homeTab=='mur'" class="getting-started">
+  <div class="getting-started">
     <ion-refresher (ionRefresh)="doRefresh($event)">
       <ion-refresher-content
         pullingIcon="arrow-dropdown"
@@ -50,6 +45,17 @@
           <h4>Impossible de charger les articles</h4>
           <p>Abscence de connexion internet. Veuillez v&eacute;rifier votre connexion et r&eacute;essayer</p>
           <button ion-button outline pixis (click)="getArticlesByLimit(0,6)">REESSAYER</button>
+        </div>
+      </ion-col>
+    </ion-row>
+
+    <ion-row *ngIf="(this.articles1.length == 0 || this.articles.length == 0)">
+      <ion-col text-center>
+        <div class="network-error">
+          <img margin-bottom src="../../assets/img/no-network.png"/>
+          <h4>Désolé</h4>
+          <p>Aucun article ne correspond à votre recherche !</p>
+          <button ion-button outline pixis (click)="searchArticle()">Nouvelle recherche</button>
         </div>
       </ion-col>
     </ion-row>
@@ -101,42 +107,13 @@
 
       </ion-col>
     </ion-row>
-    <ion-infinite-scroll *ngIf="!offLine" (ionInfinite)="doInfinite($event)">
-      <ion-infinite-scroll-content
-        loadingSpinner="bubbles"
-        loadingText="chargement...">
-      </ion-infinite-scroll-content>
-    </ion-infinite-scroll>
+    <!--<ion-infinite-scroll *ngIf="!offLine" (ionInfinite)="doInfinite($event)">-->
+      <!--<ion-infinite-scroll-content-->
+        <!--loadingSpinner="bubbles"-->
+        <!--loadingText="chargement...">-->
+      <!--</ion-infinite-scroll-content>-->
+    <!--</ion-infinite-scroll>-->
   </div>
-  <div *ngIf="homeTab=='explorer'">
-    <ion-refresher (ionRefresh)="doRefreshImages($event)">
-      <ion-refresher-content
-        pullingIcon="arrow-dropdown"
-        pullingText="Lachez pour raffraichir"
-        refreshingSpinner="circles"
-        refreshingText="chargement...">
-      </ion-refresher-content>
-    </ion-refresher>
-    <ion-col width-33 class="left" *ngFor="let image of images">
-      <div (click)="articleDetails($event,image.article)" class="image-explorer" [ngStyle]="{'background-image':'url('+ (image.srcImage !=null && image.srcImage || 'assets/img/defaultImage.png') + ')'}" >
-      </div>
-      <div class="sold-explorer" *ngIf="image.article.etat=='Vendu'">
-       <span >Vendu</span>
-      </div>
-    </ion-col>
-    <ion-infinite-scroll *ngIf="!offLine" (ionInfinite)="doInfiniteImages($event)">
-      <ion-infinite-scroll-content
-        loadingSpinner="bubbles"
-        loadingText="chargement...">
-      </ion-infinite-scroll-content>
-    </ion-infinite-scroll>
-
-  </div>
-  <div *ngIf="homeTab=='collections'" >
-    Collections
-
-  </div>
-
   <ion-fab bottom right *ngIf="homeTab=='mur'" >
     <button ion-fab fab-fixed	>
       <ion-icon name="add" is-active="false"></ion-icon>

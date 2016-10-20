@@ -21,6 +21,8 @@ import {CategoriePage} from '../pages/categorie/categorie';
 import {CategorieService}  from '../services/categorie.service';
 import {SignupPage} from '../pages/signup/signup';
 import {MediaSharing} from "../services/mediaSharing.service";
+import {ArticleList} from "../components/article.list.component/article.list.component";
+import {SearchResult} from "../pages/search-result/search-result";
 
 
 
@@ -31,6 +33,7 @@ import {MediaSharing} from "../services/mediaSharing.service";
     AboutPage,
     ContactPage,
     HomePage,
+    SearchResult,
     ItemDetailsPage,
     ArticleDetailsPage,
     ListPage,
@@ -54,6 +57,7 @@ import {MediaSharing} from "../services/mediaSharing.service";
     AboutPage,
     ContactPage,
     HomePage,
+    SearchResult,
     ItemDetailsPage,
     ArticleDetailsPage,
     ListPage,

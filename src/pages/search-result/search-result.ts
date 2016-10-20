@@ -1,29 +1,30 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ArticleService} from "../../services/article.service";
 import {Article} from "../../components/article.component";
 import {GlobalsConstants} from "../../constants/globals.constants";
 import {NavController, NavParams, ModalController, ViewController, PopoverController} from "ionic-angular";
 import {ArticleDetailsPage} from "../article-details/article-details";
 import {searchModalPage} from "../search-articles/search-articles";
-import {SearchResult} from "../search-result/search-result";
+import {HomePage} from "../home/home";
 
 
 
 @Component({
-  selector:'page-home',
-  templateUrl: 'home.html'
+  selector:'search-result',
+  templateUrl: 'search-result.html'
 })
-export class HomePage {
+export class SearchResult implements OnInit{
 
   public homeTab;
   public title = GlobalsConstants.APPNAME;
-  private skip = 0;
-  private skipExplorer = 0;
+
   private limit = GlobalsConstants.PAGE;
   private limitExplorer=GlobalsConstants.PAGEEXPLORER;
   public articles1:Array<Article> = [];
   public articles2:Array<Article> = [];
+  private param;
   private offLine:boolean;
+  public searchChips = [];
 
   public prixOrder:string = 'croissants';
   public dateOrder:string = 'décroissantes';
@@ -37,36 +38,18 @@ export class HomePage {
               private navParams: NavParams,
               private modalController : ModalController,
               private popoverCtrl: PopoverController) {
-
-    this.getArticlesByLimit(this.skip,this.limit);
-    this.loadImageArticle(this.skip,this.limitExplorer);
-    this.homeTab="mur";
-
+    let param = navParams.get('searchParam');
+    this.param = param;
   }
 
-  loadAll(){
-    this.articleService.getAllArticles().subscribe(res => {
-      //  let articles = res;
 
-      // console.log("Article =>",articles)
-    })
-
-
+   ngOnInit(): void {
+    this.getChipsList(this.param);
+    this.getArticleByParam(this.param);
   }
 
-  selectedMur(){
-    this.homeTab="mur";
-  }
-  selectedExplorer(){
-    this.homeTab="explorer";
-  }
-  selectedCollections(){
-    this.homeTab="collections";
-  }
-
-  getArticlesByLimit(skip:number,limit:number){
-    this.articleService.getArticlesByLimit(skip,limit).subscribe(res => {
-
+  getArticleByParam(param){
+    this.articleService.getArticleByParam(param).subscribe(res => {
       this.loadImageArticle(res);
 
       this.skip=this.skip+res.length;
@@ -93,7 +76,6 @@ export class HomePage {
   }
 
   loadImageArticle(res:any){
-    this.skipExplorer=this.skipExplorer+res.length;
     for(var i =0 ; i<res.length;i++)
     {
       if(res[i].images.length>0)
@@ -117,22 +99,12 @@ export class HomePage {
   searchArticle() {
     let modal = this.modalController.create(searchModalPage);
     modal.present();
-
-    modal.onDidDismiss(data => {
-      console.log('MODAL DATA', data);
-      this.navCtrl.push(SearchResult, {
-        searchParam: data
-      });
-
-    });
   }
 
-
   doRefresh(refresher) {
-    this.skip=0;
     this.articles1 = [];
     this.articles2 = [];
-    this.getArticlesByLimit(this.skip,GlobalsConstants.PAGE);
+    this.getArticleByParam(param);
     refresher.complete();
   }
 
@@ -180,8 +152,34 @@ export class HomePage {
     })
   }
 
-  shuffle(array)
-  {
+
+  remove(p:string,event){
+
+    Object.keys(this.param).forEach(key=>{
+      if (this.param[key] === p){
+        this.param[key] = "";
+        return;
+      }
+    });
+
+    this.searchChips.forEach((k,idx) =>{
+      if(k === p){
+        this.searchChips.splice(idx,1);
+      }
+    });
+
+    // if chips array is empty we redirect to the home page
+    if(this.searchChips.length == 0){
+      this.navCtrl.pop(HomePage);
+
+    }else {
+      // else we query a new search with the new params
+      this.getArticleByParam(this.param);
+    }
+
+  }
+
+  shuffle(array) {
     var m = array.length, t, i;
 
     // While there remain elements to shuffle?
@@ -198,39 +196,17 @@ export class HomePage {
 
     return array;
   }
+
+  getChipsList(param:Object){
+    debugger;
+    Object.keys(param).forEach(key => {
+      if(!(param[key] === '')){
+        this.searchChips.push(param[key]);
+      }
+    });
+
+  }
+
+
 }
 
-@Component({
-  template: `<ion-list no-margin>
-                <ion-item  (click)="trierParPix(prixOrder)">
-                   prix {{prixOrder}}
-                </ion-item>
-                <ion-item  (click)="trierParDate(dateOrder)">
-                   Date {{dateOrder}}
-                </ion-item>
-             </ion-list>`,
-})
-export class ArticlesPopOver {
-  private prixOrder:string;
-  private dateOrder:string;
-
-  constructor(private viewCtrl: ViewController,navParams: NavParams) {
-    this.dateOrder = navParams.get('dateOrder');
-    this.prixOrder = navParams.get('prixOrder');
-  }
-
-  trierParPix(order:string){
-    console.log("trier par prix "+order)
-    this.prixOrder = this.prixOrder === 'croissants'?'décroissants':'croissants';
-    this.viewCtrl.dismiss({prixOrder:this.prixOrder,dateOrder:this.dateOrder});
-  }
-
-  trierParDate(order:string){
-    console.log("trier par date "+order)
-    this.dateOrder = this.dateOrder === 'décroissantes'?'croissantes':'décroissantes';
-    this.viewCtrl.dismiss({prixOrder:this.prixOrder,dateOrder:this.dateOrder});
-  }
-  close() {
-    this.viewCtrl.dismiss({prixOrder:this.prixOrder,dateOrder:this.dateOrder});
-  }
-}
