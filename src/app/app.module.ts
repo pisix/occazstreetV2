@@ -1,4 +1,3 @@
-
 import { NgModule } from '@angular/core';
 import { IonicApp, IonicModule } from 'ionic-angular';
 import { App } from './app.component';
@@ -72,4 +71,3 @@ import {ProfilPage} from '../pages/profil/profil';
   providers: [ArticleService,UtilisateurService,CategorieService,MediaSharing]
 })
 export class AppModule {}
-
