@@ -1,3 +1,6 @@
+21-10-2016
+----------
+Mise en place ecran de profil utilisateur
 18-10-2016
 ----------
 Modification design login & Signup 

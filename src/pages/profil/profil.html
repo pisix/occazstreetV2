@@ -1,0 +1,135 @@
+<!--
+  Generated template for the Profil page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header no-shadow>
+  <ion-navbar transparent>
+    <button ion-button menuToggle color="dark">
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title><p style="color: #222 ">Profil</p></ion-title>
+    <ion-buttons end>
+      <button color="dark" ion-button (click)="goToEditProfilePage()" [hidden]="!showEdit">
+        <ion-icon name="create" style="font-size:large"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-buttons end>
+      <button color="dark" ion-button (click)="goToEditProfilePage()" [hidden]="!showEdit">
+        <ion-icon name="cog" style="font-size:large"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding class="cont">
+  <div class="profil">
+    <div class="profil-top">
+      <p class="profil-name">{{utilisateur.nom}} {{utilisateur.prenom}}</p>
+      <div class="profil-user">
+        <ion-icon [hidden]="utilisateur?.photo.idPhoto!=1" name="contact" style="font-size: 500%;color: white"></ion-icon>
+        <img [hidden]="utilisateur?.photo.idPhoto==1" src="{{url}}{{cheminPhoto}}{{utilisateur?.photo.cheminPhoto}}" alt="" class="profil-user-photo" />
+        <!--<span class="profil-user-notif">3</span>-->
+      </div>
+    </div>
+    <div class="profil-bot">
+      <ion-toolbar no-border color="white" ligth style="background-color: white;">
+        <ion-segment [(ngModel)]="profileTab" primary>
+          <ion-segment-button value="envente"  (ionSelect)="selectedEnVente()">
+            En Vente
+            <span class="profil-article-notif">{{articleUser?.length}}</span>
+          </ion-segment-button>
+          <ion-segment-button value="vendu" (ionSelect)="selectedVendu()">
+            Vendu
+            <span class="profil-article-notif">{{articleSoldUser?.length}}</span>
+          </ion-segment-button>
+          <ion-segment-button value="favoris" (ionSelect)="selectedFavoris()">
+            Favoris
+            <span class="profil-article-notif">{{articleFavoriteUser?.length}}</span>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-toolbar>
+      <div *ngIf="profileTab=='envente'" >
+        <ion-card style="width: 80%; margin-left: 10%;" *ngIf="!articleUser || articleUser?.length==0">
+            <ion-card-header>
+              <p style="text-align: center">
+                <ion-icon name="camera" class="profil-no-article-image"></ion-icon>
+              </p>
+            </ion-card-header>
+          <ion-card-content>
+            <p  style="text-align: center" >Vous n'avez pas encore mis des articles en vente.</p>
+            <p style="text-align: center">Tapez sur le boutton ci-dessous pour mettre en vente votre premier article !</p>
+            <p style="text-align: center;line-height: 250%">
+              <a (click)="goToAddArticlePage()" style="color:#B71C1C;text-transform: uppercase;font-weight:bold;text-align: center">Commencer à vendre</a>
+            </p>
+          </ion-card-content>
+        </ion-card>
+        <div style="width: 80%; margin-left: 10%;" *ngIf="articleUser || articleUser?.length==0">
+          <ion-col width-33 class="left" *ngFor="let article of articleUser">
+           <!-- <img src="{{url}}{{cheminImage}}{{article?.images[0].cheminImage}}" class="profil-image" (click)="goToDetailArticlePage($event,article)">-->
+            <div (click)="goToDetailArticlePage($event,article)" class="profil-image" [ngStyle]="{'background-image':'url('+ (article?.images[0].cheminImage !=null && url+cheminImage+ article.images[0].cheminImage || 'assets/img/defaultImage.png') + ')'}" >
+            </div>
+          </ion-col>
+        </div>
+      </div>
+      <div *ngIf="profileTab=='vendu'"  >
+        <ion-card style="width: 80%; margin-left: 10%;" *ngIf="!articleSoldUser || articleSoldUser?.length==0">
+
+          <ion-card-header>
+            <p style="text-align: center">
+              <ion-icon name="camera" class="profil-no-article-image"></ion-icon>
+            </p>
+          </ion-card-header>
+          <ion-card-content>
+            <p  style="text-align: center" >Vous n'avez aucun article vendu pour le moment.</p>
+            <p style="text-align: center">Tapez sur le boutton ci-dessous pour mettre en vente un article !</p>
+            <p style="text-align: center;line-height: 250%">
+              <a (click)="goToAddArticlePage()" style="color:#B71C1C;text-transform: uppercase;font-weight:bold;text-align: center">Commencer à vendre</a>
+            </p>
+          </ion-card-content>
+        </ion-card>
+        <div style="width: 80%; margin-left: 10%;" *ngIf="articleSoldUser || articleSoldUser?.length==0">
+          <ion-col width-33 class="left" *ngFor="let article of articleSoldUser">
+            <!-- <img src="{{url}}{{cheminImage}}{{article?.images[0].cheminImage}}" class="profil-image" (click)="goToDetailArticlePage($event,article)">-->
+            <div (click)="goToDetailArticlePage($event,article)" class="profil-image" [ngStyle]="{'background-image':'url('+ (article?.images[0].cheminImage !=null && url+cheminImage+ article.images[0].cheminImage || 'assets/img/defaultImage.png') + ')'}" >
+            </div>
+            <div class="profil-sold" *ngIf="article.etat=='Vendu'">
+              <span >Vendu</span>
+            </div>
+          </ion-col>
+        </div>
+
+      </div>
+      <div *ngIf="profileTab=='favoris'"  >
+        <ion-card style="width: 80%; margin-left: 10%;" *ngIf="!articleFavoriteUser || articleFavoriteUser?.length==0">
+
+          <ion-card-header>
+            <p style="text-align: center">
+              <ion-icon name="camera" class="profil-no-article-image"></ion-icon>
+            </p>
+          </ion-card-header>
+          <ion-card-content>
+            <p  style="text-align: center" >Pas encore de favoris pour l'instant.</p>
+            <p style="text-align: center">Il faut s'y mettre !</p>
+            <p style="text-align: center;line-height: 250%">
+              <a (click)="goToHomePage()" style="color:#B71C1C;text-transform: uppercase;font-weight:bold;text-align: center">Voir les articles </a>
+            </p>
+          </ion-card-content>
+        </ion-card>
+        <div style="width: 80%; margin-left: 10%;" *ngIf="articleFavoriteUser || articleFavoriteUser?.length==0">
+          <ion-col width-33 class="left" *ngFor="let article of articleFavoriteUser">
+            <!-- <img src="{{url}}{{cheminImage}}{{article?.images[0].cheminImage}}" class="profil-image" (click)="goToDetailArticlePage($event,article)">-->
+            <div (click)="goToDetailArticlePage($event,article)" class="profil-image" [ngStyle]="{'background-image':'url('+ (article?.images[0].cheminImage !=null && url+cheminImage+ article.images[0].cheminImage || 'assets/img/defaultImage.png') + ')'}" >
+            </div>
+            <div class="profil-sold" *ngIf="article.etat=='Vendu'">
+              <span >Vendu</span>
+            </div>
+          </ion-col>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</ion-content>

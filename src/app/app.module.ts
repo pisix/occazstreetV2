@@ -21,8 +21,7 @@ import {CategoriePage} from '../pages/categorie/categorie';
 import {CategorieService}  from '../services/categorie.service';
 import {SignupPage} from '../pages/signup/signup';
 import {MediaSharing} from "../services/mediaSharing.service";
-import {ArticleList} from "../components/article.list.component/article.list.component";
-import {SearchResult} from "../pages/search-result/search-result";
+import {ProfilPage} from '../pages/profil/profil';
 
 
 
@@ -33,7 +32,6 @@ import {SearchResult} from "../pages/search-result/search-result";
     AboutPage,
     ContactPage,
     HomePage,
-    SearchResult,
     ItemDetailsPage,
     ArticleDetailsPage,
     ListPage,
@@ -46,7 +44,8 @@ import {SearchResult} from "../pages/search-result/search-result";
     ResetPasswordModalPage,
     CategoriePage,
     ArticlesPopOver,
-    SignupPage
+    SignupPage,
+    ProfilPage
   ],
   imports: [
     IonicModule.forRoot(App)
@@ -57,7 +56,6 @@ import {SearchResult} from "../pages/search-result/search-result";
     AboutPage,
     ContactPage,
     HomePage,
-    SearchResult,
     ItemDetailsPage,
     ArticleDetailsPage,
     ListPage,
@@ -68,7 +66,8 @@ import {SearchResult} from "../pages/search-result/search-result";
     ResetPasswordModalPage,
     CategoriePage,
     ArticlesPopOver,
-    SignupPage
+    SignupPage,
+    ProfilPage
   ],
   providers: [ArticleService,UtilisateurService,CategorieService,MediaSharing]
 })

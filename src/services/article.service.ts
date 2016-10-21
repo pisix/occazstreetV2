@@ -102,4 +102,53 @@ export class ArticleService {
       });
   }
 
+  getArticleByUser(user)
+  {
+    return this.http.get(GlobalsConstants.urlServer + GlobalsConstants.port + '/article/getArticlesByUser?iduser='+user)
+      .map((res) => {
+        if (res.status === 200) {
+
+          return (res.json())
+        }
+        else {
+          throw new Error("Could not get User Articles");
+        }
+      })
+      .map((res) => {
+        return res;
+      });
+  }
+
+  getSoldArticleByUser(user)
+  {
+    return this.http.get(GlobalsConstants.urlServer + GlobalsConstants.port + '/article/getArticlesVenduByUser?iduser='+user)
+      .map((res) => {
+        if (res.status === 200) {
+
+          return (res.json())
+        }
+        else {
+          throw new Error("Could note get Sold Articles by User");
+        }
+      })
+      .map((res) => {
+        return res;
+      });
+  }
+  getFavoriteArticleByUser(user)
+  {
+    return this.http.get(GlobalsConstants.urlServer + GlobalsConstants.port + '/article/getArticlesFavorisByUser?iduser='+user)
+      .map((res) => {
+        if (res.status === 200) {
+
+          return (res.json())
+        }
+        else {
+          throw new Error("Could note get Favorites Articles by User");
+        }
+      })
+      .map((res) => {
+        return res;
+      });
+  }
 }

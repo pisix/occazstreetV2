@@ -1,5 +1,5 @@
 import {Component, ViewChild} from '@angular/core';
-import {Platform, MenuController, Nav,ModalController,Events} from 'ionic-angular';
+import {Platform, MenuController, Nav,ModalController,Events } from 'ionic-angular';
 import {StatusBar} from 'ionic-native';
 import {HomePage} from '../pages/home/home';
 import {ListPage} from '../pages/list/list';
@@ -7,6 +7,7 @@ import {CategoriePage} from '../pages/categorie/categorie';
 import {LoginPage} from '../pages/login/login';
 import {GlobalsConstants} from "../constants/globals.constants";
 import {OccasStreetTimer} from "../pipes/timer.pipe";
+import {ProfilPage} from '../pages/profil/profil';
 
 
 @Component({
@@ -97,8 +98,15 @@ export class App {
   doLogout()
   {
     this.menu.close();
+    this.nav.setRoot(this.rootPage)
     localStorage.removeItem(GlobalsConstants.USER_LOGGED);
     localStorage.removeItem("logged");
     this.logged=false;
+  }
+
+  profil()
+  {
+    this.menu.close();
+    this.nav.setRoot(ProfilPage,{user:localStorage.getItem(GlobalsConstants.USER_LOGGED)});
   }
 }

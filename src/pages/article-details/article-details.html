@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-navbar pixis >
+  <ion-navbar pixis color="primary2">
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
@@ -71,9 +71,10 @@
     <ion-card-content>
       <ion-item>
         <ion-avatar item-left>
-          <img src="{{url}}{{cheminPhoto}}{{article.utilisateur.photo}}">
+
+          <img src="{{url}}{{cheminPhoto}}{{article?.utilisateur.photo}}">
         </ion-avatar>
-         {{article.utilisateur.prenom}} {{article.utilisateur.nom[0]}}
+         {{article?.utilisateur.prenom}} {{article?.utilisateur.nom[0]}}
       </ion-item>
     </ion-card-content>
   </ion-card>

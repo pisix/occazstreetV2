@@ -33,13 +33,10 @@ export class ArticleDetailsPage {
 
     // If we navigated to this page, we will have an item available as a nav param
     this.article = navParams.get('article');
-
     this.imgSliderOption = {
       initialSlide: 0,
       pager:true
     }
-
-    console.log(this.article)
 
   }
 

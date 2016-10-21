@@ -62,6 +62,7 @@ export  class MessagesConstants{
     static filtreParDefaut:string = "Filtres par d&#233;faut r&#233;tablis";
     static localisationMessage:string = "Occazstreet a besoin de votre localisation soit activer pour fonctionner correctement";
     static erreurPhoto:string = "Une erreur a &#233;t&#233; rencontr&#233; lors de la mise &#224; jour de votre photo.static";
+    static erreurRecuperationArticleUtilisateur:string = "Une erreur serveur est survenue ";
 
 
 
