@@ -21,6 +21,7 @@ import {CategorieService}  from '../services/categorie.service';
 import {SignupPage} from '../pages/signup/signup';
 import {MediaSharing} from "../services/mediaSharing.service";
 import {ProfilPage} from '../pages/profil/profil';
+import {SearchResult} from "../pages/search-result/search-result";
 
 
 
@@ -35,6 +36,7 @@ import {ProfilPage} from '../pages/profil/profil';
     ArticleDetailsPage,
     ListPage,
     searchModalPage,
+    SearchResult,
     signalerModalPage,
     LoginPage,
     ConnexionModalPage,
@@ -59,6 +61,7 @@ import {ProfilPage} from '../pages/profil/profil';
     ArticleDetailsPage,
     ListPage,
     searchModalPage,
+    SearchResult,
     signalerModalPage,
     LoginPage,
     ConnexionModalPage,
