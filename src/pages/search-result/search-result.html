@@ -49,10 +49,10 @@
       </ion-col>
     </ion-row>
 
-    <ion-row *ngIf="(this.articles1.length == 0 || this.articles.length == 0)">
+    <ion-row *ngIf="(this.articles1.length == 0 || this.articles2.length == 0)">
       <ion-col text-center>
         <div class="network-error">
-          <img margin-bottom src="../../assets/img/no-network.png"/>
+          <img margin-bottom src="../../assets/img/no-network.png" width="100" height="100"/>
           <h4>Désolé</h4>
           <p>Aucun article ne correspond à votre recherche !</p>
           <button ion-button outline pixis (click)="searchArticle()">Nouvelle recherche</button>

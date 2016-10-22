@@ -1,3 +1,7 @@
+22-10-2016
+----------
+Correction autocomplete formulaire de recherche
+
 21-10-2016
 ----------
 Mise en place ecran de profil utilisateur

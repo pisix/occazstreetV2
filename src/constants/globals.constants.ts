@@ -22,6 +22,7 @@ export  class GlobalsConstants{
   static FACEBOOKPAGE:string = "";
   static TWITTERPAGE:string = "https://twitter.com/occazstreet";
   static WEBSITE:string = "http://www.occazstreet.com";
+  static RESTRICTIONCOUNTRYGOOGLEMAP:string="cmr"
 
 
   constructor(){
