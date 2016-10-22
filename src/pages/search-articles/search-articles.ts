@@ -18,7 +18,6 @@ export class searchModalPage{
   public categories:Array<Categorie>;
   public searchForm:any;
   public address : Object;
-  private result:Object;
 
   constructor(private params: NavParams,
               private viewCtrl: ViewController,
@@ -52,16 +51,15 @@ export class searchModalPage{
     var lng = location.lng();
   }
 
-  search(event){
+  search(){
     if(this.searchForm.valid){
-      console.log(this.searchForm.value);
-      this.dismiss(this.searchForm.value);
+      this.dismiss();
 
     }
   }
 
-  dismiss(data) {
-    this.viewCtrl.dismiss(data);
+  dismiss() {
+    this.viewCtrl.dismiss(this.searchForm.value);
   }
 }
 

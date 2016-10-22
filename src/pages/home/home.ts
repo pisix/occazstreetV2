@@ -39,7 +39,7 @@ export class HomePage {
               private popoverCtrl: PopoverController) {
 
     this.getArticlesByLimit(this.skip,this.limit);
-    this.loadImageArticle(this.skip,this.limitExplorer);
+    // this.loadImageArticle(this.skip,this.limitExplorer);
     this.homeTab="mur";
 
   }
@@ -139,7 +139,7 @@ export class HomePage {
   doRefreshImages(refresher) {
     this.images=[];
     this.skipExplorer=0;
-    this.loadImageArticle(this.skipExplorer,GlobalsConstants.PAGEEXPLORER);
+    // this.loadImageArticle(this.skipExplorer,GlobalsConstants.PAGEEXPLORER);
     refresher.complete();
   }
 
@@ -161,7 +161,7 @@ export class HomePage {
       this.skipExplorer=GlobalsConstants.PAGEEXPLORER;
     }
     setTimeout(()=>{
-      this.loadImageArticle(this.skipExplorer,this.limitExplorer+this.limitExplorer);
+      // this.loadImageArticle(this.skipExplorer,this.limitExplorer+this.limitExplorer);
       infiniteScroll.complete();
 
     },1000);
@@ -211,8 +211,8 @@ export class HomePage {
              </ion-list>`,
 })
 export class ArticlesPopOver {
-  private prixOrder:string;
-  private dateOrder:string;
+  public prixOrder:string;
+  public dateOrder:string;
 
   constructor(private viewCtrl: ViewController,navParams: NavParams) {
     this.dateOrder = navParams.get('dateOrder');

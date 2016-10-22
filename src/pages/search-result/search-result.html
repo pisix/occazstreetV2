@@ -49,7 +49,7 @@
       </ion-col>
     </ion-row>
 
-    <ion-row *ngIf="(this.articles1.length == 0 || this.articles.length == 0)">
+    <ion-row *ngIf="(this.articles1.length == 0 && this.articles2.length == 0)">
       <ion-col text-center>
         <div class="network-error">
           <img margin-bottom src="../../assets/img/no-network.png"/>

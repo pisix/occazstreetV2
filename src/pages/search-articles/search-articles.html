@@ -15,14 +15,14 @@
 
 <ion-content>
 
-  <form [formGroup]="searchForm" (ngSubmit)="search($event)">
+  <form [formGroup]="searchForm" (ngSubmit)="search()">
     <ion-searchbar formControlName="motcle" placeholder="Mot(s)-cl&#233;(s)"></ion-searchbar>
 
     <ion-card>
       <ion-card-content>
         <ion-item>
           <ion-label floating>Ville</ion-label>
-          <ion-input type="text" formControlName="ville" (setAddress) = "getAddress($event)" googleplace></ion-input>
+          <ion-input type="text" formControlName="ville" ></ion-input>
         </ion-item>
         <hr class="card-devider" />
         <ion-item>

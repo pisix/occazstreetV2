@@ -5,7 +5,7 @@ import {GlobalsConstants} from "../../constants/globals.constants";
 import {NavController, NavParams, ModalController, ViewController, PopoverController} from "ionic-angular";
 import {ArticleDetailsPage} from "../article-details/article-details";
 import {searchModalPage} from "../search-articles/search-articles";
-import {HomePage} from "../home/home";
+import {HomePage, ArticlesPopOver} from "../home/home";
 
 
 
@@ -23,7 +23,7 @@ export class SearchResult implements OnInit{
   public articles1:Array<Article> = [];
   public articles2:Array<Article> = [];
   private param;
-  private offLine:boolean;
+  public offLine:boolean;
   public searchChips = [];
 
   public prixOrder:string = 'croissants';
@@ -50,9 +50,7 @@ export class SearchResult implements OnInit{
 
   getArticleByParam(param){
     this.articleService.getArticleByParam(param).subscribe(res => {
-      this.loadImageArticle(res);
-
-      this.skip=this.skip+res.length;
+      // this.loadImageArticle(res);
 
       this.offLine = false;
       let articles = res;
@@ -104,40 +102,34 @@ export class SearchResult implements OnInit{
   doRefresh(refresher) {
     this.articles1 = [];
     this.articles2 = [];
-    this.getArticleByParam(param);
+    this.getArticleByParam(this.param);
     refresher.complete();
   }
 
-  doRefreshImages(refresher) {
-    this.images=[];
-    this.skipExplorer=0;
-    this.loadImageArticle(this.skipExplorer,GlobalsConstants.PAGEEXPLORER);
-    refresher.complete();
-  }
 
-  doInfinite(infiniteScroll){
-    if(this.skip==0)
-    {
-      this.skip=GlobalsConstants.PAGE;
-    }
-    setTimeout(()=>{
-      this.getArticlesByLimit(this.skip,this.limit+this.limit);
-      infiniteScroll.complete();
+  // doInfinite(infiniteScroll){
+  //   if(this.skip==0)
+  //   {
+  //     this.skip=GlobalsConstants.PAGE;
+  //   }
+  //   setTimeout(()=>{
+  //     this.getArticlesByLimit(this.skip,this.limit+this.limit);
+  //     infiniteScroll.complete();
+  //
+  //   },1000);
+  // }
 
-    },1000);
-  }
-
-  doInfiniteImages(infiniteScroll){
-    if(this.skipExplorer==0)
-    {
-      this.skipExplorer=GlobalsConstants.PAGEEXPLORER;
-    }
-    setTimeout(()=>{
-      this.loadImageArticle(this.skipExplorer,this.limitExplorer+this.limitExplorer);
-      infiniteScroll.complete();
-
-    },1000);
-  }
+  // doInfiniteImages(infiniteScroll){
+  //   if(this.skipExplorer==0)
+  //   {
+  //     this.skipExplorer=GlobalsConstants.PAGEEXPLORER;
+  //   }
+  //   setTimeout(()=>{
+  //     this.loadImageArticle(this.skipExplorer,this.limitExplorer+this.limitExplorer);
+  //     infiniteScroll.complete();
+  //
+  //   },1000);
+  // }
 
   option(myEvent){
 
@@ -198,7 +190,6 @@ export class SearchResult implements OnInit{
   }
 
   getChipsList(param:Object){
-    debugger;
     Object.keys(param).forEach(key => {
       if(!(param[key] === '')){
         this.searchChips.push(param[key]);
