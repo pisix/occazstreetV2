@@ -29,7 +29,7 @@
     <div class="profil-top">
       <p class="profil-name">{{utilisateur.nom}} {{utilisateur.prenom}}</p>
       <div class="profil-user">
-        <ion-icon [hidden]="utilisateur?.photo.idPhoto!=1" name="contact" style="font-size: 500%;color: white"></ion-icon>
+        <ion-icon [hidden]="utilisateur.photo.idPhoto!=1" name="contact" style="font-size: 500%;color: white"></ion-icon>
         <img [hidden]="utilisateur?.photo.idPhoto==1" src="{{url}}{{cheminPhoto}}{{utilisateur?.photo.cheminPhoto}}" alt="" class="profil-user-photo" />
         <!--<span class="profil-user-notif">3</span>-->
       </div>

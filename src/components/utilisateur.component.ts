@@ -21,7 +21,7 @@ export class Utilisateur{
   private _nomVille:string;
   private _nomPays:string;
   private _afficherTel:string;
-  private _photo:string;
+  private _photo:any;
 
   constructor(){
 
@@ -164,11 +164,11 @@ export class Utilisateur{
     this._afficherTel = value;
   }
 
-  get photo(): string {
+  get photo(): any {
     return this._photo;
   }
 
-  set photo(value: string) {
+  set photo(value: any) {
     this._photo = value;
   }
 }

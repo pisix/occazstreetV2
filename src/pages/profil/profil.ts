@@ -126,7 +126,7 @@ export class ProfilPage {
       content: 'Patientez...'
     });
 
-    loading.present();
+    this.loading.present();
   }
 
   hideLoading()
