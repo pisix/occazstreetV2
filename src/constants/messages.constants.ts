@@ -13,7 +13,7 @@ export  class MessagesConstants{
     static internetErrorContent:string = "Vous n'&#234;tes pas connect&#233; &#224; Internet. Connectez-vous  &#224; une source de donn&#233;es et reessayer";
     static serverDown:string = "Le serveur est inacc&#233;ssible";
     static internetError:string = "Mise &#224; jour impossible. Verfiez votre connexion internet et reessayez";
-    static erreurServeur:string = "Une erreur est survenue lors du traitement de votre demande. Merci de reesayer plus tard";
+    static erreurServeur:string = "Une erreur est survenue lors du traitement de votre demande. Merci de reesayer";
     static annuler:string = "Annuler";
     static authenticationFailed:string = "Le login ou le mot de passe est incorrect";
     static successChangePassword:string = "Votre mot de passe a &#233;t&#233; chang&#233; avec succes";

@@ -151,4 +151,21 @@ export class ArticleService {
         return res;
       });
   }
+
+  getArticleByCategorie(categorie)
+  {
+    return this.http.get(GlobalsConstants.urlServer + GlobalsConstants.port + '/article/getArticleByCategorie?idcategorie='+categorie                                                                                                                                    )
+      .map((res) => {
+        if (res.status === 200) {
+
+          return (res.json())
+        }
+        else {
+          throw new Error("Could note get Favorites Articles by User");
+        }
+      })
+      .map((res) => {
+        return res;
+      });
+  }
 }

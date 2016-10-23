@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import {CategorieService} from '../../services/categorie.service';
 import {Categorie} from '../../components/categorie.component'
+import {CategorieDetailsPage} from '../../pages/categorie-details/categorie-details'
 
 /*
   Generated class for the Categorie page.
@@ -25,6 +26,13 @@ export class CategoriePage {
 
   ionViewDidLoad() {
     console.log('Hello Categorie Page');
+  }
+  goToDetailsCategorie(event, idCategorie,libelleCategorie)
+  {
+    let categorie={};
+    categorie.idCategorie=idCategorie;
+    categorie.libelleCategorie=libelleCategorie;
+    this.navCtrl.push(CategorieDetailsPage,{categorie:categorie});
   }
 
 }

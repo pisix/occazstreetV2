@@ -1,3 +1,6 @@
+23-10-2016
+----------
+Affichage détail d'une categorie
 22-10-2016
 ----------
 Correction autocomplete formulaire de recherche

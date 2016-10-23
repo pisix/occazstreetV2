@@ -22,7 +22,7 @@ import {SignupPage} from '../pages/signup/signup';
 import {MediaSharing} from "../services/mediaSharing.service";
 import {ProfilPage} from '../pages/profil/profil';
 import {SearchResult} from "../pages/search-result/search-result";
-
+import {CategorieDetailsPage} from "../pages/categorie-details/categorie-details"
 
 
 
@@ -46,7 +46,8 @@ import {SearchResult} from "../pages/search-result/search-result";
     CategoriePage,
     ArticlesPopOver,
     SignupPage,
-    ProfilPage
+    ProfilPage,
+    CategorieDetailsPage
   ],
   imports: [
     IonicModule.forRoot(App)
@@ -69,7 +70,8 @@ import {SearchResult} from "../pages/search-result/search-result";
     CategoriePage,
     ArticlesPopOver,
     SignupPage,
-    ProfilPage
+    ProfilPage,
+    CategorieDetailsPage
   ],
   providers: [ArticleService,UtilisateurService,CategorieService,MediaSharing]
 })

@@ -1,0 +1,82 @@
+<!--
+  Generated template for the CategorieDetails page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="primary2">
+    <ion-title>{{categorie.libelleCategorie}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-row *ngIf="offLine">
+    <ion-col text-center>
+      <div class="network-error">
+        <img margin-bottom src="assets/img/no-network.png" width="100" height="100"/>
+        <h4>Impossible de charger les articles</h4>
+        <p>Abscence de connexion internet. Veuillez v&eacute;rifier votre connexion et r&eacute;essayer</p>
+        <button ion-button outline pixis (click)="getArticlesByLimit(0,6)">REESSAYER</button>
+      </div>
+    </ion-col>
+  </ion-row>
+  <ion-row *ngIf="!hasArticle">
+    <ion-col text-center>
+      <div style="margin:0 auto">
+        <ion-icon name="notifications-off" style="font-size:60px"></ion-icon>
+        <h4>Aucun article trouvé</h4>
+      </div>
+    </ion-col>
+  </ion-row>
+  <ion-row *ngIf="!offLine">
+
+    <ion-col width-50 no-padding>
+
+      <ion-card *ngFor="let art1 of articles1"  (click)="articleDetails($event,art1)">
+        <img *ngIf="art1?.images.length>0" src="{{url}}{{cheminImage}}{{art1?.images[0]?.cheminImage}}"/>
+        <img *ngIf="art1?.images.length==0" src="assets/img/defaultImage.png"/>
+        <ion-card-content text-center no-padding>
+          <ion-card-title  class="price" >
+            {{art1.prix | currency:'XAF':true}}}}
+          </ion-card-title>
+          <h6>{{art1.titre | titeCapitalize}}</h6>
+        </ion-card-content>
+        <section class="timer" text-right>
+          <span *ngIf="art1.dateModification === null">Ajout&eacute; : {{art1.dateAjout | occasStreetTimer}}</span>
+          <span *ngIf="art1.dateModification">Modifi&eacute; : {{art1.dateModification | occasStreetTimer}}</span>
+        </section>
+        <div class="sold" *ngIf="art1.etat=='Vendu'">
+          Vendu
+        </div>
+      </ion-card>
+
+    </ion-col>
+
+    <ion-col width-50 no-padding>
+      <ion-card *ngFor="let art2 of articles2" (click)="articleDetails($event,art2)">
+        <img *ngIf="art2?.images.length>0" src="{{url}}{{cheminImage}}{{art2?.images[0]?.cheminImage}}"/>
+        <img *ngIf="art2?.images.length==0" src="assets/img/defaultImage.png"/>
+
+
+        <ion-card-content text-center no-padding>
+          <ion-card-title class="price">
+            {{art2.prix | currency:'XAF':true}}
+          </ion-card-title>
+          <h6>{{art2.titre | titeCapitalize}}</h6>
+        </ion-card-content>
+        <section class="timer" text-right>
+          <span *ngIf="art2.dateModification === null" >Ajout&eacute; : {{art2.dateAjout | occasStreetTimer}}</span>
+          <span *ngIf="art2.dateModification">Modifi&eacute; : {{art2.dateModification | occasStreetTimer}}</span>
+        </section>
+        <div class="sold" *ngIf="art2.etat=='Vendu'">
+          <span style="margin-top: 1%">Vendu</span>
+        </div>
+      </ion-card>
+
+    </ion-col>
+  </ion-row>
+</ion-content>
