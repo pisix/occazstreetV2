@@ -22,7 +22,8 @@ import {SignupPage} from '../pages/signup/signup';
 import {MediaSharing} from "../services/mediaSharing.service";
 import {ProfilPage} from '../pages/profil/profil';
 import {SearchResult} from "../pages/search-result/search-result";
-import {CategorieDetailsPage} from "../pages/categorie-details/categorie-details"
+import {CategorieDetailsPage} from "../pages/categorie-details/categorie-details";
+import {ActiviteModalPage} from "../pages/activite/activite";
 
 
 
@@ -47,7 +48,8 @@ import {CategorieDetailsPage} from "../pages/categorie-details/categorie-details
     ArticlesPopOver,
     SignupPage,
     ProfilPage,
-    CategorieDetailsPage
+    CategorieDetailsPage,
+    ActiviteModalPage
   ],
   imports: [
     IonicModule.forRoot(App)
@@ -71,7 +73,8 @@ import {CategorieDetailsPage} from "../pages/categorie-details/categorie-details
     ArticlesPopOver,
     SignupPage,
     ProfilPage,
-    CategorieDetailsPage
+    CategorieDetailsPage,
+    ActiviteModalPage
   ],
   providers: [ArticleService,UtilisateurService,CategorieService,MediaSharing]
 })

@@ -7,6 +7,7 @@ import {ArticleService} from '../../services/article.service';
 import {Article} from '../../components/article.component';
 import {ArticleDetailsPage} from '../article-details/article-details';
 import {HomePage} from '../home/home';
+import {ActiviteModalPage} from '../activite/activite';
 
 /*
   Generated class for the Profil page.
@@ -139,4 +140,18 @@ export class ProfilPage {
       article: item
     });
   }
+
+  goToActivite(utilisateur) {
+    let modal = this.modalCtrl.create(ActiviteModalPage,{idutilisateur:utilisateur});
+    modal.present();
+
+    /*modal.onDidDismiss(data => {
+      console.log('MODAL DATA', data);
+      this.navCtrl.push(SearchResult, {
+        searchParam: data
+      });
+
+    });*/
+  }
+
 }

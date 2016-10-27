@@ -11,12 +11,12 @@
     </button>
     <ion-title><p style="color: #222 ">Profil</p></ion-title>
     <ion-buttons end>
-      <button color="dark" ion-button (click)="goToEditProfilePage()" [hidden]="!showEdit">
+      <button color="dark" ion-button (click)="goToEditProfilePage(utilisateur.id)" [hidden]="!showEdit">
         <ion-icon name="create" style="font-size:large"></ion-icon>
       </button>
     </ion-buttons>
     <ion-buttons end>
-      <button color="dark" ion-button (click)="goToEditProfilePage()" [hidden]="!showEdit">
+      <button color="dark" ion-button (click)="goToActivite(utilisateur.id)">
         <ion-icon name="cog" style="font-size:large"></ion-icon>
       </button>
     </ion-buttons>
