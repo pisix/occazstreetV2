@@ -1,6 +1,8 @@
 27-10-2016
 ----------
 Mise en place vue activité
+initialisation de la vue d'édition du profil de l'utilisateur
+
 23-10-2016
 ----------
 Affichage détail d'une categorie
