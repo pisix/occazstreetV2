@@ -63,4 +63,15 @@ export class UtilisateurService{
         return res;
       });
   }
+
+  getUserActivity(idUser)
+  {
+    return this.http
+      .get(
+      GlobalsConstants.urlServer + GlobalsConstants.port + '/utilisateur/getActiviteUser?idutilisateur='+idUser)
+      .map(res => res.json())
+      .map((res) => {
+        return res;
+      });
+  }
 }

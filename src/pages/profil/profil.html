@@ -9,14 +9,14 @@
     <button ion-button menuToggle color="dark">
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title><p style="color: #222 ">Profil</p></ion-title>
+    <ion-title><p style="color: #222 ">Profil d'utilisateur </p></ion-title>
     <ion-buttons end>
-      <button color="dark" ion-button (click)="goToEditProfilePage()" [hidden]="!showEdit">
+      <button color="dark" ion-button (click)="goToEditProfil(utilisateur.id)" [hidden]="!showEdit">
         <ion-icon name="create" style="font-size:large"></ion-icon>
       </button>
     </ion-buttons>
     <ion-buttons end>
-      <button color="dark" ion-button (click)="goToEditProfilePage()" [hidden]="!showEdit">
+      <button color="dark" ion-button (click)="goToActivite(utilisateur.id)">
         <ion-icon name="cog" style="font-size:large"></ion-icon>
       </button>
     </ion-buttons>
@@ -31,7 +31,24 @@
       <div class="profil-user">
         <ion-icon [hidden]="utilisateur.photo.idPhoto!=1" name="contact" style="font-size: 500%;color: white"></ion-icon>
         <img [hidden]="utilisateur?.photo.idPhoto==1" src="{{url}}{{cheminPhoto}}{{utilisateur?.photo.cheminPhoto}}" alt="" class="profil-user-photo" />
-        <!--<span class="profil-user-notif">3</span>-->
+        <span class="profil-user-notif">
+           <ion-fab center middle>
+             <button ion-fab color="primary2" mini><ion-icon name="share" ></ion-icon></button>
+             <ion-fab-list side="top">
+               <button ion-fab color="primary"><ion-icon name="logo-instagram"></ion-icon></button>
+             </ion-fab-list>
+             <ion-fab-list side="bottom">
+               <button ion-fab color="facebook"><ion-icon name="logo-facebook"></ion-icon></button>
+             </ion-fab-list>
+             <ion-fab-list side="left">
+               <button ion-fab color="light"><ion-icon name="mail"></ion-icon></button>
+             </ion-fab-list>
+             <ion-fab-list side="right">
+               <button ion-fab color="twitter"><ion-icon name="logo-twitter"></ion-icon></button>
+             </ion-fab-list>
+           </ion-fab>
+
+        </span>
       </div>
     </div>
     <div class="profil-bot">
