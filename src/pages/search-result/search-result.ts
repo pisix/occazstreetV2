@@ -97,6 +97,12 @@ export class SearchResult implements OnInit{
   searchArticle() {
     let modal = this.modalController.create(searchModalPage);
     modal.present();
+
+    modal.onDidDismiss(data =>{
+      this.searchChips = [];
+      this.getChipsList(data);
+      this.getArticleByParam(data);
+    })
   }
 
   doRefresh(refresher) {

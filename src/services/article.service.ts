@@ -154,7 +154,7 @@ export class ArticleService {
 
   getArticleByCategorie(categorie)
   {
-    return this.http.get(GlobalsConstants.urlServer + GlobalsConstants.port + '/article/getArticleByCategorie?idcategorie='+categorie                                                                                                                                    )
+    return this.http.get(GlobalsConstants.urlServer + GlobalsConstants.port + '/article/getArticleByCategorie?idCategorie='+categorie                                                                                                                                    )
       .map((res) => {
         if (res.status === 200) {
 

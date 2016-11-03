@@ -4,6 +4,8 @@ import {ArticleService} from '../../services/article.service';
 import {MessagesConstants} from '../../constants/messages.constants';
 import {GlobalsConstants} from '../../constants/globals.constants';
 import {ArticleDetailsPage} from '../article-details/article-details';
+import {Article} from "../../components/article.component";
+import {Categorie} from "../../components/categorie.component";
 /*
   Generated class for the CategorieDetails page.
 
@@ -16,7 +18,7 @@ import {ArticleDetailsPage} from '../article-details/article-details';
 })
 export class CategorieDetailsPage {
 
-  public categorie;
+  public categorie:Categorie;
   public articleCategorie;
   public articles1:Array<Article> = [];
   public articles2:Array<Article> = [];
@@ -24,9 +26,9 @@ export class CategorieDetailsPage {
   public url=GlobalsConstants.urlServer+GlobalsConstants.port+'/';
   public cheminImage=GlobalsConstants.cheminImage;
   public hasArticle;
-  constructor(public navCtrl: NavController,navParams: NavParams,public  articleService:ArticleService, toastCtrl:ToastController
+  constructor(private navCtrl: NavController,private navParams: NavParams,private  articleService:ArticleService, private toastCtrl:ToastController
   ) {
-    this.categorie=navParams.get('categorie');
+    this.categorie=this.navParams.get('categorie');
 
     articleService.getArticleByCategorie(this.categorie.idCategorie).subscribe(res=>{
       this.hasArticle=res.hasArticle;
@@ -46,7 +48,7 @@ export class CategorieDetailsPage {
         });
 
         console.log(this.articles1);
-        console.log(this.article2);
+        console.log(this.articles2);
 
       }else
       {

@@ -1,12 +1,11 @@
 import {Component, ViewChild} from '@angular/core';
-import {Platform, MenuController, Nav,ModalController,Events } from 'ionic-angular';
+import {Platform, MenuController, Nav,Events } from 'ionic-angular';
 import {StatusBar} from 'ionic-native';
 import {HomePage} from '../pages/home/home';
 import {ListPage} from '../pages/list/list';
 import {CategoriePage} from '../pages/categorie/categorie';
 import {LoginPage} from '../pages/login/login';
 import {GlobalsConstants} from "../constants/globals.constants";
-import {OccasStreetTimer} from "../pipes/timer.pipe";
 import {ProfilPage} from '../pages/profil/profil';
 
 
@@ -30,7 +29,6 @@ export class App {
   constructor(
     public platform: Platform,
     public menu: MenuController,
-    private modalController:ModalController,
     public events:Events
   ) {
     this.initializeApp();

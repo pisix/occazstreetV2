@@ -29,9 +29,9 @@ export class CategoriePage {
   }
   goToDetailsCategorie(event, idCategorie,libelleCategorie)
   {
-    let categorie={};
+    let categorie:Categorie;
     categorie.idCategorie=idCategorie;
-    categorie.libelleCategorie=libelleCategorie;
+    categorie.libelle=libelleCategorie;
     this.navCtrl.push(CategorieDetailsPage,{categorie:categorie});
   }
 
