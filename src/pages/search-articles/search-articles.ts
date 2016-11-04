@@ -59,11 +59,20 @@ export class searchModalPage {
   search(event){
     if(this.searchForm.valid){
 
-      // this.ville=localStorage.getItem('villeSearch');
-      this.searchForm.value.ville = typeof this.ville === 'string' ? this.ville : '';
+      let ville;
+      let localisation =JSON.parse(localStorage.getItem('localisation'));
+      for (let ac = 0; ac < localisation.address_components.length; ac++) {
+        let component =localisation.address_components[ac];
+        switch(component.types[0]) {
+          case 'locality':
+            ville = component.long_name;
+            break;
+        }
+      }
+      this.ville=localStorage.getItem('villeSearch');
+      this.searchForm.value.ville = typeof ville === 'string' ? ville : '';
       console.log(this.searchForm.value);
       this.dismiss(this.searchForm.value);
-
     }
   }
 
@@ -81,7 +90,7 @@ export class searchModalPage {
       let place = autoCompleteCity.getPlace();
       let geometry = place.geometry;
       if ((geometry) !== undefined) {
-        this.ville = place.name;
+        localStorage.setItem('localisation',JSON.stringify(place));
       }
     })
   }

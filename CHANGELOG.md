@@ -10,6 +10,10 @@ Affichage détail d'une categorie
 ----------
 Correction autocomplete formulaire de recherche
 
+04-10-2016
+----------
+Correction problème ville au niveau de la recherche
+
 21-10-2016
 ----------
 Mise en place ecran de profil utilisateur
