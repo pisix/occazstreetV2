@@ -69,9 +69,8 @@ export class searchModalPage {
             break;
         }
       }
-      this.ville=localStorage.getItem('villeSearch');
       this.searchForm.value.ville = typeof ville === 'string' ? ville : '';
-      console.log(this.searchForm.value);
+      localStorage.removeItem('localisation');
       this.dismiss(this.searchForm.value);
     }
   }
