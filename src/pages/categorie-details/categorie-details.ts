@@ -4,14 +4,14 @@ import {ArticleService} from '../../services/article.service';
 import {MessagesConstants} from '../../constants/messages.constants';
 import {GlobalsConstants} from '../../constants/globals.constants';
 import {ArticleDetailsPage} from '../article-details/article-details';
-import {Article} from "../../components/article.component";
-import {Categorie} from "../../components/categorie.component";
+import {Article}  from '../../components/article.component';
+import {Categorie} from '../../components/categorie.component';
 /*
-  Generated class for the CategorieDetails page.
+ Generated class for the CategorieDetails page.
 
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
+ See http://ionicframework.com/docs/v2/components/#navigation for more info on
+ Ionic pages and navigation.
+ */
 @Component({
   selector: 'page-categorie-details',
   templateUrl: 'categorie-details.html'
@@ -26,10 +26,9 @@ export class CategorieDetailsPage {
   public url=GlobalsConstants.urlServer+GlobalsConstants.port+'/';
   public cheminImage=GlobalsConstants.cheminImage;
   public hasArticle;
-  constructor(private navCtrl: NavController,private navParams: NavParams,private  articleService:ArticleService, private toastCtrl:ToastController
+  constructor(public navCtrl: NavController,navParams: NavParams,public  articleService:ArticleService,public toastCtrl:ToastController
   ) {
-    this.categorie=this.navParams.get('categorie');
-
+    this.categorie=navParams.get('categorie');
     articleService.getArticleByCategorie(this.categorie.idCategorie).subscribe(res=>{
       this.hasArticle=res.hasArticle;
       if(res)
@@ -46,10 +45,6 @@ export class CategorieDetailsPage {
         tab2.forEach(x => {
           this.articles2.push(x);
         });
-
-        console.log(this.articles1);
-        console.log(this.articles2);
-
       }else
       {
 
@@ -67,15 +62,10 @@ export class CategorieDetailsPage {
   }
 
   ionViewDidLoad() {
-    console.log('Hello CategorieDetails Page');
   }
   showToast(message)
   {
-    /*Toast.show(message, '5000', 'bottom').subscribe(
-     toast => {
-     console.log(toast);
-     }
-     );*/
+
 
     let toast = this.toastCtrl.create({
       message: message,
@@ -95,5 +85,4 @@ export class CategorieDetailsPage {
       article: item
     });
   }
-
 }
