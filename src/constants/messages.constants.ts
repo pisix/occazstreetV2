@@ -30,6 +30,8 @@ export  class MessagesConstants{
     static ajoutDuProduitEnCours:string = "Ajout de votre annonce";
     static misAJourProfilSuccess:string = "Votre profil a &#233;t&#233; mis &#224; jour";
     static miseAjoutProfilTitre:string = "Profil";
+    static erreurUpdateProfil :string ="Une erreur a &#233;t&#233; rencontr&#233;e lors de la mise &#224; jour de votre profil. Veuillez reessayer ulterieurement";
+
     static reinitPasswordSuccess:string = "Votre mot de passe a &#233;t&#233; reinitailis&#233; et un nouveau mot de passe temporaire a &#233;t&#233; envoy&#233; dans votre boite mail";
     static reinitPasswordTitre:string = "Reinitialisatiion mot de passe";
     static miseAjoutArticleTitre:string = "Mise &#224; jour du Produit";

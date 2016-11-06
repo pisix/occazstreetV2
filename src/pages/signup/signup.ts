@@ -5,6 +5,8 @@ import {Device} from 'ionic-native';
 import {UtilisateurService} from '../../services/utilisateur.service';
 import {HomePage} from '../home/home';
 import {MessagesConstants} from '../../constants/messages.constants';
+import {MessageService} from '../../services/message.service';
+
 /*
   Generated class for the Signup page.
 
@@ -26,7 +28,7 @@ export class SignupPage {
   // private loading:LoadingController;
 
 
-  constructor(public navCtrl: NavController,public events:Events,public loadingCtrl:LoadingController,public toastCtrl:ToastController,private utilisateurService:UtilisateurService,public alertCtrl:AlertController) {
+  constructor(public navCtrl: NavController,public messageService:MessageService,public events:Events,public loadingCtrl:LoadingController,public toastCtrl:ToastController,private utilisateurService:UtilisateurService,public alertCtrl:AlertController) {
     /*this.loading = this.loadingCtrl.create({
       content: 'Patientez...'
     });*/
@@ -60,54 +62,20 @@ export class SignupPage {
                 this.events.publish('user:logged',true);
 
                 this.navCtrl.setRoot(HomePage);
-                this.showToast(MessagesConstants.welcome);
-           }else if(!res.success && res.existant)
+                this.messageService.showToast(MessagesConstants.welcome);
+
+            }else if(!res.success && res.existant)
            {
-            this.showAlert(MessagesConstants.changementEmailError,"Inscription");
-          }
+             this.messageService.showToast(MessagesConstants.changementEmailError,"Inscription");
+           }
           else
             {
-              this.showAlert(MessagesConstants.inscriptionFailed,"Inscription");
-
+              this.messageService.showToast(MessagesConstants.inscriptionFailed,"Inscription");
             }
         })
 
     }
-
-    showToast(message)
-    {
-        /*Toast.show(message, '5000', 'bottom').subscribe(
-         toast => {
-         console.log(toast);
-         }
-         );*/
-
-        let toast = this.toastCtrl.create({
-            message: message,
-            duration: 4000,
-            position: 'top',
-            cssClass:'red-error'
-        });
-
-        toast.onDidDismiss(() => {
-            console.log('Dismissed toast');
-        });
-
-        toast.present();
-    }
-
-  showAlert(message,title)
-  {
-
-    let alert = this.alertCtrl.create({
-      title: title,
-      subTitle: message,
-      buttons: ['Ok']
-    });
-    alert.present();
-  }
-
- /* showLoader(){
+  /* showLoader(){
     this.loading.present();
   }
 

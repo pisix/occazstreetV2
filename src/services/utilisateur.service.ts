@@ -28,6 +28,22 @@ export class UtilisateurService{
         return res;
       });
   }
+  editUtilisateur(utilisateur)
+  {
+    console.log("service "+utilisateur);
+    return this.http
+      .post(
+      GlobalsConstants.urlServer+GlobalsConstants.port+'/utilisateur/updateUtilisateurP',
+      utilisateur)
+      .map(res => res.json())
+      .map((res) => {
+        /*if (res.success){
+
+         }*/
+        return res;
+      });
+
+  }
 
   reInitPassword(email)
   {

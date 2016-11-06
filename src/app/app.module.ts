@@ -25,6 +25,7 @@ import {SearchResult} from "../pages/search-result/search-result";
 import {CategorieDetailsPage} from "../pages/categorie-details/categorie-details";
 import {ActiviteModalPage} from "../pages/activite/activite";
 import {EditProfilModalPage} from "../pages/edit-profil/edit-profil";
+import {MessageService} from '../services/message.service'
 
 
 
@@ -54,7 +55,12 @@ import {EditProfilModalPage} from "../pages/edit-profil/edit-profil";
     EditProfilModalPage
   ],
   imports: [
-    IonicModule.forRoot(App)
+    IonicModule.forRoot(App,{
+      monthNames: ['Janvier', 'F\u00e9vrier', 'Mars', 'Mai', 'Juin','Juillet','Ao\u00fbt','Septembre','Octobre','Novembre','D\u00e9cembre' ],
+      monthShortNames: ['Janv.' , 'F\u00e9vr.' ,'Mars', 'Avr.','Mai','Juin', 'Juill.','Ao\u00fbt', 'Sept.' , 'Oct.' , 'Nov.' , 'Déc.' ],
+      dayNames: ['Lundi', 'Mardi','Mercredi','Jeudi','Vendredi','Samedi','Dimanche'],
+      dayShortNames: ['Lun.', 'Mar.', 'Mer.', 'Jeu.','Ven.','Sam.','Dim.' ],
+    })
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -79,6 +85,6 @@ import {EditProfilModalPage} from "../pages/edit-profil/edit-profil";
     ActiviteModalPage,
     EditProfilModalPage
   ],
-  providers: [ArticleService,UtilisateurService,CategorieService,MediaSharing]
+  providers: [ArticleService,UtilisateurService,CategorieService,MediaSharing,MessageService]
 })
 export class AppModule {}

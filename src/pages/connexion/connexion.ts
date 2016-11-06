@@ -6,6 +6,8 @@ import {ResetPasswordModalPage} from "../reset-password/reset-password";
 import {HomePage} from "../home/home";
 import {Facebook, Device} from 'ionic-native';
 import {MessagesConstants} from '../../constants/messages.constants';
+import {MessageService} from '../../services/message.service';
+
 
 
 
@@ -28,7 +30,7 @@ export class ConnexionModalPage {
   public infoLoggedUser=null;
   public logged:boolean=false;
  // private loading:LoadingController;
-  constructor(public alertCtrl:AlertController,public events:Events,private modalController:ModalController,private utilisateurService:UtilisateurService,public loadingCtrl:LoadingController, public navCtrl: NavController,private viewCtrl: ViewController,private toastCtrl: ToastController) {
+  constructor(public alertCtrl:AlertController,public messageService:MessageService,public events:Events,private modalController:ModalController,private utilisateurService:UtilisateurService,public loadingCtrl:LoadingController, public navCtrl: NavController,private viewCtrl: ViewController,private toastCtrl: ToastController) {
   }
 
   ionViewDidLoad() {
@@ -45,7 +47,7 @@ export class ConnexionModalPage {
       if(!res.success)
       {
        // this.loading().dismiss();
-        this.showToast("Le login ou le mot de passe est incorrect");
+        this.messageService.showToast("Le login ou le mot de passe est incorrect");
       }else if (res.success)
       {
         this.connected=true;
@@ -54,7 +56,7 @@ export class ConnexionModalPage {
         this.events.publish('user:logged-data',res.data);
         this.events.publish('user:logged',true);
         this.navCtrl.setRoot(HomePage);
-        this.showToast("Faites vous plaisir");
+        this.messageService.showToast("Faites vous plaisir");
       }
     })
 
@@ -74,26 +76,6 @@ export class ConnexionModalPage {
      this.loading.dismiss();
    }*/
 
-  showToast(message)
-  {
-    /*Toast.show(message, '5000', 'bottom').subscribe(
-     toast => {
-     console.log(toast);
-     }
-     );*/
-
-    let toast = this.toastCtrl.create({
-      message: message,
-      duration: 3000,
-      position: 'bottom'
-    });
-
-    toast.onDidDismiss(() => {
-      console.log('Dismissed toast');
-    });
-
-    toast.present();
-  }
 
   resetPassword()
   {
@@ -118,11 +100,11 @@ export class ConnexionModalPage {
           this.events.publish('user:logged-data',resu.data);
           this.events.publish('user:logged',true);
           this.navCtrl.setRoot(HomePage);
-          this.showToast(MessagesConstants.welcome)
+          this.messageService.showToast("(MessagesConstants.welcome");
         }
         else
         {
-          this.showAlert(MessagesConstants.erreurOAuthMessage+MessagesConstants.parFacebook,"Connexion ");
+          this.messageService.showAlert(MessagesConstants.erreurOAuthMessage+MessagesConstants.parFacebook,"Connexion ");
         }
       })
     });
@@ -133,13 +115,4 @@ export class ConnexionModalPage {
 
   }
 
-  showAlert(message,title)
-  {
-    let alert = this.alertCtrl.create({
-      title: title,
-      subTitle: message,
-      buttons: ['Ok']
-    });
-    alert.present();
-  }
 }

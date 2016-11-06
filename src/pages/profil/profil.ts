@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController,NavParams,ToastController, LoadingController,ModalController } from 'ionic-angular';
+import { NavController,NavParams,ToastController, LoadingController,ModalController,Events } from 'ionic-angular';
 import {Utilisateur} from '../../components/utilisateur.component';
 import {GlobalsConstants} from '../../constants/globals.constants';
 import {MessagesConstants} from '../../constants/messages.constants';
@@ -9,6 +9,8 @@ import {ArticleDetailsPage} from '../article-details/article-details';
 import {HomePage} from '../home/home';
 import {ActiviteModalPage} from '../activite/activite';
 import {EditProfilModalPage} from '../edit-profil/edit-profil';
+import {MessageService} from '../../services/message.service';
+
 
 /*
   Generated class for the Profil page.
@@ -34,7 +36,7 @@ export class ProfilPage {
   private loading;
 
 
-  constructor(public modalCtrl:ModalController,public navCtrl: NavController,public navParams:NavParams,private articleService:ArticleService,public toastCtrl:ToastController,public loadingCtrl:LoadingController) {
+  constructor(public events:Events,public modalCtrl:ModalController,public messageService:MessageService,public navCtrl: NavController,public navParams:NavParams,private articleService:ArticleService,public toastCtrl:ToastController,public loadingCtrl:LoadingController) {
    // this.utilisateur = navParams.get('loggedUser');
 
     this.loggedUser=JSON.parse(localStorage.getItem(GlobalsConstants.USER_LOGGED));
@@ -45,6 +47,9 @@ export class ProfilPage {
       this.showEdit=true;
     }
 
+    events.subscribe('user:logged-data',(userEventData)=> {
+      this.utilisateur=userEventData[0];
+    });
 
     articleService.getArticleByUser(this.utilisateur.id).subscribe(res=>{
       if(res.success)
@@ -59,18 +64,17 @@ export class ProfilPage {
               {
                 this.articleFavoriteUser=res3.articles;
               }else{
-                this.showToast(MessagesConstants.erreurRecuperationArticleUtilisateur);
-
+                this.messageService.showToast(MessagesConstants.erreurRecuperationArticleUtilisateur);
               }
             })
           }else
           {
-            this.showToast(MessagesConstants.erreurRecuperationArticleUtilisateur);
+            this.messageService.showToast(MessagesConstants.erreurRecuperationArticleUtilisateur);
           }
         })
       }
       else{
-        this.showToast(MessagesConstants.erreurRecuperationArticleUtilisateur);
+        this.messageService.showToast(MessagesConstants.erreurRecuperationArticleUtilisateur);
       }
     })
 
@@ -104,22 +108,6 @@ export class ProfilPage {
   goToHomePage()
   {
     this.navCtrl.setRoot(HomePage)
-  }
-
-  showToast(message)
-  {
-    let toast = this.toastCtrl.create({
-      message: message,
-      duration: 4000,
-      position: 'bottom',
-      showCloseButton: true,
-    });
-
-    toast.onDidDismiss(() => {
-      console.log('Dismissed toast');
-    });
-
-    toast.present();
   }
 
   showLoading()

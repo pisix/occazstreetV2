@@ -1,3 +1,10 @@
+06-11-2016
+----------
+Creation du service MessageService pour partager l'utilisation des Toasts et des alertes entres les différentes vues de l'application
+Modification des vue afin de passer le service MessageService pour affichage des ou des alertes pour passer par le service
+Edition profil utilisateur
+Modification de la config de l'app pour prise en compte des dates en francais
+
 27-10-2016
 ----------
 Mise en place vue activité

@@ -3,8 +3,8 @@
  */
 
 export  class GlobalsConstants{
-  // static urlServer:string = "http://localhost:";
-  static urlServer:string = "http://37.59.101.217:";
+   static urlServer:string = "http://localhost:";
+ // static urlServer:string = "http://37.59.101.217:";
   static port:string = "1337";
   static cheminImage:string = "imagesArticle/";
   static cheminPhoto:string = "photoUtilisateur/";

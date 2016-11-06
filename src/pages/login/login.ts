@@ -7,6 +7,7 @@ import {SignupPage} from '../../pages/signup/signup';
 import {Facebook, Device} from 'ionic-native';
 import {UtilisateurService} from '../../services/utilisateur.service';
 import {HomePage} from "../home/home";
+import {MessageService} from "../../services/message.service";
 
 
 /*
@@ -26,8 +27,7 @@ export class LoginPage {
   public infoLoggedUser=null;
 
 
-  constructor(public toastCtrl:ToastController,public alertCtrl:AlertController,public events:Events,private navCtrl: NavController,private modalController:ModalController,public utilisateurService:UtilisateurService
-  ) {
+  constructor(public messageService:MessageService,public toastCtrl:ToastController,public alertCtrl:AlertController,public events:Events,private navCtrl: NavController,private modalController:ModalController,public utilisateurService:UtilisateurService) {
 
   }
 
@@ -59,39 +59,13 @@ export class LoginPage {
           this.events.publish('user:logged-data',resu.data);
           this.events.publish('user:logged',true);
           this.navCtrl.setRoot(HomePage);
-          this.showToast(MessagesConstants.welcome)
+          this.messageService.showToast(MessagesConstants.welcome)
         }
         else
         {
-          this.showAlert(MessagesConstants.erreurOAuthMessage+MessagesConstants.parFacebook,"Connexion ");
+          this.messageService.showAlert(MessagesConstants.erreurOAuthMessage+MessagesConstants.parFacebook,"Connexion ");
         }
       })
     });
   }
-
-  showAlert(message,title)
-  {
-    let alert = this.alertCtrl.create({
-      title: title,
-      subTitle: message,
-      buttons: ['Ok']
-    });
-    alert.present();
-  }
-
-  showToast(message)
-  {
-     let toast = this.toastCtrl.create({
-      message: message,
-      duration: 3000,
-      position: 'bottom'
-    });
-
-    toast.onDidDismiss(() => {
-      console.log('Dismissed toast');
-    });
-
-    toast.present();
-  }
-
 }

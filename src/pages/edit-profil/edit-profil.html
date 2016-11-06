@@ -12,13 +12,13 @@
       Modifier le profil
     </ion-title>
     <ion-buttons start left>
-      <button ion-button (click)="dismiss()">
+      <button ion-button (click)="dismiss()" >
         <span showWhen="ios">Cancel</span>
         <ion-icon name="md-close" showWhen="android,windows"></ion-icon>
       </button>
     </ion-buttons>
-    <ion-buttons end>
-      <button ion-button (click)="save()">
+    <ion-buttons end >
+      <button type="submit" form="updateUserForm" ion-button>
         <ion-icon name="checkmark" ></ion-icon>
       </button>
     </ion-buttons>
@@ -29,5 +29,46 @@
 
 
 <ion-content padding>
+  <ion-list no-lines>
+    <ion-item>
+      <ion-avatar item-right>
+        <table style="border:dotted;border-color: #c3c3c3">
+          <td>
+            <img src="../../assets/img/default.png">
+          </td>
+        </table>
+      </ion-avatar>
+      Changer l'image
+    </ion-item>
+  </ion-list>
+  <form id="updateUserForm"  #updateUserForm="ngForm" (ngSubmit)="onSubmit(updateUserForm)" >
+    <ion-list>
+      <ion-item>
+        <ion-label>Nom</ion-label>
+        <ion-input [(ngModel)]="nom" name="nom" required required type="text"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Prénom</ion-label>
+        <ion-input [(ngModel)]="prenom"  name="prenom" type="text"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Email</ion-label>
+        <ion-input [(ngModel)]="email" required name="email" type="email"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Mot de passe</ion-label>
+        <ion-input [(ngModel)]="password"  name="password" type="password"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Date de naissance</ion-label>
+        <ion-datetime displayFormat="DD MMM YYYY" name="datedenaissance" [(ngModel)]="datedenaissance"></ion-datetime>
+      </ion-item>
+      <ion-item>
+        <ion-label>Localisation</ion-label>
+        <ion-input #localisationElement type="text" required  id="localisation"  [(ngModel)]="localisation" name="localisation" type="text"></ion-input>
+      </ion-item>
+    </ion-list>
+    <input id="submit-form" type="submit" class="hidden" style="display: none">
+  </form>
 
 </ion-content>
