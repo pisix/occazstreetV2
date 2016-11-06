@@ -1,4 +1,4 @@
-import { Component,ViewChild } from '@angular/core';
+import {Component, ViewChild, ElementRef} from '@angular/core';
 import { NavController, ViewController, Events} from 'ionic-angular';
 import {NgForm} from '@angular/forms';
 import {GlobalsConstants} from '../../constants/globals.constants';

@@ -16,7 +16,7 @@ export class MessageService{
   constructor(public alertCtrl:AlertController,public loadingCtrl:LoadingController,private toastCtrl: ToastController) {
   }
 
-  showToast(message)
+  showToast(message,title?)
   {
     /*Toast.show(message, '5000', 'bottom').subscribe(
      toast => {

@@ -1,9 +1,11 @@
-import {Component} from '@angular/core';
-import {NavController, NavParams, PopoverController, ViewController, ModalController} from 'ionic-angular';
+import {Component, OnInit} from '@angular/core';
+import {NavParams, PopoverController, ViewController, ModalController} from 'ionic-angular';
 import {Article} from "../../components/article.component";
 import {signalerModalPage} from "../signaler-article/signaler-article";
 import {GlobalsConstants} from "../../constants/globals.constants";
 import {MediaSharing} from "../../services/mediaSharing.service";
+import {ArticleService} from "../../services/article.service";
+import {MessageService} from "../../services/message.service";
 
 
 declare var window;
@@ -12,13 +14,14 @@ declare var window;
   selector:'page-article-details',
   templateUrl: 'article-details.html',
 })
-export class ArticleDetailsPage {
+export class ArticleDetailsPage implements OnInit{
   public article: Article;
   public imgSliderOption:any;
   public map;
   public url=GlobalsConstants.urlServer+GlobalsConstants.port+'/';
   public cheminImage = GlobalsConstants.cheminImage;
   public cheminPhoto = GlobalsConstants.cheminPhoto;
+  public favoris:boolean;
 
   private PopoverOptions = {
     cssClass:'',
@@ -26,19 +29,26 @@ export class ArticleDetailsPage {
     enableBackdropDismiss:true
   };
 
-  constructor(private navCtrl: NavController,
-              navParams: NavParams,
+
+  constructor(
+              private articleService:ArticleService,
+              private messageService:MessageService,
+              private navParams: NavParams,
               private mediaSharing:MediaSharing,
               private popoverCtrl: PopoverController) {
 
     // If we navigated to this page, we will have an item available as a nav param
     this.article = navParams.get('article');
-    alert(JSON.stringify(this.article));
     this.imgSliderOption = {
       initialSlide: 0,
       pager:true
     }
 
+  }
+
+
+   ngOnInit(): void {
+     this.favoris = this.isFavoris(this.article.idArticle);
   }
 
   contactOwner(channel:string,event){
@@ -138,6 +148,39 @@ export class ArticleDetailsPage {
         console.log('Impossible de partager cette annonce');
       }
     }
+  }
+
+  addToFavoriteList(articleId:number){
+    let userId:number = JSON.parse(localStorage.getItem(GlobalsConstants.USER_LOGGED)).id;
+
+    this.articleService.addToFavorie(userId,articleId).subscribe(res => {
+
+      if(res.success && res.suppression) {
+
+        this.favoris=false;
+
+      }else if(res.success && !res.suppression) {
+
+        this.favoris=true;
+
+      }
+      this.messageService.showToast(res.message);
+    })
+
+  }
+
+  isFavoris(articleId:number):boolean{
+    let favoris =  JSON.parse(localStorage.getItem(GlobalsConstants.USER_LOGGED)).favoris;
+
+    if(typeof favoris === 'undefined'){
+      return false
+    }
+
+    let tmp = favoris.filter(fav => {
+      fav.article == articleId;
+    }).map(k => k.article);
+
+    return (tmp.length === 1 && tmp[0] === this.article.idArticle)?true:false;
   }
 
   option(myEvent){

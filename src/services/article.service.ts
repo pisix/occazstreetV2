@@ -11,7 +11,7 @@ import 'rxjs/Rx';
 import {Observable} from "rxjs/Observable";
 
 @Injectable()
-export class ArticleService {
+export class ArticleService{
 
   constructor(private http: Http) {
 
@@ -102,8 +102,7 @@ export class ArticleService {
       });
   }
 
-  getArticleByUser(user)
-  {
+  getArticleByUser(user) {
     return this.http.get(GlobalsConstants.urlServer + GlobalsConstants.port + '/article/getArticlesByUser?iduser='+user)
       .map((res) => {
         if (res.status === 200) {
@@ -119,8 +118,7 @@ export class ArticleService {
       });
   }
 
-  getSoldArticleByUser(user)
-  {
+  getSoldArticleByUser(user) {
     return this.http.get(GlobalsConstants.urlServer + GlobalsConstants.port + '/article/getArticlesVenduByUser?iduser='+user)
       .map((res) => {
         if (res.status === 200) {
@@ -135,8 +133,8 @@ export class ArticleService {
         return res;
       });
   }
-  getFavoriteArticleByUser(user)
-  {
+
+  getFavoriteArticleByUser(user) {
     return this.http.get(GlobalsConstants.urlServer + GlobalsConstants.port + '/article/getArticlesFavorisByUser?iduser='+user)
       .map((res) => {
         if (res.status === 200) {
@@ -152,8 +150,7 @@ export class ArticleService {
       });
   }
 
-  getArticleByCategorie(categorie)
-  {
+  getArticleByCategorie(categorie) {
     return this.http.get(GlobalsConstants.urlServer + GlobalsConstants.port + '/article/getArticleByCategorie?idcategorie='+categorie                                                                                                                                    )
       .map((res) => {
         if (res.status === 200) {
@@ -161,11 +158,32 @@ export class ArticleService {
           return (res.json())
         }
         else {
-          throw new Error("Could note get Favorites Articles by User");
+          throw new Error("Could not get Favorites Articles by User");
         }
       })
       .map((res) => {
         return res;
       });
   }
+
+  addToFavorie(userId:number,articleId:number){
+
+    let data = {
+      "idutilisateur":userId,
+      "idarticle":articleId
+    };
+
+    return this.http.post(GlobalsConstants.urlServer + GlobalsConstants.port + '/favoris/ajouterFavoris',data)
+      .map((res) => {
+        if(res.status === 200){
+          return (res.json())
+        }else {
+          throw  new  Error("Could add to favorite list !")
+        }
+      })
+      .map(res => {
+        return res;
+      })
+  }
+
 }
