@@ -7,6 +7,7 @@ import {CategoriePage} from '../pages/categorie/categorie';
 import {LoginPage} from '../pages/login/login';
 import {GlobalsConstants} from "../constants/globals.constants";
 import {ProfilPage} from '../pages/profil/profil';
+import {NouveautePresDeChezVousPage} from '../pages/nouveaute-pres-de-chez-vous/nouveaute-pres-de-chez-vous';
 
 
 @Component({
@@ -59,7 +60,7 @@ export class App {
       { title: 'Cat&#233;gories', component: CategoriePage , icon:'list-box'},
       { title: 'Mes Favoris', component: ListPage , icon:'heart'},
       { title: 'Invitez vos amis', component: ListPage, icon:'people' },
-      { title: 'Nouveau pr&egrave;s de chez vous', component: ListPage, icon:'locate' },
+      { title: 'Nouveau pr&egrave;s de chez vous', component: NouveautePresDeChezVousPage, icon:'locate' },
       { title: 'Aide', component: ListPage, icon:'help-circle' }
     ];
   }

@@ -26,7 +26,7 @@ import {CategorieDetailsPage} from "../pages/categorie-details/categorie-details
 import {ActiviteModalPage} from "../pages/activite/activite";
 import {EditProfilModalPage} from "../pages/edit-profil/edit-profil";
 import {MessageService} from '../services/message.service'
-
+import {NouveautePresDeChezVousPage} from '../pages/nouveaute-pres-de-chez-vous/nouveaute-pres-de-chez-vous';
 
 
 @NgModule({
@@ -52,7 +52,8 @@ import {MessageService} from '../services/message.service'
     ProfilPage,
     CategorieDetailsPage,
     ActiviteModalPage,
-    EditProfilModalPage
+    EditProfilModalPage,
+    NouveautePresDeChezVousPage
   ],
   imports: [
     IonicModule.forRoot(App,{
@@ -83,7 +84,8 @@ import {MessageService} from '../services/message.service'
     ProfilPage,
     CategorieDetailsPage,
     ActiviteModalPage,
-    EditProfilModalPage
+    EditProfilModalPage,
+    NouveautePresDeChezVousPage
   ],
   providers: [ArticleService,UtilisateurService,CategorieService,MediaSharing,MessageService]
 })

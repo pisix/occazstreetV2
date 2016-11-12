@@ -1,3 +1,6 @@
+12-11-2016
+----------
+Fonctionnalité Nouveauté près de chez vous et affichage du nombre d'annonce dans au niveau de l'entete de la page d'accueil
 06-11-2016
 ----------
 Creation du service MessageService pour partager l'utilisation des Toasts et des alertes entres les différentes vues de l'application

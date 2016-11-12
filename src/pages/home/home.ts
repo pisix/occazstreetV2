@@ -30,6 +30,7 @@ export class HomePage {
   public url=GlobalsConstants.urlServer+GlobalsConstants.port+'/';
   public cheminImage=GlobalsConstants.cheminImage;
   public  images:any = [];
+  public numbreAnnonces;
 
 
   constructor(private articleService:ArticleService,
@@ -39,6 +40,7 @@ export class HomePage {
               private popoverCtrl: PopoverController) {
 
     this.getArticlesByLimit(this.skip,this.limit);
+    this.loadAll();
     // this.loadImageArticle(this.skip,this.limitExplorer);
     this.homeTab="mur";
 
@@ -49,6 +51,7 @@ export class HomePage {
       //  let articles = res;
 
       // console.log("Article =>",articles)
+      this.numbreAnnonces=res.length;
     })
 
 
