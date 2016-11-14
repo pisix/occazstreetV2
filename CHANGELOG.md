@@ -1,3 +1,6 @@
+14-11-2016
+----------
+Fonctionnalité Invitation des amis 
 12-11-2016
 ----------
 Fonctionnalité Nouveauté près de chez vous et affichage du nombre d'annonce dans au niveau de l'entete de la page d'accueil

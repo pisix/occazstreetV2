@@ -25,7 +25,7 @@ export class MediaSharing{
     return SocialSharing.shareViaFacebook(message,image,link);
   }
 
-  shareViaWhatApp(message:string,image?:string,link?:string):any{
+  shareViaWhatsApp(message:string,image?:string,link?:string):any{
     return SocialSharing.shareViaWhatsApp(message,image,link);
   }
 
@@ -33,5 +33,8 @@ export class MediaSharing{
     return SocialSharing.shareViaSMS(message,phoneNumber);
   }
 
+  shareViaInstagram(message:string,image?:string):any{
+    return SocialSharing.shareViaInstagram(message,image);
+  }
 
 }

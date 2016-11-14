@@ -129,7 +129,7 @@ export class ArticleDetailsPage implements OnInit{
 
       case 'whatsapp':
 
-        this.mediaSharing.shareViaWhatApp(message,imageLink).then(()=>{
+        this.mediaSharing.shareViaWhatsApp(message,imageLink).then(()=>{
           // share succesfull
         }).catch((err)=>{
           console.log(err);
