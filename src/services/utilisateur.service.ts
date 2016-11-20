@@ -90,4 +90,16 @@ export class UtilisateurService{
         return res;
       });
   }
+
+  registerToken(tokenData)
+  {
+    return this.http
+      .post(
+      GlobalsConstants.urlServer + GlobalsConstants.port + '/devicepush/register',
+      tokenData)
+      .map(res => res.json())
+      .map((res) => {
+        return res;
+      });
+  }
 }
