@@ -82,7 +82,7 @@ export class NouveautePresDeChezVousPage {
       position: new google.maps.LatLng(article.latitude, article.longitude),
       map: this.map,
       animation: google.maps.Animation.DROP,
-      icon:'../assets/img/marker.png',
+      icon:'assets/img/marker.png',
       title: article.titre
     });
 

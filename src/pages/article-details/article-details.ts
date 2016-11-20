@@ -73,7 +73,7 @@ export class ArticleDetailsPage implements OnInit{
        position: new google.maps.LatLng(this.article.latitude, this.article.longitude),
        map: this.map,
        animation: google.maps.Animation.DROP,
-       icon:'../assets/img/marker.png',
+       icon:'assets/img/marker.png',
        title: this.article.titre
      });
      google.maps.event.addListener(marker, 'click', ()=>{
