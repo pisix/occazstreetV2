@@ -21,14 +21,13 @@ declare var google: any;
 export class ArticleDetailsPage implements OnInit{
   public article: Article;
   public imgSliderOption:any;
-  public map;
+  public map:any;
   public url=GlobalsConstants.urlServer+GlobalsConstants.port+'/';
   public cheminImage = GlobalsConstants.cheminImage;
   public cheminPhoto = GlobalsConstants.cheminPhoto;
   public favoris:boolean;
 
   @ViewChild('map') mapElement: ElementRef;
-  map: any;
 
   private PopoverOptions = {
     cssClass:'',
