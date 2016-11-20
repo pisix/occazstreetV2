@@ -28,6 +28,10 @@ import {EditProfilModalPage} from "../pages/edit-profil/edit-profil";
 import {MessageService} from '../services/message.service'
 import {NouveautePresDeChezVousPage} from '../pages/nouveaute-pres-de-chez-vous/nouveaute-pres-de-chez-vous';
 import {InvitezVosAmisPage} from '../pages/invitez-vos-amis/invitez-vos-amis';
+import {ChatsPage} from '../pages/chats/chats';
+import { MomentModule } from "angular2-moment";
+import {MessagesPage} from '../pages/messages/messages'
+import {ChatService} from '../services/chat.service'
 
 
 @NgModule({
@@ -55,7 +59,9 @@ import {InvitezVosAmisPage} from '../pages/invitez-vos-amis/invitez-vos-amis';
     ActiviteModalPage,
     EditProfilModalPage,
     NouveautePresDeChezVousPage,
-    InvitezVosAmisPage
+    InvitezVosAmisPage,
+    ChatsPage,
+    MessagesPage
   ],
   imports: [
     IonicModule.forRoot(App,{
@@ -63,7 +69,8 @@ import {InvitezVosAmisPage} from '../pages/invitez-vos-amis/invitez-vos-amis';
       monthShortNames: ['Janv.' , 'F\u00e9vr.' ,'Mars', 'Avr.','Mai','Juin', 'Juill.','Ao\u00fbt', 'Sept.' , 'Oct.' , 'Nov.' , 'Déc.' ],
       dayNames: ['Lundi', 'Mardi','Mercredi','Jeudi','Vendredi','Samedi','Dimanche'],
       dayShortNames: ['Lun.', 'Mar.', 'Mer.', 'Jeu.','Ven.','Sam.','Dim.' ],
-    })
+    }),
+    MomentModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -88,8 +95,10 @@ import {InvitezVosAmisPage} from '../pages/invitez-vos-amis/invitez-vos-amis';
     ActiviteModalPage,
     EditProfilModalPage,
     NouveautePresDeChezVousPage,
-    InvitezVosAmisPage
+    InvitezVosAmisPage,
+    ChatsPage,
+    MessagesPage
   ],
-  providers: [ArticleService,UtilisateurService,CategorieService,MediaSharing,MessageService]
+  providers: [ArticleService,UtilisateurService,CategorieService,MediaSharing,MessageService,ChatService]
 })
 export class AppModule {}

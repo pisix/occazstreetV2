@@ -5,6 +5,7 @@ Ajout icon et splashcreen
 Affichage de la photo de l'utilisateur au niveau de la vue details d'un article
 Suppression accolade supperflue
 Affichage d'un message au niveau de la vue de login en fonction de l'action necessitant une authentification
+Ajout fonctionnalité messagerie
 
 14-11-2016
 ----------

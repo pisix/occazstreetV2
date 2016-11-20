@@ -1,0 +1,42 @@
+<!--
+  Generated template for the Messages page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header >
+  <ion-navbar color="primary2" class="messages-page-navbar" style="line-height: 23px;">
+    <ion-buttons>
+      <img class="chat-picture" *ngIf="picture" [src]="picture">
+    </ion-buttons>
+
+    <ion-title style="line-height: 23px;" class="chat-title">{{title}} <br/> <span class="text-center" style="font-style: italic;font-size: 15px">{{prix | currency:'XAF':true}} </span></ion-title>
+
+   <!-- <ion-buttons end>
+      <button ion-button icon-only class="settings-button" (click)="goToDetails(article)"><ion-icon name="return-right"></ion-icon></button>
+    </ion-buttons>-->
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding class="messages-page-content">
+  <ion-scroll  scrollY="true"  class="messages">
+    <div *ngFor="let message of messages" class="message-wrapper">
+      <div [class]="'message message-' + message.ownership">
+        <div class="message-content">{{message.contenu}}</div><br/><br/>
+        <span class="message-timestamp">{{message.date | amDateFormat:'LL'}}</span>
+      </div>
+    </div>
+  </ion-scroll>
+</ion-content>
+<ion-footer>
+  <ion-toolbar color="primary2" class="messages-page-footer" position="bottom">
+    <ion-input [(ngModel)]="message" (keypress)="onInputKeypress($event.keyCode)" class="message-editor" placeholder="Taper un message"></ion-input>
+
+    <ion-buttons end>
+      <button ion-button icon-only  class="message-editor-button" [disabled]="message === ''" (click)="sendMessage()">
+        <ion-icon name="send"></ion-icon>
+      </button>
+
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>
