@@ -1,6 +1,7 @@
 20-11-2016
 ----------
 Ajout de la map au niveau du détails des articles
+Ajout icon et splashcreen
 
 14-11-2016
 ----------
