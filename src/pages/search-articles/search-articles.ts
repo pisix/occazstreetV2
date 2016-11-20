@@ -8,6 +8,7 @@ import {ViewController,Events} from "ionic-angular";
 import {CategorieService} from "../../services/categorie.service";
 import {Categorie} from "../../components/categorie.component";
 import {GlobalsConstants} from '../../constants/globals.constants';
+declare var google: any;
 
 @Component({
   templateUrl: 'search-articles.html',
@@ -43,8 +44,6 @@ export class searchModalPage {
     this.categorieService.getAllCategories().subscribe(res => {
       this.categories = res;
       console.log(this.categories)
-
-
     });
 
   }
@@ -75,7 +74,7 @@ export class searchModalPage {
     }
   }
 
-  dismiss(data) {
+  dismiss(data?) {
     this.viewCtrl.dismiss(data);
   }
 
