@@ -1,3 +1,7 @@
+20-11-2016
+----------
+Ajout de la map au niveau du détails des articles
+
 14-11-2016
 ----------
 Fonctionnalité Invitation des amis 

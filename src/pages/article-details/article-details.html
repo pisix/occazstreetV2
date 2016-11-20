@@ -24,9 +24,14 @@
 
 <ion-content>
   <div>
-    <ion-slides [options]="imgSliderOption">
+    <ion-slides *ngIf="article.images.length>0" [options]="imgSliderOption">
       <ion-slide *ngFor="let img of article.images">
         <img class="art-detail-img" src="{{url}}{{cheminImage}}{{img.cheminImage}}"/>
+      </ion-slide>
+    </ion-slides>
+    <ion-slides *ngIf="article.images.length==0" [options]="imgSliderOption">
+      <ion-slide >
+        <img class="art-detail-img" src="assets/img/defaultImage.png"/>
       </ion-slide>
     </ion-slides>
   </div>
@@ -36,13 +41,13 @@
       <button ion-button  class="contact-btn-left" medium round color="secondary" *ngIf="article.utilisateur.afficherTel" (click)="contactOwner('tel',$event)">
         <ion-icon   name="call" royal></ion-icon>
       </button>
-      <button ion-button class="" medium round  color="danger" (click)="contactOwner('email',$event)">
+      <button ion-button  medium round  color="danger" [ngClass]="{'contact-btn-left':!article.utilisateur.afficherTel}" (click)="contactOwner('email',$event)">
         <ion-icon   name="mail"></ion-icon>
       </button>
       <!--<button  ion-button  medium round color="dark" >
         <ion-icon name="text" ></ion-icon>
       </button>-->
-      <button  ion-button class="contact-btn-right" medium round color="primary2" (click)="contactOwner('sms',$event)">
+      <button  ion-button class="contact-btn-right" medium round color="primary2" (click)="startChat(article,$event)">
         <ion-icon name="chatbubbles" ></ion-icon>
       </button>
     </ion-card-content>
@@ -51,7 +56,7 @@
   <ion-card>
     <ion-card-header class="header-padding">
       <ion-item>
-        Prix : {{article.prix}}
+        Prix : {{article.prix | currency:'XAF':true}}
         <ion-badge item-right>{{article.nombreDeVue}}</ion-badge>
       </ion-item>
     </ion-card-header>
@@ -72,17 +77,19 @@
     <ion-card-content>
       <ion-item>
         <ion-avatar item-left>
-
-          <img src="{{url}}{{cheminPhoto}}{{article?.utilisateur.photo}}">
+          <img src="{{url}}{{cheminPhoto}}{{article?.utilisateur.photo.cheminPhoto}}">
         </ion-avatar>
          {{article?.utilisateur.prenom}} {{article?.utilisateur.nom[0]}}
       </ion-item>
     </ion-card-content>
   </ion-card>
 
-  <ion-card id="article-details-map">
+  <ion-card style="
+    min-height: 200px;
+    max-height: 250px;"  #map id="map">
 
   </ion-card>
+
 
   <ion-card text-center>
     <ion-card-header class="header-padding">

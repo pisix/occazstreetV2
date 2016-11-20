@@ -1,14 +1,18 @@
-import {Component, OnInit} from '@angular/core';
-import {NavParams, PopoverController, ViewController, ModalController} from 'ionic-angular';
+import {Component, OnInit,ElementRef,ViewChild} from '@angular/core';
+import {NavParams, PopoverController, ViewController, ModalController, NavController} from 'ionic-angular';
 import {Article} from "../../components/article.component";
 import {signalerModalPage} from "../signaler-article/signaler-article";
 import {GlobalsConstants} from "../../constants/globals.constants";
 import {MediaSharing} from "../../services/mediaSharing.service";
 import {ArticleService} from "../../services/article.service";
 import {MessageService} from "../../services/message.service";
+import {MessagesPage} from "../messages/messages";
+import {LoginPage} from "../login/login"
 
 
-declare var window;
+declare var window
+declare var google: any;
+
 
 @Component({
   selector:'page-article-details',
@@ -23,6 +27,9 @@ export class ArticleDetailsPage implements OnInit{
   public cheminPhoto = GlobalsConstants.cheminPhoto;
   public favoris:boolean;
 
+  @ViewChild('map') mapElement: ElementRef;
+  map: any;
+
   private PopoverOptions = {
     cssClass:'',
     showBackdrop:true,
@@ -35,21 +42,45 @@ export class ArticleDetailsPage implements OnInit{
               private messageService:MessageService,
               private navParams: NavParams,
               private mediaSharing:MediaSharing,
-              private popoverCtrl: PopoverController) {
+              private popoverCtrl: PopoverController,
+              private navCtrl:NavController) {
 
     // If we navigated to this page, we will have an item available as a nav param
     this.article = navParams.get('article');
+    console.log(JSON.stringify(this.article));
+
     this.imgSliderOption = {
       initialSlide: 0,
       pager:true
-    }
+    };
 
   }
 
 
    ngOnInit(): void {
-     this.favoris = this.isFavoris(this.article.idArticle);
+     if(localStorage.getItem(GlobalsConstants.USER_LOGGED))
+     {
+       this.favoris = this.isFavoris(this.article.idArticle);
+     }
+
+     let latLng = new google.maps.LatLng(this.article.latitude, this.article.longitude);
+     let mapOptions = {
+       center: latLng,
+       zoom:15,
+       mapTypeId: google.maps.MapTypeId.ROADMAP
+     };
+     this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
+     let marker = new google.maps.Marker({
+       position: new google.maps.LatLng(this.article.latitude, this.article.longitude),
+       map: this.map,
+       animation: google.maps.Animation.DROP,
+       icon:'../assets/img/marker.png',
+       title: this.article.titre
+     });
+     google.maps.event.addListener(marker, 'click', ()=>{
+     });
   }
+
 
   contactOwner(channel:string,event){
     let message;
@@ -80,6 +111,17 @@ export class ArticleDetailsPage implements OnInit{
         break;
       default:
 
+    }
+  }
+  startChat(article,event)
+  {
+    if(localStorage.getItem(GlobalsConstants.USER_LOGGED))
+    {
+      this.navCtrl.push(MessagesPage,{startChat:article});
+    }
+    else
+    {
+      this.navCtrl.push(LoginPage,{message:"Pour pouvoir envoyer un message à ce vendeur, connectez-vous à Occazstreet ! "})
     }
   }
 
@@ -151,21 +193,30 @@ export class ArticleDetailsPage implements OnInit{
   }
 
   addToFavoriteList(articleId:number){
-    let userId:number = JSON.parse(localStorage.getItem(GlobalsConstants.USER_LOGGED)).id;
+    if(localStorage.getItem(GlobalsConstants.USER_LOGGED))
+    {
+      let userId:number = JSON.parse(localStorage.getItem(GlobalsConstants.USER_LOGGED)).id;
 
-    this.articleService.addToFavorie(userId,articleId).subscribe(res => {
+      this.articleService.addToFavorie(userId,articleId).subscribe(res => {
 
-      if(res.success && res.suppression) {
+        if(res.success && res.suppression) {
 
-        this.favoris=false;
+          this.favoris=false;
 
-      }else if(res.success && !res.suppression) {
+        }else if(res.success && !res.suppression) {
 
-        this.favoris=true;
+          this.favoris=true;
 
-      }
-      this.messageService.showToast(res.message);
-    })
+        }
+        this.messageService.showToast(res.message);
+      })
+
+    }
+    else
+    {
+      this.navCtrl.push(LoginPage,{message:"Pour pouvoir ajouter cet article en favoris, connectez-vous à Occazstreet ! "})
+
+    }
 
   }
 
