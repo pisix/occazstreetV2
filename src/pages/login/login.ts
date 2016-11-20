@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, ModalController,Events,AlertController,ToastController} from 'ionic-angular';
+import {NavParams, NavController, ModalController,Events,AlertController,ToastController} from 'ionic-angular';
 import {GlobalsConstants} from "../../constants/globals.constants";
 import {MessagesConstants} from '../../constants/messages.constants';
 import {ConnexionModalPage} from "../../pages/connexion/connexion";
@@ -25,10 +25,11 @@ export class LoginPage {
   public title = GlobalsConstants.APPNAME;
   public logged:boolean=false;
   public infoLoggedUser=null;
+  public message;
 
 
-  constructor(public messageService:MessageService,public toastCtrl:ToastController,public alertCtrl:AlertController,public events:Events,private navCtrl: NavController,private modalController:ModalController,public utilisateurService:UtilisateurService) {
-
+  constructor(private navParams: NavParams,public messageService:MessageService,public toastCtrl:ToastController,public alertCtrl:AlertController,public events:Events,private navCtrl: NavController,private modalController:ModalController,public utilisateurService:UtilisateurService) {
+    this.message=navParams.get('message')
   }
 
     connexion()

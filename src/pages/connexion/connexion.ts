@@ -93,7 +93,6 @@ export class ConnexionModalPage {
     };
 
     Facebook.login(["email", "public_profile", "user_website", "user_location", "user_relationships","user_birthday"]).then(res=>{
-      alert(JSON.stringify(res));
       this.utilisateurService.doOauth(res.authResponse.accessToken,userData).subscribe(resu=>{
         if(resu.success)
         {
