@@ -44,29 +44,4 @@ export class LoginPage {
         this.navCtrl.push(SignupPage)
     }
 
-  facebook()
-  {
-
-    let userData = {
-      device: Device.device.manufacturer + " " + Device.device.model,
-      os: Device.device.platform + " " + Device.device.version
-    };
-
-    Facebook.login(["email", "public_profile", "user_website", "user_location", "user_relationships","user_birthday"]).then(res=>{
-      alert(JSON.stringify(res));
-      this.utilisateurService.doOauth(res.authResponse.accessToken,userData).subscribe(resu=>{
-        if(resu.success)
-        {
-          this.events.publish('user:logged-data',resu.data);
-          this.events.publish('user:logged',true);
-          this.navCtrl.setRoot(HomePage);
-          this.messageService.showToast(MessagesConstants.welcome)
-        }
-        else
-        {
-          this.messageService.showAlert(MessagesConstants.erreurOAuthMessage+MessagesConstants.parFacebook,"Connexion ");
-        }
-      })
-    });
-  }
 }

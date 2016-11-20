@@ -89,7 +89,9 @@ export class ConnexionModalPage {
 
     let userData = {
       device: Device.device.manufacturer + " " + Device.device.model,
-      os: Device.device.platform + " " + Device.device.version
+      os: Device.device.platform + " " + Device.device.version,
+      provider:'Facebook'
+
     };
 
     Facebook.login(["email", "public_profile", "user_website", "user_location", "user_relationships","user_birthday"]).then(res=>{
@@ -99,7 +101,7 @@ export class ConnexionModalPage {
           this.events.publish('user:logged-data',resu.data);
           this.events.publish('user:logged',true);
           this.navCtrl.setRoot(HomePage);
-          this.messageService.showToast("(MessagesConstants.welcome");
+          this.messageService.showToast(MessagesConstants.welcome);
         }
         else
         {

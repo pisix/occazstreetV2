@@ -7,6 +7,7 @@ Suppression accolade supperflue
 Affichage d'un message au niveau de la vue de login en fonction de l'action necessitant une authentification
 Ajout fonctionnalité messagerie
 Ajout fonctionnalité de notification push 
+Authentification Facebook
 
 14-11-2016
 ----------
