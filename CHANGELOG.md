@@ -2,6 +2,7 @@
 ----------
 Ajout de la map au niveau du détails des articles
 Ajout icon et splashcreen
+Affichage de la photo de l'utilisateur au niveau de la vue details d'un article
 
 14-11-2016
 ----------

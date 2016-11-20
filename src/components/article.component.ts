@@ -3,6 +3,7 @@
 import {Categorie} from "./categorie.component";
 import {Devise} from "./devise.component";
 import {Utilisateur} from "./utilisateur.component";
+import {Photo} from "./photo.component";
 
 export class Article{
 
@@ -25,6 +26,7 @@ export class Article{
   private _categorie:Categorie;
   private _devise:Devise;
   private _utilisateur:Utilisateur;
+  private _photo:Photo;
 
   constructor(){
 
@@ -181,5 +183,13 @@ export class Article{
 
   set utilisateur(value: Utilisateur) {
     this._utilisateur = value;
+  }
+
+  get photo(): Photo {
+    return this._photo;
+  }
+
+  set photo(value: Photo) {
+    this._photo = value;
   }
 }
