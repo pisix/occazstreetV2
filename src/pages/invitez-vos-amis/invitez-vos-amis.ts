@@ -39,7 +39,7 @@ export class InvitezVosAmisPage {
   inviteMail()
   {
     let subjectMail="Invitation à découvrir Occazstreet";
-    this.mediaSharing.shareViaEmail(this.message,subjectMail)
+    this.mediaSharing.shareViaEmail(this.message,subjectMail,null,null,null,null);
   }
   inviteFacebook()
   {
