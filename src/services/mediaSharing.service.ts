@@ -13,7 +13,7 @@ export class MediaSharing{
 
   }
 
-  shareViaEmail(message:string, subject:string, to:Array<string>, cc?, bcc?, files?):any{
+  shareViaEmail(message:string, subject:string, to?:Array<string>, cc?, bcc?, files?):any{
     return SocialSharing.shareViaEmail(message, subject, to, cc, bcc, files);
   }
 

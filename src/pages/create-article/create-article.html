@@ -1,0 +1,82 @@
+<ion-header>
+  <ion-navbar pixis color="primary2">
+    <ion-title>
+      Ajouter une annonce
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+
+  <form [formGroup]="newArticleForm" (ngSubmit)="addNewArticle($event)">
+
+    <ion-row>
+      <ion-col class="img-select" width-20>
+        <ion-icon *ngIf="imageSrc[0] == ''"  (click)="loadImage(0)" name="ios-camera-outline"></ion-icon>
+        <img *ngIf="imageSrc[0] != ''" src="{{imageSrc}}">
+      </ion-col>
+      <ion-col class="img-select" width-20>
+        <ion-icon *ngIf="imageSrc[1] == ''" (click)="loadImage(1)" name="ios-camera-outline"></ion-icon>
+        <img *ngIf="imageSrc[1] != ''" src="{{imageSrc}}">
+      </ion-col>
+      <ion-col class="img-select" width-20>
+        <ion-icon *ngIf="imageSrc[2] == ''" (click)="loadImage(2)" name="ios-camera-outline"></ion-icon>
+        <img *ngIf="imageSrc[2] != ''" src="{{imageSrc}}">
+      </ion-col>
+      <ion-col class="img-select" width-20>
+        <ion-icon *ngIf="imageSrc[3] == ''" (click)="loadImage(3)" name="ios-camera-outline"></ion-icon>
+        <img *ngIf="imageSrc[3] != ''" src="{{imageSrc}}">
+      </ion-col>
+    </ion-row>
+
+    <ion-item>
+      <ion-label floating>Titre</ion-label>
+      <ion-input type="text" formControlName="titre"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Description</ion-label>
+      <ion-input type="text" formControlName="details"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Prix</ion-label>
+      <ion-input type="number" formControlName="prix"></ion-input>
+    </ion-item>
+
+
+    <ion-item>
+      <ion-label floating>Quartier</ion-label>
+      <ion-input type="text" formControlName="complementadresse" ></ion-input>
+    </ion-item>
+    <ion-item>
+
+    <ion-label floating>Ville</ion-label>
+    <ion-input #villeElement type="text" (focus)="clearVille()" id="ville"  [(ngModel)]="ville" [ngModelOptions]="{standalone: true}" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Cat&#233;gories</ion-label>
+      <ion-select formControlName="categorie" required>
+      <ion-option *ngFor="let cat of categories" [value]="cat.idcategorie">{{cat.libelle}}</ion-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Accepte les échanges</ion-label>
+      <ion-checkbox color="primary2" checked="false"  formControlName="echangeable"></ion-checkbox>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Prix négociable</ion-label>
+      <ion-checkbox checked="false" formControlName="negociable"></ion-checkbox>
+    </ion-item>
+
+    <ion-fab bottom right>
+      <button ion-fab fab-fixed	type="submit" >
+        <ion-icon name="checkmark" is-active="false"></ion-icon>
+      </button>
+    </ion-fab>
+  </form>
+
+</ion-content>

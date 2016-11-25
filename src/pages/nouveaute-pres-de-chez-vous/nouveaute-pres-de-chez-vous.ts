@@ -19,6 +19,7 @@ declare var google: any;
 export class NouveautePresDeChezVousPage {
 
   public articles: Array<any>;
+  public platform:any;
   public searchKey: string = "";
 
   @ViewChild('map') mapElement: ElementRef;

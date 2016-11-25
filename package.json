@@ -56,7 +56,7 @@
     {
       "variables": {
         "APP_ID": "360840357584353",
-        "APP_NAME":"OccazStreet"
+        "APP_NAME": "OccazStreet"
       },
       "locator": "cordova-plugin-facebook4",
       "id": "cordova-plugin-facebook4"

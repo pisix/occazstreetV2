@@ -32,6 +32,7 @@ import {ChatsPage} from '../pages/chats/chats';
 import { MomentModule } from "angular2-moment";
 import {MessagesPage} from '../pages/messages/messages'
 import {ChatService} from '../services/chat.service'
+import {CreateArticle} from "../pages/create-article/create-article";
 
 
 @NgModule({
@@ -61,7 +62,9 @@ import {ChatService} from '../services/chat.service'
     NouveautePresDeChezVousPage,
     InvitezVosAmisPage,
     ChatsPage,
-    MessagesPage
+    MessagesPage,
+    CreateArticle,
+    InvitezVosAmisPage
   ],
   imports: [
     IonicModule.forRoot(App,{
@@ -97,7 +100,9 @@ import {ChatService} from '../services/chat.service'
     NouveautePresDeChezVousPage,
     InvitezVosAmisPage,
     ChatsPage,
-    MessagesPage
+    MessagesPage,
+    InvitezVosAmisPage,
+    CreateArticle
   ],
   providers: [ArticleService,UtilisateurService,CategorieService,MediaSharing,MessageService,ChatService]
 })

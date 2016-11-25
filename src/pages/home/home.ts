@@ -6,6 +6,7 @@ import {NavController, NavParams, ModalController, ViewController, PopoverContro
 import {ArticleDetailsPage} from "../article-details/article-details";
 import {searchModalPage} from "../search-articles/search-articles";
 import {SearchResult} from "../search-result/search-result";
+import {CreateArticle} from "../create-article/create-article";
 
 
 
@@ -116,6 +117,10 @@ export class HomePage {
     });
   }
 
+  addNewArticle(){
+    this.navCtrl.push(CreateArticle);
+  }
+
 
   searchArticle() {
     let modal = this.modalController.create(searchModalPage);
@@ -183,8 +188,7 @@ export class HomePage {
     })
   }
 
-  shuffle(array)
-  {
+  shuffle(array) {
     var m = array.length, t, i;
 
     // While there remain elements to shuffle?

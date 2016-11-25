@@ -140,7 +140,7 @@
 
   </div>
 
-  <ion-fab bottom right *ngIf="homeTab=='mur'" >
+  <ion-fab bottom right *ngIf="homeTab=='mur'" (click)="addNewArticle()">
     <button ion-fab fab-fixed	>
       <ion-icon name="add" is-active="false"></ion-icon>
     </button>

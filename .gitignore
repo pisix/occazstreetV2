@@ -25,6 +25,8 @@ hooks/
 platforms/
 plugins/
 plugins/android.json
+resources/
+homedanadevoccazstreetv2/
 plugins/ios.json
 www/
 $RECYCLE.BIN/

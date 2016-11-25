@@ -186,4 +186,14 @@ export class ArticleService{
       })
   }
 
+  addNewArticle(article:Any){
+    return this.http.post(GlobalsConstants.urlServer + GlobalsConstants.port + '/article/createArticleP')
+      .map(res => {
+        if(res.status === 200){
+          return (res.json).article
+        }else {
+          throw new Error("Unable to create new article! please try again later");
+        }
+      })
+  }
 }
