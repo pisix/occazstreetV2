@@ -29,18 +29,17 @@
 
 
 <ion-content padding>
-  <ion-list no-lines>
-    <ion-item>
-      <ion-avatar item-right>
-        <table style="border:dotted;border-color: #c3c3c3">
-          <td>
-            <img src="../../assets/img/default.png">
-          </td>
-        </table>
-      </ion-avatar>
-      Changer l'image
-    </ion-item>
-  </ion-list>
+    <ion-row>
+      <ion-col width-80>
+        Changer l'image
+      </ion-col>
+      <ion-col class="img-select" width-20>
+        <ion-icon   (click)="loadImage(0)"  *ngIf="photo" ><img  src="{{photo}}"/></ion-icon>
+        <ion-icon  *ngIf="!photo" (click)="loadImage(0)" name="ios-camera-outline"></ion-icon>
+
+
+      </ion-col>
+    </ion-row>
   <form id="updateUserForm"  #updateUserForm="ngForm" (ngSubmit)="onSubmit(updateUserForm)" >
     <ion-list>
       <ion-item>

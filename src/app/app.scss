@@ -22,6 +22,18 @@
 
 @import "../pages/search-articles/search-articles";
 
+@font-face {
+  font-family: 'MullerNarrowLight';
+  src: url('../assets/fonts/MullerNarrowLight.eot');
+  src: url('../assets/fonts/MullerNarrowLight.eot') format('embedded-opentype'),
+  url('../assets/fonts/MullerNarrowLight.woff2') format('woff2'),
+  url('../assets/fonts/MullerNarrowLight.woff') format('woff'),
+  url('../assets/fonts/MullerNarrowLight.ttf') format('truetype'),
+  url('../assets/fonts/MullerNarrowLight.svg#MullerNarrowLight') format('svg');
+}
+
+@import url(https://fonts.googleapis.com/css?family=Montserrat);
+
 
 .avatar {
   height: 88px;
@@ -39,7 +51,7 @@
 
 body{
   min-width: 320px;
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Montserrat', sans-serif;
   color: #1a5046;
   background-color: #eef2f6;
   font-size: 12px;

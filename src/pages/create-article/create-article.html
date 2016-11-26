@@ -40,10 +40,16 @@
     </ion-item>
 
     <ion-item>
+      <ion-label>Cat&#233;gories</ion-label>
+      <ion-select formControlName="categorie" required>
+        <ion-option *ngFor="let cat of categories" [value]="cat.idcategorie">{{cat.libelle}}</ion-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
       <ion-label floating>Prix</ion-label>
       <ion-input type="number" formControlName="prix"></ion-input>
     </ion-item>
-
 
     <ion-item>
       <ion-label floating>Quartier</ion-label>
@@ -53,13 +59,6 @@
 
     <ion-label floating>Ville</ion-label>
     <ion-input #villeElement type="text" (focus)="clearVille()" id="ville"  [(ngModel)]="ville" [ngModelOptions]="{standalone: true}" required></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-label>Cat&#233;gories</ion-label>
-      <ion-select formControlName="categorie" required>
-      <ion-option *ngFor="let cat of categories" [value]="cat.idcategorie">{{cat.libelle}}</ion-option>
-      </ion-select>
     </ion-item>
 
     <ion-item>

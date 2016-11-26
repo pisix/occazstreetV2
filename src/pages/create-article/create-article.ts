@@ -7,6 +7,8 @@ import {FormBuilder} from "@angular/forms";
 import {GlobalsConstants} from "../../constants/globals.constants";
 import {LoginPage} from "../login/login";
 import {ArticleService} from "../../services/article.service";
+import {Article} from "../../components/article.component";
+declare var  google;
 
 @Component({
   selector:'create-article',
@@ -89,7 +91,7 @@ export class CreateArticle{
         err => console.log(err));
   }
 
-  addNewArticle(){
+  addNewArticle(event){
     if(localStorage.getItem("logged")){
       let userId = JSON.parse(localStorage.getItem(GlobalsConstants.USER_LOGGED)).id;
       let ville;
@@ -106,7 +108,7 @@ export class CreateArticle{
       localStorage.removeItem('localisation');
       this.newArticleForm.value.utilisateur = userId;
 
-      this.articleService.addNewArticle(this.newArticleForm.value).subscribe(res =>{
+      this.articleService.addNewArticle(<Article>this.newArticleForm.value).subscribe(res =>{
         //
       });
       console.log(this.newArticleForm.value);

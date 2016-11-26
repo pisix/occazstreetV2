@@ -29,6 +29,10 @@ export class EditProfilModalPage {
   public email:string;
   public localisation:string;
   public datedenaissance:Date;
+  public url=GlobalsConstants.urlServer+GlobalsConstants.port+'/';
+  public cheminImage = GlobalsConstants.cheminImage;
+  public cheminPhoto = GlobalsConstants.cheminPhoto;
+  public photo;
   private loggedUser;
   @ViewChild('localisationElement') addressElement: ElementRef;
 
@@ -41,6 +45,13 @@ export class EditProfilModalPage {
     this.datedenaissance=this.loggedUser.dateDeNaissance._i;
     this.prenom=this.loggedUser.prenom;
     this.localisation=this.loggedUser.nomVille +', '+this.loggedUser.nomPays;
+    if(this.loggedUser.photo.idPhoto!=1)
+    {
+      this.photo=this.url+this.cheminPhoto+this.loggedUser.photo.cheminPhoto;
+    }else
+    {
+      this.photo=null;
+    }
   }
 
   ionViewDidLoad() {
