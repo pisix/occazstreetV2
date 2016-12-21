@@ -3,7 +3,7 @@ import {Categorie} from "../../components/categorie.component";
 import {ViewController, Events, AlertController, NavController} from "ionic-angular";
 import {CategorieService} from "../../services/categorie.service";
 import { ImagePicker,Camera,Dialogs } from 'ionic-native';
-import {FormBuilder} from "@angular/forms";
+import {FormBuilder, Validators} from "@angular/forms";
 import {GlobalsConstants} from "../../constants/globals.constants";
 import {LoginPage} from "../login/login";
 import {ArticleService} from "../../services/article.service";
@@ -39,15 +39,16 @@ export class CreateArticle{
     //TODO trouver une validator pour gerer le prix min et max contraindre au prix positif et aux entiers
 
     this.newArticleForm = this.formBuilder.group({
-      'titre':[''],
+      'titre':['',Validators.required],
       'details':[''],
-      'categorie':[''],
+      'categorie':['',Validators.required],
       'ville':[''],
       'complementadresse':[''],
       'prix':[''],
       'echangeable':['false'],
       'negociable':['false'],
     });
+
 
 
     this.categorieService.getAllCategories().subscribe(res => {
@@ -94,24 +95,31 @@ export class CreateArticle{
   addNewArticle(event){
     if(localStorage.getItem("logged")){
       let userId = JSON.parse(localStorage.getItem(GlobalsConstants.USER_LOGGED)).id;
-      let ville;
+      let ville:string = '';
+      let latitude:number = 0;
+      let longitude:number = 0;
       let localisation =JSON.parse(localStorage.getItem('localisation'));
+      console.log(localisation);
       for (let ac = 0; ac < localisation.address_components.length; ac++) {
-        let component =localisation.address_components[ac];
+        let component = localisation.address_components[ac];
         switch(component.types[0]) {
           case 'locality':
             ville = component.long_name;
+            debugger;
+            latitude = localisation.geometry.location.lat;
+            longitude = localisation.geometry.location.lng;
             break;
         }
       }
-      this.newArticleForm.value.ville = typeof ville === 'string' ? ville : '';
-      localStorage.removeItem('localisation');
+      this.newArticleForm.value.ville = ville;
+      this.newArticleForm.value.latitude = latitude;
+      this.newArticleForm.value.longitude = longitude;
       this.newArticleForm.value.utilisateur = userId;
+      console.log(this.newArticleForm.value);
 
-      this.articleService.addNewArticle(<Article>this.newArticleForm.value).subscribe(res =>{
+      this.articleService.addNewArticle(<Article>this.newArticleForm.value,this.imageSrc).subscribe(res =>{
         //
       });
-      console.log(this.newArticleForm.value);
     }else {
       this.navCtrl.push(LoginPage);
     }

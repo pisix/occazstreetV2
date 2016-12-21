@@ -11,8 +11,6 @@ import {NouveautePresDeChezVousPage} from '../pages/nouveaute-pres-de-chez-vous/
 import {InvitezVosAmisPage} from '../pages/invitez-vos-amis/invitez-vos-amis';
 import {ChatsPage} from '../pages/chats/chats';
 import {UtilisateurService} from '../services/utilisateur.service';
-import {MessagesPage} from '../pages/messages/messages';
-import {ArticleDetailsPage} from '../pages/article-details/article-details';
 declare var NotificationEventAdditionalData;
 declare var pushInfo;
 

@@ -9,11 +9,12 @@ import {GlobalsConstants} from "../constants/globals.constants";
 import 'rxjs/add/operator/map';
 import 'rxjs/Rx';
 import {Observable} from "rxjs/Observable";
+import {ImageService} from "./image.service"
 
 @Injectable()
 export class ArticleService{
 
-  constructor(private http: Http) {
+  constructor(private http: Http,private ImageService:ImageService) {
 
   }
 
@@ -186,10 +187,18 @@ export class ArticleService{
       })
   }
 
-  addNewArticle(article?:Article ){
-    return this.http.get(GlobalsConstants.urlServer + GlobalsConstants.port + '/article/createArticleP',article)
+  addNewArticle(article:Article,images:Array<string> ){
+    return this.http.post(GlobalsConstants.urlServer + GlobalsConstants.port + '/article/createArticleP',article)
       .map(res => {
         if(res.status === 200){
+          let article = (res.json()).article;
+          images.forEach(i =>{
+            this.ImageService.upload(i).then(res=>{
+
+            }).catch((error)=>{
+
+              });
+          });
           return (res.json)
         }else {
           throw new Error("Unable to create new article! please try again later");

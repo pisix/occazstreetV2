@@ -8,11 +8,11 @@ import {ArticleDetailsPage} from '../article-details/article-details';
 import {Utilisateur} from '../../components/utilisateur.component';
 import {Article} from '../../components/article.component';
 import {MessageService} from '../../services/message.service'
-import moment from 'moment';
-import 'moment/locale/fr';
-
-moment.locale('fr');
-console.log(moment.locale());
+// import moment from 'moment';
+// import 'moment/locale/fr';
+//
+// moment.locale('fr');
+// console.log(moment.locale());
 /*
   Generated class for the Messages page.
 

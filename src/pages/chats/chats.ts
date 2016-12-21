@@ -5,7 +5,7 @@ import { Observable } from "rxjs";
 import {ChatService} from '../../services/chat.service';
 import {GlobalsConstants} from '../../constants/globals.constants';
 import {MessagesPage} from '../messages/messages';
-moment.locale('fr');
+// moment.locale('fr');
 
 /*
   Generated class for the Chats page.
