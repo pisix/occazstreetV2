@@ -65,8 +65,7 @@ import {ImageService} from "../services/image.service";
     ChatsPage,
     MessagesPage,
     CreateArticle,
-    InvitezVosAmisPage,
-    ImageService
+    InvitezVosAmisPage
   ],
   imports: [
     IonicModule.forRoot(App,{
@@ -104,8 +103,7 @@ import {ImageService} from "../services/image.service";
     ChatsPage,
     MessagesPage,
     InvitezVosAmisPage,
-    CreateArticle,
-    ImageService
+    CreateArticle
   ],
   providers: [ArticleService,ImageService,UtilisateurService,CategorieService,MediaSharing,MessageService,ChatService]
 })
