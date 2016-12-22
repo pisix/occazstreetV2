@@ -3,6 +3,7 @@ import {Injectable} from "@angular/core";
 import {Http} from "@angular/http";
 import {GlobalsConstants} from "../../src/constants/globals.constants";
 import {Transfer} from "ionic-native";
+import {FileUploadResult} from 'ionic-native';
 
 
 @Injectable()
@@ -28,5 +29,5 @@ export class ImageService{
       }
     };
     return ft.upload(image, GlobalsConstants.urlServer + GlobalsConstants.port + '/article/uploadImage', options)
-  };
+  }
 }
