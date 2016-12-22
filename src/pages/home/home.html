@@ -27,9 +27,9 @@
       <ion-segment-button value="explorer" (ionSelect)="selectedExplorer()">
         Explorer
       </ion-segment-button>
-      <ion-segment-button value="collections" (ionSelect)="selectedCollections()">
+      <!--<ion-segment-button value="collections" (ionSelect)="selectedCollections()">
         Collections
-      </ion-segment-button>
+      </ion-segment-button>-->
     </ion-segment>
   </ion-toolbar>
 </ion-header>
@@ -135,10 +135,10 @@
     </ion-infinite-scroll>
 
   </div>
-  <div *ngIf="homeTab=='collections'" >
+  <!--<div *ngIf="homeTab=='collections'" >
     Collections
 
-  </div>
+  </div>-->
 
   <ion-fab bottom right *ngIf="homeTab=='mur'" (click)="addNewArticle()">
     <button ion-fab fab-fixed	>
