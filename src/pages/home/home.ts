@@ -147,7 +147,7 @@ export class HomePage {
   doRefreshImages(refresher) {
     this.images=[];
     this.skipExplorer=0;
-    // this.loadImageArticle(this.skipExplorer,GlobalsConstants.PAGEEXPLORER);
+    this.getArticlesByLimit(this.skipExplorer,GlobalsConstants.PAGEEXPLORER);
     refresher.complete();
   }
 
@@ -169,9 +169,8 @@ export class HomePage {
       this.skipExplorer=GlobalsConstants.PAGEEXPLORER;
     }
     setTimeout(()=>{
-      // this.loadImageArticle(this.skipExplorer,this.limitExplorer+this.limitExplorer);
+      this.loadImageArticle(this.skipExplorer,this.limitExplorer+this.limitExplorer);
       infiniteScroll.complete();
-
     },1000);
   }
 
