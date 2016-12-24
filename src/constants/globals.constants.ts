@@ -3,7 +3,7 @@
  */
 
 export  class GlobalsConstants{
-   static urlServer:string = "http://192.168.1.44:";
+   static urlServer:string = "http://127.0.0.1:";
   //static urlServer:string = "http://37.59.101.217:";
   static port:string = "1337";
   static cheminImage:string = "imagesArticle/";
@@ -13,7 +13,7 @@ export  class GlobalsConstants{
   static USER_LOGGED:string = "loggedUser";
   static LOCAL_TOKEN_KEY:string = "token";
   static URL_JSON_IP:string ="http://freegeoip.net/json";
-  static PAGE:number = 10;
+  static PAGE:number = 16;
   static PAGEEXPLORER:number = 16;
   static VERSION:string = "2.0.0";
   static APPPLAYSTORE:string = "https://play.google.com/store/apps/details?id=com.pisixlabs.occazstreet";

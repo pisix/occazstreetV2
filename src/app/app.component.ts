@@ -2,7 +2,7 @@ import {Component, ViewChild} from '@angular/core';
 import {Platform, MenuController, Nav,Events, AlertController } from 'ionic-angular';
 import {StatusBar,Push,Splashscreen} from 'ionic-native';
 import {HomePage} from '../pages/home/home';
-import {ListPage} from '../pages/list/list';
+import {HelpPage} from '../pages/help/help';
 import {CategoriePage} from '../pages/categorie/categorie';
 import {LoginPage} from '../pages/login/login';
 import {GlobalsConstants} from "../constants/globals.constants";
@@ -67,10 +67,10 @@ export class App {
       { title: 'Acceuil', component: HomePage, icon:'home'},
       { title: 'Messages', component: ChatsPage, icon:'chatbubbles'},
       { title: 'Cat&#233;gories', component: CategoriePage , icon:'list-box'},
-      { title: 'Mes Favoris', component: ListPage , icon:'heart'},
+      { title: 'Mes Favoris', component: HelpPage , icon:'heart'},
       { title: 'Invitez vos amis', component: InvitezVosAmisPage, icon:'people' },
       { title: 'Nouveau pr&egrave;s de chez vous', component: NouveautePresDeChezVousPage, icon:'locate' },
-      { title: 'Aide', component: ListPage, icon:'help-circle' }
+      { title: 'Aide', component: HelpPage, icon:'help-circle' }
     ];
 
   }

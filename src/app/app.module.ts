@@ -6,7 +6,6 @@ import { ContactPage } from '../pages/contact/contact';
 import {HomePage, ArticlesPopOver} from '../pages/home/home';
 import {ItemDetailsPage} from '../pages/item-details/item-details';
 import {ArticleDetailsPage} from '../pages/article-details/article-details';
-import {ListPage} from '../pages/list/list'
 import {searchModalPage} from '../pages/search-articles/search-articles';
 import {signalerModalPage} from '../pages/signaler-article/signaler-article';
 import {LoginPage} from '../pages/login/login';
@@ -34,7 +33,12 @@ import {MessagesPage} from '../pages/messages/messages'
 import {ChatService} from '../services/chat.service'
 import {CreateArticle} from "../pages/create-article/create-article";
 import {ImageService} from "../services/image.service";
-
+import {HelpPage} from '../pages/help/help';
+import {ContactPage} from '../pages/contact/contact';
+import {SecuritePage} from '../pages/securite/securite';
+import {PolitiqueConfidentialitePage} from '../pages/politique-confidentialite/politique-confidentialite';
+import {CguPage} from '../pages/cgu/cgu';
+import {ContactSujetPage} from '../pages/contact-sujet/contact-sujet';
 
 @NgModule({
   declarations: [
@@ -44,7 +48,6 @@ import {ImageService} from "../services/image.service";
     HomePage,
     ItemDetailsPage,
     ArticleDetailsPage,
-    ListPage,
     searchModalPage,
     SearchResult,
     signalerModalPage,
@@ -65,7 +68,13 @@ import {ImageService} from "../services/image.service";
     ChatsPage,
     MessagesPage,
     CreateArticle,
-    InvitezVosAmisPage
+    InvitezVosAmisPage,
+    HelpPage,
+    ContactPage,
+    PolitiqueConfidentialitePage,
+    SecuritePage,
+    CguPage,
+    ContactSujetPage
   ],
   imports: [
     IonicModule.forRoot(App,{
@@ -84,7 +93,6 @@ import {ImageService} from "../services/image.service";
     HomePage,
     ItemDetailsPage,
     ArticleDetailsPage,
-    ListPage,
     searchModalPage,
     SearchResult,
     signalerModalPage,
@@ -103,7 +111,13 @@ import {ImageService} from "../services/image.service";
     ChatsPage,
     MessagesPage,
     InvitezVosAmisPage,
-    CreateArticle
+    CreateArticle,
+    HelpPage,
+    ContactPage,
+    PolitiqueConfidentialitePage,
+    SecuritePage,
+    CguPage,
+    ContactSujetPage
   ],
   providers: [ArticleService,ImageService,UtilisateurService,CategorieService,MediaSharing,MessageService,ChatService]
 })

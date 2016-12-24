@@ -1,0 +1,82 @@
+<!--
+  Generated template for the Help page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar color="primary2">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Aide</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+  <ion-card>
+    <ion-card-header class="card-h">
+      Conditions légales
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item>
+        <a class="link" (click)="goToCgu()" >
+          Conditions d'utilisation
+        </a>
+      </ion-item>
+      <ion-item>
+        <a class="link" (click)="goToPolitique()">
+          Politique de confidentialité
+        </a>
+      </ion-item>
+      <ion-item>
+        <a class="link" (click)="goToSecurite()">
+          Conseil de sécurité
+        </a>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+  <ion-card>
+    <ion-card-header class="card-h">
+      Réseaux sociaux
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item>
+        <a class="link"  onclick="window.open('https://www.facebook.com/occazStreet/', '_system', 'location=no'); return false;" >
+          "J'aime" sur Facebook!.
+        </a>
+      </ion-item>
+      <ion-item>
+        <a class="link"  onclick="window.open('https://twitter.com/occazstreet', '_blank', 'location=no'); return false;">
+          Occazstreet sur Twitter
+        </a>
+      </ion-item>
+      <ion-item>
+        <a  class="link" onclick="window.open('https://instagram.com/occazstreet', '_blank', 'location=no'); return false;">
+          Occazstreet sur Instagram
+        </a>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+  <ion-card>
+    <ion-card-header class="card-h">
+      Version
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item>
+        <span class="link">Version de l'application {{version}}</span>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+  <ion-card>
+    <ion-card-header class="card-h">
+      Contact
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item>
+        <a class="link" (click)="goToContactPage()">
+          Contact
+        </a>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

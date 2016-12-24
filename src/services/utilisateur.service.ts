@@ -102,4 +102,16 @@ export class UtilisateurService{
         return res;
       });
   }
+
+  sendMessageContact(message)
+  {
+    return this.http
+      .post(
+      GlobalsConstants.urlServer + GlobalsConstants.port + '/article/sendMessageContact',
+      {contact:message})
+      .map(res => res.json())
+      .map((res) => {
+        return res;
+      });
+  }
 }
