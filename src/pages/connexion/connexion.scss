@@ -1,6 +1,6 @@
 page-connexion {
   .login {
-    position: fixed;
+    position: absolute;
     height: 100%;
     width: 100%;
     background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.84) -17%, #f1ecec 637%);
@@ -19,11 +19,13 @@ page-connexion {
     text-align: center;
   }
   .login_logo {
-    position: absolute;
-    top: 2rem;
-    left: 9.5rem;
+    position: relative;
     width: 14rem;
     height: 2.8rem;
+    -webkit-filter: contrast(160%);
+    filter: contrast(160%);
+    text-align: center;
+    margin: 0 auto;
 
   }
 
