@@ -39,6 +39,7 @@ import {SecuritePage} from '../pages/securite/securite';
 import {PolitiqueConfidentialitePage} from '../pages/politique-confidentialite/politique-confidentialite';
 import {CguPage} from '../pages/cgu/cgu';
 import {ContactSujetPage} from '../pages/contact-sujet/contact-sujet';
+import {FavorisPage} from '../pages/favoris/favoris';
 
 @NgModule({
   declarations: [
@@ -74,7 +75,8 @@ import {ContactSujetPage} from '../pages/contact-sujet/contact-sujet';
     PolitiqueConfidentialitePage,
     SecuritePage,
     CguPage,
-    ContactSujetPage
+    ContactSujetPage,
+    FavorisPage
   ],
   imports: [
     IonicModule.forRoot(App,{
@@ -117,7 +119,8 @@ import {ContactSujetPage} from '../pages/contact-sujet/contact-sujet';
     PolitiqueConfidentialitePage,
     SecuritePage,
     CguPage,
-    ContactSujetPage
+    ContactSujetPage,
+    FavorisPage
   ],
   providers: [ArticleService,ImageService,UtilisateurService,CategorieService,MediaSharing,MessageService,ChatService]
 })

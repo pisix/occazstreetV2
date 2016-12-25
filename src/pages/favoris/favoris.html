@@ -1,0 +1,65 @@
+<!--
+  Generated template for the Favoris page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="primary2">
+    <ion-title>Favoris</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding style="background-color: #eff1f5" >
+  <div [hidden]="!articleFavorisExist"  class="getting-started">
+    <ion-row>
+      <ion-col width-50 no-padding>
+        <ion-card *ngFor="let art1 of articles1"  (click)="articleDetails($event,art1)">
+          <img *ngIf="art1?.images.length>0" src="{{url}}{{cheminImage}}{{art1?.images[0]?.cheminImage}}"/>
+          <img *ngIf="art1?.images.length==0" src="assets/img/defaultImage.png"/>
+          <ion-card-content text-center no-padding>
+            <ion-card-title  class="price" >
+              {{art1.prix | currency:'XAF':true}}
+            </ion-card-title>
+            <h6>{{art1.titre | titeCapitalize}}</h6>
+          </ion-card-content>
+          <section class="timer" text-right>
+            <span *ngIf="art1.dateModification === null">Ajout&eacute; : {{art1.dateAjout | occasStreetTimer}}</span>
+            <span *ngIf="art1.dateModification">Modifi&eacute; : {{art1.dateModification | occasStreetTimer}}</span>
+          </section>
+          <div class="sold" *ngIf="art1.etat=='Vendu'">
+            Vendu
+          </div>
+        </ion-card>
+      </ion-col>
+
+      <ion-col width-50 no-padding>
+        <ion-card *ngFor="let art2 of articles2" (click)="articleDetails($event,art2)">
+          <img *ngIf="art2?.images.length>0" src="{{url}}{{cheminImage}}{{art2?.images[0]?.cheminImage}}"/>
+          <img *ngIf="art2?.images.length==0" src="assets/img/defaultImage.png"/>
+          <ion-card-content text-center no-padding>
+            <ion-card-title class="price">
+              {{art2.prix | currency:'XAF':true}}
+            </ion-card-title>
+            <h6 class="title">{{art2.titre | titeCapitalize}}</h6>
+          </ion-card-content>
+          <section class="timer" text-right>
+            <span *ngIf="art2.dateModification === null" >Ajout&eacute; : {{art2.dateAjout | occasStreetTimer}}</span>
+            <span *ngIf="art2.dateModification">Modifi&eacute; : {{art2.dateModification | occasStreetTimer}}</span>
+          </section>
+          <div class="sold" *ngIf="art2.etat=='Vendu'">
+            <span style="margin-top: 1%">Vendu</span>
+          </div>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </div>
+  <div [hidden]="articleFavorisExist" class="no-fav">
+    <ion-icon class="icon-no-fav" name="heart-outline"></ion-icon>
+    <p class="libelle-no-fav">Vous n'avez pas encore de favoris</p>
+  </div>
+
+</ion-content>

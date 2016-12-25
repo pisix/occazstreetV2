@@ -10,6 +10,7 @@ import {ProfilPage} from '../pages/profil/profil';
 import {NouveautePresDeChezVousPage} from '../pages/nouveaute-pres-de-chez-vous/nouveaute-pres-de-chez-vous';
 import {InvitezVosAmisPage} from '../pages/invitez-vos-amis/invitez-vos-amis';
 import {ChatsPage} from '../pages/chats/chats';
+import {FavorisPage} from '../pages/favoris/favoris';
 import {UtilisateurService} from '../services/utilisateur.service';
 declare var NotificationEventAdditionalData;
 declare var pushInfo;
@@ -67,7 +68,7 @@ export class App {
       { title: 'Acceuil', component: HomePage, icon:'home'},
       { title: 'Messages', component: ChatsPage, icon:'chatbubbles'},
       { title: 'Cat&#233;gories', component: CategoriePage , icon:'list-box'},
-      { title: 'Mes Favoris', component: HelpPage , icon:'heart'},
+      { title: 'Mes Favoris', component: FavorisPage , icon:'heart'},
       { title: 'Invitez vos amis', component: InvitezVosAmisPage, icon:'people' },
       { title: 'Nouveau pr&egrave;s de chez vous', component: NouveautePresDeChezVousPage, icon:'locate' },
       { title: 'Aide', component: HelpPage, icon:'help-circle' }
@@ -182,6 +183,19 @@ export class App {
      }
 
     }
+    else if(page.component==FavorisPage)
+    {
+      if(this.logged)
+      {
+        this.nav.push(page.component);
+      }
+      else
+      {
+        this.nav.push(LoginPage,{message:"Pour voir vos Favoris, connectez-vous à Occazstreet !"});
+      }
+
+    }
+
     else if(page.component==HomePage)
     {
       this.nav.setRoot(page.component);

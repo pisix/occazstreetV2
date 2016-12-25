@@ -13,8 +13,17 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  <ion-list>
+<ion-content padding >
+  <ion-row [hidden]="categories.length>0">
+    <ion-col text-center>
+      <div class="network-error">
+        <img margin-bottom src="assets/img/no-network.png" style="-webkit-filter:grayscale(100%)" width="100" height="100"/>
+        <h4>Impossible de récuperér la liste des catégories</h4>
+        <p>Abscence de connexion avec le serveur. Veuillez v&eacute;rifier votre connexion internet et r&eacute;essayer</p>
+      </div>
+    </ion-col>
+  </ion-row>
+  <ion-list [hidden]="categories.length<0">
     <button ion-item *ngFor="let categorie of categories" (click)="goToDetailsCategorie($event, categorie.idcategorie,categorie.libelle)">
       {{categorie.libelle}}
     </button>

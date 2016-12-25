@@ -1,4 +1,44 @@
-page-home {
+page-favoris {
+
+  ion-card{
+    width: calc(100% - 10px);
+    border-radius:10px;
+    ion-card-content{
+      padding: 0;
+    }
+  }
+
+  p {
+    margin: 20px 0;
+    line-height: 22px;
+    font-size: 16px;
+  }
+
+  .icon-no-fav
+  {
+    text-align: center;
+    margin :0 auto;
+    font-size: 100px;
+    color: rgba(41, 41, 41, 0.26);
+  }
+
+  .libelle-no-fav
+  {
+    text-align: center;
+    margin :0 auto;
+    color: rgba(144, 143, 143, 0.64);
+  }
+
+  .no-fav{
+    position: absolute;
+    top: 50%;
+    margin: auto 0;
+    font-weight: bold;
+    font-size: 20px;
+    text-align: center;
+    width: 100%;
+  }
+
   .getting-started {
 
     ion-card{
@@ -80,20 +120,6 @@ page-home {
     text-align: center;
     margin-top: -10%;
     MARGIN-LEFT: 4%;
-
   }
 
-}
-
-.popover-content{
-
-  .popover-viewport{
-    ion-list{
-      margin: 0px;
-    }
-
-    ion-item{
-      padding-right: 16px;
-    }
-  }
 }

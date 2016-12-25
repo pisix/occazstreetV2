@@ -5,7 +5,7 @@
     </button>
     <ion-title>
       <span style="font-weight: bold">{{title}}</span><br/>
-      <span style="font-size: 15px">{{numbreAnnonces}} annonces</span>
+      <span style="font-size: 15px" [hidden]="numberAnnonces==0 || !numberAnnonces">{{numbreAnnonces}} annonces</span>
     </ion-title>
 
     <ion-buttons end>
@@ -35,7 +35,7 @@
 </ion-header>
 
 
-<ion-content>
+<ion-content style="background-color: #eff1f5">
   <div *ngIf="homeTab=='mur'" class="getting-started">
     <ion-refresher (ionRefresh)="doRefresh($event)">
       <ion-refresher-content
@@ -49,7 +49,7 @@
     <ion-row *ngIf="offLine">
       <ion-col text-center>
         <div class="network-error">
-          <img margin-bottom src="assets/img/no-network.png" width="100" height="100"/>
+          <img margin-bottom src="assets/img/no-network.png" style="-webkit-filter:grayscale(100%)" width="100" height="100"/>
           <h4>Impossible de charger les articles</h4>
           <p>Abscence de connexion internet. Veuillez v&eacute;rifier votre connexion et r&eacute;essayer</p>
           <button ion-button outline pixis (click)="getArticlesByLimit(0,6)">REESSAYER</button>
@@ -91,7 +91,7 @@
             <ion-card-title class="price">
               {{art2.prix | currency:'XAF':true}}
             </ion-card-title>
-            <h6>{{art2.titre | titeCapitalize}}</h6>
+            <h6 class="title">{{art2.titre | titeCapitalize}}</h6>
           </ion-card-content>
           <section class="timer" text-right>
             <span *ngIf="art2.dateModification === null" >Ajout&eacute; : {{art2.dateAjout | occasStreetTimer}}</span>
@@ -121,11 +121,15 @@
       </ion-refresher-content>
     </ion-refresher>
     <ion-col width-33 class="left" *ngFor="let image of images">
-      <div (click)="articleDetails($event,image.article)" class="image-explorer" [ngStyle]="{'background-image':'url('+ (image.srcImage !=null && image.srcImage || 'assets/img/defaultImage.png') + ')'}" >
-      </div>
-      <div class="sold-explorer" *ngIf="image.article.etat=='Vendu'">
-       <span >Vendu</span>
-      </div>
+      <ion-card>
+        <ion-card-content>
+          <div (click)="articleDetails($event,image.article)" class="image-explorer" [ngStyle]="{'background-image':'url('+ (image.srcImage !=null && image.srcImage || 'assets/img/defaultImage.png') + ')'}" >
+          </div>
+          <div class="sold-explorer" *ngIf="image.article.etat=='Vendu'">
+            <span >Vendu</span>
+          </div>
+        </ion-card-content>
+      </ion-card>
     </ion-col>
     <ion-infinite-scroll *ngIf="!offLine" (ionInfinite)="doInfiniteImages($event)">
       <ion-infinite-scroll-content
@@ -140,7 +144,7 @@
 
   </div>-->
 
-  <ion-fab bottom right *ngIf="homeTab=='mur'" (click)="addNewArticle()">
+  <ion-fab bottom center *ngIf="homeTab=='mur'" (click)="addNewArticle()">
     <button ion-fab fab-fixed	>
       <ion-icon name="add" is-active="false"></ion-icon>
     </button>
