@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController,LoadingController } from 'ionic-angular';
 import {ArticleService} from '../../services/article.service';
 import {GlobalsConstants} from "../../constants/globals.constants";
+import {Article} from '../../components/article.component';
 
 
 /*

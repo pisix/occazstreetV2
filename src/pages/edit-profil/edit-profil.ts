@@ -1,5 +1,5 @@
 import {Component, ViewChild, ElementRef} from '@angular/core';
-import { NavController, ViewController, Events} from 'ionic-angular';
+import { NavController, ViewController, Events, LoadingController} from 'ionic-angular';
 import {NgForm} from '@angular/forms';
 import {GlobalsConstants} from '../../constants/globals.constants';
 import { DatePicker } from 'ionic-native';
@@ -36,7 +36,7 @@ export class EditProfilModalPage {
   private loggedUser;
   @ViewChild('localisationElement') addressElement: ElementRef;
 
-  constructor(public events:Events,public navCtrl: NavController,public viewCtrl:ViewController,public utilisateurService:UtilisateurService, public messageService:MessageService) {
+  constructor(public loadingCtrl:LoadingController, public events:Events,public navCtrl: NavController,public viewCtrl:ViewController,public utilisateurService:UtilisateurService, public messageService:MessageService) {
     this.loggedUser=JSON.parse(localStorage.getItem(GlobalsConstants.USER_LOGGED));
     console.log(this.loggedUser.dateDeNaissance._i);
     this.nom=this.loggedUser.nom;
@@ -78,6 +78,8 @@ export class EditProfilModalPage {
   }
 
   onSubmit(f) {
+   let loading = this.loadingCtrl.create();
+    loading.present();
     if(f.value.localisation)
     {
       let nomVille;
@@ -117,21 +119,20 @@ export class EditProfilModalPage {
         console.log(JSON.stringify(res));
         if(res.success)
         {
+          loading.dismiss();
           this.events.publish('user:logged-data',res.utilisateur);
           this.messageService.showAlert(MessagesConstants.misAJourProfilSuccess,MessagesConstants.miseAjoutProfilTitre);
         }
         else
         {
+          loading.dismiss();
           this.messageService.showAlert(MessagesConstants.misAJourProfilSuccess,MessagesConstants.erreurUpdateProfil);
         }
       })
     }else
     {
+      loading.dismiss();
       this.messageService.showToast("Veuillez renseigner votre localisation !");
     }
-
-
-
   }
-
 }

@@ -22,7 +22,7 @@ export class ContactSujetPage {
   public name:string;
   public email:string;
   public message:string;
-  contactForm:FormGroup;
+  contactForm=null;
   constructor(  private navParams: NavParams, private _formBuilder: FormBuilder, public navCtrl: NavController,public loadingCtrl:LoadingController,public messageService:MessageService,public utilisateurService:UtilisateurService) {
 
     this.sujet = navParams.get('sujet');
@@ -45,9 +45,7 @@ export class ContactSujetPage {
     this.name=this.contactForm.value.name;
 
 
-    let contact={nom:this.name,email:this.email,message:this.contactForm.value.message};
-    contact.sujet=this.sujet;
-    console.log(contact);
+    let contact={nom:this.name,email:this.email,message:this.contactForm.value.message,sujet:this.sujet};
     let loading = this.loadingCtrl.create({
     });
     loading.present();

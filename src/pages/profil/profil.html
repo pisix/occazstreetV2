@@ -35,19 +35,18 @@
            <ion-fab center middle>
              <button ion-fab color="primary2" mini><ion-icon name="share" ></ion-icon></button>
              <ion-fab-list side="top">
-               <button ion-fab color="primary"><ion-icon name="logo-instagram"></ion-icon></button>
+               <button ion-fab color="primary" (click)="share('instagram')"><ion-icon name="logo-instagram" color="primary"></ion-icon></button>
              </ion-fab-list>
              <ion-fab-list side="bottom">
-               <button ion-fab color="facebook"><ion-icon name="logo-facebook"></ion-icon></button>
+               <button ion-fab color="facebook" (click)="share('facebook')"><ion-icon name="logo-facebook" color="facebook"></ion-icon></button>
              </ion-fab-list>
              <ion-fab-list side="left">
-               <button ion-fab color="light"><ion-icon name="mail"></ion-icon></button>
+               <button ion-fab  color="whatsapp" (click)="share('whatsapp')"><ion-icon color="whatsapp" name="logo-whatsapp"></ion-icon></button>
              </ion-fab-list>
              <ion-fab-list side="right">
-               <button ion-fab color="twitter"><ion-icon name="logo-twitter"></ion-icon></button>
+               <button ion-fab color="twitter" (click)="share('twitter')"><ion-icon name="logo-twitter" color="twitter"></ion-icon></button>
              </ion-fab-list>
            </ion-fab>
-
         </span>
       </div>
     </div>

@@ -10,7 +10,7 @@ import {HomePage} from '../home/home';
 import {ActiviteModalPage} from '../activite/activite';
 import {EditProfilModalPage} from '../edit-profil/edit-profil';
 import {MessageService} from '../../services/message.service';
-
+import {MediaSharing} from '../../services/mediaSharing.service';
 
 /*
   Generated class for the Profil page.
@@ -36,7 +36,7 @@ export class ProfilPage {
   private loading;
 
 
-  constructor(public events:Events,public modalCtrl:ModalController,public messageService:MessageService,public navCtrl: NavController,public navParams:NavParams,private articleService:ArticleService,public toastCtrl:ToastController,public loadingCtrl:LoadingController) {
+  constructor(public mediaSharing:MediaSharing, public events:Events,public modalCtrl:ModalController,public messageService:MessageService,public navCtrl: NavController,public navParams:NavParams,private articleService:ArticleService,public toastCtrl:ToastController,public loadingCtrl:LoadingController) {
    // this.utilisateur = navParams.get('loggedUser');
 
     this.loggedUser=JSON.parse(localStorage.getItem(GlobalsConstants.USER_LOGGED));
@@ -155,5 +155,58 @@ export class ProfilPage {
 
      });*/
   }
+  share(channel:string){
+    /*Social Sharing*/
+    let message="Découvrez mon profil et mes articles en vente sur @OccazStreet \n en téléchargent  l'application  sur "+GlobalsConstants.APPPLAYSTORE;
+   // let imageLink = this.url+GlobalsConstants.cheminImage +this.article.images[0].cheminImage;
+    let imageLink=null;
+
+
+    switch (channel){
+
+      case 'facebook':
+
+        this.mediaSharing.shareViaFacebook(message,null,'').then(()=>{
+          // share succesfull
+        }).catch((err)=>{
+          console.log(err);
+        });
+
+        break;
+
+      case 'twitter':
+
+        this.mediaSharing.shareTwitter(message+" "+GlobalsConstants.PSEUDOTWITTER,imageLink,'').then(()=>{
+          // share succesfull
+        }).catch((err)=>{
+          console.log(err);
+        });
+
+        break;
+
+      case 'whatsapp':
+        this.mediaSharing.shareViaWhatsApp(message,null,imageLink).then(()=>{
+          // share succesfull
+        }).catch((err)=>{
+          console.log(err);
+        });
+
+        break;
+
+      case 'instagram':
+
+        this.mediaSharing.shareViaWhatsApp(message,imageLink).then(()=>{
+          // share succesfull
+        }).catch((err)=>{
+          console.log(err);
+        });
+
+        break;
+      default:{
+        console.log('Impossible de partager ce profil');
+      }
+    }
+  }
+
 
 }

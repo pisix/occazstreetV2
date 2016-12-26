@@ -18,8 +18,8 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding class="messages-page-content">
-  <ion-scroll  scrollY="true"  class="messages">
+<ion-content padding class=" messages-page-content">
+  <ion-scroll  scrollY="true" id="messages" class="messages">
     <div *ngFor="let message of messages" class="message-wrapper">
       <div [class]="'message message-' + message.ownership">
         <div class="message-content">{{message.contenu}}</div><br/><br/>

@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { IonicApp, IonicModule } from 'ionic-angular';
 import { App } from './app.component';
 import { AboutPage } from '../pages/about/about';
-import { ContactPage } from '../pages/contact/contact';
 import {HomePage, ArticlesPopOver} from '../pages/home/home';
 import {ItemDetailsPage} from '../pages/item-details/item-details';
 import {ArticleDetailsPage} from '../pages/article-details/article-details';
@@ -71,7 +70,6 @@ import {FavorisPage} from '../pages/favoris/favoris';
     CreateArticle,
     InvitezVosAmisPage,
     HelpPage,
-    ContactPage,
     PolitiqueConfidentialitePage,
     SecuritePage,
     CguPage,
@@ -115,7 +113,6 @@ import {FavorisPage} from '../pages/favoris/favoris';
     InvitezVosAmisPage,
     CreateArticle,
     HelpPage,
-    ContactPage,
     PolitiqueConfidentialitePage,
     SecuritePage,
     CguPage,

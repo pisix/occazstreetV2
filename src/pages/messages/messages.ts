@@ -77,7 +77,7 @@ export class MessagesPage implements  OnInit, OnDestroy,AfterViewChecked{
 
     }
 
-
+  //this.scrollToBottom();
   }
 
   ionViewDidLoad() {
@@ -114,9 +114,7 @@ export class MessagesPage implements  OnInit, OnDestroy,AfterViewChecked{
         }
       });
     }
-  //  this.scrollToBottom();
-
-
+    //this.scrollToBottom();
     /*this.autoScroller = this.zone.subscribe(() => {
       this.scroller.scrollTop = this.scroller.scrollHeight;
       this.messageEditor.focus();
@@ -124,7 +122,7 @@ export class MessagesPage implements  OnInit, OnDestroy,AfterViewChecked{
 
   }
   ngAfterViewChecked() {
-    this.scrollToBottom();
+    //this.scrollToBottom();
   }
   onInputKeypress(keycode) {
     if (keycode === 13) {
@@ -150,6 +148,7 @@ export class MessagesPage implements  OnInit, OnDestroy,AfterViewChecked{
       this.messages.push(res.message);
       this.message = '';
     })
+   // this.scrollToBottom();
 
   }
 
@@ -160,9 +159,10 @@ export class MessagesPage implements  OnInit, OnDestroy,AfterViewChecked{
     });
   }
 
-  scrollToBottom (): void{
-  let scrollPane: any = this.el.nativeElement.querySelector('.messages');
-    scrollPane.scrollTop = scrollPane.scrollHeight;
+  scrollToBottom (): void {
+    setTimeout(function () {
+      let scrollPane = document.getElementById("messages");
+      scrollPane.scrollTop = scrollPane.scrollHeight;
+    }, 10);
   }
-
 }

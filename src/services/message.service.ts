@@ -3,7 +3,6 @@
  */
 
 import {Injectable} from '@angular/core'
-import {Http} from "@angular/http";
 import {GlobalsConstants} from "../constants/globals.constants";
 import {Observable} from "rxjs/Observable";
 import { ToastController, LoadingController,AlertController} from 'ionic-angular';
