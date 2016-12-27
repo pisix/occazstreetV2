@@ -28,7 +28,7 @@
         <ion-item>
           <ion-label>Cat&#233;gories</ion-label>
           <ion-select formControlName="categorie" required>
-            <ion-option *ngFor="let cat of categories" [value]="cat.idcategorie">{{cat.libelle}}</ion-option>
+            <ion-option *ngFor="let cat of categories" value="{{cat.idcategorie}}-{{cat.libelle}}">{{cat.libelle}}</ion-option>
           </ion-select>
         </ion-item>
       </ion-card-content>

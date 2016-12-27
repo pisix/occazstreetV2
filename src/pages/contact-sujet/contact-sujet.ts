@@ -46,6 +46,7 @@ export class ContactSujetPage {
 
 
     let contact={nom:this.name,email:this.email,message:this.contactForm.value.message,sujet:this.sujet};
+    console.log(contact);
     let loading = this.loadingCtrl.create({
     });
     loading.present();

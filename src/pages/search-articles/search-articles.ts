@@ -43,7 +43,6 @@ export class searchModalPage {
 
     this.categorieService.getAllCategories().subscribe(res => {
       this.categories = res;
-      console.log(this.categories)
     });
 
   }
@@ -70,6 +69,9 @@ export class searchModalPage {
       }
       this.searchForm.value.ville = typeof ville === 'string' ? ville : '';
       localStorage.removeItem('localisation');
+      let libelleCategorie=(this.searchForm.value.categorie).split('-')[1];
+      this.searchForm.value.categorie=(this.searchForm.value.categorie).split('-')[0];
+      localStorage.setItem('libelleCategorie',libelleCategorie);
       this.dismiss(this.searchForm.value);
     }
   }

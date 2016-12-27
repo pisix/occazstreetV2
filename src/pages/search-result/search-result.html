@@ -10,11 +10,11 @@
         <ion-icon name="search"></ion-icon>
       </button>
     </ion-buttons>
-    <ion-buttons end>
+    <!--<ion-buttons end>
       <button ion-button (click)="option($event)">
         <ion-icon name="more"></ion-icon>
       </button>
-    </ion-buttons>
+    </ion-buttons>-->
   </ion-navbar>
   <ion-toolbar >
     <ion-chip *ngFor="let p of searchChips">
@@ -27,16 +27,16 @@
 </ion-header>
 
 
-<ion-content>
+<ion-content padding style="background-color: #eff1f5">
   <div class="getting-started">
-    <ion-refresher (ionRefresh)="doRefresh($event)">
+    <!--<ion-refresher (ionRefresh)="doRefresh($event)">
       <ion-refresher-content
         pullingIcon="arrow-dropdown"
         pullingText="Lachez pour raffraichir"
         refreshingSpinner="circles"
         refreshingText="chargement...">
       </ion-refresher-content>
-    </ion-refresher>
+    </ion-refresher>-->
 
     <!--<ion-row *ngIf="offLine">-->
       <!--<ion-col text-center>-->
@@ -52,7 +52,7 @@
     <ion-row *ngIf="(this.articles1.length == 0 || this.articles2.length == 0)">
       <ion-col text-center>
         <div class="network-error">
-          <img margin-bottom src="../../assets/img/no-network.png" width="100" height="100"/>
+          <img margin-bottom src="assets/img/no-network.png" style="-webkit-filter:grayscale(100%)" width="100" height="100"/>
           <h4>Désolé</h4>
           <p>Aucun article ne correspond à votre recherche !</p>
           <button ion-button outline pixis (click)="searchArticle()">Nouvelle recherche</button>
@@ -71,7 +71,7 @@
             <ion-card-title  class="price" >
               {{art1.prix | currency:'XAF':true}}}}
             </ion-card-title>
-            <h6>{{art1.titre | titeCapitalize}}</h6>
+            <h6 class="title">{{art1.titre | titeCapitalize}}</h6>
           </ion-card-content>
           <section class="timer" text-right>
             <span *ngIf="art1.dateModification === null">Ajout&eacute; : {{art1.dateAjout | occasStreetTimer}}</span>

@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ArticleService} from "../../services/article.service";
 import {Article} from "../../components/article.component";
 import {GlobalsConstants} from "../../constants/globals.constants";
-import {NavController, NavParams, ModalController, ViewController, PopoverController} from "ionic-angular";
+import {NavController, NavParams, ModalController, ViewController, PopoverController,LoadingController} from "ionic-angular";
 import {ArticleDetailsPage} from "../article-details/article-details";
 import {searchModalPage} from "../search-articles/search-articles";
 import {HomePage, ArticlesPopOver} from "../home/home";
@@ -37,15 +37,16 @@ export class SearchResult implements OnInit{
               private navCtrl: NavController,
               private navParams: NavParams,
               private modalController : ModalController,
-              private popoverCtrl: PopoverController) {
+              private popoverCtrl: PopoverController,public loadingCtrl:LoadingController) {
     let param = navParams.get('searchParam');
     this.param = param;
   }
 
 
    ngOnInit(): void {
-    this.getChipsList(this.param);
-    this.getArticleByParam(this.param);
+     this.param.libellecategorie=localStorage.getItem('libelleCategorie');
+     this.getArticleByParam(this.param);
+     this.getChipsList(this.param);
   }
 
   getArticleByParam(param){
@@ -172,7 +173,10 @@ export class SearchResult implements OnInit{
 
     }else {
       // else we query a new search with the new params
+      let loading=this.loadingCtrl.create();
+      loading.present();
       this.getArticleByParam(this.param);
+      loading.dismiss();
     }
 
   }
@@ -197,8 +201,12 @@ export class SearchResult implements OnInit{
 
   getChipsList(param:Object){
     Object.keys(param).forEach(key => {
-      if(!(param[key] === '')){
-        this.searchChips.push(param[key]);
+      if(!(param[key] === '' )){
+        if(key!="categorie")
+        {
+          this.searchChips.push(param[key]);
+        }
+
       }
     });
 

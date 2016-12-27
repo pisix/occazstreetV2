@@ -128,10 +128,12 @@ export class HomePage {
 
     modal.onDidDismiss(data => {
       console.log('MODAL DATA', data);
-      this.navCtrl.push(SearchResult, {
-        searchParam: data
-      });
-
+      if(data)
+      {
+        this.navCtrl.push(SearchResult, {
+          searchParam: data
+        });
+      }
     });
   }
 
