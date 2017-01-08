@@ -3,6 +3,7 @@ form{
   ion-row{
     padding: 0.5em;
   }
+
   .img-select{
     height: 4em;
     display: flex;
@@ -17,6 +18,12 @@ form{
       margin: 0 auto;
       font-size: 2.9em;
       color: rgba(0, 0, 0, 0.44);
+    }
+
+    img{
+      height: 100%;
+      width: 100%;
+      border-radius: 15%;
     }
   }
 }

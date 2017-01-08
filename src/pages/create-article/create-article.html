@@ -12,20 +12,20 @@
 
     <ion-row>
       <ion-col class="img-select" width-20>
-        <ion-icon *ngIf="imageSrc[0] == ''"  (click)="loadImage(0)" name="ios-camera-outline"></ion-icon>
-        <img *ngIf="imageSrc[0] != ''" src="{{imageSrc}}">
+        <ion-icon *ngIf="imageSrc[0] == ''" (click)="openImagePickerDialog(0)" name="ios-camera-outline"></ion-icon>
+        <img *ngIf="imageSrc[0] != ''" [src]="imageSrc[0]">
       </ion-col>
       <ion-col class="img-select" width-20>
-        <ion-icon *ngIf="imageSrc[1] == ''" (click)="loadImage(1)" name="ios-camera-outline"></ion-icon>
-        <img *ngIf="imageSrc[1] != ''" src="{{imageSrc}}">
+        <ion-icon *ngIf="imageSrc[1] == ''" (click)="openImagePickerDialog(1)" name="ios-camera-outline"></ion-icon>
+        <img *ngIf="imageSrc[1] != ''" [src]="imageSrc[1]">
       </ion-col>
       <ion-col class="img-select" width-20>
-        <ion-icon *ngIf="imageSrc[2] == ''" (click)="loadImage(2)" name="ios-camera-outline"></ion-icon>
-        <img *ngIf="imageSrc[2] != ''" src="{{imageSrc}}">
+        <ion-icon *ngIf="imageSrc[2] == ''" (click)="openImagePickerDialog(2)" name="ios-camera-outline"></ion-icon>
+        <img *ngIf="imageSrc[2] != ''" [src]="imageSrc[2]">
       </ion-col>
       <ion-col class="img-select" width-20>
-        <ion-icon *ngIf="imageSrc[3] == ''" (click)="loadImage(3)" name="ios-camera-outline"></ion-icon>
-        <img *ngIf="imageSrc[3] != ''" src="{{imageSrc}}">
+        <ion-icon *ngIf="imageSrc[3] == ''" (click)="openImagePickerDialog(3)" name="ios-camera-outline"></ion-icon>
+        <img *ngIf="imageSrc[3] != ''" [src]="imageSrc[3]">
       </ion-col>
     </ion-row>
 
@@ -71,8 +71,8 @@
       <ion-checkbox checked="false" formControlName="negociable"></ion-checkbox>
     </ion-item>
 
-    <ion-fab bottom right>
-      <button ion-fab fab-fixed	type="submit" >
+    <ion-fab bottom center>
+      <button ion-fab fab-fixed	type="submit">
         <ion-icon name="checkmark" is-active="false"></ion-icon>
       </button>
     </ion-fab>

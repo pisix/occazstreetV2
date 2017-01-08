@@ -24,6 +24,17 @@ export class CreateArticle{
   private imgWidth = 400;
   private imgHeight = 400;
   public imageSrc:Array<string> = ["","","",""];
+  
+  private cameraOptions = {
+  sourceType: Camera.PictureSourceType.CAMERA,
+  destinationType: Camera.DestinationType.FILE_URI,
+  quality: 100,
+  targetWidth: this.imgWidth,
+  targetHeight: this.imgHeight,
+  encodingType: Camera.EncodingType.PNG,
+  correctOrientation: true
+  };
+  
 
   constructor(private viewCtrl: ViewController,
               private navCtrl:NavController,
@@ -58,36 +69,15 @@ export class CreateArticle{
     });
   }
 
-  loadImage(index:number){
+  openImagePickerDialog(index:number){
     this.showImageAlert(index);
     console.log("load Message");
   }
-
-  loadImageFromGallery(imgIndex:number):void{
-    let options = {
-      maximumImagesCount: 1,
-      width: this.imgWidth,
-      height: this.imgHeight,
-      quality: 100
-    };
-
-    ImagePicker.getPictures(options)
-      .then(file_uri => this.imageSrc[imgIndex] = file_uri,
-        err => console.log(err));
-  }
-
-  loadImageFromCamara(imgIndex:number):void{
-    let cameraOptions = {
-      sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
-      destinationType: Camera.DestinationType.FILE_URI,
-      quality: 100,
-      targetWidth: this.imgWidth,
-      targetHeight: this.imgHeight,
-      encodingType: Camera.EncodingType.PNG,
-      correctOrientation: true
-    };
-
-    Camera.getPicture(cameraOptions)
+  
+  
+  loadImageFromCamara(imgIndex:number,sourceType:any):void{
+    this.cameraOptions.sourceType = sourceType;
+    Camera.getPicture(this.cameraOptions)
       .then(file_uri => this.imageSrc[imgIndex] = file_uri,
         err => console.log(err));
   }
@@ -135,14 +125,14 @@ export class CreateArticle{
           text: 'Gallerie photo',
           cssClass:'image-alert-btn',
           handler: () => {
-            this.loadImageFromGallery(imgIndex);
+            this.loadImageFromCamara(imgIndex,Camera.PictureSourceType.PHOTOLIBRARY);
           }
         },
         {
           text: 'Appareil photo',
           cssClass:'image-alert-btn',
           handler: () => {
-            this.loadImageFromCamara(imgIndex);
+            this.loadImageFromCamara(imgIndex,Camera.PictureSourceType.CAMERA);
           }
         }
       ]
