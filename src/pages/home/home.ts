@@ -7,6 +7,7 @@ import {ArticleDetailsPage} from "../article-details/article-details";
 import {searchModalPage} from "../search-articles/search-articles";
 import {SearchResult} from "../search-result/search-result";
 import {CreateArticle} from "../create-article/create-article";
+import {RateService} from "../../services/rate-service";
 
 
 
@@ -35,6 +36,7 @@ export class HomePage {
 
 
   constructor(private articleService:ArticleService,
+              protected rateService:RateService,
               private navCtrl: NavController,
               private navParams: NavParams,
               private modalController : ModalController,
@@ -44,7 +46,9 @@ export class HomePage {
     this.loadAll();
     // this.loadImageArticle(this.skip,this.limitExplorer);
     this.homeTab="mur";
-
+  
+    this.rateService.appRate.promptForRating(true);
+  
   }
 
   loadAll(){

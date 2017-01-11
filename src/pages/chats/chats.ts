@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { NavController, AlertController} from 'ionic-angular';
-import moment from 'moment';
 import { Observable } from "rxjs";
 import {ChatService} from '../../services/chat.service';
 import {GlobalsConstants} from '../../constants/globals.constants';

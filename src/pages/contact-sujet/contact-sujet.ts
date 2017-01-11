@@ -1,17 +1,10 @@
 import { Component } from '@angular/core';
 import { NavController, LoadingController,NavParams } from 'ionic-angular';
-import { FormBuilder, Validators,NgForm,FormGroup } from '@angular/forms';
+import { FormBuilder, Validators} from '@angular/forms';
 import {UtilisateurService} from '../../services/utilisateur.service';
 import {MessageService} from '../../services/message.service';
 
 
-
-/*
-  Generated class for the ContactSujet page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Component({
   selector: 'page-contact-sujet',
   templateUrl: 'contact-sujet.html'
