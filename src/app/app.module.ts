@@ -33,12 +33,13 @@ import {ChatService} from '../services/chat.service'
 import {CreateArticle} from "../pages/create-article/create-article";
 import {ImageService} from "../services/image.service";
 import {HelpPage} from '../pages/help/help';
-import {ContactPage} from '../pages/contact/contact';
 import {SecuritePage} from '../pages/securite/securite';
 import {PolitiqueConfidentialitePage} from '../pages/politique-confidentialite/politique-confidentialite';
 import {CguPage} from '../pages/cgu/cgu';
 import {ContactSujetPage} from '../pages/contact-sujet/contact-sujet';
 import {FavorisPage} from '../pages/favoris/favoris';
+import {ContactPage} from "../pages/contact/contact";
+import {RateService} from "../services/rate-service";
 
 @NgModule({
   declarations: [
@@ -119,6 +120,6 @@ import {FavorisPage} from '../pages/favoris/favoris';
     ContactSujetPage,
     FavorisPage
   ],
-  providers: [ArticleService,ImageService,UtilisateurService,CategorieService,MediaSharing,MessageService,ChatService]
+  providers: [ArticleService,ImageService,UtilisateurService,CategorieService,MediaSharing,MessageService,ChatService,RateService]
 })
 export class AppModule {}

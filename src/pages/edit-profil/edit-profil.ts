@@ -2,20 +2,12 @@ import {Component, ViewChild, ElementRef} from '@angular/core';
 import { NavController, ViewController, Events, LoadingController} from 'ionic-angular';
 import {NgForm} from '@angular/forms';
 import {GlobalsConstants} from '../../constants/globals.constants';
-import { DatePicker } from 'ionic-native';
 import {UtilisateurService} from '../../services/utilisateur.service';
 import {MessageService} from '../../services/message.service';
 import {MessagesConstants} from '../../constants/messages.constants';
 declare var google: any;
 
 
-
-/*
- Generated class for the EditProfil page.
-
- See http://ionicframework.com/docs/v2/components/#navigation for more info on
- Ionic pages and navigation.
- */
 @Component({
   selector: 'page-edit-profil',
   templateUrl: 'edit-profil.html'

@@ -2,7 +2,7 @@ import {Component} from "@angular/core/src/metadata/directives";
 import {Categorie} from "../../components/categorie.component";
 import {ViewController, Events, AlertController, NavController} from "ionic-angular";
 import {CategorieService} from "../../services/categorie.service";
-import { ImagePicker,Camera,Dialogs } from 'ionic-native';
+import {Camera} from 'ionic-native';
 import {FormBuilder, Validators} from "@angular/forms";
 import {GlobalsConstants} from "../../constants/globals.constants";
 import {LoginPage} from "../login/login";

@@ -3,7 +3,6 @@ import {Injectable} from "@angular/core";
 import {Http} from "@angular/http";
 import {GlobalsConstants} from "../../src/constants/globals.constants";
 import {Transfer} from "ionic-native";
-import {FileUploadResult} from 'ionic-native';
 
 
 @Injectable()
