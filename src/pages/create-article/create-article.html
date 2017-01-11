@@ -48,17 +48,17 @@
 
     <ion-item>
       <ion-label floating>Prix</ion-label>
-      <ion-input type="number" formControlName="prix" min="0"></ion-input>
+      <ion-input type="number" required formControlName="prix" min="0"></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label floating>Quartier</ion-label>
-      <ion-input type="text" formControlName="complementadresse" ></ion-input>
+      <ion-input type="text" required formControlName="complementadresse" ></ion-input>
     </ion-item>
     <ion-item>
 
     <ion-label floating>Ville</ion-label>
-    <ion-input #villeElement type="text" (focus)="clearVille()" id="ville"  [(ngModel)]="ville" [ngModelOptions]="{standalone: true}" required></ion-input>
+    <ion-input #villeElement  type="text" (focus)="clearVille()" id="ville"  [(ngModel)]="ville" [ngModelOptions]="{standalone: true}" required></ion-input>
     </ion-item>
 
     <ion-item>
@@ -70,12 +70,12 @@
       <ion-label>Prix négociable</ion-label>
       <ion-checkbox checked="false" formControlName="negociable"></ion-checkbox>
     </ion-item>
-
     <ion-fab bottom center>
-      <button ion-fab fab-fixed	type="submit">
+      <button ion-fab fab-fixed	type="submit"  [disabled]="!newArticleForm.valid">
         <ion-icon name="checkmark" is-active="false"></ion-icon>
       </button>
     </ion-fab>
   </form>
 
 </ion-content>
+

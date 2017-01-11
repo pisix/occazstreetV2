@@ -24,7 +24,7 @@ export class CreateArticle{
   private imgWidth = 400;
   private imgHeight = 400;
   public imageSrc:Array<string> = ["","","",""];
-  
+
   private cameraOptions = {
   sourceType: Camera.PictureSourceType.CAMERA,
   destinationType: Camera.DestinationType.FILE_URI,
@@ -34,7 +34,7 @@ export class CreateArticle{
   encodingType: Camera.EncodingType.PNG,
   correctOrientation: true
   };
-  
+
 
   constructor(private viewCtrl: ViewController,
               private navCtrl:NavController,
@@ -51,11 +51,11 @@ export class CreateArticle{
 
     this.newArticleForm = this.formBuilder.group({
       'titre':['',Validators.required],
-      'details':[''],
+      'details':['',Validators.required],
       'categorie':['',Validators.required],
-      'ville':[''],
-      'complementadresse':[''],
-      'prix':[''],
+      'ville':['',Validators.required],
+      'complementadresse':['',Validators.required],
+      'prix':['',Validators.required],
       'echangeable':['false'],
       'negociable':['false'],
     });
@@ -73,8 +73,8 @@ export class CreateArticle{
     this.showImageAlert(index);
     console.log("load Message");
   }
-  
-  
+
+
   loadImageFromCamara(imgIndex:number,sourceType:any):void{
     this.cameraOptions.sourceType = sourceType;
     Camera.getPicture(this.cameraOptions)

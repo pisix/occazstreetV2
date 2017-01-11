@@ -7,7 +7,7 @@ import {ArticleDetailsPage} from "../article-details/article-details";
 import {searchModalPage} from "../search-articles/search-articles";
 import {SearchResult} from "../search-result/search-result";
 import {CreateArticle} from "../create-article/create-article";
-import {RateService} from "../../services/rate-service";
+import {LoginPage} from "../login/login";
 
 
 
@@ -46,9 +46,8 @@ export class HomePage {
     this.loadAll();
     // this.loadImageArticle(this.skip,this.limitExplorer);
     this.homeTab="mur";
-  
     this.rateService.appRate.promptForRating(true);
-  
+
   }
 
   loadAll(){
@@ -122,7 +121,13 @@ export class HomePage {
   }
 
   addNewArticle(){
-    this.navCtrl.push(CreateArticle);
+    if(localStorage.getItem("logged"))
+    {
+      this.navCtrl.push(CreateArticle);
+    }else
+    {
+      this.navCtrl.push(LoginPage,{message:'Pour ajouter un article veuillez vous connecter '})
+    }
   }
 
 
