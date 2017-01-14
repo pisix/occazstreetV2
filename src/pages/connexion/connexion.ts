@@ -7,6 +7,7 @@ import {HomePage} from "../home/home";
 import {Facebook, Device} from 'ionic-native';
 import {MessagesConstants} from '../../constants/messages.constants';
 import {MessageService} from '../../services/message.service';
+import {GlobalsConstants} from '../../constants/globals.constants';
 
 
 
@@ -47,12 +48,15 @@ export class ConnexionModalPage {
       if(!res.success)
       {
        // this.loading().dismiss();
-        this.messageService.showToast("Le login ou le mot de passe est incorrect");
+        this.messageService.showToast("Le login ou le mot de passe est incorrect",'top');
       }else if (res.success)
       {
+        console.log(res.data);
         this.connected=true;
         this.logged=true;
         this.infoLoggedUser=res.data;
+        localStorage.setItem(GlobalsConstants.USER_LOGGED, JSON.stringify(res.data));
+
         this.events.publish('user:logged-data',res.data);
         this.events.publish('user:logged',true);
         this.navCtrl.setRoot(HomePage);
