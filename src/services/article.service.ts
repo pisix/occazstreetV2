@@ -191,17 +191,19 @@ export class ArticleService{
     return this.http.post(GlobalsConstants.urlServer + GlobalsConstants.port + '/article/createArticleP',article)
       .map(res => {
         if(res.status === 200){
-          let article = (res.json()).article;
-          images.forEach(i =>{
-            this.ImageService.upload(i).then(res=>{
+          if((res.json()).success)
+          {
+            let result=res;
+            let article = (res.json()).article;
+            var itemsProcessed = 0;
+            return res.json();
+          }else
+          {
+            return res.json();
+          }
 
-            }).catch((error)=>{
-
-              });
-          });
-          return (res.json)
         }else {
-          throw new Error("Unable to create new article! please try again later");
+          return res.json();
         }
       })
   }

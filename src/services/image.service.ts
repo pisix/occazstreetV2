@@ -13,18 +13,20 @@ export class ImageService{
 
   }
 
-  upload(image:string){
+  upload(image:string,article :string){
     let ft = new Transfer();
     let options = {
       fileKey: 'file',
       fileName: image,
       mimeType: 'image/png',
       chunkedMode: false,
+      idArticle: article,
       headers: {
         'Content-Type' : undefined
       },
       params: {
-        fileName: image
+        fileName: image,
+        idArticle: article,
       }
     };
     return ft.upload(image, GlobalsConstants.urlServer + GlobalsConstants.port + '/article/uploadImage', options)

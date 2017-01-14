@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
 import {ArticleService} from "../../services/article.service";
+import {RateService} from '../../services/rate-service';
 import {Article} from "../../components/article.component";
 import {GlobalsConstants} from "../../constants/globals.constants";
 import {NavController, NavParams, ModalController, ViewController, PopoverController} from "ionic-angular";

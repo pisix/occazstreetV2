@@ -1,12 +1,15 @@
 import {Component} from "@angular/core/src/metadata/directives";
 import {Categorie} from "../../components/categorie.component";
-import {ViewController, Events, AlertController, NavController} from "ionic-angular";
+import {ViewController, Events, AlertController, NavController,LoadingController} from "ionic-angular";
 import {CategorieService} from "../../services/categorie.service";
 import {Camera} from 'ionic-native';
 import {FormBuilder, Validators} from "@angular/forms";
 import {GlobalsConstants} from "../../constants/globals.constants";
+import {MessagesConstants} from "../../constants/messages.constants";
 import {LoginPage} from "../login/login";
 import {ArticleService} from "../../services/article.service";
+import {MessageService} from "../../services/message.service";
+import {ImageService} from "../../services/image.service";
 import {Article} from "../../components/article.component";
 declare var  google;
 
@@ -42,7 +45,10 @@ export class CreateArticle{
               private formBuilder: FormBuilder,
               private alertCtrl: AlertController,
               private articleService:ArticleService,
-              public events:Events) {
+              public loadinCtrl:LoadingController,
+              public messageService:MessageService,
+              public events:Events,
+              private _imageService:ImageService) {
 
     this.categories = [];
     this.address="";
@@ -82,14 +88,26 @@ export class CreateArticle{
         err => console.log(err));
   }
 
-  addNewArticle(event){
-    if(localStorage.getItem("logged")){
+  addNewArticle(event)
+  {
+    let hasImage =false;
+    for(var i=0;i<this.imageSrc.length;i++)
+    {
+      if(this.imageSrc[i]!="")
+      {
+        hasImage=true;
+      }
+    }
+    if(hasImage)
+    {
+
+      let loading=this.loadinCtrl.create();
+      loading.present();
       let userId = JSON.parse(localStorage.getItem(GlobalsConstants.USER_LOGGED)).id;
       let ville:string = '';
       let latitude:number = 0;
       let longitude:number = 0;
       let localisation =JSON.parse(localStorage.getItem('localisation'));
-      console.log(localisation);
       for (let ac = 0; ac < localisation.address_components.length; ac++) {
         let component = localisation.address_components[ac];
         switch(component.types[0]) {
@@ -105,16 +123,61 @@ export class CreateArticle{
       this.newArticleForm.value.latitude = latitude;
       this.newArticleForm.value.longitude = longitude;
       this.newArticleForm.value.utilisateur = userId;
-      console.log(this.newArticleForm.value);
+      if(this.newArticleForm.value.categorie)
+      {
+        this.articleService.addNewArticle(<Article>this.newArticleForm.value,this.imageSrc).subscribe(res =>{
+          alert("article "+JSON.stringify(res));
+          if(res["success"]==true)
+          {
+            let itemsProcessed =0;
+            let error;
+            this.imageSrc.forEach(i =>{
+              itemsProcessed++;
+              this._imageService.upload(i,res.article.idArticle).then(res=>{
+                if(!(JSON.parse(res.response)).success)
+                {
+                  error=true;
 
-      this.articleService.addNewArticle(<Article>this.newArticleForm.value,this.imageSrc).subscribe(res =>{
-        //
-      });
-    }else {
-      this.navCtrl.push(LoginPage);
+                }
+                  if(itemsProcessed == this.imageSrc.length) {
+                    alert('finish');
+                    if(!error)
+                    {
+                      this.navCtrl.pop();
+                      this.messageService.showToast(MessagesConstants.articleAjouteSucces,"top");
+                      loading.dismiss();
+                    }
+                    else
+                    {
+                      loading.dismiss();
+                      this.messageService.showAlert(MessagesConstants.erreurAjoutArticle,"Création d'une annonce");
+
+                    }
+
+                  }
+
+              }).catch((error)=>{
+
+              });
+            });
+          }
+          else
+          {
+            this.messageService.showAlert(MessagesConstants.erreurAjoutArticle,"Création d'une annonce");
+          }
+        });
+      }
+      else
+      {
+        loading.dismiss();
+        this.messageService.showToast("Veuillez choisir une catégorie pour votre annonce","top");
+      }
+
     }
-
-
+    else
+    {
+      this.messageService.showToast('Veuillez ajouter au moins 1 photo pour votre annonce','top');
+    }
   }
 
   showImageAlert(imgIndex:number) {

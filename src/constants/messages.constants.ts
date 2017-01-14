@@ -21,10 +21,10 @@ export  class MessagesConstants{
     static inscriptionFailed:string = "Une erreur a &#233;t&#233; rencontr&#233;e lors de votre inscription.";
     static operationAnormalementLongue:string = "L'op&#233;ration en cours est anormalement longue. Veuillez recommencer";
     static welcome:string = "Bienvenue sur Occazstreet ! Faites vous plaisir.";
-    static articleAjouteSucces:string = "Votre annonce a &#233;t&#233; ajout&#233; avec succ&#232;s";
+    static articleAjouteSucces:string = "Votre annonce a été ajouté avec succès";
     static deconnexion:string = "Vous n'&#234;tes plus connect&#233;";
-    static erreurAjoutArticlestatic :string ="Une erreur a &#233;t&#233; rencontr&#233;e lors de la cr&#233;ation de votre annonce. Veuillez reessayer ulterieurement";
-    static erreurUpdateArticlestatic :string ="Une erreur a &#233;t&#233; rencontr&#233;e lors de la mise &#224; jour de votre annonce. Veuillez reessayer ulterieurement";
+    static erreurAjoutArticle :string ="Une erreur a été rencontré lors de la création de votre annonce. Veuillez reessayer ulterieurement";
+    static erreurUpdateArticle :string ="Une erreur a &#233;t&#233; rencontr&#233;e lors de la mise &#224; jour de votre annonce. Veuillez reessayer ulterieurement";
     static erreurUpdatePhoto:string = "Une erreur  a &#233;t&#233; rencontr&#233;e lors de la mise &#224; jour de votre photo";
     static erreurAjoutArticleTitre:string = "Ajout d\"un produit";
     static ajoutDuProduitEnCours:string = "Ajout de votre annonce";

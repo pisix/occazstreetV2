@@ -14,7 +14,7 @@ export class MessageService{
   constructor(public alertCtrl:AlertController,public loadingCtrl:LoadingController,private toastCtrl: ToastController) {
   }
 
-  showToast(message,title?)
+  showToast(message,position?)
   {
     /*Toast.show(message, '5000', 'bottom').subscribe(
      toast => {
@@ -25,7 +25,7 @@ export class MessageService{
     let toast = this.toastCtrl.create({
       message: message,
       duration: 3000,
-      position: 'bottom'
+      position: position
     });
 
     toast.onDidDismiss(() => {
