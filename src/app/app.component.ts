@@ -1,6 +1,6 @@
 import {Component, ViewChild} from '@angular/core';
-import {Platform, MenuController, Nav,Events, AlertController } from 'ionic-angular';
-import {StatusBar,Splashscreen} from 'ionic-native';
+import {Platform, MenuController, Nav,Events, AlertController,LoadingController } from 'ionic-angular';
+import {StatusBar,Push,Splashscreen} from 'ionic-native';
 import {HomePage} from '../pages/home/home';
 import {HelpPage} from '../pages/help/help';
 import {CategoriePage} from '../pages/categorie/categorie';
@@ -12,6 +12,8 @@ import {InvitezVosAmisPage} from '../pages/invitez-vos-amis/invitez-vos-amis';
 import {ChatsPage} from '../pages/chats/chats';
 import {FavorisPage} from '../pages/favoris/favoris';
 import {UtilisateurService} from '../services/utilisateur.service';
+import {ArticleDetailsPage} from '../pages/article-details/article-details';
+import {MessagesPage} from '../pages/messages/messages'
 declare var NotificationEventAdditionalData;
 declare var pushInfo;
 
@@ -25,10 +27,10 @@ export class App {
   // make HelloIonicPage the root (or first) page
   rootPage: any = HomePage;
   pages: Array<{title: string, component: any,icon:any}>;
-  public logged:boolean =false;
+  public logged:boolean ;
   public  connected=false;
   public infoLoggedUser;
-  public loginPage={component: LoginPage}
+  public loginPage={component: LoginPage};
 
   public url=GlobalsConstants.urlServer+GlobalsConstants.port+'/';
   public cheminPhoto=GlobalsConstants.cheminPhoto;
@@ -39,13 +41,17 @@ export class App {
     public menu: MenuController,
     public events:Events,
     public alertCtrl:AlertController,
-    public utilisateurService:UtilisateurService
+    public utilisateurService:UtilisateurService,
+    public loadingCtrl:LoadingController
   ) {
+
+    let loading = this.loadingCtrl.create()
+    loading.present();
     this.initializeApp();
 
-    this.infoLoggedUser=JSON.parse(localStorage.getItem(GlobalsConstants.USER_LOGGED));
     if(localStorage.getItem("logged"))
     {
+      this.infoLoggedUser=JSON.parse(localStorage.getItem(GlobalsConstants.USER_LOGGED));
       this.logged=true;
     }else
     {
@@ -53,13 +59,14 @@ export class App {
     }
 
     events.subscribe('user:logged-data',(userEventData)=> {
-      localStorage.setItem(GlobalsConstants.USER_LOGGED, JSON.stringify(userEventData[0]));
-      console.log(userEventData[0]);
-      this.infoLoggedUser = userEventData[0];
+      localStorage.setItem(GlobalsConstants.USER_LOGGED, JSON.stringify(userEventData));
+      console.log(userEventData);
+      this.infoLoggedUser = userEventData;
+      this.logged=true;
     });
     events.subscribe('user:logged',(eventData)=>{
-      localStorage.setItem("logged", eventData[0]);
-      this.logged=eventData[0];
+      localStorage.setItem("logged", 'true');
+      this.logged=true;
     });
 
 
@@ -74,6 +81,8 @@ export class App {
       { title: 'Aide', component: HelpPage, icon:'help-circle' }
     ];
 
+    loading.dismiss();
+
   }
 
   initializeApp() {
@@ -82,10 +91,11 @@ export class App {
       // Here you can do any higher level native things you might need.
       StatusBar.styleDefault();
       Splashscreen.hide();
-      /*let push = Push.init({
+      let push = Push.init({
         android: {
           senderID: "860269311689"
         },
+
         ios: {
           senderID: "860269311689",
           alert: "true",
@@ -96,13 +106,9 @@ export class App {
       });
 
       push.on('registration', (data) => {
-        let tokenData={deviceToken:data.registrationId,idUtilisateur:''};
-        alert("device token ->"+data.registrationId);
         //TODO - send device token to server
-        if(this.logged)
-        {
-          tokenData.idUtilisateur=JSON.parse(localStorage.getItem(GlobalsConstants.USER_LOGGED)).id;
-        }
+        let tokenData={deviceToken:data.registrationId,idUtilisateur:JSON.parse(localStorage.getItem(GlobalsConstants.USER_LOGGED)).id?JSON.parse(localStorage.getItem(GlobalsConstants.USER_LOGGED)).id:''};
+        alert(JSON.stringify(tokenData));
         this.utilisateurService.registerToken(tokenData).subscribe(res=>{
 
         })
@@ -161,8 +167,7 @@ export class App {
       });
       push.on('error', (e) => {
         console.log(e.message);
-      });*/
-
+      });
     });
   }
 
