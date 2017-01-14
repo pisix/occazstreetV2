@@ -10,7 +10,7 @@
       <!--</button>-->
     <!--</ion-buttons>-->
     <ion-buttons end>
-      <button ion-button (click)="addToFavoriteList(article.idArticle)">
+      <button ion-button (click)="addToFavoriteList(article.idArticle)" *ngIf="showFavorisButton">
         <ion-icon *ngIf="favoris" isActive="true" name="heart"></ion-icon>
         <ion-icon *ngIf="!favoris" isActive="true" name="heart-outline"></ion-icon>
       </button>

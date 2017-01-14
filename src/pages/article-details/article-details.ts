@@ -26,6 +26,7 @@ export class ArticleDetailsPage implements OnInit{
   public cheminImage = GlobalsConstants.cheminImage;
   public cheminPhoto = GlobalsConstants.cheminPhoto;
   public favoris:boolean;
+  public showFavorisButton:boolean;
 
   @ViewChild('map') mapElement: ElementRef;
 
@@ -60,7 +61,12 @@ export class ArticleDetailsPage implements OnInit{
      if(localStorage.getItem(GlobalsConstants.USER_LOGGED))
      {
        this.favoris = this.isFavoris(this.article.idArticle);
+       if(this.article.utilisateur.id!=(JSON.parse(localStorage.getItem(GlobalsConstants.USER_LOGGED))).id)
+       {
+         this.showFavorisButton=true;
+       }
      }
+
 
      let latLng = new google.maps.LatLng(this.article.latitude, this.article.longitude);
      let mapOptions = {
