@@ -75,7 +75,7 @@ page-profil {
   }
   .profil-bot {
     position: relative;
-    height: 31rem;
+    min-height: 31rem;
     background: #fff;
   }
 
@@ -108,5 +108,12 @@ page-profil {
     margin-top: -12%;
     MARGIN-LEFT: 2%;
 
+  }
+  .list-article
+  {
+    min-width: 80%;
+    margin-left: 10%;
+    height:auto;
+    width: 80%;
   }
 }

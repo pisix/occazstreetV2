@@ -3,13 +3,13 @@ import { NavController,NavParams,ToastController, LoadingController,ModalControl
 import {Utilisateur} from '../../components/utilisateur.component';
 import {GlobalsConstants} from '../../constants/globals.constants';
 import {MessagesConstants} from '../../constants/messages.constants';
-import {ArticleService} from '../../services/article.service';
 import {Article} from '../../components/article.component';
 import {ArticleDetailsPage} from '../article-details/article-details';
 import {HomePage} from '../home/home';
 import {ActiviteModalPage} from '../activite/activite';
 import {EditProfilModalPage} from '../edit-profil/edit-profil';
 import {MessageService} from '../../services/message.service';
+import {ArticleService} from '../../services/article.service';
 import {MediaSharing} from '../../services/mediaSharing.service';
 
 /*
@@ -51,38 +51,49 @@ export class ProfilPage {
       this.utilisateur=userEventData[0];
     });
 
-    articleService.getArticleByUser(this.utilisateur.id).subscribe(res=>{
+
+  }
+
+  ionViewDidLoad() {
+    let loading = this.loadingCtrl.create();
+    loading.present();
+    this.articleService.getArticleByUser(this.utilisateur.id).subscribe(res=>{
       if(res.success)
       {
         this.articleUser=res.articles;
-        articleService.getSoldArticleByUser(this.utilisateur.id).subscribe(res2=>{
+        console.log("Article user"+this.articleUser);
+        this.articleService.getSoldArticleByUser(this.utilisateur.id).subscribe(res2=>{
           if(res2.success)
           {
             this.articleSoldUser=res2.articles;
-            articleService.getFavoriteArticleByUser(this.utilisateur.id).subscribe(res3=>{
+            console.log("En vente "+this.articleSoldUser);
+            this.articleService.getFavoriteArticleByUser(this.utilisateur.id).subscribe(res3=>{
               if(res3.success)
               {
                 this.articleFavoriteUser=res3.articles;
+                console.log("Favoris "+this.articleFavoriteUser);
+
+                loading.dismiss();
               }else{
+                loading.dismiss();
                 this.messageService.showToast(MessagesConstants.erreurRecuperationArticleUtilisateur);
               }
             })
           }else
           {
+            loading.dismiss();
             this.messageService.showToast(MessagesConstants.erreurRecuperationArticleUtilisateur);
           }
         })
       }
-      else{
+      else
+      {
+        loading.dismiss();
         this.messageService.showToast(MessagesConstants.erreurRecuperationArticleUtilisateur);
       }
+
     })
 
-
-  }
-
-  ionViewDidLoad() {
-    console.log('Hello Profil Page');
   }
 
   selectedEnVente(){
@@ -195,7 +206,7 @@ export class ProfilPage {
 
       case 'instagram':
 
-        this.mediaSharing.shareViaWhatsApp(message,imageLink).then(()=>{
+        this.mediaSharing.shareViaInstagram(message,imageLink).then(()=>{
           // share succesfull
         }).catch((err)=>{
           console.log(err);
