@@ -50,8 +50,8 @@ export class SignupPage {
             prenom: f.value.prenom,
             sexe: f.value.sexe,
             dateDeNaissance: null,
-            device: Device.device.manufacturer + " " + Device.device.model,
-            os: Device.device.platform + " " + Device.device.version
+            device: Device.manufacturer + " " + Device.model,
+            os: Device.platform + " " + Device.version
         };
 
         this.utilisateurService.signup(user).subscribe(res =>{

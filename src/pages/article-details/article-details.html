@@ -3,12 +3,8 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Details</ion-title>
-    <!--<ion-buttons end>-->
-      <!--<button ion-button (click)="searchArticle()">-->
-        <!--<ion-icon name="search"></ion-icon>-->
-      <!--</button>-->
-    <!--</ion-buttons>-->
+    <ion-title>{{'pageTile.details' | translate}}</ion-title>
+
     <ion-buttons end>
       <button ion-button (click)="addToFavoriteList(article.idArticle)" *ngIf="showFavorisButton">
         <ion-icon *ngIf="favoris" isActive="true" name="heart"></ion-icon>
@@ -56,7 +52,7 @@
   <ion-card>
     <ion-card-header class="header-padding">
       <ion-item>
-        Prix : {{article.prix | currency:'XAF':true}}
+        {{'articlePrice' | translate}} : {{article.prix | currency:'XAF':true}}
         <ion-badge item-right>{{article.nombreDeVue}}</ion-badge>
       </ion-item>
     </ion-card-header>
@@ -64,14 +60,14 @@
     <ion-card-content>
       <h2 margin-bottom text-capitalize style="margin-bottom: 5px;">{{article.titre | titeCapitalize}}</h2>
       <p margin-bottom text-justify>{{article.details}}</p>
-      <p *ngIf="article.dateModification === null">Ajouté : {{article.dateAjout | occasStreetTimer}}</p>
-      <p *ngIf="article.dateModification">Modifié : {{article.dateModification | occasStreetTimer}}</p>
+      <p *ngIf="article.dateModification === null">{{'addedOn' | translate}} : {{article.dateAjout | occasStreetTimer}}</p>
+      <p *ngIf="article.dateModification">{{'editedOn' | translate}} : {{article.dateModification | occasStreetTimer}}</p>
     </ion-card-content>
   </ion-card>
 
   <ion-card>
     <ion-card-header text-center>
-      Vendeur
+      {{'articleDetaile.owner' | translate}}
     </ion-card-header>
     <hr class="card-devider" />
     <ion-card-content>
@@ -93,7 +89,7 @@
 
   <ion-card text-center>
     <ion-card-header class="header-padding">
-      Infos supplémentaires
+      {{'articleDetaile.more' | translate}}
     </ion-card-header>
     <hr class="card-devider" />
     <ion-card-content no-margin>
@@ -104,7 +100,7 @@
 
   <ion-card text-center>
     <ion-card-header class="header-padding">
-      Partager l'annonce
+      {{'articleDetaile.shareThis' | translate}}
     </ion-card-header>
     <hr class="card-devider" />
     <ion-card-content>

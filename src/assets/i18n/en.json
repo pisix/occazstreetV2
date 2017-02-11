@@ -1,0 +1,27 @@
+{
+  "pageTile":{
+    "details":"Details",
+    "category":"Categories"
+  },
+  "loginLabel":"Sign in to ",
+  "home":"Home",
+  "message":"Messages",
+  "homeWall":"Home",
+  "homeExplore":"Explore",
+  "noNetworkTitle":"Unable to load articles",
+  "noNetworkBody":"No network. Please check your connection and try again later",
+  "noNetworkBtnText":"Try again !",
+  "addedOn":"Added",
+  "editedOn":"Edited",
+  "sold":"Sold",
+  "loadingText":"Loading ...",
+  "pullingText":"Pull to refresh",
+  "articleDetaile.owner":"Owner",
+  "articlePrice":"Price",
+  "articleDetaile.more":"More",
+  "articleDetaile.shareThis":"Share",
+  "noArticleFound":"No article found"
+
+
+
+}

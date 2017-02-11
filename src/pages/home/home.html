@@ -22,10 +22,10 @@
   <ion-toolbar no-border color="white" ligth style="background-color: white;">
     <ion-segment [(ngModel)]="homeTab" primary>
       <ion-segment-button value="mur"  (ionSelect)="selectedMur()">
-        Mur
+        {{'homeWall' | translate}}
       </ion-segment-button>
       <ion-segment-button value="explorer" (ionSelect)="selectedExplorer()">
-        Explorer
+        {{'homeExplore' | translate}}
       </ion-segment-button>
       <!--<ion-segment-button value="collections" (ionSelect)="selectedCollections()">
         Collections
@@ -40,9 +40,9 @@
     <ion-refresher (ionRefresh)="doRefresh($event)">
       <ion-refresher-content
         pullingIcon="arrow-dropdown"
-        pullingText="Lachez pour raffraichir"
+        pullingText="{{'pullingText' | translate}}"
         refreshingSpinner="circles"
-        refreshingText="chargement...">
+        refreshingText="{{'loadingText' | translate}}">
       </ion-refresher-content>
     </ion-refresher>
 
@@ -50,9 +50,9 @@
       <ion-col text-center>
         <div class="network-error">
           <img margin-bottom src="assets/img/no-network.png" style="-webkit-filter:grayscale(100%)" width="100" height="100"/>
-          <h4>Impossible de charger les articles</h4>
-          <p>Abscence de connexion internet. Veuillez v&eacute;rifier votre connexion et r&eacute;essayer</p>
-          <button ion-button outline pixis (click)="getArticlesByLimit(0,6)">REESSAYER</button>
+          <h4>{{'noNetworkTitle' | translate}}</h4>
+          <p>{{'noNetworkBody' | translate}}</p>
+          <button ion-button outline pixis (click)="getArticlesByLimit(0,6)">{{'noNetworkBtnText' | translate}}</button>
         </div>
       </ion-col>
     </ion-row>
@@ -71,11 +71,11 @@
             <h6>{{art1.titre | titeCapitalize}}</h6>
           </ion-card-content>
           <section class="timer" text-right>
-            <span *ngIf="art1.dateModification === null">Ajout&eacute; : {{art1.dateAjout | occasStreetTimer}}</span>
-            <span *ngIf="art1.dateModification">Modifi&eacute; : {{art1.dateModification | occasStreetTimer}}</span>
+            <span *ngIf="art1.dateModification === null">{{'addedOn' | translate}} : {{art1.dateAjout | occasStreetTimer}}</span>
+            <span *ngIf="art1.dateModification">{{'editedOn' | translate}} : {{art1.dateModification | occasStreetTimer}}</span>
           </section>
           <div class="sold" *ngIf="art1.etat=='Vendu'">
-            Vendu
+            {{'sold' | translate}}
           </div>
         </ion-card>
 
@@ -94,11 +94,11 @@
             <h6 class="title">{{art2.titre | titeCapitalize}}</h6>
           </ion-card-content>
           <section class="timer" text-right>
-            <span *ngIf="art2.dateModification === null" >Ajout&eacute; : {{art2.dateAjout | occasStreetTimer}}</span>
-            <span *ngIf="art2.dateModification">Modifi&eacute; : {{art2.dateModification | occasStreetTimer}}</span>
+            <span *ngIf="art2.dateModification === null" >{{'addedOn' | translate}} : {{art2.dateAjout | occasStreetTimer}}</span>
+            <span *ngIf="art2.dateModification">{{'editedOn' | translate}} : {{art2.dateModification | occasStreetTimer}}</span>
           </section>
           <div class="sold" *ngIf="art2.etat=='Vendu'">
-            <span style="margin-top: 1%">Vendu</span>
+            <span style="margin-top: 1%">{{'sold' | translate}}</span>
           </div>
         </ion-card>
 
@@ -107,7 +107,7 @@
     <ion-infinite-scroll *ngIf="!offLine" (ionInfinite)="doInfinite($event)">
       <ion-infinite-scroll-content
         loadingSpinner="bubbles"
-        loadingText="chargement...">
+        loadingText="{{'loadingText' | translate}}">
       </ion-infinite-scroll-content>
     </ion-infinite-scroll>
   </div>
@@ -115,9 +115,9 @@
     <ion-refresher (ionRefresh)="doRefreshImages($event)">
       <ion-refresher-content
         pullingIcon="arrow-dropdown"
-        pullingText="Lachez pour raffraichir"
+        pullingText="{{'pullingText' | translate}}"
         refreshingSpinner="circles"
-        refreshingText="chargement...">
+        refreshingText="{{'loadingText' | translate}}">
       </ion-refresher-content>
     </ion-refresher>
     <ion-col width-33 class="left" *ngFor="let image of images">
@@ -126,7 +126,7 @@
           <div (click)="articleDetails($event,image.article)" class="image-explorer" [ngStyle]="{'background-image':'url('+ (image.srcImage !=null && image.srcImage || 'assets/img/defaultImage.png') + ')'}" >
           </div>
           <div class="sold-explorer" *ngIf="image.article.etat=='Vendu'">
-            <span >Vendu</span>
+            <span >{{'sold' | translate}}</span>
           </div>
         </ion-card-content>
       </ion-card>
@@ -134,7 +134,7 @@
     <ion-infinite-scroll *ngIf="!offLine" (ionInfinite)="doInfiniteImages($event)">
       <ion-infinite-scroll-content
         loadingSpinner="bubbles"
-        loadingText="chargement...">
+        loadingText="{{'loadingText' | translate}}">
       </ion-infinite-scroll-content>
     </ion-infinite-scroll>
 

@@ -3,8 +3,8 @@
  */
 
 export  class GlobalsConstants{
-  static urlServer:string = "http://192.168.1.44:";
- // static urlServer:string = "http://37.59.101.217:";
+  // static urlServer:string = "http://192.168.1.44:";
+  static urlServer:string = "http://37.59.101.217:";
   static port:string = "1337";
   static cheminImage:string = "imagesArticle/";
   static cheminPhoto:string = "photoUtilisateur/";
@@ -23,6 +23,11 @@ export  class GlobalsConstants{
   static TWITTERPAGE:string = "https://twitter.com/occazstreet";
   static WEBSITE:string = "http://www.occazstreet.com";
   static RESTRICTIONCOUNTRYGOOGLEMAP:string="cmr";
+  static SUPPORTEDLANGUAGES:Object = {
+    en:"en",
+    fr:"fr",
+    default:"en"
+  };
 
 
   constructor(){
