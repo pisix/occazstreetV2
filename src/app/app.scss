@@ -85,3 +85,43 @@ body{
   font-size: 12px;
 }
 
+page-cgu,page-politique-confidentialite,page-securite,page-contact {
+
+  p{
+    box-sizing: inherit;
+    margin: 2rem 0px;
+    padding: 0px;
+    border: 0px;
+    font-stretch: inherit;
+    font-size: 1.3rem;
+    line-height: 1.6em;
+    font-family: 'Avenir Next Cyr W00 Regular';
+    vertical-align: baseline;
+    text-align: justify;
+    color: rgb(119, 119, 119);
+  }
+
+  a{
+    color: #6c6c6c;
+  }
+
+  span{
+    box-sizing: inherit;
+    margin: 0 3px 0 0;
+    padding: 0;
+    border: 0;
+    font-style: inherit;
+    font-variant: inherit;
+    font-weight: 700;
+    font-stretch: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    font-family: inherit;
+    vertical-align: baseline;
+  }
+
+  br{
+    box-sizing: inherit;
+  }
+}
+

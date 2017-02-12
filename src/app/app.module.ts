@@ -40,6 +40,8 @@ import {ContactSujetPage} from '../pages/contact-sujet/contact-sujet';
 import {FavorisPage} from '../pages/favoris/favoris';
 import {ContactPage} from "../pages/contact/contact";
 import {RateService} from "../services/rate-service";
+import {TranslateModule, TranslateStaticLoader, TranslateLoader} from "ng2-translate";
+import {Http} from "@angular/http";
 
 @NgModule({
   declarations: [
@@ -84,6 +86,11 @@ import {RateService} from "../services/rate-service";
       dayNames: ['Lundi', 'Mardi','Mercredi','Jeudi','Vendredi','Samedi','Dimanche'],
       dayShortNames: ['Lun.', 'Mar.', 'Mer.', 'Jeu.','Ven.','Sam.','Dim.' ],
     }),
+    TranslateModule.forRoot({
+      provide: TranslateLoader,
+      useFactory: (http: Http) =>new TranslateStaticLoader(http, 'assets/i18n', '.json'),
+      deps: [Http]
+    }),
     MomentModule
   ],
   bootstrap: [IonicApp],
@@ -122,4 +129,5 @@ import {RateService} from "../services/rate-service";
   ],
   providers: [ArticleService,ImageService,UtilisateurService,CategorieService,MediaSharing,MessageService,ChatService,RateService]
 })
+
 export class AppModule {}

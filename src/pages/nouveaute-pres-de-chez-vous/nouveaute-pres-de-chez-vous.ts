@@ -84,10 +84,10 @@ export class NouveautePresDeChezVousPage {
       map: this.map,
       animation: google.maps.Animation.DROP,
       icon:'assets/img/marker.png',
-      title: article.titre
+      title: article.title
     });
 
-    marker.content = '<div >' + article.titre + '</div>';
+    marker.content = '<div >' + article.title + '</div>';
     let infoWindow = new google.maps.InfoWindow({
       content: marker.content
     });

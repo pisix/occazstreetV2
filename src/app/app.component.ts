@@ -12,8 +12,8 @@ import {InvitezVosAmisPage} from '../pages/invitez-vos-amis/invitez-vos-amis';
 import {ChatsPage} from '../pages/chats/chats';
 import {FavorisPage} from '../pages/favoris/favoris';
 import {UtilisateurService} from '../services/utilisateur.service';
-import {ArticleDetailsPage} from '../pages/article-details/article-details';
-import {MessagesPage} from '../pages/messages/messages'
+import {TranslateService} from "ng2-translate";
+import {Page} from "../components/page.component";
 declare var NotificationEventAdditionalData;
 declare var pushInfo;
 
@@ -26,7 +26,7 @@ export class App {
   @ViewChild(Nav) nav: Nav;
   // make HelloIonicPage the root (or first) page
   rootPage: any = HomePage;
-  pages: Array<{title: string, component: any,icon:any}>;
+  pages: Array<Page>;
   public logged:boolean ;
   public  connected=false;
   public infoLoggedUser;
@@ -40,14 +40,18 @@ export class App {
     public platform: Platform,
     public menu: MenuController,
     public events:Events,
+    public translate:TranslateService,
     public alertCtrl:AlertController,
     public utilisateurService:UtilisateurService,
     public loadingCtrl:LoadingController
   ) {
 
-    let loading = this.loadingCtrl.create()
+    let loading = this.loadingCtrl.create();
     loading.present();
     this.initializeApp();
+
+    this.translate.setDefaultLang('en');
+    this.translate.use(this.getUserLanguage());
 
     if(localStorage.getItem("logged"))
     {
@@ -72,17 +76,22 @@ export class App {
 
     // set our app's pages
     this.pages = [
-      { title: 'Acceuil', component: HomePage, icon:'home'},
-      { title: 'Messages', component: ChatsPage, icon:'chatbubbles'},
-      { title: 'Cat&#233;gories', component: CategoriePage , icon:'list-box'},
-      { title: 'Mes Favoris', component: FavorisPage , icon:'heart'},
-      { title: 'Invitez vos amis', component: InvitezVosAmisPage, icon:'people' },
-      { title: 'Nouveau pr&egrave;s de chez vous', component: NouveautePresDeChezVousPage, icon:'locate' },
-      { title: 'Aide', component: HelpPage, icon:'help-circle' }
+      new Page('menu.home',HomePage,'home'),
+      new Page('menu.messages',ChatsPage,'chatbubbles'),
+      new Page('menu.categories',CategoriePage,'list-box'),
+      new Page('menu.favorite',FavorisPage,'heart'),
+      new Page('menu.inviteFriends',InvitezVosAmisPage,'people'),
+      new Page('menu.aroundYou',NouveautePresDeChezVousPage,'locate'),
+      new Page('menu.help',HelpPage,'help-circle'),
     ];
 
     loading.dismiss();
 
+  }
+
+  getUserLanguage():string{
+    let  userLang:string = GlobalsConstants.SUPPORTEDLANGUAGES[navigator.language];
+    return  typeof userLang === "string"?userLang:GlobalsConstants.SUPPORTEDLANGUAGES["default"];
   }
 
   initializeApp() {
@@ -91,83 +100,83 @@ export class App {
       // Here you can do any higher level native things you might need.
       StatusBar.styleDefault();
       Splashscreen.hide();
-      let push = Push.init({
-        android: {
-          senderID: "860269311689"
-        },
-
-        ios: {
-          senderID: "860269311689",
-          alert: "true",
-          badge: false,
-          sound: "true"
-        },
-        windows: {}
-      });
-
-      push.on('registration', (data) => {
-        //TODO - send device token to server
-        let tokenData={deviceToken:data.registrationId,idUtilisateur:JSON.parse(localStorage.getItem(GlobalsConstants.USER_LOGGED)).id?JSON.parse(localStorage.getItem(GlobalsConstants.USER_LOGGED)).id:''};
-        alert(JSON.stringify(tokenData));
-        this.utilisateurService.registerToken(tokenData).subscribe(res=>{
-
-        })
-      });
-      push.on('notification', (push) => {
-        let self = this;
-        //if user using app and push notification comes
-        if (push.additionalData.foreground) {
-          // if application open, show popup
-          let confirmAlert = this.alertCtrl.create({
-            title: push.additionalData['pushInfo'].title,
-            message: push.additionalData['pushInfo'].body,
-            buttons: [{
-              text: 'Ignorer',
-              role: 'cancel'
-            }, {
-              text: 'Voir',
-              handler: () => {
-                //TODO: Your logic here
-                if(push.additionalData['pushInfo'].type=='newMessage')
-                {
-                  self.nav.push(ChatsPage);
-                }
-                if(push.additionalData['pushInfo'].type=='newArticle')
-                {
-                  self.nav.push(ArticleDetailsPage, {
-                    article: push.additionalData['data']
-                  });
-                }
-                if(push.additionalData['pushInfo'].type=='newPrice')
-                {
-
-                }
-              }
-            }]
-          });
-          confirmAlert.present();
-        } else {
-          //if user NOT using app and push notification comes
-          //TODO: Your logic on click of push notification directly
-          if(push.additionalData['pushInfo'].type=='newMessage')
-          {
-            self.nav.push(MessagesPage, push.additionalData['data']);
-          }
-          if(push.additionalData['pushInfo'].type=='newArticle')
-          {
-            self.nav.push(ArticleDetailsPage, {
-              article: push.additionalData['data']
-            });
-          }
-          if(push.additionalData['pushInfo'].type=='newPrice')
-          {
-
-          }
-        }
-      });
-      push.on('error', (e) => {
-        console.log(e.message);
-      });
+      // let push = Push.init({
+      //   android: {
+      //     senderID: "860269311689"
+      //   },
+      //
+      //   ios: {
+      //     senderID: "860269311689",
+      //     alert: "true",
+      //     badge: false,
+      //     sound: "true"
+      //   },
+      //   windows: {}
+      // });
+      //
+      // push.on('registration', (data) => {
+      //   //TODO - send device token to server
+      //   let tokenData={deviceToken:data.registrationId,idUtilisateur:JSON.parse(localStorage.getItem(GlobalsConstants.USER_LOGGED)).id?JSON.parse(localStorage.getItem(GlobalsConstants.USER_LOGGED)).id:''};
+      //   alert(JSON.stringify(tokenData));
+      //   this.utilisateurService.registerToken(tokenData).subscribe(res=>{
+      //
+      //   })
+      // });
+      // push.on('notification', (push) => {
+      //   let self = this;
+      //   //if user using app and push notification comes
+      //   if (push.additionalData.foreground) {
+      //     // if application open, show popup
+      //     let confirmAlert = this.alertCtrl.create({
+      //       title: push.additionalData['pushInfo'].title,
+      //       message: push.additionalData['pushInfo'].body,
+      //       buttons: [{
+      //         text: 'Ignorer',
+      //         role: 'cancel'
+      //       }, {
+      //         text: 'Voir',
+      //         handler: () => {
+      //           //TODO: Your logic here
+      //           if(push.additionalData['pushInfo'].type=='newMessage')
+      //           {
+      //             self.nav.push(ChatsPage);
+      //           }
+      //           if(push.additionalData['pushInfo'].type=='newArticle')
+      //           {
+      //             self.nav.push(ArticleDetailsPage, {
+      //               article: push.additionalData['data']
+      //             });
+      //           }
+      //           if(push.additionalData['pushInfo'].type=='newPrice')
+      //           {
+      //
+      //           }
+      //         }
+      //       }]
+      //     });
+      //     confirmAlert.present();
+      //   } else {
+      //     //if user NOT using app and push notification comes
+      //     //TODO: Your logic on click of push notification directly
+      //     if(push.additionalData['pushInfo'].type=='newMessage')
+      //     {
+      //       self.nav.push(MessagesPage, push.additionalData['data']);
+      //     }
+      //     if(push.additionalData['pushInfo'].type=='newArticle')
+      //     {
+      //       self.nav.push(ArticleDetailsPage, {
+      //         article: push.additionalData['data']
+      //       });
+      //     }
+      //     if(push.additionalData['pushInfo'].type=='newPrice')
+      //     {
+      //
+      //     }
+      //   }
+      // });
+      // push.on('error', (e) => {
+      //   console.log(e.message);
+      // });
     });
   }
 
@@ -177,15 +186,15 @@ export class App {
     this.menu.close();
     // navigate to the new page if it is not the current page
     if(page.component==ChatsPage)
-     {
-     if(this.logged)
-     {
-       this.nav.push(page.component);
-     }
-     else
-     {
-       this.nav.push(LoginPage,{message:"Pour lire vos messages, connectez-vous à Occazstreet !"});
-     }
+    {
+      if(this.logged)
+      {
+        this.nav.push(page.component);
+      }
+      else
+      {
+        this.nav.push(LoginPage,{message:"messLoginIfNotConnected"});
+      }
 
     }
     else if(page.component==FavorisPage)
@@ -196,7 +205,7 @@ export class App {
       }
       else
       {
-        this.nav.push(LoginPage,{message:"Pour voir vos Favoris, connectez-vous à Occazstreet !"});
+        this.nav.push(LoginPage,{message:"favLoginIfNotConnected"});
       }
 
     }

@@ -58,7 +58,7 @@ export class MessagesPage implements  OnInit, OnDestroy,AfterViewChecked{
 
       if(navParams.get('startChat'))
       {
-        this.title = navParams.get('startChat').titre;
+        this.title = navParams.get('startChat').title;
         this.prix=navParams.get('startChat').prix;
         this.article=<Article>navParams.get('startChat');
         this.loggedUser=JSON.parse(localStorage.getItem(GlobalsConstants.USER_LOGGED));

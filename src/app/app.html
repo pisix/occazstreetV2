@@ -11,7 +11,7 @@
           <ion-row>
             <ion-col width-30><ion-icon name="contact" style="font-size: 500%;color: white"></ion-icon> </ion-col>
             <ion-col center width-40 style="color: white;">
-              <section style="font-size: 100%"><b>Connectez-vous </b></section>
+              <section style="font-size: 100%"><b>{{'loginLabel'| translate}}</b></section>
               <section ><b>&agrave; Occazstreet </b></section>
             </ion-col>
           </ion-row>
@@ -23,16 +23,15 @@
         </section>
       </ion-list-header>
       <button ion-item *ngFor="let p of pages" (click)="openPage(p)">
-        <ion-icon name="{{p.icon}}" item-left style="color:#a1a1a1" ></ion-icon>
-        <span [innerHtml]="p.title"></span>
+        <ion-icon name="{{p._icon}}" item-left style="color:#a1a1a1" ></ion-icon>
+        <span [innerHtml]="p._title | translate"></span>
       </button>
       <button *ngIf="logged" ion-item  (click)="doLogout()">
         <ion-icon name="log-out" item-left style="color:#a1a1a1" ></ion-icon>
-        <span>Se d&#233;connecter</span>
+        <span>{{'logoutLabel' | translate}}</span>
       </button>
     </ion-list>
   </ion-content>
-
 </ion-menu>
 
 <ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>

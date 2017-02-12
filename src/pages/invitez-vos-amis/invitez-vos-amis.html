@@ -9,38 +9,38 @@
     <button ion-button menuToggle="left" >
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Invitez vos amis(es)</ion-title>
+    <ion-title>{{'InviteYourFried' | translate}}</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
   <ion-list no-border no-lines>
     <ion-list-header>
-      Faites découvrir OccazStreet à vos amis(es) !
+      {{'shareWithYourFriend' | translate}}
     </ion-list-header>
     <ion-item (click)="inviteFacebook()">
       <ion-icon name='logo-facebook' color="facebook" item-left></ion-icon>
-      Inviter par facebook
+      facebook
     </ion-item>
     <ion-item (click)="inviteTwitter()">
       <ion-label>
-        Inviter par twitter
+        twitter
       </ion-label>
       <ion-icon name='logo-twitter' color="twitter" item-left></ion-icon>
     </ion-item>
 
     <ion-item (click)="inviteInstagram()">
       <ion-icon name='logo-instagram' item-left></ion-icon>
-        Inviter par instagram
+        instagram
     </ion-item>
     <ion-item (click)="inviteWhatsapp()">
       <ion-icon name='logo-whatsapp' color="whatsapp" item-left></ion-icon>
-        Inviter par whatsapp
+        whatsapp
     </ion-item>
 
     <ion-item (click)="inviteMail()">
       <ion-icon name='mail' color="primary2"  item-left></ion-icon>
-      Inviter par mail
+      mail
     </ion-item>
   </ion-list>
 </ion-content>

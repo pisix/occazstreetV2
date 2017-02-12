@@ -1,9 +1,4 @@
-<!--
-  Generated template for the Contact page.
 
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
   <ion-navbar color="primary2">
     <ion-title>Contact</ion-title>
@@ -12,30 +7,30 @@
 
 
 <ion-content padding>
-  <p style="box-sizing: inherit; margin: 2rem 0px; padding: 0px; border: 0px; font-stretch: inherit; font-size: 1.3rem; line-height: 1.6em; font-family: 'Avenir Next Cyr W00 Regular'; vertical-align: baseline; text-align: justify; color: rgb(119, 119, 119);">
+  <p>
     Pour nous aider à améliorer l'application Occazstreet, n'hésitez pas à contacter notre service client en remplissant le formulaire ci-dessous. Signalez-nous les problèmes techniques que vous rencontrez ou exprimez-vous en nous laissant vos commentaires ou vos suggestions. Pour recevoir une réponse, veillez à bien nous indiquer votre adresse email dans le champs correspondant.
   </p>
   <ion-list no-lines>
     <ion-list-header >
-      <span style="font-size:larger;">Selectionner un sujet</span>
+      <span>Selectionner un sujet</span>
     </ion-list-header>
     <ion-item>
-      <a class="link" style="color: #6c6c6c;" (click)="goToContactForm({sujet:'Annonce refusée'})">
+      <a (click)="goToContactForm({sujet:'Annonce refusée'})">
         Annonce refusée
       </a>
     </ion-item>
     <ion-item>
-      <a class="link"  style="color: #6c6c6c;" (click)="goToContactForm({sujet:'Problème technique'})">
+      <a  (click)="goToContactForm({sujet:'Problème technique'})">
         Problème technique
       </a>
     </ion-item>
     <ion-item>
-      <a class="link"  style="color: #6c6c6c;" (click)="goToContactForm({sujet:'Retrouver mon annonce'})">
+      <a  (click)="goToContactForm({sujet:'Retrouver mon annonce'})">
         Retrouver mon annonce
       </a>
     </ion-item>
     <ion-item>
-      <a class="link"  style="color: #6c6c6c;" (click)="goToContactForm({sujet:'Suggestion'})">
+      <a  (click)="goToContactForm({sujet:'Suggestion'})">
         Suggestion
       </a>
     </ion-item>

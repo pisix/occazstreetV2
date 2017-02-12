@@ -59,8 +59,7 @@ export class HomePage {
       // console.log("Article =>",articles)
       this.numberAnnonces=res.length;
     })
-
-
+    
   }
 
   selectedMur(){

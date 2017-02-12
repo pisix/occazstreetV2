@@ -92,8 +92,8 @@ export class ConnexionModalPage {
   {
 
     let userData = {
-      device: Device.device.manufacturer + " " + Device.device.model,
-      os: Device.device.platform + " " + Device.device.version,
+      device: Device.manufacturer + " " + Device.model,
+      os: Device.platform + " " + Device.version,
       provider:'Facebook'
 
     };
