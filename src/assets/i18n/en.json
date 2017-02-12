@@ -4,6 +4,9 @@
     "category":"Categories"
   },
   "loginLabel":"Sign in to ",
+  "logoutLabel":"Sign out ",
+  "login":"Sign in",
+  "logon":"Sign up",
   "home":"Home",
   "message":"Messages",
   "homeWall":"Home",
@@ -20,8 +23,32 @@
   "articlePrice":"Price",
   "articleDetaile.more":"More",
   "articleDetaile.shareThis":"Share",
-  "noArticleFound":"No article found"
-
-
-
+  "noArticleFound":"No article found",
+  "menu":{
+    "home":"home",
+    "messages":"Messages",
+    "categories":"Categories",
+    "favorite":"favorite",
+    "inviteFriends":"Invite your friends",
+    "aroundYou":"Around you",
+    "help":"help"
+  },
+  "messLoginIfNotConnected": "To read your messages please sign in to ",
+  "favLoginIfNotConnected": "To see your favorites please sign in to ",
+  "shareWithYourFriend":"Share OccazStreet with your friends",
+  "InviteYourFried":"Invite your friends",
+  "loginPage":{
+    "email":"Email",
+    "passWord":"Password",
+    "forgotMp":"Forgot password ?"
+  },
+  "logonPage":{
+    "firstName":"First name",
+    "lastName":"Last name",
+    "email":"Email",
+    "password":"Password",
+    "gender":"Gender",
+    "male":"Male",
+    "female":"Female"
+  }
 }

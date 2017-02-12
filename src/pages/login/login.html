@@ -82,20 +82,20 @@
     text-align: center;
     margin-top: -70px;
     color:white">
-      {{message}}
+      {{message | translate}} Occazstreet
     </div>
     <div class="login_form">
       <ion-row >
         <ion-col >
           <button ion-button round outline  color="light"  (click)="connexion()" class="login_submit" >
-            Se connecter
+            {{'login' | translate}}
           </button>
         </ion-col>
       </ion-row>
       <ion-row >
         <ion-col >
           <button ion-button  round outline  color="light"  (click)="signup()" class="signup_submit">
-            S'inscrire
+            {{'logon' | translate}}
           </button>
         </ion-col>
       </ion-row>

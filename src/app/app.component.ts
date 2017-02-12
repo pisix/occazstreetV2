@@ -13,6 +13,7 @@ import {ChatsPage} from '../pages/chats/chats';
 import {FavorisPage} from '../pages/favoris/favoris';
 import {UtilisateurService} from '../services/utilisateur.service';
 import {TranslateService} from "ng2-translate";
+import {Page} from "../components/page.component";
 declare var NotificationEventAdditionalData;
 declare var pushInfo;
 
@@ -25,7 +26,7 @@ export class App {
   @ViewChild(Nav) nav: Nav;
   // make HelloIonicPage the root (or first) page
   rootPage: any = HomePage;
-  pages: Array<{title: string, component: any,icon:any}>;
+  pages: Array<Page>;
   public logged:boolean ;
   public  connected=false;
   public infoLoggedUser;
@@ -48,10 +49,10 @@ export class App {
     let loading = this.loadingCtrl.create();
     loading.present();
     this.initializeApp();
-    
+
     this.translate.setDefaultLang('en');
-    // this.translate.use(this.getUserLanguage());
-    
+    this.translate.use(this.getUserLanguage());
+
     if(localStorage.getItem("logged"))
     {
       this.infoLoggedUser=JSON.parse(localStorage.getItem(GlobalsConstants.USER_LOGGED));
@@ -75,19 +76,19 @@ export class App {
 
     // set our app's pages
     this.pages = [
-      { title: 'Acceuil', component: HomePage, icon:'home'},
-      { title: 'Messages', component: ChatsPage, icon:'chatbubbles'},
-      { title: 'Cat&#233;gories', component: CategoriePage , icon:'list-box'},
-      { title: 'Mes Favoris', component: FavorisPage , icon:'heart'},
-      { title: 'Invitez vos amis', component: InvitezVosAmisPage, icon:'people' },
-      { title: 'Nouveau pr&egrave;s de chez vous', component: NouveautePresDeChezVousPage, icon:'locate' },
-      { title: 'Aide', component: HelpPage, icon:'help-circle' }
+      new Page('menu.home',HomePage,'home'),
+      new Page('menu.messages',ChatsPage,'chatbubbles'),
+      new Page('menu.categories',CategoriePage,'list-box'),
+      new Page('menu.favorite',FavorisPage,'heart'),
+      new Page('menu.inviteFriends',InvitezVosAmisPage,'people'),
+      new Page('menu.aroundYou',NouveautePresDeChezVousPage,'locate'),
+      new Page('menu.help',HelpPage,'help-circle'),
     ];
 
     loading.dismiss();
 
   }
-  
+
   getUserLanguage():string{
     let  userLang:string = GlobalsConstants.SUPPORTEDLANGUAGES[navigator.language];
     return  typeof userLang === "string"?userLang:GlobalsConstants.SUPPORTEDLANGUAGES["default"];
@@ -185,15 +186,15 @@ export class App {
     this.menu.close();
     // navigate to the new page if it is not the current page
     if(page.component==ChatsPage)
-     {
-     if(this.logged)
-     {
-       this.nav.push(page.component);
-     }
-     else
-     {
-       this.nav.push(LoginPage,{message:"Pour lire vos messages, connectez-vous à Occazstreet !"});
-     }
+    {
+      if(this.logged)
+      {
+        this.nav.push(page.component);
+      }
+      else
+      {
+        this.nav.push(LoginPage,{message:"messLoginIfNotConnected"});
+      }
 
     }
     else if(page.component==FavorisPage)
@@ -204,7 +205,7 @@ export class App {
       }
       else
       {
-        this.nav.push(LoginPage,{message:"Pour voir vos Favoris, connectez-vous à Occazstreet !"});
+        this.nav.push(LoginPage,{message:"favLoginIfNotConnected"});
       }
 
     }

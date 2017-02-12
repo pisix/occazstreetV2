@@ -4,6 +4,9 @@
     "category":"Catégories"
   },
   "loginLabel":"Connectez-vous à ",
+  "logoutLabel":"Se déconnecter",
+  "login":"Se connecter",
+  "logon":"S'inscrire",
   "home":"Acceuil",
   "message":"Messages",
   "homeWall":"Mur",
@@ -20,5 +23,32 @@
   "articlePrice":"prix",
   "articleDetaile.more":"Informations supplémentaires",
   "articleDetaile.shareThis":"Partager l'annonce",
-  "noArticleFound":"Aucun article trouvé"
+  "noArticleFound":"Aucun article trouvé",
+  "menu":{
+    "home":"Acceuil",
+    "messages":"Messages",
+    "categories":"Catégories",
+    "favorite":"Mes favoris",
+    "inviteFriends":"Invitez vos amis",
+    "aroundYou":"Nouveau près de chez moi",
+    "help":"Aide"
+  },
+  "messLoginIfNotConnected": "Pour lire vos messages connectez-vous à",
+  "favLoginIfNotConnected": "Pour voir vos Favoris connectez-vous à",
+  "shareWithYourFriend":"Faites découvrir OccazStreet à vos amis(es)",
+  "InviteYourFried":"Invitez vos amis(es)",
+  "loginPage":{
+    "email":"Email",
+    "mp":"Mot de passe",
+    "forgotMp":"Mot de passe oublié ?"
+  },
+  "logonPage":{
+    "firstName":"Nom",
+    "lastName":"Prénom",
+    "email":"Email",
+    "password":"Mot de passe",
+    "gender":"Sexe",
+    "male":"Homme",
+    "female":"Femme"
+  }
 }

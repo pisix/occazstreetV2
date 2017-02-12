@@ -35,6 +35,7 @@
   },
   "devDependencies": {
     "@ionic/app-scripts": "latest",
+    "sw-toolbox": "^3.4.0",
     "typescript": "^2.0.3"
   },
   "description": "occazstreetV2: An Ionic project",
