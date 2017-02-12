@@ -207,4 +207,15 @@ export class ArticleService{
         }
       })
   }
+
+  updateNumberView(article:Article){
+    return this.http.post(GlobalsConstants.urlServer + GlobalsConstants.port + '/article/updateNumberView?article='+article.idArticle)
+      .map(res => {
+        if(res.status === 200){
+         return res.json()
+        }else {
+          return res.json();
+        }
+      })
+  }
 }

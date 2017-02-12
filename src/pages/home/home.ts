@@ -3,7 +3,7 @@ import {ArticleService} from "../../services/article.service";
 import {RateService} from '../../services/rate-service';
 import {Article} from "../../components/article.component";
 import {GlobalsConstants} from "../../constants/globals.constants";
-import {NavController, NavParams, ModalController, ViewController, PopoverController} from "ionic-angular";
+import {NavController, NavParams, ModalController, ViewController, PopoverController, LoadingController} from "ionic-angular";
 import {ArticleDetailsPage} from "../article-details/article-details";
 import {searchModalPage} from "../search-articles/search-articles";
 import {SearchResult} from "../search-result/search-result";
@@ -39,6 +39,7 @@ export class HomePage {
   constructor(private articleService:ArticleService,
               protected rateService:RateService,
               private navCtrl: NavController,
+              private loadingCtrl:LoadingController,
               private navParams: NavParams,
               private modalController : ModalController,
               private popoverCtrl: PopoverController) {
@@ -116,9 +117,16 @@ export class HomePage {
   }
 
   articleDetails(event,item:Article){
-    this.navCtrl.push(ArticleDetailsPage, {
-      article: item
-    });
+    let loading =this.loadingCtrl.create();
+    loading.present();
+    this.articleService.updateNumberView(item).subscribe(res=>{
+      loading.dismiss();
+      item.nombreDeVue=res.article.nombreDeVue;
+      this.navCtrl.push(ArticleDetailsPage, {
+        article: item
+      });
+    })
+
   }
 
   addNewArticle(){
