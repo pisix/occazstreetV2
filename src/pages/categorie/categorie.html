@@ -19,8 +19,9 @@
     </ion-col>
   </ion-row>
   <ion-list [hidden]="categories.length<0">
-    <button ion-item *ngFor="let categorie of categories" (click)="goToDetailsCategorie($event, categorie.idcategorie,categorie.libelle)">
-      {{categorie.libelle}}
+    <button ion-item *ngFor="let categorie of categories" (click)="goToDetailsCategorie($event,categorie)">
+      <span *ngIf="locale=='fr'">{{categorie.libelle}}</span>
+      <span *ngIf="locale!='fr'">{{categorie.libelleEn}}</span>
     </button>
   </ion-list>
 </ion-content>

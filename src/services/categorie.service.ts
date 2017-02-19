@@ -16,9 +16,14 @@ export class CategorieService{
 
   }
 
- getAllCategories()
+  getUserLanguage():string{
+    let  userLang:string = GlobalsConstants.SUPPORTEDLANGUAGES[navigator.language];
+    return  typeof userLang === "string"?userLang:GlobalsConstants.SUPPORTEDLANGUAGES["default"];
+  }
+ getAllCategories(locale)
  {
-     return this.http.get(GlobalsConstants.urlServer+GlobalsConstants.port+'/categorie/getAllCategorie')
+    console.log(locale);
+     return this.http.get(GlobalsConstants.urlServer+GlobalsConstants.port+'/categorie/getAllCategorie?locale='+locale)
          .map((res)=>{
              if(res.status === 200){
 
@@ -38,6 +43,7 @@ export class CategorieService{
                  })
 
              }
+         console.log(categories);
 
              return categories;
          });

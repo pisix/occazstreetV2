@@ -7,6 +7,7 @@ export class Categorie{
   private _idCategorie:number;
   private _libelle:string;
   private _statut:string;
+  private _libelleEn:string;
 
   constructor(){
 
@@ -35,5 +36,13 @@ export class Categorie{
 
   set statut(value: string) {
     this._statut = value;
+  }
+
+  public get libelleEn():string {
+    return this._libelleEn;
+  }
+
+  public set libelleEn(value:string) {
+    this._libelleEn = value;
   }
 }
