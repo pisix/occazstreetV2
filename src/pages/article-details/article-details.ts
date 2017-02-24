@@ -72,7 +72,12 @@ export class ArticleDetailsPage implements OnInit{
      let mapOptions = {
        center: latLng,
        zoom:15,
-       mapTypeId: google.maps.MapTypeId.ROADMAP
+       mapTypeId: google.maps.MapTypeId.ROADMAP,
+       scrollwheel: false,
+       navigationControl: false,
+       mapTypeControl: false,
+       scaleControl: false,
+       draggable: false,
      };
      this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
      let marker = new google.maps.Marker({
