@@ -17,9 +17,9 @@
           </ion-row>
         </section>
         <section *ngIf="logged" class="profil-centre dark-bg expanded" menu-close (click)="profil()">
-          <ion-col width-30 [hidden]="infoLoggedUser?.photo.idPhoto !=1"><ion-icon name="contact" style="font-size: 500%;color: white"></ion-icon> </ion-col>
-          <img [hidden]="infoLoggedUser?.photo.idPhoto==1 " src="{{url}}{{cheminPhoto}}{{infoLoggedUser?.photo.cheminPhoto}}" alt="" class="img-circle">
-          <section style="color: white;font-weight: bold">{{infoLoggedUser?.prenom}} {{infoLoggedUser?.nom}}</section>
+          <ion-col width-30 [hidden]="loggedUser?.photo.idPhoto !=1"><ion-icon name="contact" style="font-size: 500%;color: white"></ion-icon> </ion-col>
+          <img [hidden]="loggedUser?.photo.idPhoto==1 " src="{{url}}{{cheminPhoto}}{{loggedUser?.photo.cheminPhoto}}" alt="" class="img-circle">
+          <section style="color: white;font-weight: bold">{{loggedUser?.prenom}} {{loggedUser?.nom}}</section>
         </section>
       </ion-list-header>
       <button ion-item *ngFor="let p of pages" (click)="openPage(p)">

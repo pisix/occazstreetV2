@@ -12,12 +12,7 @@ import {MessageService} from '../../services/message.service';
 import {ArticleService} from '../../services/article.service';
 import {MediaSharing} from '../../services/mediaSharing.service';
 
-/*
-  Generated class for the Profil page.
 
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Component({
   selector: 'page-profil',
   templateUrl: 'profil.html'
@@ -218,6 +213,4 @@ export class ProfilPage {
       }
     }
   }
-
-
 }

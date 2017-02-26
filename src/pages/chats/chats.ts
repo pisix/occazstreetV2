@@ -4,32 +4,24 @@ import { Observable } from "rxjs";
 import {ChatService} from '../../services/chat.service';
 import {GlobalsConstants} from '../../constants/globals.constants';
 import {MessagesPage} from '../messages/messages';
+import {AbstractLoggedPage} from "../abstratLoggedPage";
 // moment.locale('fr');
 
-/*
-  Generated class for the Chats page.
 
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Component({
   selector: 'page-chats',
   templateUrl: 'chats.html'
 })
-export class ChatsPage {
+export class ChatsPage extends AbstractLoggedPage{
 
   chats: Observable<any[]>;
   public loggedUser;
   public cheminImage = GlobalsConstants.cheminImage;
   public cheminPhoto = GlobalsConstants.cheminPhoto;
   public url=GlobalsConstants.urlServer+GlobalsConstants.port+'/';
-
-
-
-
-
+  
   constructor(public navCtrl: NavController, public chatService:ChatService, public alertCtrl:AlertController){
-    this.loggedUser=JSON.parse(localStorage.getItem(GlobalsConstants.USER_LOGGED));
+    super();
     this.findChats();
   }
 
@@ -38,6 +30,12 @@ export class ChatsPage {
     this.loggedUser=JSON.parse(localStorage.getItem(GlobalsConstants.USER_LOGGED))
 
   }
+  
+  
+  initData() {
+    return undefined;
+  }
+  
   showMessages(chat): void {
     this.navCtrl.push(MessagesPage, {chat});
   }

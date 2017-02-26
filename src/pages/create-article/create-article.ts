@@ -11,6 +11,7 @@ import {ArticleService} from "../../services/article.service";
 import {MessageService} from "../../services/message.service";
 import {ImageService} from "../../services/image.service";
 import {Article} from "../../components/article.component";
+import {App} from "../../app/app.component";
 declare var  google;
 
 @Component({
@@ -68,7 +69,7 @@ export class CreateArticle{
 
 
 
-    this.categorieService.getAllCategories().subscribe(res => {
+    this.categorieService.getAllCategories(App.getUserLanguage()).subscribe(res => {
       this.categories = res;
       console.log(this.categories)
 

@@ -1,6 +1,6 @@
 import {Component, ViewChild} from '@angular/core';
-import {Platform, MenuController, Nav,Events, AlertController,LoadingController } from 'ionic-angular';
-import {StatusBar,Push,Splashscreen} from 'ionic-native';
+import {Platform, MenuController, Nav, Events, AlertController, LoadingController} from 'ionic-angular';
+import {StatusBar, Splashscreen} from 'ionic-native';
 import {HomePage} from '../pages/home/home';
 import {HelpPage} from '../pages/help/help';
 import {CategoriePage} from '../pages/categorie/categorie';
@@ -18,7 +18,6 @@ declare var NotificationEventAdditionalData;
 declare var pushInfo;
 
 
-
 @Component({
   templateUrl: 'app.html'
 })
@@ -27,73 +26,69 @@ export class App {
   // make HelloIonicPage the root (or first) page
   rootPage: any = HomePage;
   pages: Array<Page>;
-  public logged:boolean ;
-  public  connected=false;
+  public logged: boolean;
+  public connected = false;
   public infoLoggedUser;
-  public loginPage={component: LoginPage};
-
-  public url=GlobalsConstants.urlServer+GlobalsConstants.port+'/';
-  public cheminPhoto=GlobalsConstants.cheminPhoto;
-
-
-  constructor(
-    public platform: Platform,
-    public menu: MenuController,
-    public events:Events,
-    public translate:TranslateService,
-    public alertCtrl:AlertController,
-    public utilisateurService:UtilisateurService,
-    public loadingCtrl:LoadingController
-  ) {
-
+  public loginPage = {component: LoginPage};
+  
+  public url = GlobalsConstants.urlServer + GlobalsConstants.port + '/';
+  public cheminPhoto = GlobalsConstants.cheminPhoto;
+  
+  
+  constructor(public platform: Platform,
+              public menu: MenuController,
+              public events: Events,
+              public translate: TranslateService,
+              public alertCtrl: AlertController,
+              public utilisateurService: UtilisateurService,
+              public loadingCtrl: LoadingController) {
+    
     let loading = this.loadingCtrl.create();
     loading.present();
     this.initializeApp();
-
+    
     this.translate.setDefaultLang('en');
-    this.translate.use(this.getUserLanguage());
-
-    if(localStorage.getItem("logged"))
-    {
-      this.infoLoggedUser=JSON.parse(localStorage.getItem(GlobalsConstants.USER_LOGGED));
-      this.logged=true;
-    }else
-    {
-      this.logged=false;
+    this.translate.use(App.getUserLanguage());
+    
+    if (localStorage.getItem("logged")) {
+      this.infoLoggedUser = JSON.parse(localStorage.getItem(GlobalsConstants.USER_LOGGED));
+      this.logged = true;
+    } else {
+      this.logged = false;
     }
-
-    events.subscribe('user:logged-data',(userEventData)=> {
+    
+    events.subscribe('user:logged-data', (userEventData) => {
       localStorage.setItem(GlobalsConstants.USER_LOGGED, JSON.stringify(userEventData));
       console.log(userEventData);
       this.infoLoggedUser = userEventData;
-      this.logged=true;
+      this.logged = true;
     });
-    events.subscribe('user:logged',(eventData)=>{
+    events.subscribe('user:logged', (eventData) => {
       localStorage.setItem("logged", 'true');
-      this.logged=true;
+      this.logged = true;
     });
-
-
+    
+    
     // set our app's pages
     this.pages = [
-      new Page('menu.home',HomePage,'home'),
-      new Page('menu.messages',ChatsPage,'chatbubbles'),
-      new Page('menu.categories',CategoriePage,'list-box'),
-      new Page('menu.favorite',FavorisPage,'heart'),
-      new Page('menu.inviteFriends',InvitezVosAmisPage,'people'),
-      new Page('menu.aroundYou',NouveautePresDeChezVousPage,'locate'),
-      new Page('menu.help',HelpPage,'help-circle'),
+      new Page('menu.home', HomePage, 'home'),
+      new Page('menu.messages', ChatsPage, 'chatbubbles'),
+      new Page('menu.categories', CategoriePage, 'list-box'),
+      new Page('menu.favorite', FavorisPage, 'heart'),
+      new Page('menu.inviteFriends', InvitezVosAmisPage, 'people'),
+      new Page('menu.aroundYou', NouveautePresDeChezVousPage, 'locate'),
+      new Page('menu.help', HelpPage, 'help-circle'),
     ];
-
+    
     loading.dismiss();
-
+    
   }
-
-  getUserLanguage():string{
-    let  userLang:string = GlobalsConstants.SUPPORTEDLANGUAGES[navigator.language];
-    return  typeof userLang === "string"?userLang:GlobalsConstants.SUPPORTEDLANGUAGES["default"];
+  
+  static getUserLanguage(): string {
+    let userLang: string = GlobalsConstants.SUPPORTEDLANGUAGES[navigator.language];
+    return typeof userLang === "string" ? userLang : GlobalsConstants.SUPPORTEDLANGUAGES["default"];
   }
-
+  
   initializeApp() {
     this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
@@ -179,60 +174,41 @@ export class App {
       // });
     });
   }
-
-
+  
+  
   openPage(page) {
     // close the menu when clicking a link from the menu
     this.menu.close();
     // navigate to the new page if it is not the current page
-    if(page.component==ChatsPage)
-    {
-      if(this.logged)
-      {
-        this.nav.push(page.component);
-      }
-      else
-      {
-        this.nav.push(LoginPage,{message:"messLoginIfNotConnected"});
-      }
-
+    if (page.component == ChatsPage) {
+      this.nav.push(ChatsPage).catch(e => {
+        this.nav.push(LoginPage, {message: 'messLoginIfNotConnected'});
+      });
     }
-    else if(page.component==FavorisPage)
-    {
-      if(this.logged)
-      {
-        this.nav.push(page.component);
-      }
-      else
-      {
-        this.nav.push(LoginPage,{message:"favLoginIfNotConnected"});
-      }
-
+    
+    else if (page.component == FavorisPage) {
+      this.nav.push(FavorisPage).catch(e => {
+        this.nav.push(LoginPage, {message: 'favLoginIfNotConnected'});
+      });
     }
-
-    else if(page.component==HomePage)
-    {
+    else if (page.component == HomePage) {
       this.nav.setRoot(page.component);
     }
-    else
-    {
+    else {
       this.nav.push(page.component);
-
     }
   }
-
-  doLogout()
-  {
+  
+  doLogout() {
     this.menu.close();
     this.nav.setRoot(this.rootPage);
     localStorage.removeItem(GlobalsConstants.USER_LOGGED);
     localStorage.removeItem("logged");
-    this.logged=false;
+    this.logged = false;
   }
-
-  profil()
-  {
+  
+  profil() {
     this.menu.close();
-    this.nav.setRoot(ProfilPage,{user:localStorage.getItem(GlobalsConstants.USER_LOGGED)});
+    this.nav.setRoot(ProfilPage, {user: localStorage.getItem(GlobalsConstants.USER_LOGGED)});
   }
 }

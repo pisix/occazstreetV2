@@ -8,6 +8,7 @@ import {ViewController,Events} from "ionic-angular";
 import {CategorieService} from "../../services/categorie.service";
 import {Categorie} from "../../components/categorie.component";
 import {GlobalsConstants} from '../../constants/globals.constants';
+import {App} from "../../app/app.component";
 declare var google: any;
 
 @Component({
@@ -41,7 +42,7 @@ export class searchModalPage {
     });
 
 
-    this.categorieService.getAllCategories().subscribe(res => {
+    this.categorieService.getAllCategories(App.getUserLanguage()).subscribe(res => {
       this.categories = res;
     });
 
