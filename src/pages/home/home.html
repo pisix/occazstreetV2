@@ -73,6 +73,9 @@
             <span *ngIf="art1.dateModification === null">{{'addedOn' | translate}} : {{art1.dateAjout | occasStreetTimer}}</span>
             <span *ngIf="art1.dateModification">{{'editedOn' | translate}} : {{art1.dateModification | occasStreetTimer}}</span>
           </section>
+          <div class="sold" *ngIf="art2.etat=='Vendu'">
+            {{'sold' | translate}}
+          </div>
         </ion-card>
 
       </ion-col>
