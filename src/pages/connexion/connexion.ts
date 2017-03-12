@@ -63,8 +63,6 @@ export class ConnexionModalPage {
         this.messageService.showToast("Faites vous plaisir");
       }
     })
-
-
   }
 
   dismiss() {

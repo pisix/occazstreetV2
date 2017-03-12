@@ -13,11 +13,7 @@
         <ion-icon name="search"></ion-icon>
       </button>
     </ion-buttons>
-    <!--<ion-buttons end>
-      <button ion-button (click)="option($event)">
-        <ion-icon name="more"></ion-icon>
-      </button>
-    </ion-buttons>-->
+    
   </ion-navbar>
   <ion-toolbar no-border color="white" ligth style="background-color: white;">
     <ion-segment [(ngModel)]="homeTab" primary>
@@ -62,6 +58,9 @@
       <ion-col width-50 no-padding>
 
         <ion-card *ngFor="let art1 of articles1"  (click)="articleDetails($event,art1)">
+          <div class="corner-ribbon" *ngIf="art1.etat=='Vendu'">
+            {{'sold' | translate}}
+          </div>
           <img *ngIf="art1?.images.length>0" src="{{url}}{{cheminImage}}{{art1?.images[0]?.cheminImage}}"/>
           <img *ngIf="art1?.images.length==0" src="assets/img/defaultImage.png"/>
           <ion-card-content text-center no-padding>
@@ -74,7 +73,7 @@
             <span *ngIf="art1.dateModification === null">{{'addedOn' | translate}} : {{art1.dateAjout | occasStreetTimer}}</span>
             <span *ngIf="art1.dateModification">{{'editedOn' | translate}} : {{art1.dateModification | occasStreetTimer}}</span>
           </section>
-          <div class="sold" *ngIf="art1.etat=='Vendu'">
+          <div class="sold" *ngIf="art2.etat=='Vendu'">
             {{'sold' | translate}}
           </div>
         </ion-card>
@@ -98,7 +97,7 @@
             <span *ngIf="art2.dateModification">{{'editedOn' | translate}} : {{art2.dateModification | occasStreetTimer}}</span>
           </section>
           <div class="sold" *ngIf="art2.etat=='Vendu'">
-            <span style="margin-top: 1%">{{'sold' | translate}}</span>
+            {{'sold' | translate}}
           </div>
         </ion-card>
 
