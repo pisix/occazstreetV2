@@ -47,8 +47,6 @@ export class ArticleDetailsPage implements OnInit{
 
     // If we navigated to this page, we will have an item available as a nav param
     this.article = navParams.get('article');
-    console.log(JSON.stringify(this.article));
-
     this.imgSliderOption = {
       initialSlide: 0,
       pager:true

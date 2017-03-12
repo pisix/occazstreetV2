@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController,NavParams,ToastController, LoadingController,ModalController,Events } from 'ionic-angular';
+import { NavController,NavParams,ToastController, LoadingController,ModalController,Events,ActionSheetController, AlertController} from 'ionic-angular';
 import {Utilisateur} from '../../components/utilisateur.component';
 import {GlobalsConstants} from '../../constants/globals.constants';
 import {MessagesConstants} from '../../constants/messages.constants';
@@ -10,7 +10,8 @@ import {ActiviteModalPage} from '../activite/activite';
 import {EditProfilModalPage} from '../edit-profil/edit-profil';
 import {MessageService} from '../../services/message.service';
 import {ArticleService} from '../../services/article.service';
-import {MediaSharing} from '../../services/mediaSharing.service';
+import {MediaSharing} from '../../services/mediaSharing.service'
+import {EditArticlePage} from '../../pages/edit-article/edit-article';
 
 /*
   Generated class for the Profil page.
@@ -36,7 +37,7 @@ export class ProfilPage {
   private loading;
 
 
-  constructor(public mediaSharing:MediaSharing, public events:Events,public modalCtrl:ModalController,public messageService:MessageService,public navCtrl: NavController,public navParams:NavParams,private articleService:ArticleService,public toastCtrl:ToastController,public loadingCtrl:LoadingController) {
+  constructor(public alertCtrl:AlertController,public actionSheetCtrl: ActionSheetController,public mediaSharing:MediaSharing, public events:Events,public modalCtrl:ModalController,public messageService:MessageService,public navCtrl: NavController,public navParams:NavParams,private articleService:ArticleService,public toastCtrl:ToastController,public loadingCtrl:LoadingController) {
    // this.utilisateur = navParams.get('loggedUser');
 
     this.loggedUser=JSON.parse(localStorage.getItem(GlobalsConstants.USER_LOGGED));
@@ -51,10 +52,56 @@ export class ProfilPage {
       this.utilisateur=userEventData[0];
     });
 
+    events.subscribe('user:update',(userEventData)=> {
+      localStorage.setItem(GlobalsConstants.USER_LOGGED,JSON.stringify(userEventData));
+      this.utilisateur=userEventData;
+    });
+
+
 
   }
 
   ionViewDidLoad() {
+    let loading = this.loadingCtrl.create();
+    loading.present();
+    this.articleService.getArticleByUser(this.utilisateur.id).subscribe(res=>{
+      if(res.success)
+      {
+        this.articleUser=res.articles;
+        console.log("Article user"+this.articleUser);
+        this.articleService.getSoldArticleByUser(this.utilisateur.id).subscribe(res2=>{
+          if(res2.success)
+          {
+            this.articleSoldUser=res2.articles;
+            console.log("En vente "+this.articleSoldUser);
+            this.articleService.getFavoriteArticleByUser(this.utilisateur.id).subscribe(res3=>{
+              if(res3.success)
+              {
+                this.articleFavoriteUser=res3.articles;
+                console.log("Favoris "+this.articleFavoriteUser);
+
+                loading.dismiss();
+              }else{
+                loading.dismiss();
+                this.messageService.showToast(MessagesConstants.erreurRecuperationArticleUtilisateur);
+              }
+            })
+          }else
+          {
+            loading.dismiss();
+            this.messageService.showToast(MessagesConstants.erreurRecuperationArticleUtilisateur);
+          }
+        })
+      }
+      else
+      {
+        loading.dismiss();
+        this.messageService.showToast(MessagesConstants.erreurRecuperationArticleUtilisateur);
+      }
+
+    })
+  }
+  ionViewWillEnter() {
     let loading = this.loadingCtrl.create();
     loading.present();
     this.articleService.getArticleByUser(this.utilisateur.id).subscribe(res=>{
@@ -217,6 +264,71 @@ export class ProfilPage {
         console.log('Impossible de partager ce profil');
       }
     }
+  }
+  showAction(e,article)
+  {
+
+    if(article.utilisateur.id==JSON.parse(localStorage.getItem(GlobalsConstants.USER_LOGGED)).id)
+    {
+      let actionSheet = this.actionSheetCtrl.create({
+        title: 'Gestion d\'article',
+        buttons: [
+          {
+            text: 'Modifier l\'annonce',
+            handler: () => {
+              this.navCtrl.push(EditArticlePage,{article:article});
+            }
+          },
+          {
+            text: 'Supprimer l\'annonce',
+            handler: () => {
+              let alert=this.alertCtrl.create({
+                title:'Confirmation suppression',
+                subTitle:"Cette opération est irreversible. Confirmez-vous la suppression de votre annonce ?",
+                buttons: [
+                  {
+                    text: 'Oui',
+                    handler: () => {
+
+                      let loading=this.loadingCtrl.create();
+                      loading.present();
+                      this.articleService.deleteArticle(article).subscribe(res=>{
+                        if(res.success)
+                        {
+                          loading.dismiss()
+                          this.messageService.showAlert('Votre annonce a été supprimée avec succès','Suppression');
+                          this.ionViewDidLoad();
+                        }
+
+                      },(err) => {
+                        loading.dismiss();
+                        this.messageService.showToast('Une erreur interne est survenue. Veuillez reprendre l\'opération');
+                      });
+                    }
+                  },
+                  {
+                    text: 'Non',
+                    handler: () => {
+                    }
+                  }
+                ]
+              });
+              alert.present();
+
+            }
+          },
+          {
+            text: 'Cancel',
+            role: 'cancel',
+            handler: () => {
+              console.log('Cancel clicked');
+            }
+          }
+        ]
+      });
+      actionSheet.present();
+    }
+
   }
 
 

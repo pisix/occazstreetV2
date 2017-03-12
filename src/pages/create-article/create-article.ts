@@ -27,6 +27,7 @@ export class CreateArticle{
   private imgWidth = 400;
   private imgHeight = 400;
   public imageSrc:Array<string> = ["","","",""];
+  public locale;
 
   private cameraOptions = {
   sourceType: Camera.PictureSourceType.CAMERA,
@@ -67,8 +68,8 @@ export class CreateArticle{
     });
 
 
-
-    this.categorieService.getAllCategories().subscribe(res => {
+    this.locale=this.getUserLanguage();
+    this.categorieService.getAllCategories(this.locale).subscribe(res => {
       this.categories = res;
       console.log(this.categories)
 
@@ -79,7 +80,11 @@ export class CreateArticle{
     this.showImageAlert(index);
     console.log("load Message");
   }
-
+  getUserLanguage():string{
+    let  userLang:string = GlobalsConstants.SUPPORTEDLANGUAGES[navigator.language];
+    userLang='en';
+    return  typeof userLang === "string"?userLang:GlobalsConstants.SUPPORTEDLANGUAGES["default"];
+  }
 
   loadImageFromCamara(imgIndex:number,sourceType:any):void{
     this.cameraOptions.sourceType = sourceType;
@@ -126,36 +131,34 @@ export class CreateArticle{
       if(this.newArticleForm.value.categorie)
       {
         this.articleService.addNewArticle(<Article>this.newArticleForm.value,this.imageSrc).subscribe(res =>{
-          alert("article "+JSON.stringify(res));
           if(res["success"]==true)
           {
             let itemsProcessed =0;
             let error;
             this.imageSrc.forEach(i =>{
               itemsProcessed++;
-              // this._imageService.upload(i,res.article.idArticle).then(res=>{
-              //   if(!(JSON.parse(res.response)).success)
-              //   {
-              //     error=true;
-              //
-              //   }
-              //     if(itemsProcessed == this.imageSrc.length) {
-              //       alert('finish');
-              //       if(!error)
-              //       {
-              //         this.navCtrl.pop();
-              //         this.messageService.showToast(MessagesConstants.articleAjouteSucces,"top");
-              //         loading.dismiss();
-              //       }
-              //       else
-              //       {
-              //         loading.dismiss();
-              //         this.messageService.showAlert(MessagesConstants.erreurAjoutArticle,"Création d'une annonce");
-              //       }
-              //     }
-              // }).catch((error)=>{
-              //
-              // });
+              this._imageService.upload(i,res.article.idArticle).then(res=>{
+                 if(!(JSON.parse(res.response)).success)
+                 {
+                   error=true;
+                 }
+                if(itemsProcessed == this.imageSrc.length) {
+                     alert('finish');
+                    if(!error)
+                     {
+                       this.navCtrl.pop();
+                       this.messageService.showToast(MessagesConstants.articleAjouteSucces,"top");
+                       loading.dismiss();
+                     }
+                    else
+                     {
+                       loading.dismiss();
+                       this.messageService.showAlert(MessagesConstants.erreurAjoutArticle,"Création d'une annonce");
+                     }
+                   }
+               }).catch((error)=>{
+
+               });
             });
           }
           else

@@ -27,11 +27,30 @@ export class Article{
   private _devise:Devise;
   private _utilisateur:Utilisateur;
   private _photo:Photo;
+  private _echangeable:boolean;
+  private _negociable:boolean;
+
 
   constructor(){
 
   }
 
+
+  public get echangeable():boolean {
+    return this._echangeable;
+  }
+
+  public set echangeable(value:boolean) {
+    this._echangeable = value;
+  }
+
+  public get negociable():boolean {
+    return this._negociable;
+  }
+
+  public set negociable(value:boolean) {
+    this._negociable = value;
+  }
 
   get idArticle(): number {
     return this._idArticle;

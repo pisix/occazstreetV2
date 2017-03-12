@@ -32,7 +32,10 @@
     <ion-item>
       <ion-label>Cat&#233;gories</ion-label>
       <ion-select formControlName="categorie" required>
-        <ion-option *ngFor="let cat of categories" [value]="cat.idcategorie" required>{{cat.libelle}}</ion-option>
+        <ion-option *ngFor="let cat of categories" [value]="cat.idcategorie" required>
+          <span *ngIf="locale=='fr'">{{cat.libelle}}</span>
+          <span *ngIf="locale!='fr'">{{cat.libelleEn}}</span>
+        </ion-option>
       </ion-select>
     </ion-item>
 
@@ -43,7 +46,7 @@
 
     <ion-item>
       <ion-label floating>Description</ion-label>
-      <ion-input type="text" required formControlName="details"></ion-input>
+      <ion-textarea required formControlName="details"></ion-textarea>
     </ion-item>
 
 

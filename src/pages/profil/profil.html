@@ -84,7 +84,7 @@
         </ion-card>
         <div class="list-article" *ngIf="articleUser || articleUser?.length==0">
             <ion-row style="flex-wrap: wrap; -webkit-flex-wrap: wrap">
-              <ion-col width-33 (click)="goToDetailArticlePage($event,article)" *ngFor="let article of articleUser">
+              <ion-col width-33 (press)="showAction($event,article)" (click)="goToDetailArticlePage($event,article)" *ngFor="let article of articleUser">
                 <img *ngIf="article?.images.length>0" src="{{url}}{{cheminImage}}{{article?.images[0]?.cheminImage}}"/>
                 <img *ngIf="article?.images.length==0" src="assets/img/defaultImage.png"/>
               </ion-col>

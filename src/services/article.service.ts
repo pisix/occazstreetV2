@@ -218,4 +218,41 @@ export class ArticleService{
         }
       })
   }
+
+  deleteArticle(article) {
+    return this.http.get(GlobalsConstants.urlServer + GlobalsConstants.port + '/article/deleteArticle?idarticle='+article.idArticle)
+      .map((res) => {
+        if (res.status === 200) {
+
+          return (res.json())
+        }
+        else {
+          throw new Error("Could not get User Articles");
+        }
+      })
+      .map((res) => {
+        return res;
+      });
+  }
+
+  updateArticle(article:Article,images:Array<string> ){
+    return this.http.post(GlobalsConstants.urlServer + GlobalsConstants.port + '/article/updateArticle',article)
+      .map(res => {
+        if(res.status === 200){
+          if((res.json()).success)
+          {
+            let result=res;
+            let article = (res.json()).article;
+            var itemsProcessed = 0;
+            return res.json();
+          }else
+          {
+            return res.json();
+          }
+
+        }else {
+          return res.json();
+        }
+      })
+  }
 }

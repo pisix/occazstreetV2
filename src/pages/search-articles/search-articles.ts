@@ -9,6 +9,7 @@ import {CategorieService} from "../../services/categorie.service";
 import {Categorie} from "../../components/categorie.component";
 import {GlobalsConstants} from '../../constants/globals.constants';
 declare var google: any;
+declare var device
 
 @Component({
   templateUrl: 'search-articles.html',
@@ -19,6 +20,8 @@ export class searchModalPage {
   public searchForm:any;
   public address : Object;
   public ville;
+  public locale;
+
 
   @ViewChild('villeElement') addressElement: ElementRef;
 
@@ -40,19 +43,20 @@ export class searchModalPage {
       'filterBy': ['prix asc']
     });
 
+    this.locale=this.getUserLanguage();
 
-    this.categorieService.getAllCategories().subscribe(res => {
+    this.categorieService.getAllCategories(this.locale).subscribe(res => {
       this.categories = res;
     });
 
   }
 
-  getAddress(place:Object) {
+  /*getAddress(place:Object) {
     this.address = place['formatted_address'];
     var location = place['geometry']['location'];
     var lat =  location.lat();
     var lng = location.lng();
-  }
+  }*/
 
   search(event){
     if(this.searchForm.valid){
@@ -74,6 +78,12 @@ export class searchModalPage {
       localStorage.setItem('libelleCategorie',libelleCategorie);
       this.dismiss(this.searchForm.value);
     }
+  }
+
+  getUserLanguage():string{
+    let  userLang:string = GlobalsConstants.SUPPORTEDLANGUAGES[navigator.language];
+    userLang='en';
+    return  typeof userLang === "string"?userLang:GlobalsConstants.SUPPORTEDLANGUAGES["default"];
   }
 
   dismiss(data?) {

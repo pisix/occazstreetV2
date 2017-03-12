@@ -1,0 +1,99 @@
+<!--
+  Generated template for the EditArticle page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar pixis color="primary2">
+    <ion-title>
+      Modification de l'annonce
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+
+<ion-content>
+
+  <form id="updateArticleForm" [formGroup]="updateArticleForm" (ngSubmit)="updateArticle(updateArticleForm)">
+    <ion-row>
+      <ion-col class="img-select" width-20 (click)="openImagePickerDialog(0)">
+        <ion-icon *ngIf="imageSrc[0] == ''"  name="ios-camera-outline"></ion-icon>
+        <img *ngIf="imageSrc[0] != '' && !imageSrc[0].path" src="{{imageSrc[0].file_uri}}">
+        <img *ngIf="imageSrc[0] != '' && imageSrc[0].path" src="{{url}}{{cheminImage}}{{imageSrc[0].file_uri}}">
+      </ion-col>
+      <ion-col class="img-select" width-20 (click)="openImagePickerDialog(1)">
+        <ion-icon *ngIf="imageSrc[1] == ''"  name="ios-camera-outline"></ion-icon>
+        <img *ngIf="imageSrc[1] != '' && !imageSrc[1].path" src="{{imageSrc[1].file_uri}}">
+        <img *ngIf="imageSrc[1] != '' && imageSrc[1].path" src="{{url}}{{cheminImage}}{{imageSrc[1].file_uri}}">
+      </ion-col>
+      <ion-col class="img-select" width-20 (click)="openImagePickerDialog(2)">
+        <ion-icon *ngIf="imageSrc[2] == ''" name="ios-camera-outline"></ion-icon>
+        <img *ngIf="imageSrc[2] != '' && !imageSrc[2].path" src="{{imageSrc[2].file_uri}}">
+        <img *ngIf="imageSrc[2] != '' && imageSrc[2].path" src="{{url}}{{cheminImage}}{{imageSrc[2].file_uri}}">
+      </ion-col>
+      <ion-col class="img-select" width-20 (click)="openImagePickerDialog(3)">
+        <ion-icon *ngIf="imageSrc[3] == ''"  name="ios-camera-outline"></ion-icon>
+        <img *ngIf="imageSrc[3] != '' && !imageSrc[3].path" src="{{imageSrc[3].file_uri}}">
+        <img *ngIf="imageSrc[3] != '' && imageSrc[3].path" src="{{url}}{{cheminImage}}{{imageSrc[3].file_uri}}">
+      </ion-col>
+    </ion-row>
+
+    <ion-item>
+      <ion-label>Cat&#233;gories</ion-label>
+      <ion-select formControlName="categorie" required>
+        <ion-option *ngFor="let cat of categories" [value]="cat.idcategorie"  required>
+          <span *ngIf="locale=='fr'">{{cat.libelle}}</span>
+          <span *ngIf="locale!='fr'">{{cat.libelleEn}}</span>
+        </ion-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Que vendez-vous ?</ion-label>
+      <ion-input type="text" required formControlName="titre"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Description</ion-label>
+      <ion-textarea required formControlName="details"></ion-textarea>
+    </ion-item>
+
+
+    <ion-item>
+      <ion-label floating>Prix (FCFA)</ion-label>
+      <ion-input type="number" required formControlName="prix" min="0"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Quartier</ion-label>
+      <ion-input type="text" required formControlName="complementadresse" ></ion-input>
+    </ion-item>
+    <ion-item>
+
+      <ion-label floating>Ville</ion-label>
+      <ion-input #villeElement  type="text" (focus)="clearVille()" id="ville"  [(ngModel)]="ville" [ngModelOptions]="{standalone: true}" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>vendu</ion-label>
+      <ion-checkbox checked="false" formControlName="vendu"></ion-checkbox>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Accepte les échanges</ion-label>
+      <ion-checkbox color="primary2" checked="false"  formControlName="echangeable"></ion-checkbox>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Prix négociable</ion-label>
+      <ion-checkbox checked="false" formControlName="negociable"></ion-checkbox>
+    </ion-item>
+  </form>
+</ion-content>
+<ion-fab bottom center>
+  <button ion-fab fab-fixed	type="submit"  form="updateArticleForm"  >
+    <ion-icon name="checkmark" is-active="false"></ion-icon>
+  </button>
+</ion-fab>

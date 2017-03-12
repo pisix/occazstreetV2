@@ -36,7 +36,7 @@
         <splash density="port-xhdpi" src="resources\android\splash\drawable-port-xhdpi-screen.png" />
         <splash density="port-xxhdpi" src="resources\android\splash\drawable-port-xxhdpi-screen.png" />
         <splash density="port-xxxhdpi" src="resources\android\splash\drawable-port-xxxhdpi-screen.png" />
-      <allow-intent href="itms:*" />
+        <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
     </platform>
     <platform name="ios">
@@ -72,4 +72,8 @@
     <plugin name="cordova-plugin-file-transfer" spec="~1.6.1" />
     <plugin name="cordova-plugin-camera" spec="~2.3.1" />
     <plugin name="cordova-plugin-apprate" spec="~1.2" />
+    <plugin name="cordova-plugin-googleplus" spec="https://github.com/EddyVerbruggen/cordova-plugin-googleplus">
+        <variable name="REVERSED_CLIENT_ID" value="448214499045-jkgrcc65jcmq6amd7ag4vs36qpjnsov5.apps.googleusercontent.com" />
+    </plugin>
+    <plugin name="cordova-plugin-badge" spec="~0.7.4" />
 </widget>
