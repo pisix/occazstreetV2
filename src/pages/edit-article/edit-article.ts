@@ -68,7 +68,7 @@ export class EditArticlePage {
       'prix':[this.article.prix,Validators.required],
       'echangeable':[this.article.echangeable],
       'negociable':[this.article.negociable],
-      'vendu':[this.article.vendu]
+      'etat':[this.article.etat=='Vendu'?true:false]
     });
 
     this.ville=this.article.nomVille;
@@ -142,6 +142,14 @@ export class EditArticlePage {
     this.updateArticleForm.value.longitude = longitude;
     this.updateArticleForm.value.utilisateur = userId;
     this.updateArticleForm.value.idArticle=this.article.idArticle;
+    if(this.updateArticleForm.value.etat==true)
+    {
+      this.updateArticleForm.value.etat='Vendu';
+    }
+    else
+    {
+      this.updateArticleForm.value.etat='Normal';
+    }
     this.articleService.updateArticle(<Article>this.updateArticleForm.value,this.imageSrc).subscribe(res =>{
       if(res.success==true)
       {
@@ -162,12 +170,14 @@ export class EditArticlePage {
                 if(itemsProcessed == this.imageSrc.length) {
                   if(!error)
                   {
+
                     this.article=(JSON.parse(res.response)).article;
                     this.messageService.showToast(MessagesConstants.articleUpdateSucces,"top");
                     loading.dismiss();
                   }
                   else
                   {
+                    console.log(res);
                     loading.dismiss();
                     this.messageService.showAlert(MessagesConstants.erreurUpdateArticle,"Modification d'une annonce");
                   }
@@ -182,7 +192,7 @@ export class EditArticlePage {
               if(itemsProcessed == this.imageSrc.length) {
                 if(!error)
                 {
-                  this.article=(JSON.parse(res.response)).article;
+                  this.article=res.article;
                   this.messageService.showToast(MessagesConstants.articleUpdateSucces,"top");
                   loading.dismiss();
                 }
@@ -193,7 +203,6 @@ export class EditArticlePage {
                 }
               }
             }
-
         });
       }
       else

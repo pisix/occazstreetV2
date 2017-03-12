@@ -11,22 +11,27 @@ import {App} from "../../app/app.component";
   templateUrl: 'categorie.html'
 })
 export class CategoriePage {
-  
+
   public categories: Array<Categorie> = [];
   public locale;
-  
+
   constructor(public navCtrl: NavController, private categorieService: CategorieService) {
-    this.locale = App.getUserLanguage();
+    this.locale = this.getUserLanguage();
     this.categorieService.getAllCategories(this.locale).subscribe(res => {
       this.categories = res;
     })
-    
+
   }
-  
+  public getUserLanguage():string{
+    let  userLang:string = GlobalsConstants.SUPPORTEDLANGUAGES[navigator.language];
+    return  typeof userLang === "string"?userLang:GlobalsConstants.SUPPORTEDLANGUAGES["default"];
+  }
+
+
   ionViewDidLoad() {
     console.log('Hello Categorie Page');
   }
-  
+
   goToDetailsCategorie(event, laCategorie) {
     let categorie = new Categorie();
     categorie.idCategorie = laCategorie.idcategorie;

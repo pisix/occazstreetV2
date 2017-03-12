@@ -3,12 +3,13 @@ import {ArticleService} from "../../services/article.service";
 import {RateService} from '../../services/rate-service';
 import {Article} from "../../components/article.component";
 import {GlobalsConstants} from "../../constants/globals.constants";
-import {NavController, NavParams, ModalController, ViewController, PopoverController, LoadingController} from "ionic-angular";
+import {NavController, NavParams, ModalController, ViewController, PopoverController, LoadingController,Events} from "ionic-angular";
 import {ArticleDetailsPage} from "../article-details/article-details";
 import {searchModalPage} from "../search-articles/search-articles";
 import {SearchResult} from "../search-result/search-result";
 import {CreateArticle} from "../create-article/create-article";
 import {LoginPage} from "../login/login";
+import {ConnectivityService} from "../../services/connectivity.service";
 
 
 
@@ -27,7 +28,7 @@ export class HomePage {
   public articles1:Array<Article> = [];
   public articles2:Array<Article> = [];
   private offLine:boolean;
-
+  public noNetwork:boolean=false;
   public prixOrder:string = 'croissants';
   public dateOrder:string = 'décroissantes';
   public url=GlobalsConstants.urlServer+GlobalsConstants.port+'/';
@@ -42,13 +43,37 @@ export class HomePage {
               private loadingCtrl:LoadingController,
               private navParams: NavParams,
               private modalController : ModalController,
-              private popoverCtrl: PopoverController) {
+              private popoverCtrl: PopoverController,
+              public events:Events,
+              public connectivityService:ConnectivityService) {
 
     this.getArticlesByLimit(this.skip,this.limit);
-    this.loadAll();
+    //this.loadAll();
     // this.loadImageArticle(this.skip,this.limitExplorer);
     this.homeTab="mur";
     this.rateService.appRate.promptForRating(true);
+
+    //subscribe network events
+    this.events.subscribe('network',(data)=>{
+      if(data.state=='on')
+      {
+        this.noNetwork=false;
+      }else
+      {
+        this.noNetwork=true;
+      }
+    })
+
+    if(this.connectivityService.isOffline())
+    {
+      this.noNetwork=true
+    }
+
+    if(this.connectivityService.isOnline())
+    {
+      this.noNetwork=false;
+    }
+
 
   }
 
@@ -59,7 +84,7 @@ export class HomePage {
       // console.log("Article =>",articles)
       this.numberAnnonces=res.length;
     })
-    
+
   }
 
   selectedMur(){
@@ -81,6 +106,8 @@ export class HomePage {
 
       this.offLine = false;
       let articles = res;
+      console.log(articles);
+
       let tab1, tab2;
       // console.log(articles)
       tab1 = articles.splice(0,(articles.length/2));
@@ -91,6 +118,8 @@ export class HomePage {
       tab2.forEach(x => {
         this.articles2.push(x);
       });
+      console.log(this.articles1);
+      console.log(this.articles2);
 
     },err =>{
       console.log('err',err);

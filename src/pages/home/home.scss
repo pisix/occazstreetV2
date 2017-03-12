@@ -1,4 +1,28 @@
 page-home {
+
+  .subheader .toolbar-title-md
+  {
+    padding: 0 12px;
+    font-weight: 500;
+    font-family: Rubik,sans-serif;
+    font-size: 10px;
+    text-overflow: initial;
+    text-transform: none;
+  }
+  .subheader .toolbar-title-ios
+  {
+    padding: 0 12px;
+    font-weight: 500;
+    font-family: Rubik,sans-serif;
+    font-size: 10px;
+    text-overflow: initial;
+    text-transform: none;
+
+  }
+  .subheader {
+    min-height: 25px;
+    padding: 4px;
+  }
   .getting-started {
     
     ion-card {
