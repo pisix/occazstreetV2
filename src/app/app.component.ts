@@ -1,10 +1,12 @@
 import {Component, ViewChild} from '@angular/core';
 import {Platform, MenuController, Nav,Events, AlertController,LoadingController } from 'ionic-angular';
-import {StatusBar,Push,Splashscreen,Badge} from 'ionic-native';
+import {StatusBar,Push,Splashscreen,Badge,Network} from 'ionic-native';
 import {HomePage} from '../pages/home/home';
 import {HelpPage} from '../pages/help/help';
 import {CategoriePage} from '../pages/categorie/categorie';
 import {LoginPage} from '../pages/login/login';
+import {MessagesPage} from '../pages/messages/messages';
+import {ArticleDetailsPage} from '../pages/article-details/article-details';
 import {GlobalsConstants} from "../constants/globals.constants";
 import {ProfilPage} from '../pages/profil/profil';
 import {NouveautePresDeChezVousPage} from '../pages/nouveaute-pres-de-chez-vous/nouveaute-pres-de-chez-vous';
@@ -14,7 +16,6 @@ import {FavorisPage} from '../pages/favoris/favoris';
 import {UtilisateurService} from '../services/utilisateur.service';
 import {TranslateService} from "ng2-translate";
 import {Page} from "../components/page.component";
-import { ConnectivityService } from '../services/connectivity.service';
 
 
 declare var NotificationEventAdditionalData;
@@ -47,10 +48,30 @@ export class App {
     public translate:TranslateService,
     public alertCtrl:AlertController,
     public utilisateurService:UtilisateurService,
-    public loadingCtrl:LoadingController,
-    public connectivityService: ConnectivityService
-
+    public loadingCtrl:LoadingController
   ) {
+
+    // watch network for a disconnect
+    let disconnectSubscription = Network.onDisconnect().subscribe(() => {
+      console.log('network was disconnected :-(');
+    });
+
+    // stop disconnect watch
+    disconnectSubscription.unsubscribe();
+
+
+    // watch network for a connection
+    let connectSubscription = Network.onConnect().subscribe(() => {
+      console.log('network connected!');
+      // We just got a connection but we need to wait briefly
+      // before we determine the connection type.  Might need to wait 
+      // prior to doing any api requests as well.
+    });
+
+   // stop connect watch
+
+
+
 
     let loading = this.loadingCtrl.create();
     loading.present();
@@ -72,7 +93,6 @@ export class App {
       localStorage.setItem(GlobalsConstants.USER_LOGGED, JSON.stringify(userEventData));
       console.log(userEventData);
       this.infoLoggedUser = userEventData;
-      this.logged=true;
     });
     events.subscribe('user:logged',(eventData)=>{
       localStorage.setItem("logged", 'true');
@@ -95,7 +115,7 @@ export class App {
 
   }
 
-  getUserLanguage():string{
+  public getUserLanguage():string{
     let  userLang:string = GlobalsConstants.SUPPORTEDLANGUAGES[navigator.language];
     return  typeof userLang === "string"?userLang:GlobalsConstants.SUPPORTEDLANGUAGES["default"];
   }
@@ -126,8 +146,8 @@ export class App {
 
        push.on('registration', (data) => {
          //TODO - send device token to server
-         let tokenData={deviceToken:data.registrationId,idUtilisateur:JSON.parse(localStorage.getItem(GlobalsConstants.USER_LOGGED)).id?JSON.parse(localStorage.getItem(GlobalsConstants.USER_LOGGED)).id:''};
-         alert(JSON.stringify(tokenData));
+         let tokenData={deviceToken:data.registrationId,idUtilisateur:JSON.parse(localStorage.getItem(GlobalsConstants.USER_LOGGED))?JSON.parse(localStorage.getItem(GlobalsConstants.USER_LOGGED)).id:''};
+        // alert(JSON.stringify(tokenData));
          this.utilisateurService.registerToken(tokenData).subscribe(res=>{
 
          })

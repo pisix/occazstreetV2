@@ -61,9 +61,9 @@
       <ion-col width-50 no-padding>
 
         <ion-card *ngFor="let art1 of articles1"  (click)="articleDetails($event,art1)">
-          <div class="corner-ribbon" *ngIf="art1.etat=='Vendu'">
+          <!--<div class="corner-ribbon" *ngIf="art1.etat=='Vendu'">
             {{'sold' | translate}}
-          </div>
+          </div>-->
           <img *ngIf="art1?.images.length>0" src="{{url}}{{cheminImage}}{{art1?.images[0]?.cheminImage}}"/>
           <img *ngIf="art1?.images.length==0" src="assets/img/defaultImage.png"/>
           <ion-card-content text-center no-padding>
@@ -76,9 +76,9 @@
             <span *ngIf="art1.dateModification === null">{{'addedOn' | translate}} : {{art1.dateAjout | occasStreetTimer}}</span>
             <span *ngIf="art1.dateModification">{{'editedOn' | translate}} : {{art1.dateModification | occasStreetTimer}}</span>
           </section>
-          <div class="sold" *ngIf="art1.etat=='Vendu'">
+          <!--<div class="sold" *ngIf="art1.etat=='Vendu'">
             {{'sold' | translate}}
-          </div>
+          </div>-->
         </ion-card>
 
       </ion-col>
@@ -99,9 +99,9 @@
             <span *ngIf="art2.dateModification === null" >{{'addedOn' | translate}} : {{art2.dateAjout | occasStreetTimer}}</span>
             <span *ngIf="art2.dateModification">{{'editedOn' | translate}} : {{art2.dateModification | occasStreetTimer}}</span>
           </section>
-          <div class="sold" *ngIf="art2.etat=='Vendu'">
+          <!--<div class="sold" *ngIf="art2.etat=='Vendu'">
             {{'sold' | translate}}
-          </div>
+          </div>-->
         </ion-card>
 
       </ion-col>

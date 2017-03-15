@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Network } from 'ionic-native';
+import { Network } from 'ionic-native'
+
 import { Platform } from 'ionic-angular';
 
 declare var Connection;

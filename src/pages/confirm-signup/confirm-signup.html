@@ -1,0 +1,62 @@
+<!--
+  Generated template for the ConfirmSignup page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<!--
+<ion-header>
+  <ion-navbar pixis color="primary2"  >
+    <ion-title>Confirmation inscription</ion-title>
+  </ion-navbar>
+</ion-header>
+-->
+
+<ion-content padding class="cont">
+
+  <div class="confirm-signup">
+    <form  #digiCodeForm="ngForm" (ngSubmit)="onSubmit(digiCodeForm)" style="margin-top: 15%;">
+      <ion-row>
+        <ion-col class="width-12">
+          <ion-input required class="input-border" type="text" maxlength="1"   [(ngModel)]="code1" name="code1"></ion-input>
+        </ion-col>
+        <ion-col class="width-12">
+          <ion-input required class="input-border" type="text" maxlength="1"    [(ngModel)]="code2" name="code2"></ion-input>
+        </ion-col>
+        <ion-col class="width-12">
+          <ion-input required class="input-border" type="text" maxlength="1" [(ngModel)]="code3" name="code3"></ion-input>
+        </ion-col>
+        <ion-col class="width-12 separator" >
+         <span color="white"> - </span>
+        </ion-col>
+        <ion-col class="width-12">
+          <ion-input required class="input-border" type="text" maxlength="1"   [(ngModel)]="code4" name="code4"></ion-input>
+        </ion-col>
+        <ion-col class="width-12">
+          <ion-input required class="input-border" type="text" maxlength="1"  [(ngModel)]="code5" name="code5"></ion-input>
+        </ion-col>
+        <ion-col class="width-12">
+          <ion-input required class="input-border" type="text" maxlength="1"   [(ngModel)]="code6" name="code6"></ion-input>
+        </ion-col>
+
+      </ion-row>
+
+      <p color="white" style="margin: auto 15px;">
+        Nous avons envoyé un code de confirmation à 6 caractères à l'adresse {{adresseEmail}}. Saisissez-le ici pour confirmer votre adresse email
+      </p>
+
+      <ion-row style="margin-top: 15%">
+        <ion-col width-50>
+          <a ion-button round  color="light"  color="white" outline class="signup_submit" (click)="resendConfirmationCode()">Renvoyer le code</a>
+        </ion-col>
+        <ion-col width-50>
+          <button ion-button round  color="light" type="submit" style="color: #B71C1C;" class="signup_submit" type="submit">Valider</button>
+        </ion-col>
+      </ion-row>
+    </form>
+
+
+  </div>
+
+
+</ion-content>

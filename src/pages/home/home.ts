@@ -53,28 +53,6 @@ export class HomePage {
     this.homeTab="mur";
     this.rateService.appRate.promptForRating(true);
 
-    //subscribe network events
-    this.events.subscribe('network',(data)=>{
-      if(data.state=='on')
-      {
-        this.noNetwork=false;
-      }else
-      {
-        this.noNetwork=true;
-      }
-    })
-
-    if(this.connectivityService.isOffline())
-    {
-      this.noNetwork=true
-    }
-
-    if(this.connectivityService.isOnline())
-    {
-      this.noNetwork=false;
-    }
-
-
   }
 
   loadAll(){

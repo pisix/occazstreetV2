@@ -8,6 +8,7 @@ import {Facebook, Device} from 'ionic-native';
 import {UtilisateurService} from '../../services/utilisateur.service';
 import {HomePage} from "../home/home";
 import {MessageService} from "../../services/message.service";
+import {ConfirmSignupPage} from '../../pages/confirm-signup/confirm-signup';
 
 
 /*

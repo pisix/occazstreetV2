@@ -57,6 +57,31 @@ export class UtilisateurService{
       });
   }
 
+  checkEmailConfirmationCode(email,code)
+  {
+    return this.http
+      .post(
+      GlobalsConstants.urlServer+GlobalsConstants.port+'/utilisateur/checkEmailConfirmationCode',
+      {email:email,
+      code:code})
+      .map(res => res.json())
+      .map((res) => {
+        return res;
+      });
+  }
+
+  regenerateEmailConfirmationCode(email)
+  {
+    console.log(email);
+    return this.http
+      .post(
+      GlobalsConstants.urlServer+GlobalsConstants.port+'/utilisateur/regenerateEmailConfirmationCode',
+      {email:email})
+      .map(res => res.json())
+      .map((res) => {
+        return res;
+      });
+  }
   signup(user)
   {
     return this.http

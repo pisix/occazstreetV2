@@ -123,5 +123,13 @@ page-cgu,page-politique-confidentialite,page-securite,page-contact {
   br{
     box-sizing: inherit;
   }
+
+  .input-cover {
+    position: absolute;
+     top: 0;
+    left: 0;
+    height: 100%;
+    border-bottom: 2px solid blue;
+  }
 }
 

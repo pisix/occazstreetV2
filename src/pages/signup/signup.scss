@@ -1,12 +1,35 @@
 page-signup {
 
+  /*Over Load*/
+  .input-cover {
+    position: absolute;
+    top: 0;
+    left: 10px;
+    height: 100%;
+    border-bottom: 2px solid #c1c1c1;
+  }
+
+  .item-cover {
+    position: absolute;
+    top: 0;
+    left: 10px;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    cursor: pointer;
+    border-bottom: 2px solid #c1c1c1;
+  }
+  /*end overload*/
+
+
+
   .navbar {
     .toolbar-background {
       background: transparent;
     }
   }
   .signup {
-    position: fixed;
+    position: absolute;
     height: 100%;
     width: 100%;
     background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.84) -17%, #f1ecec 637%);
@@ -48,7 +71,7 @@ page-signup {
     width: 100%;
     height: 4rem;
     font-size: 1.5rem;
-    border-radius: 3rem;
+    border-radius: 5px;
     cursor: pointer;
     overflow: hidden;
     transition: width 0.3s 0.15s, font-size 0.1s 0.15s;
@@ -61,7 +84,7 @@ page-signup {
     margin: 1rem 0 2.2rem;
     color: rgba(255, 255, 255, 0.8);
     font-size: 1.5rem;
-    border-radius: 3rem;
+    border-radius: 5px;
     cursor: pointer;
     overflow: hidden;
     -webkit-transition: width 0.3s 0.15s, font-size 0.1s 0.15s;

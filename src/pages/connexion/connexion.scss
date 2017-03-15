@@ -44,7 +44,7 @@ page-connexion {
     width: 100%;
     height: 4rem;
     font-size: 1.5rem;
-    border-radius: 3rem;
+    border-radius: 5px;
     cursor: pointer;
     overflow: hidden;
     transition: width 0.3s 0.15s, font-size 0.1s 0.15s;
@@ -57,7 +57,7 @@ page-connexion {
     margin: 1rem 0 2.2rem;
     color: rgba(255, 255, 255, 0.8);
     font-size: 1.5rem;
-    border-radius: 3rem;
+    border-radius: 5px;
     cursor: pointer;
     overflow: hidden;
     -webkit-transition: width 0.3s 0.15s, font-size 0.1s 0.15s;
@@ -98,6 +98,15 @@ page-connexion {
     padding: 0 0.25em;
     background: -webkit-linear-gradient(top, rgb(223, 227, 230) -17%, #e2e4e5 309%);
     color:#8d8e8e;
+  }
+
+  /*OverLoad*/
+  .input-cover {
+    position: absolute;
+    top: 0;
+    left: 10px;
+    height: 100%;
+    border-bottom: 2px solid #c1c1c1;
   }
 
 }

@@ -4,13 +4,13 @@ import {NgForm} from '@angular/forms';
 import {UtilisateurService} from '../../services/utilisateur.service'
 import {ResetPasswordModalPage} from "../reset-password/reset-password";
 import {HomePage} from "../home/home";
-import {Facebook, Device} from 'ionic-native';
+import {Facebook, Device,GooglePlus} from 'ionic-native';
 import {MessagesConstants} from '../../constants/messages.constants';
 import {MessageService} from '../../services/message.service';
 import {GlobalsConstants} from '../../constants/globals.constants';
 
 
-
+declare var device;
 
 /*
  Generated class for the Connexion page.v
@@ -90,8 +90,8 @@ export class ConnexionModalPage {
   {
 
     let userData = {
-      device: Device.manufacturer + " " + Device.model,
-      os: Device.platform + " " + Device.version,
+      device: device.manufacturer + " " + device.model,
+      os: device.platform + " " + device.version,
       provider:'Facebook'
 
     };
@@ -115,7 +115,36 @@ export class ConnexionModalPage {
 
   google()
   {
-
+    console.log("doGoogle");
+    let userData = {
+      device: device.manufacturer + " " + device.model,
+      os: device.platform + " " + device.version,
+      provider:'Google'
+    };
+    GooglePlus.login(
+      {
+        'scopes': 'profile email',
+        'webClientId': '',
+        'offline': false
+      }
+    )
+      .then(res => {
+        console.log(res);
+        this.utilisateurService.doOauth(res.authResponse.accessToken,userData).subscribe(resu=>{
+          if(resu.success)
+          {
+            this.events.publish('user:logged-data',resu.data);
+            this.events.publish('user:logged',true);
+            this.navCtrl.setRoot(HomePage);
+            this.messageService.showToast(MessagesConstants.welcome);
+          }
+          else
+          {
+            this.messageService.showAlert(MessagesConstants.erreurOAuthMessage+MessagesConstants.parFacebook,"Connexion ");
+          }
+        })
+      })
+      .catch(err => alert(err));
   }
 
 }
