@@ -30,11 +30,11 @@ export class EditProfilModalPage {
 
   constructor(public loadingCtrl:LoadingController, public events:Events,public navCtrl: NavController,public viewCtrl:ViewController,public utilisateurService:UtilisateurService, public messageService:MessageService) {
     this.loggedUser=JSON.parse(localStorage.getItem(GlobalsConstants.USER_LOGGED));
-    console.log(this.loggedUser.dateDeNaissance._i);
+    console.log(this.loggedUser);
     this.nom=this.loggedUser.nom;
     this.email=this.loggedUser.email;
     this.password=this.loggedUser.password;
-    this.datedenaissance=this.loggedUser.dateDeNaissance._i;
+    this.datedenaissance=this.loggedUser.dateDeNaissance;
     this.prenom=this.loggedUser.prenom;
     this.localisation=this.loggedUser.nomVille +', '+this.loggedUser.nomPays;
     if(this.loggedUser.photo.idPhoto!=1)
@@ -112,7 +112,7 @@ export class EditProfilModalPage {
         if(res.success)
         {
           loading.dismiss();
-          this.events.publish('user:logged-data',res.utilisateur);
+          this.events.publish('user:update',res.utilisateur);
           this.messageService.showAlert(MessagesConstants.misAJourProfilSuccess,MessagesConstants.miseAjoutProfilTitre);
         }
         else

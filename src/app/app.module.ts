@@ -42,7 +42,6 @@ import {ContactPage} from "../pages/contact/contact";
 import {RateService} from "../services/rate-service";
 import {TranslateModule, TranslateStaticLoader, TranslateLoader} from "ng2-translate";
 import {Http} from "@angular/http";
-import { ConnectivityService } from '../services/connectivity.service';
 import {EditArticlePage} from '../pages/edit-article/edit-article';
 import {ConfirmSignupPage} from '../pages/confirm-signup/confirm-signup';
 
@@ -135,7 +134,7 @@ import {ConfirmSignupPage} from '../pages/confirm-signup/confirm-signup';
     EditArticlePage,
     ConfirmSignupPage
   ],
-  providers: [ConnectivityService,ArticleService,ImageService,UtilisateurService,CategorieService,MediaSharing,MessageService,ChatService,RateService]
+  providers: [ArticleService,ImageService,UtilisateurService,CategorieService,MediaSharing,MessageService,ChatService,RateService]
 })
 
 export class AppModule {}

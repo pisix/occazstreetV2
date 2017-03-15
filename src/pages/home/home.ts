@@ -9,8 +9,6 @@ import {searchModalPage} from "../search-articles/search-articles";
 import {SearchResult} from "../search-result/search-result";
 import {CreateArticle} from "../create-article/create-article";
 import {LoginPage} from "../login/login";
-import {ConnectivityService} from "../../services/connectivity.service";
-
 
 
 @Component({
@@ -44,8 +42,7 @@ export class HomePage {
               private navParams: NavParams,
               private modalController : ModalController,
               private popoverCtrl: PopoverController,
-              public events:Events,
-              public connectivityService:ConnectivityService) {
+              public events:Events) {
 
     this.getArticlesByLimit(this.skip,this.limit);
     //this.loadAll();
