@@ -26,9 +26,19 @@
         <ion-icon name="{{p._icon}}" item-left style="color:#a1a1a1" ></ion-icon>
         <span [innerHtml]="p._title | translate"></span>
       </button>
+      <hr/>
+      <button  ion-item  (click)="marksApp()">
+        <span>Notez l'application</span>
+      </button>
+      <button  ion-item  (click)="shareWhatsapp()">
+        <span>Partagez l'application</span>
+      </button>
       <button *ngIf="logged" ion-item  (click)="doLogout()">
         <ion-icon name="log-out" item-left style="color:#a1a1a1" ></ion-icon>
         <span>{{'logoutLabel' | translate}}</span>
+      </button>
+      <button  ion-item  >
+        <span>Version : {{version}}</span>
       </button>
     </ion-list>
   </ion-content>

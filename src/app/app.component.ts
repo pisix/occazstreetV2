@@ -1,6 +1,6 @@
 import {Component, ViewChild} from '@angular/core';
 import {Platform, MenuController, Nav,Events, AlertController,LoadingController } from 'ionic-angular';
-import {StatusBar,Push,Splashscreen,Badge,Network} from 'ionic-native';
+import {StatusBar,Push,Splashscreen,Badge,Network,InAppBrowser} from 'ionic-native';
 import {HomePage} from '../pages/home/home';
 import {HelpPage} from '../pages/help/help';
 import {CategoriePage} from '../pages/categorie/categorie';
@@ -16,6 +16,7 @@ import {FavorisPage} from '../pages/favoris/favoris';
 import {UtilisateurService} from '../services/utilisateur.service';
 import {TranslateService} from "ng2-translate";
 import {Page} from "../components/page.component";
+import {MediaSharing} from "../services/mediaSharing.service";
 
 
 declare var NotificationEventAdditionalData;
@@ -39,6 +40,8 @@ export class App {
 
   public url=GlobalsConstants.urlServer+GlobalsConstants.port+'/';
   public cheminPhoto=GlobalsConstants.cheminPhoto;
+  public version=GlobalsConstants.VERSION;
+  public appstore=GlobalsConstants.APPPLAYSTORE;
 
 
   constructor(
@@ -48,7 +51,8 @@ export class App {
     public translate:TranslateService,
     public alertCtrl:AlertController,
     public utilisateurService:UtilisateurService,
-    public loadingCtrl:LoadingController
+    public loadingCtrl:LoadingController,
+    public mediaSharing:MediaSharing
   ) {
 
     // watch network for a disconnect
@@ -105,9 +109,9 @@ export class App {
       new Page('menu.home',HomePage,'home'),
       new Page('menu.messages',ChatsPage,'chatbubbles'),
       new Page('menu.categories',CategoriePage,'list-box'),
+      new Page('menu.aroundYou',NouveautePresDeChezVousPage,'locate'),
       new Page('menu.favorite',FavorisPage,'heart'),
       new Page('menu.inviteFriends',InvitezVosAmisPage,'people'),
-      new Page('menu.aroundYou',NouveautePresDeChezVousPage,'locate'),
       new Page('menu.help',HelpPage,'help-circle'),
     ];
 
@@ -277,5 +281,17 @@ export class App {
     };
     document.addEventListener('online', onOnline, false);
     document.addEventListener('offline', onOffline, false);
+  }
+
+  marksApp()
+  {
+    let browser = new InAppBrowser(GlobalsConstants.APPPLAYSTORE, '_system');
+
+  }
+
+  shareWhatsapp()
+  {
+    let message="je t'invite à telecharger l'application "+ GlobalsConstants.APPNAME +", elle est juste trop bien !!! :) "+GlobalsConstants.APPPLAYSTORE;
+    this.mediaSharing.shareViaWhatsApp(message,null,GlobalsConstants.WEBSITE);
   }
 }
