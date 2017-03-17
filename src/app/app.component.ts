@@ -214,8 +214,10 @@ export class App {
        });
     });
   }
-
-
+  menuClose()
+  {
+    this.menu.close();
+  }
   openPage(page) {
     // close the menu when clicking a link from the menu
     this.menu.close();
