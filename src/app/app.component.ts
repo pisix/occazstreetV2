@@ -112,7 +112,7 @@ export class App {
       new Page('menu.aroundYou',NouveautePresDeChezVousPage,'locate'),
       new Page('menu.favorite',FavorisPage,'heart'),
       new Page('menu.inviteFriends',InvitezVosAmisPage,'people'),
-      new Page('menu.help',HelpPage,'help-circle'),
+      new Page('menu.help',HelpPage,'information-circle'),
     ];
 
     loading.dismiss();
