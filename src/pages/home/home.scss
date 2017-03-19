@@ -23,46 +23,13 @@ page-home {
     min-height: 25px;
     padding: 4px;
   }
-  .getting-started {
-    
-    ion-card {
-      width: calc(100% - 10px);
-      border-radius: 10px;
-      ion-card-content {
-        padding: 0;
-      }
-    }
-    
-    p {
-      margin: 20px 0;
-      line-height: 22px;
-      font-size: 16px;
-    }
-    
-  }
-  
-  .price {
-    font-size: small;
-    font-weight: bold;
-  }
-  .title {
-    color: #989898;
-  }
-  
-  .timer {
-    font-size: x-small;
-    margin-top: 2em;
-    padding-bottom: 7px;
-    padding-right: 7px;
-    color: #989898;
-  }
-  
+
   .network-error {
     position: absolute;
     color: rgba(144, 143, 143, 0.64);
-    
+
   }
-  
+
   .image-explorer {
     background-repeat: no-repeat;
     background-size: 100%;
@@ -70,43 +37,11 @@ page-home {
     height: 0;
     padding-top: 100%
   }
-  
+
   .left {
     float: left;
   }
-  
-  .corner-ribbon{
-    width: 95px;
-    height: 20px;
-    background: #e43;
-    position: relative;
-    top: -205px;
-    text-align: center;
-    line-height: 50px;
-    letter-spacing: 1px;
-    color: #f0f0f0;
-    right: -90px;
-    left: auto;
-    transform: rotate(45deg);
-    -webkit-transform: rotate(45deg);
-  }
-  
-  .sold
-  {
-    font-size: 12px;
-    width: 20%;
-    height: 4.2%;
-    position: absolute;
-    background-color: #ffe80a;
-    color: #130808;
-    font-weight: bold;
-    text-align: center;
-    margin-top: -35%;
-    margin-left: 10%;
 
-  }
-
-  
   .sold-explorer {
     font-size: 12px;
     width: 20%;
@@ -119,18 +54,18 @@ page-home {
     text-align: center;
     margin-top: -10%;
     MARGIN-LEFT: 4%;
-    
+
   }
-  
+
 }
 
 .popover-content {
-  
+
   .popover-viewport {
     ion-list {
       margin: 0px;
     }
-    
+
     ion-item {
       padding-right: 16px;
     }

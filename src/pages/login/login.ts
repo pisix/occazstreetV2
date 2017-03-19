@@ -1,22 +1,11 @@
 import { Component } from '@angular/core';
 import {NavParams, NavController, ModalController,Events,AlertController,ToastController} from 'ionic-angular';
 import {GlobalsConstants} from "../../constants/globals.constants";
-import {MessagesConstants} from '../../constants/messages.constants';
-import {ConnexionModalPage} from "../../pages/connexion/connexion";
-import {SignupPage} from '../../pages/signup/signup';
-import {Facebook, Device} from 'ionic-native';
+import {ConnexionModalPage} from "../connexion/connexion";
+import {SignupPage} from '../signup/signup';
 import {UtilisateurService} from '../../services/utilisateur.service';
-import {HomePage} from "../home/home";
 import {MessageService} from "../../services/message.service";
-import {ConfirmSignupPage} from '../../pages/confirm-signup/confirm-signup';
 
-
-/*
-  Generated class for the LoginPage page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Component({
   selector:'page-login',
   templateUrl: 'login.html'
@@ -35,8 +24,6 @@ export class LoginPage {
 
     connexion()
     {
-        /*let modal=this.modalController.create(ConnexionModalPage);
-        modal.present();*/
         this.navCtrl.push(ConnexionModalPage)
     }
 

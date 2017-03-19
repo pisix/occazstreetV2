@@ -6,12 +6,12 @@ import {Camera} from 'ionic-native';
 import {FormBuilder, Validators} from "@angular/forms";
 import {GlobalsConstants} from "../../constants/globals.constants";
 import {MessagesConstants} from "../../constants/messages.constants";
-import {LoginPage} from "../login/login";
 import {ArticleService} from "../../services/article.service";
 import {MessageService} from "../../services/message.service";
 import {ImageService} from "../../services/image.service";
 import {Article} from "../../components/article.component";
-declare var  google;
+
+declare let  google;
 
 @Component({
   selector:'create-article',
@@ -205,9 +205,7 @@ export class CreateArticle{
 
   getAddress(place:Object) {
     this.address = place['formatted_address'];
-    var location = place['geometry']['location'];
-    var lat =  location.lat();
-    var lng = location.lng();
+    const location = place['geometry']['location'];
   }
 
   ngAfterViewInit() {

@@ -1,7 +1,3 @@
-/**
- * Created by fleundeu on 05/11/2016.
- */
-
 import {Injectable} from '@angular/core'
 import {Observable} from "rxjs/Observable";
 import { ToastController, LoadingController,AlertController} from 'ionic-angular';

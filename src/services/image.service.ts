@@ -13,7 +13,7 @@ export class ImageService{
 
   }
 
-  upload(image:string,article :string){
+  upload(image:string,article :string):any{
     let ft = new Transfer();
     let options = {
       fileKey: 'file',
@@ -32,7 +32,7 @@ export class ImageService{
     return ft.upload(image, GlobalsConstants.urlServer + GlobalsConstants.port + '/article/uploadImage', options)
   }
 
-  updateImage(image:string,article :string,idImage:string,oldFileName:string){
+  updateImage(image:string,article :string,idImage:string,oldFileName:string):any{
     console.log(idImage);
     let ft = new Transfer();
     let options = {

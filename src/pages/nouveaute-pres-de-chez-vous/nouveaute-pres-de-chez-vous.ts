@@ -4,13 +4,8 @@ import { Geolocation } from 'ionic-native';
 import {ArticleDetailsPage} from '../article-details/article-details';
 import {Article} from '../../components/article.component';
 import {ArticleService} from '../../services/article.service';
-/*
-  Generated class for the NouveautePresDeChezVous page.
 
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
-declare var google: any;
+declare let google: any;
 
 @Component({
   selector: 'page-nouveaute-pres-de-chez-vous',

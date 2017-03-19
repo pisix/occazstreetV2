@@ -1,14 +1,13 @@
 import { Injectable } from '@angular/core';
 import { AppRate } from 'ionic-native';
 import { Platform } from 'ionic-angular';
-import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 
 @Injectable()
 export class RateService {
-  
+
   appRate: any = AppRate;
-  
+
   constructor(public platform: Platform) {
     this.platform.ready().then(
       () => {
@@ -25,7 +24,7 @@ export class RateService {
         };
       }
     )
-    
+
   }
 
 }

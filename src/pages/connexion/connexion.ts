@@ -4,20 +4,14 @@ import {NgForm} from '@angular/forms';
 import {UtilisateurService} from '../../services/utilisateur.service'
 import {ResetPasswordModalPage} from "../reset-password/reset-password";
 import {HomePage} from "../home/home";
-import {Facebook, Device,GooglePlus} from 'ionic-native';
+import {Facebook,GooglePlus} from 'ionic-native';
 import {MessagesConstants} from '../../constants/messages.constants';
 import {MessageService} from '../../services/message.service';
 import {GlobalsConstants} from '../../constants/globals.constants';
 
 
-declare var device;
+declare let device;
 
-/*
- Generated class for the Connexion page.v
-
- See http://ionicframework.com/docs/v2/components/#navigation for more info on
- Ionic pages and navigation.
- */
 @Component({
   selector: 'page-connexion',
   templateUrl: 'connexion.html'

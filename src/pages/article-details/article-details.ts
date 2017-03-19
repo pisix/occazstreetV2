@@ -10,8 +10,8 @@ import {MessagesPage} from "../messages/messages";
 import {LoginPage} from "../login/login"
 
 
-declare var window
-declare var google: any;
+declare let window;
+declare let google: any;
 
 
 @Component({
@@ -136,11 +136,7 @@ export class ArticleDetailsPage implements OnInit{
   share(channel:string){
     /*Social Sharing*/
     let message=this.article.titre +" : \n  sur OccazStreet \n pour voir le détails télécharger l'application en allant sur "+GlobalsConstants.APPPLAYSTORE;
-    let messageT=this.article.titre  +" : \n sur OccazStreet \n pour voir le détails, télécharger l'application en allant sur " +GlobalsConstants.APPPLAYSTORE;
-    let image= "<img src='"+GlobalsConstants.cheminImage +this.article.images[0].cheminImage+"'/>" ;
     let imageLink = this.url+GlobalsConstants.cheminImage +this.article.images[0].cheminImage;
-    let link="";
-
 
     switch (channel){
 
@@ -166,7 +162,6 @@ export class ArticleDetailsPage implements OnInit{
 
       case 'mail':
 
-        let messageMail="Ce produit pourrait t\'interesser : "+this.article.titre+"\n"+this.article.details;
         let subjectMail=this.article.titre +" sur Occazstreet";
 
         this.mediaSharing.shareViaEmail(message,subjectMail,null,null,null,imageLink).then(()=>{
