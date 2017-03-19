@@ -13,7 +13,7 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
   <ion-row *ngIf="offLine">
     <ion-col text-center>
       <div class="network-error">
@@ -35,48 +35,17 @@
   <ion-row *ngIf="!offLine">
 
     <ion-col width-50 no-padding>
-
-      <ion-card *ngFor="let art1 of articles1"  (click)="articleDetails($event,art1)">
-        <img *ngIf="art1?.images.length>0" src="{{url}}{{cheminImage}}{{art1?.images[0]?.cheminImage}}"/>
-        <img *ngIf="art1?.images.length==0" src="assets/img/defaultImage.png"/>
-        <ion-card-content text-center no-padding>
-          <ion-card-title  class="price" >
-            {{art1.prix | currency:'XAF':true}}}}
-          </ion-card-title>
-          <h6>{{art1.titre | titeCapitalize}}</h6>
-        </ion-card-content>
-        <section class="timer" text-right>
-          <span *ngIf="art1.dateModification === null">{{'addedOn' | translate}} : {{art1.dateAjout | occasStreetTimer}}</span>
-          <span *ngIf="art1.dateModification">{{'editedOn' | translate}} : {{art1.dateModification | occasStreetTimer}}</span>
-        </section>
-        <div class="sold" *ngIf="art1.etat=='Vendu'">
-          {{'sold' | translate}}
-        </div>
-      </ion-card>
-
+      <article-card *ngFor="let art1 of articles1"
+                    [article]="art1" #articleCard1
+                    (click)="articleCard1.articleDetails(art1)">
+      </article-card>
     </ion-col>
 
     <ion-col width-50 no-padding>
-      <ion-card *ngFor="let art2 of articles2" (click)="articleDetails($event,art2)">
-        <img *ngIf="art2?.images.length>0" src="{{url}}{{cheminImage}}{{art2?.images[0]?.cheminImage}}"/>
-        <img *ngIf="art2?.images.length==0" src="assets/img/defaultImage.png"/>
-
-
-        <ion-card-content text-center no-padding>
-          <ion-card-title class="price">
-            {{art2.prix | currency:'XAF':true}}
-          </ion-card-title>
-          <h6>{{art2.titre | titeCapitalize}}</h6>
-        </ion-card-content>
-        <section class="timer" text-right>
-          <span *ngIf="art2.dateModification === null" >{{'addedOn' | translate}} : {{art2.dateAjout | occasStreetTimer}}</span>
-          <span *ngIf="art2.dateModification">{{'editedOn' | translate}} : {{art2.dateModification | occasStreetTimer}}</span>
-        </section>
-        <div class="sold" *ngIf="art2.etat=='Vendu'">
-          <span style="margin-top: 1%">{{'sold' | translate}}</span>
-        </div>
-      </ion-card>
-
+      <article-card *ngFor="let art2 of articles2"
+                    [article]="art2" #articleCard2
+                    (click)="articleCard2.articleDetails(art2)">
+      </article-card>
     </ion-col>
   </ion-row>
 </ion-content>

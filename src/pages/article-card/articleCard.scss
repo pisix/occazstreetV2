@@ -1,0 +1,48 @@
+article-card{
+  #card {
+    width: calc(100% - 10px);
+    border-radius: 10px;
+    ion-card-content {
+      padding: 0;
+    }
+  }
+
+  p {
+    margin: 20px 0;
+    line-height: 22px;
+    font-size: 16px;
+  }
+
+  .price {
+    font-size: small;
+    font-weight: bold;
+  }
+  .title {
+    color: #989898;
+  }
+
+  .timer {
+    font-size: x-small;
+    margin-top: 2em;
+    padding-bottom: 7px;
+    padding-right: 7px;
+    color: #989898;
+  }
+
+  .sold
+  {
+    font-size: 12px;
+    width: 20%;
+    height: 4.2%;
+    position: absolute;
+    background-color: #ffe80a;
+    color: #130808;
+    font-weight: bold;
+    text-align: center;
+    margin-top: -35%;
+    margin-left: 10%;
+
+  }
+}
+
+

@@ -11,14 +11,7 @@ import {ImageService} from "../../services/image.service";
 import {CategorieService} from "../../services/categorie.service";
 import {Camera} from 'ionic-native';
 
-
-
-/*
-  Generated class for the EditArticle page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
+declare let google:any;
 @Component({
   selector: 'page-edit-article',
   templateUrl: 'edit-article.html'

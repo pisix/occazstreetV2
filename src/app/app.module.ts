@@ -44,6 +44,7 @@ import {TranslateModule, TranslateStaticLoader, TranslateLoader} from "ng2-trans
 import {Http} from "@angular/http";
 import {EditArticlePage} from '../pages/edit-article/edit-article';
 import {ConfirmSignupPage} from '../pages/confirm-signup/confirm-signup';
+import {ArticleCard} from "../pages/article-card/article.card";
 
 
 @NgModule({
@@ -82,7 +83,8 @@ import {ConfirmSignupPage} from '../pages/confirm-signup/confirm-signup';
     ContactSujetPage,
     FavorisPage,
     EditArticlePage,
-    ConfirmSignupPage
+    ConfirmSignupPage,
+    ArticleCard
   ],
   imports: [
     IonicModule.forRoot(App,{
@@ -132,7 +134,8 @@ import {ConfirmSignupPage} from '../pages/confirm-signup/confirm-signup';
     ContactSujetPage,
     FavorisPage,
     EditArticlePage,
-    ConfirmSignupPage
+    ConfirmSignupPage,
+    ArticleCard
   ],
   providers: [ArticleService,ImageService,UtilisateurService,CategorieService,MediaSharing,MessageService,ChatService,RateService]
 })
