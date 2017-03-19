@@ -1,17 +1,10 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {NavController, LoadingController, NavParams} from 'ionic-angular';
 import {ArticleService} from '../../services/article.service';
 import {GlobalsConstants} from "../../constants/globals.constants";
 import {Article} from '../../components/article.component';
 import {AbstractLoggedPage} from "../abstratLoggedPage";
 
-
-/*
-  Generated class for the Favoris page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Component({
   selector: 'page-favoris',
   templateUrl: 'favoris.html'
@@ -25,7 +18,7 @@ export class FavorisPage extends AbstractLoggedPage {
   public url=GlobalsConstants.urlServer+GlobalsConstants.port+'/';
   public cheminImage=GlobalsConstants.cheminImage;
   private loading;
-  
+
   constructor(protected navCtrl: NavController, protected navParams: NavParams, public articleService:ArticleService,public loadingCtrl:LoadingController) {
     super();
   }
@@ -33,7 +26,7 @@ export class FavorisPage extends AbstractLoggedPage {
   ionViewDidLoad() {
     console.log('Hello FavorisPage Page');
   }
-  
+
   initData() {
     this.loading =this.loadingCtrl.create();
     this.loading.present();
@@ -44,7 +37,7 @@ export class FavorisPage extends AbstractLoggedPage {
         if(res.articles.length>0)
         {
           this.articleFavorisExist=true;
-        
+
           res.articles.forEach((article)=> {
             this.articles.push(article);
           });

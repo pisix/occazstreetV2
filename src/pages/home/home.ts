@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ArticleService} from "../../services/article.service";
 import {RateService} from '../../services/rate-service';
 import {Article} from "../../components/article.component";
@@ -15,7 +15,7 @@ import {LoginPage} from "../login/login";
   selector:'page-home',
   templateUrl: 'home.html'
 })
-export class HomePage {
+export class HomePage implements OnInit{
 
   public homeTab;
   public title = GlobalsConstants.APPNAME;
@@ -38,18 +38,17 @@ export class HomePage {
   constructor(private articleService:ArticleService,
               protected rateService:RateService,
               private navCtrl: NavController,
-              private loadingCtrl:LoadingController,
-              private navParams: NavParams,
               private modalController : ModalController,
               private popoverCtrl: PopoverController,
               public events:Events) {
 
+  }
+
+
+  ngOnInit(): void {
     this.getArticlesByLimit(this.skip,this.limit);
-    //this.loadAll();
-    // this.loadImageArticle(this.skip,this.limitExplorer);
     this.homeTab="mur";
     this.rateService.appRate.promptForRating(true);
-
   }
 
   loadAll(){
@@ -117,19 +116,6 @@ export class HomePage {
       }
     }
     this.images=this.shuffle(this.images);
-  }
-
-  articleDetails(event,item:Article){
-    let loading =this.loadingCtrl.create();
-    loading.present();
-    this.articleService.updateNumberView(item).subscribe(res=>{
-      loading.dismiss();
-      item.nombreDeVue=res.article.nombreDeVue;
-      this.navCtrl.push(ArticleDetailsPage, {
-        article: item
-      });
-    })
-
   }
 
   addNewArticle(){

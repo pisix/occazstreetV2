@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ArticleService} from "../../services/article.service";
 import {Article} from "../../components/article.component";
 import {GlobalsConstants} from "../../constants/globals.constants";
-import {NavController, NavParams, ModalController, ViewController, PopoverController,LoadingController} from "ionic-angular";
+import {NavController, NavParams, ModalController, PopoverController,LoadingController} from "ionic-angular";
 import {ArticleDetailsPage} from "../article-details/article-details";
 import {searchModalPage} from "../search-articles/search-articles";
 import {HomePage, ArticlesPopOver} from "../home/home";
@@ -18,8 +18,6 @@ export class SearchResult implements OnInit{
   public homeTab;
   public title = GlobalsConstants.APPNAME;
 
-  private limit = GlobalsConstants.PAGE;
-  private limitExplorer=GlobalsConstants.PAGEEXPLORER;
   public articles1:Array<Article> = [];
   public articles2:Array<Article> = [];
   private param;

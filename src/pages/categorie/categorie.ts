@@ -2,9 +2,8 @@ import {Component} from '@angular/core';
 import {NavController} from 'ionic-angular';
 import {CategorieService} from '../../services/categorie.service';
 import {Categorie} from '../../components/categorie.component';
-import {CategorieDetailsPage} from '../../pages/categorie-details/categorie-details';
+import {CategorieDetailsPage} from '../categorie-details/categorie-details';
 import {GlobalsConstants} from '../../constants/globals.constants';
-import {App} from "../../app/app.component";
 
 @Component({
   selector: 'page-categorie',

@@ -1,22 +1,16 @@
 import { Component } from '@angular/core';
 import {NgForm} from '@angular/forms';
 import { NavController, Events,ToastController, AlertController,LoadingController} from 'ionic-angular';
-import {Device,Push} from 'ionic-native';
+import {Push} from 'ionic-native';
 import {UtilisateurService} from '../../services/utilisateur.service';
 import {HomePage} from '../home/home';
 import {MessagesConstants} from '../../constants/messages.constants';
 import {MessageService} from '../../services/message.service';
-import {ConfirmSignupPage} from '../../pages/confirm-signup/confirm-signup';
+import {ConfirmSignupPage} from '../confirm-signup/confirm-signup';
 import {GlobalsConstants} from '../../constants/globals.constants';
 
-declare var device;
+declare let device;
 
-/*
-  Generated class for the Signup page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Component({
   selector: 'page-signup',
   templateUrl: 'signup.html'

@@ -190,9 +190,6 @@ export class ArticleService{
         if(res.status === 200){
           if((res.json()).success)
           {
-            let result=res;
-            let article = (res.json()).article;
-            var itemsProcessed = 0;
             return res.json();
           }else
           {
@@ -238,9 +235,6 @@ export class ArticleService{
         if(res.status === 200){
           if((res.json()).success)
           {
-            let result=res;
-            let article = (res.json()).article;
-            var itemsProcessed = 0;
             return res.json();
           }else
           {
