@@ -136,11 +136,11 @@ export class App {
        let push = Push.init({
          android: {
           // (old)senderID: "860269311689"
-           senderID:"448214499045"
+           senderID:"662729627350"
         },
 
          ios: {
-           senderID: "448214499045",
+           senderID: "662729627350",
            alert: "true",
            badge: false,
            sound: "true"

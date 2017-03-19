@@ -8,7 +8,8 @@ export  class GlobalsConstants{
   static port:string = "1337";
   static cheminImage:string = "imagesArticle/";
   static cheminPhoto:string = "photoUtilisateur/";
-  static GOOGLECLIENTID:string = "448214499045-h5rf4q3tnp6he7r9mbj72espfplgc315.apps.googleusercontent.com";
+  static GOOGLECLIENTID:string = "662729627350-55h29ab20l6pvn78o75i3sru68qrgit3.apps.googleusercontent.com";
+  static GOOGLEWEBCLIENTID:string="662729627350-caog2toft0kdi1rj4vreaire3eqk733d.apps.googleusercontent.com";
   static FACEBOOKCLIENTID:string = "360840357584353";
   static USER_LOGGED:string = "loggedUser";
   static LOCAL_TOKEN_KEY:string = "token";
