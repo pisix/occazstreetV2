@@ -28,16 +28,19 @@
       </button>
       <hr/>
       <button  ion-item  (click)="marksApp()">
+        <ion-icon name="star" item-left style="color:#a1a1a1" ></ion-icon>
         <span>Notez l'application</span>
       </button>
       <button  ion-item  (click)="shareWhatsapp()">
+        <ion-icon name="logo-whatsapp" item-left style="color:#a1a1a1" ></ion-icon>
         <span>Partagez l'application</span>
       </button>
       <button *ngIf="logged" ion-item  (click)="doLogout()">
         <ion-icon name="log-out" item-left style="color:#a1a1a1" ></ion-icon>
         <span>{{'logoutLabel' | translate}}</span>
       </button>
-      <button  ion-item  >
+      <button  ion-item  (click)="menuClose()">
+        <ion-icon name="sync" item-left style="color:#a1a1a1" ></ion-icon>
         <span>Version : {{version}}</span>
       </button>
     </ion-list>
