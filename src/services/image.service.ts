@@ -52,4 +52,22 @@ export class ImageService{
     };
     return ft.upload(image, GlobalsConstants.urlServer + GlobalsConstants.port + '/article/updateImage', options)
   }
+
+  uploadUserImg(imgUrl:string,idUtilisateur:number):any{
+    let ft = new Transfer();
+    let options = {
+      fileKey: 'file',
+      fileName: imgUrl,
+      mimeType: 'image/png',
+      chunkedMode: false,
+      headers: {
+        'Content-Type' : undefined
+      },
+      params: {
+        fileName: imgUrl,
+        idUtilisateur: idUtilisateur
+      }
+    };
+    return ft.upload(imgUrl, GlobalsConstants.urlServer + GlobalsConstants.port + '/utilisateur/uploadPhoto', options)
+  }
 }

@@ -9,7 +9,7 @@ export class Categorie{
   private _statut:string;
   private _libelleEn:string;
 
-  constructor(){
+  constructor(category?:Categorie){
 
   }
 

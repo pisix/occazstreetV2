@@ -138,25 +138,25 @@ export class CreateArticle{
             this.imageSrc.forEach(i =>{
               itemsProcessed++;
               this._imageService.upload(i,res.article.idArticle).then(res=>{
-                 if(!(JSON.parse(res.response)).success)
-                 {
-                   error=true;
-                 }
+                if(!(JSON.parse(res.response)).success)
+                {
+                  error=true;
+                }
                 if(itemsProcessed == this.imageSrc.length) {
-                     alert('finish');
-                    if(!error)
-                     {
-                       this.navCtrl.pop();
-                       this.messageService.showToast(MessagesConstants.articleAjouteSucces,"top");
-                       loading.dismiss();
-                     }
-                    else
-                     {
-                       loading.dismiss();
-                       this.messageService.showAlert(MessagesConstants.erreurAjoutArticle,"Création d'une annonce");
-                     }
-                   }
-               }).catch((error)=>{
+                  alert('finish');
+                  if(!error)
+                  {
+                    this.navCtrl.pop();
+                    this.messageService.showToast(MessagesConstants.articleAjouteSucces,"top");
+                    loading.dismiss();
+                  }
+                  else
+                  {
+                    loading.dismiss();
+                    this.messageService.showAlert(MessagesConstants.erreurAjoutArticle,"Création d'une annonce");
+                  }
+                }
+              }).catch((error)=>{
 
                });
             });
