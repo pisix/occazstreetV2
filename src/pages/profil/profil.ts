@@ -35,7 +35,15 @@ export class ProfilPage {
   public showEdit:boolean=false;
   private loggedUser:Utilisateur;
   private loading;
-
+  public articles1:Array<Article> = [];
+  public articles2:Array<Article> = [];
+  public articlesV1:Array<Article> = [];
+  public articlesV2:Array<Article> = [];
+  public articlesF1:Array<Article> = [];
+  public articlesF2:Array<Article> = [];
+  public numberSoldArticle:number;
+  public numberArticle:number;
+  public numberFavoriteArticle:number;
 
   constructor(public alertCtrl:AlertController,public actionSheetCtrl: ActionSheetController,public mediaSharing:MediaSharing, public events:Events,public modalCtrl:ModalController,public messageService:MessageService,public navCtrl: NavController,public navParams:NavParams,private articleService:ArticleService,public toastCtrl:ToastController,public loadingCtrl:LoadingController) {
    // this.utilisateur = navParams.get('loggedUser');
@@ -57,28 +65,72 @@ export class ProfilPage {
       this.utilisateur=userEventData;
     });
 
-
-
+    events.subscribe('update:profile',(data)=>{
+      this.ionViewDidLoad();
+    })
   }
 
   ionViewDidLoad() {
+    this.articles1=[];
+    this.articles2=[];
+    this.articlesF1=[];
+    this.articlesF2=[];
+    this.articlesV1=[];
+    this.articlesV2=[];
     let loading = this.loadingCtrl.create();
     loading.present();
     this.articleService.getArticleByUser(this.utilisateur.id).subscribe(res=>{
       if(res.success)
       {
         this.articleUser=res.articles;
-        console.log("Article user"+this.articleUser);
+        this.numberArticle=res.articles.length;
+        let article=res.articles;
+
+        let tab1, tab2;
+        // console.log(articles)
+        tab1 = article.splice(0,(article.length/2));
+        tab2 = article;
+        tab1.forEach(x => {
+          this.articles1.push(x);
+        });
+        tab2.forEach(x => {
+          this.articles2.push(x);
+        });
+
         this.articleService.getSoldArticleByUser(this.utilisateur.id).subscribe(res2=>{
           if(res2.success)
           {
             this.articleSoldUser=res2.articles;
-            console.log("En vente "+this.articleSoldUser);
+            this.numberSoldArticle=res2.articles.length;
+
+            let articlesV=res2.articles;
+            let tabV1, tabV2;
+            // console.log(articles)
+            tabV1 = articlesV.splice(0,(articlesV.length/2));
+            tabV2 = articlesV;
+            tabV1.forEach(x => {
+              this.articlesV1.push(x);
+            });
+            tabV2.forEach(x => {
+              this.articlesV2.push(x);
+            });
             this.articleService.getFavoriteArticleByUser(this.utilisateur.id).subscribe(res3=>{
               if(res3.success)
               {
+                this.numberFavoriteArticle=res3.articles.length;
+
                 this.articleFavoriteUser=res3.articles;
-                console.log("Favoris "+this.articleFavoriteUser);
+                let articlesF=res3.articles;
+                let tabF1, tabF2;
+                // console.log(articles)
+                tabF1 = articlesF.splice(0,(articlesF.length/2));
+                tabF2 = articlesF;
+                tabF1.forEach(x => {
+                  this.articlesF1.push(x);
+                });
+                tabF2.forEach(x => {
+                  this.articlesF2.push(x);
+                });
 
                 loading.dismiss();
               }else{
@@ -101,24 +153,66 @@ export class ProfilPage {
 
     })
   }
+
+  /*To do*/
+  sliceList(articles)
+  {
+
+  }
   ionViewWillEnter() {
+   /* this.articles1=[];
+    this.articles2=[];
+    this.articlesF1=[];
+    this.articlesF2=[];
+    this.articlesV1=[];
+    this.articlesV2=[];
     let loading = this.loadingCtrl.create();
     loading.present();
     this.articleService.getArticleByUser(this.utilisateur.id).subscribe(res=>{
       if(res.success)
       {
         this.articleUser=res.articles;
-        console.log("Article user"+this.articleUser);
+
+        let tab1, tab2;
+        // console.log(articles)
+        tab1 = this.articleUser.splice(0,(this.articleUser.length/2));
+        tab2 = this.articleUser;
+        tab1.forEach(x => {
+          this.articles1.push(x);
+        });
+        tab2.forEach(x => {
+          this.articles2.push(x);
+        });
+
         this.articleService.getSoldArticleByUser(this.utilisateur.id).subscribe(res2=>{
           if(res2.success)
           {
             this.articleSoldUser=res2.articles;
-            console.log("En vente "+this.articleSoldUser);
+            let tabV1, tabV2;
+            // console.log(articles)
+            tabV1 = this.articleSoldUser.splice(0,(this.articleSoldUser.length/2));
+            tabV2 = this.articleSoldUser;
+            tabV1.forEach(x => {
+              this.articlesV1.push(x);
+            });
+            tabV2.forEach(x => {
+              this.articlesV2.push(x);
+            });
             this.articleService.getFavoriteArticleByUser(this.utilisateur.id).subscribe(res3=>{
               if(res3.success)
               {
                 this.articleFavoriteUser=res3.articles;
-                console.log("Favoris "+this.articleFavoriteUser);
+
+                let tabF1, tabF2;
+                // console.log(articles)
+                tabF1 = this.articleFavoriteUser.splice(0,(this.articleFavoriteUser.length/2));
+                tabF2 = this.articleFavoriteUser;
+                tabF1.forEach(x => {
+                  this.articlesF1.push(x);
+                });
+                tabF2.forEach(x => {
+                  this.articlesF2.push(x);
+                });
 
                 loading.dismiss();
               }else{
@@ -139,8 +233,7 @@ export class ProfilPage {
         this.messageService.showToast(MessagesConstants.erreurRecuperationArticleUtilisateur);
       }
 
-    })
-
+    })*/
   }
 
   selectedEnVente(){
@@ -267,7 +360,6 @@ export class ProfilPage {
   }
   showAction(e,article)
   {
-
     if(article.utilisateur.id==JSON.parse(localStorage.getItem(GlobalsConstants.USER_LOGGED)).id)
     {
       let actionSheet = this.actionSheetCtrl.create({

@@ -217,7 +217,7 @@ export class ArticleDetailsPage implements OnInit{
     }
     else
     {
-      this.navCtrl.push(LoginPage,{message:"Pour pouvoir ajouter cet article en favoris, connectez-vous à Occazstreet ! "})
+      this.navCtrl.push(LoginPage,{message:"Pour pouvoir ajouter cet article en favoris, connectez-vous ! "})
 
     }
 

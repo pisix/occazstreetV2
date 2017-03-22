@@ -22,10 +22,8 @@ export class ArticleCard {
   }
 
   articleDetails(article) {
-    let loading = this.loadingCtrl.create();
-    loading.present();
+
     this.articleService.updateNumberView(article).subscribe(res => {
-      loading.dismiss();
       article.nombreDeVue = res.article.nombreDeVue;
       try {
         this.navCtrl.push(ArticleDetailsPage, {

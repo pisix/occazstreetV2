@@ -117,9 +117,7 @@ export class ConnexionModalPage {
     };
     GooglePlus.login(
       {
-        'scopes': 'profile email',
-        'webClientId': '',
-        'offline': false
+        'webClientId': GlobalsConstants.GOOGLEWEBCLIENTID,
       }
     )
       .then(res => {
@@ -138,7 +136,10 @@ export class ConnexionModalPage {
           }
         })
       })
-      .catch(err => alert(err));
+      .catch(err => {
+        console.log(err);
+        alert(err)
+      });
   }
 
 }

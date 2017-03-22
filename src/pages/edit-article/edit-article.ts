@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {NavController, NavParams, AlertController, LoadingController} from 'ionic-angular';
+import {NavController, NavParams, AlertController, LoadingController,Events} from 'ionic-angular';
 import {Article} from '../../components/article.component';
 import {Categorie} from '../../components/categorie.component';
 import {FormBuilder, Validators} from "@angular/forms";
@@ -42,7 +42,7 @@ export class EditArticlePage {
   };
 
 
-  constructor(public loadingCtrl: LoadingController, public messageService: MessageService, public imageService: ImageService, public alertCtrl: AlertController, public navCtrl: NavController, public navParams: NavParams, private formBuilder: FormBuilder, private articleService: ArticleService, private categorieService: CategorieService) {
+  constructor(public events:Events,public loadingCtrl: LoadingController, public messageService: MessageService, public imageService: ImageService, public alertCtrl: AlertController, public navCtrl: NavController, public navParams: NavParams, private formBuilder: FormBuilder, private articleService: ArticleService, private categorieService: CategorieService) {
     this.article = <Article>navParams.get('article');
     for (let i = 0; i < this.article.images.length; i++) {
       this.imageSrc[i] = {
@@ -109,6 +109,8 @@ export class EditArticlePage {
   }
 
   updateArticle() {
+    debugger;
+    console.log('doUpdate');
     let loading = this.loadingCtrl.create();
     loading.present();
     let userId = JSON.parse(localStorage.getItem(GlobalsConstants.USER_LOGGED)).id;
@@ -116,21 +118,26 @@ export class EditArticlePage {
     let longitude: number = 0;
     let city: string;
 
-    let localisation = JSON.parse(localStorage.getItem('localisation'));
-    for (let ac = 0; ac < localisation.address_components.length; ac++) {
-      let component = localisation.address_components[ac];
-      switch (component.types[0]) {
-        case 'locality':
-          city = component.long_name;
-          debugger;
-          latitude = localisation.geometry.location.lat;
-          longitude = localisation.geometry.location.lng;
-          break;
+    console.log(localStorage.getItem('localisation'));
+    if(JSON.parse(localStorage.getItem('localisation')))
+    {
+      let localisation = JSON.parse(localStorage.getItem('localisation'));
+      for (let ac = 0; ac < localisation.address_components.length; ac++) {
+        let component = localisation.address_components[ac];
+        switch (component.types[0]) {
+          case 'locality':
+            city = component.long_name;
+            debugger;
+            latitude = localisation.geometry.location.lat;
+            longitude = localisation.geometry.location.lng;
+            break;
+        }
       }
+      this.updateArticleForm.value.ville = city;
+      this.updateArticleForm.value.latitude = latitude;
+      this.updateArticleForm.value.longitude = longitude;
     }
-    this.updateArticleForm.value.ville = city;
-    this.updateArticleForm.value.latitude = latitude;
-    this.updateArticleForm.value.longitude = longitude;
+
     this.updateArticleForm.value.utilisateur = userId;
     this.updateArticleForm.value.idArticle = this.article.idArticle;
     if (this.updateArticleForm.value.etat == true) {
@@ -141,13 +148,16 @@ export class EditArticlePage {
     }
     this.articleService.updateArticle(<Article>this.updateArticleForm.value, this.imageSrc).subscribe(res => {
       if (res.success == true) {
+        this.events.publish('update:profile',true);
         this.article = res.article;
         let itemsProcessed = 0;
         let error;
         console.log(this.imageSrc);
         this.imageSrc.forEach(i => {
+          debugger;
           itemsProcessed++;
           console.log(i);
+          debugger;
           if (i != '' && i.file_uri.indexOf('file') !== -1) {
             this.imageService.updateImage(i.file_uri, res.article.idArticle, i.idImage, i.oldFileName).then(res => {
               if (!(JSON.parse(res.response)).success) {

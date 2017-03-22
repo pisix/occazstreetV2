@@ -1,10 +1,14 @@
-<ion-card (click)="articleicleDetails($event,article)" id="card">
+<ion-card (click)="articleDetails($event,article)" id="card">
   <img *ngIf="article?.images.length>0" src="{{url}}{{cheminImage}}{{article?.images[0]?.cheminImage}}"/>
   <img *ngIf="article?.images.length==0" src="assets/img/defaultImage.png"/>
   <ion-card-content text-center no-padding>
     <ion-card-title  class="price" >
       {{article.prix | currency:'XAF':true}}
     </ion-card-title>
+    <ion-card-title  class="price" *ngIf="article.ancienPrix>article.prix && article.ancienPrix !=0" class="line-through">
+      {{article.ancienPrix | currency:'XAF':true}}
+    </ion-card-title>
+
     <h6>{{article.titre | titeCapitalize}}</h6>
   </ion-card-content>
   <section class="timer" text-right>

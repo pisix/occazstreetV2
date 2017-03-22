@@ -55,15 +55,15 @@
         <ion-segment [(ngModel)]="profileTab" primary>
           <ion-segment-button value="envente"  (ionSelect)="selectedEnVente()">
             En Vente
-            <span class="profil-article-notif">{{articleUser?.length}}</span>
+            <span class="profil-article-notif">{{numberArticle}}</span>
           </ion-segment-button>
           <ion-segment-button value="vendu" (ionSelect)="selectedVendu()">
             Vendu
-            <span class="profil-article-notif">{{articleSoldUser?.length}}</span>
+            <span class="profil-article-notif">{{numberSoldArticle}}</span>
           </ion-segment-button>
           <ion-segment-button value="favoris" (ionSelect)="selectedFavoris()">
             Favoris
-            <span class="profil-article-notif">{{articleFavoriteUser?.length}}</span>
+            <span class="profil-article-notif">{{numberFavoriteArticle}}</span>
           </ion-segment-button>
         </ion-segment>
       </ion-toolbar>
@@ -82,14 +82,21 @@
             </p>
           </ion-card-content>
         </ion-card>
-        <div class="list-article" *ngIf="articleUser || articleUser?.length==0">
-            <ion-row style="flex-wrap: wrap; -webkit-flex-wrap: wrap">
-              <ion-col width-33 (press)="showAction($event,article)" (click)="goToDetailArticlePage($event,article)" *ngFor="let article of articleUser">
-                <img *ngIf="article?.images.length>0" src="{{url}}{{cheminImage}}{{article?.images[0]?.cheminImage}}"/>
-                <img *ngIf="article?.images.length==0" src="assets/img/defaultImage.png"/>
-              </ion-col>
-            </ion-row>
-        </div>
+        <ion-row  *ngIf="articles1?.length>0 || articles2?.length>0" style="width: 80%; margin-left: 9%;">
+          <ion-col width-40 no-padding>
+            <article-card *ngFor="let art1 of articles1"
+                          [article]="art1" #articleCard1
+                          (click)="articleCard1.articleDetails(art1)" (press)="showAction($event,art1)">
+            </article-card>
+          </ion-col>
+
+          <ion-col width-40 no-padding>
+            <article-card *ngFor="let art2 of articles2"
+                          [article]="art2" #articleCard2
+                          (click)="articleCard2.articleDetails(art2)" (press)="showAction($event,art2)">
+            </article-card>
+          </ion-col>
+        </ion-row>
       </div>
       <div *ngIf="profileTab=='vendu'"  >
         <ion-card class="list-article" *ngIf="!articleSoldUser || articleSoldUser?.length==0">
@@ -107,14 +114,21 @@
             </p>
           </ion-card-content>
         </ion-card>
-        <div class="list-article" *ngIf="articleSoldUser || articleSoldUser?.length==0">
-          <ion-row style="flex-wrap: wrap; -webkit-flex-wrap: wrap">
-            <ion-col width-33 (click)="goToDetailArticlePage($event,article)" *ngFor="let article of articleSoldUser">
-              <img *ngIf="article?.images.length>0" src="{{url}}{{cheminImage}}{{article?.images[0]?.cheminImage}}"/>
-              <img *ngIf="article?.images.length==0" src="assets/img/defaultImage.png"/>
-            </ion-col>
-          </ion-row>
-        </div>
+        <ion-row  *ngIf="articlesV1?.length>0 || articlesV2?.length>0" style="width: 80%; margin-left: 9%;">
+          <ion-col width-40 no-padding>
+            <article-card *ngFor="let art1 of articlesV1"
+                          [article]="art1" #articleCard1
+                          (click)="articleCard1.articleDetails(art1)" (press)="showAction($event,art1)">
+            </article-card>
+          </ion-col>
+
+          <ion-col width-40 no-padding>
+            <article-card *ngFor="let art2 of articlesV2"
+                          [article]="art2" #articleCard2
+                          (click)="articleCard2.articleDetails(art2)" (press)="showAction($event,art2)">
+            </article-card>
+          </ion-col>
+        </ion-row>
       </div>
       <div *ngIf="profileTab=='favoris'"  >
         <ion-card class="list-article" *ngIf="!articleFavoriteUser || articleFavoriteUser?.length==0">
@@ -132,14 +146,21 @@
             </p>
           </ion-card-content>
         </ion-card>
-        <div class="list-article" *ngIf="articleFavoriteUser || articleFavoriteUser?.length==0">
-          <ion-row style="flex-wrap: wrap; -webkit-flex-wrap: wrap">
-            <ion-col width-33 (click)="goToDetailArticlePage($event,article)" *ngFor="let article of articleFavoriteUser">
-              <img *ngIf="article?.images.length>0" src="{{url}}{{cheminImage}}{{article?.images[0]?.cheminImage}}"/>
-              <img *ngIf="article?.images.length==0" src="assets/img/defaultImage.png"/>
-            </ion-col>
-          </ion-row>
-        </div>
+        <ion-row  *ngIf="articlesF1?.length>0 || articlesF2?.length>0" style="width: 80%; margin-left: 9%;">
+          <ion-col width-40 no-padding>
+            <article-card *ngFor="let art1 of articlesV1"
+                          [article]="art1" #articleCard1
+                          (click)="articleCard1.articleDetails(art1)" >
+            </article-card>
+          </ion-col>
+
+          <ion-col width-40 no-padding>
+            <article-card *ngFor="let art2 of articlesV2"
+                          [article]="art2" #articleCard2
+                          (click)="articleCard2.articleDetails(art2)">
+            </article-card>
+          </ion-col>
+        </ion-row>
 
       </div>
     </div>
