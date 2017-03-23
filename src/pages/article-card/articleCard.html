@@ -11,8 +11,15 @@
 
     <h6>{{article.titre | titeCapitalize}}</h6>
   </ion-card-content>
-  <section class="timer" text-right>
-    <span *ngIf="article.dateModification === null">{{'addedOn' | translate}} : {{article.dateAjout | occasStreetTimer}}</span>
-    <span *ngIf="article.dateModification">{{'editedOn' | translate}} : {{article.dateModification | occasStreetTimer}}</span>
+  <section class="timer" >
+    <ion-col width-50 >
+      <ion-icon name="heart-outline" class="icon-favorite" >&nbsp;&nbsp;{{article.nombreFavoris}}</ion-icon>
+
+    </ion-col>
+    <ion-col width-50 >
+      <ion-icon name="ios-eye-outline" class="icon-view" >&nbsp;&nbsp;{{article.nombreDeVue}}</ion-icon>
+    </ion-col>
+    <!--<span *ngIf="article.dateModification === null">{{'addedOn' | translate}} : {{article.dateAjout | occasStreetTimer}}</span>
+    <span *ngIf="article.dateModification">{{'editedOn' | translate}} : {{article.dateModification | occasStreetTimer}}</span>-->
   </section>
 </ion-card>
