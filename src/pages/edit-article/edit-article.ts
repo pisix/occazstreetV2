@@ -133,7 +133,8 @@ export class EditArticlePage {
             break;
         }
       }
-      this.updateArticleForm.value.ville = city;
+
+      this.updateArticleForm.value.nomVille = city;
       this.updateArticleForm.value.latitude = latitude;
       this.updateArticleForm.value.longitude = longitude;
     }
