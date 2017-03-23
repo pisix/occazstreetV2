@@ -3,7 +3,15 @@ import {ArticleService} from "../../services/article.service";
 import {RateService} from '../../services/rate-service';
 import {Article} from "../../components/article.component";
 import {GlobalsConstants} from "../../constants/globals.constants";
-import {NavController, NavParams, ModalController, ViewController, PopoverController, LoadingController,Events} from "ionic-angular";
+import {
+  NavController,
+  NavParams,
+  ModalController,
+  ViewController,
+  PopoverController,
+  LoadingController,
+  Events
+} from "ionic-angular";
 import {ArticleDetailsPage} from "../article-details/article-details";
 import {searchModalPage} from "../search-articles/search-articles";
 import {SearchResult} from "../search-result/search-result";
@@ -12,119 +20,110 @@ import {LoginPage} from "../login/login";
 
 
 @Component({
-  selector:'page-home',
+  selector: 'page-home',
   templateUrl: 'home.html'
 })
-export class HomePage implements OnInit{
+export class HomePage implements OnInit {
 
   public homeTab;
   public title = GlobalsConstants.APPNAME;
   private skip = 0;
   private skipExplorer = 0;
   private limit = GlobalsConstants.PAGE;
-  private limitExplorer=GlobalsConstants.PAGEEXPLORER;
-  public articles1:Array<Article> = [];
-  public articles2:Array<Article> = [];
-  private offLine:boolean;
-  public noNetwork:boolean=false;
-  public prixOrder:string = 'croissants';
-  public dateOrder:string = 'décroissantes';
-  public url=GlobalsConstants.urlServer+GlobalsConstants.port+'/';
-  public cheminImage=GlobalsConstants.cheminImage;
-  public  images:any = [];
+  private limitExplorer = GlobalsConstants.PAGEEXPLORER;
+  public articles1: Array<Article> = [];
+  public articles2: Array<Article> = [];
+  private offLine: boolean;
+  public noNetwork: boolean = false;
+  public prixOrder: string = 'croissants';
+  public dateOrder: string = 'décroissantes';
+  public url = GlobalsConstants.urlServer + GlobalsConstants.port + '/';
+  public cheminImage = GlobalsConstants.cheminImage;
+  public images: any = [];
   public numberAnnonces;
 
 
-  constructor(private articleService:ArticleService,
-              protected rateService:RateService,
+  constructor(private articleService: ArticleService,
+              protected rateService: RateService,
               private navCtrl: NavController,
-              private modalController : ModalController,
+              private modalController: ModalController,
               private popoverCtrl: PopoverController,
-              public events:Events) {
+              public events: Events) {
 
   }
 
 
   ngOnInit(): void {
-    this.getArticlesByLimit(this.skip,this.limit);
-    this.homeTab="mur";
+    this.getArticlesByLimit(this.skip, this.limit);
+    this.homeTab = "mur";
     this.rateService.appRate.promptForRating(true);
   }
 
-  loadAll(){
+  loadAll() {
     this.articleService.getAllArticles().subscribe(res => {
       //  let articles = res;
 
       // console.log("Article =>",articles)
-      this.numberAnnonces=res.length;
+      this.numberAnnonces = res.length;
     })
 
   }
 
-  selectedMur(){
-    this.homeTab="mur";
-  }
-  selectedExplorer(){
-    this.homeTab="explorer";
-  }
-  selectedCollections(){
-    this.homeTab="collections";
+  selectedMur() {
+    this.homeTab = "mur";
   }
 
-  getArticlesByLimit(skip:number,limit:number){
-    this.articleService.getArticlesByLimit(skip,limit).subscribe(res => {
+  selectedExplorer() {
+    this.homeTab = "explorer";
+  }
 
-      this.loadImageArticle(res,limit);
+  selectedCollections() {
+    this.homeTab = "collections";
+  }
 
-      this.skip=this.skip+res.length;
+  getArticlesByLimit(skip: number, limit: number) {
+    this.articleService.getArticlesByLimit(skip, limit).subscribe(res => {
+
+      this.loadImageArticle(res, limit);
+
+      this.skip = this.skip + res.length;
 
       this.offLine = false;
       let articles = res;
       console.log(articles);
 
-      let tab1, tab2;
-      // console.log(articles)
-      tab1 = articles.splice(0,(articles.length/2));
-      tab2 = articles;
-      tab1.forEach(x => {
-        this.articles1.push(x);
+      articles.forEach((art, idx) => {
+        idx % 2 === 0 ? this.articles1.push(art) :this.articles2.push(art);
       });
-      tab2.forEach(x => {
-        this.articles2.push(x);
-      });
+
       console.log(this.articles1);
       console.log(this.articles2);
 
-    },err =>{
-      console.log('err',err);
+    }, err => {
+      console.log('err', err);
       // watch network for a disconnect
       this.offLine = true;
 
     });
   }
 
-  loadImageArticle(res:any,limit:number){
-    this.skipExplorer=this.skipExplorer+res.length;
-    for(var i =0 ; i<res.length;i++)
-    {
-      if(res[i].images.length>0)
-      {
-        this.images.push({article:res[i],srcImage:this.url+this.cheminImage+res[i].images[0].cheminImage});
-      }else
-      {
-        this.images.push({article:res[i],srcImage:null});
+  loadImageArticle(res: any, limit: number) {
+    this.skipExplorer = this.skipExplorer + res.length;
+    for (var i = 0; i < res.length; i++) {
+      if (res[i].images.length > 0) {
+        this.images.push({article: res[i], srcImage: this.url + this.cheminImage + res[i].images[0].cheminImage});
+      } else {
+        this.images.push({article: res[i], srcImage: null});
       }
     }
-    this.images=this.shuffle(this.images);
+    this.images = this.shuffle(this.images);
   }
 
-  addNewArticle(){
-    if(localStorage.getItem("logged"))
-    {
+  addNewArticle() {
+    if (localStorage.getItem("logged")) {
       this.navCtrl.push(CreateArticle);
-    }else
-    {
-      this.navCtrl.push(LoginPage,{message:'Pour ajouter un article veuillez vous connecter '})
+    } else {
+      this.navCtrl.push(LoginPage, {message: 'Pour ajouter un article veuillez vous connecter '})
     }
   }
 
@@ -135,8 +134,7 @@ export class HomePage implements OnInit{
 
     modal.onDidDismiss(data => {
       console.log('MODAL DATA', data);
-      if(data)
-      {
+      if (data) {
         this.navCtrl.push(SearchResult, {
           searchParam: data
         });
@@ -146,46 +144,44 @@ export class HomePage implements OnInit{
 
 
   doRefresh(refresher) {
-    this.skip=0;
+    this.skip = 0;
     this.articles1 = [];
     this.articles2 = [];
-    this.getArticlesByLimit(this.skip,GlobalsConstants.PAGE);
+    this.getArticlesByLimit(this.skip, GlobalsConstants.PAGE);
     refresher.complete();
   }
 
   doRefreshImages(refresher) {
-    this.images=[];
-    this.skipExplorer=0;
-    this.getArticlesByLimit(this.skipExplorer,GlobalsConstants.PAGEEXPLORER);
+    this.images = [];
+    this.skipExplorer = 0;
+    this.getArticlesByLimit(this.skipExplorer, GlobalsConstants.PAGEEXPLORER);
     refresher.complete();
   }
 
-  doInfinite(infiniteScroll){
-    if(this.skip==0)
-    {
-      this.skip=GlobalsConstants.PAGE;
+  doInfinite(infiniteScroll) {
+    if (this.skip == 0) {
+      this.skip = GlobalsConstants.PAGE;
     }
-    setTimeout(()=>{
-      this.getArticlesByLimit(this.skip,this.limit+this.limit);
+    setTimeout(() => {
+      this.getArticlesByLimit(this.skip, this.limit + this.limit);
       infiniteScroll.complete();
 
-    },1000);
+    }, 1000);
   }
 
-  doInfiniteImages(infiniteScroll){
-    if(this.skipExplorer==0)
-    {
-      this.skipExplorer=GlobalsConstants.PAGEEXPLORER;
+  doInfiniteImages(infiniteScroll) {
+    if (this.skipExplorer == 0) {
+      this.skipExplorer = GlobalsConstants.PAGEEXPLORER;
     }
-    setTimeout(()=>{
-      this.loadImageArticle(this.skipExplorer,this.limitExplorer+this.limitExplorer);
+    setTimeout(() => {
+      this.loadImageArticle(this.skipExplorer, this.limitExplorer + this.limitExplorer);
       infiniteScroll.complete();
-    },1000);
+    }, 1000);
   }
 
-  option(myEvent){
+  option(myEvent) {
 
-    let popover = this.popoverCtrl.create(ArticlesPopOver,{prixOrder:this.prixOrder,dateOrder:this.dateOrder});
+    let popover = this.popoverCtrl.create(ArticlesPopOver, {prixOrder: this.prixOrder, dateOrder: this.dateOrder});
     popover.present({
       ev: myEvent
     });
@@ -226,26 +222,27 @@ export class HomePage implements OnInit{
              </ion-list>`,
 })
 export class ArticlesPopOver {
-  public prixOrder:string;
-  public dateOrder:string;
+  public prixOrder: string;
+  public dateOrder: string;
 
-  constructor(private viewCtrl: ViewController,navParams: NavParams) {
+  constructor(private viewCtrl: ViewController, navParams: NavParams) {
     this.dateOrder = navParams.get('dateOrder');
     this.prixOrder = navParams.get('prixOrder');
   }
 
-  trierParPix(order:string){
-    console.log("trier par prix "+order)
-    this.prixOrder = this.prixOrder === 'croissants'?'décroissants':'croissants';
-    this.viewCtrl.dismiss({prixOrder:this.prixOrder,dateOrder:this.dateOrder});
+  trierParPix(order: string) {
+    console.log("trier par prix " + order)
+    this.prixOrder = this.prixOrder === 'croissants' ? 'décroissants' : 'croissants';
+    this.viewCtrl.dismiss({prixOrder: this.prixOrder, dateOrder: this.dateOrder});
   }
 
-  trierParDate(order:string){
-    console.log("trier par date "+order)
-    this.dateOrder = this.dateOrder === 'décroissantes'?'croissantes':'décroissantes';
-    this.viewCtrl.dismiss({prixOrder:this.prixOrder,dateOrder:this.dateOrder});
+  trierParDate(order: string) {
+    console.log("trier par date " + order)
+    this.dateOrder = this.dateOrder === 'décroissantes' ? 'croissantes' : 'décroissantes';
+    this.viewCtrl.dismiss({prixOrder: this.prixOrder, dateOrder: this.dateOrder});
   }
+
   close() {
-    this.viewCtrl.dismiss({prixOrder:this.prixOrder,dateOrder:this.dateOrder});
+    this.viewCtrl.dismiss({prixOrder: this.prixOrder, dateOrder: this.dateOrder});
   }
 }

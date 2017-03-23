@@ -118,7 +118,7 @@ export class EditProfilModalPage {
         else
         {
           loading.dismiss();
-          this.messageService.showAlert(MessagesConstants.erreurUpdateProfil,MessagesConstants.miseAjoutProfilTitre);
+          this.messageService.showAlert(MessagesConstants.misAJourProfilSuccess,MessagesConstants.erreurUpdateProfil);
         }
       })
     }else

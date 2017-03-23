@@ -1,6 +1,6 @@
 page-edit-profil {
   .img-select{
-    height: 4em;
+    height: 6em;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -13,6 +13,11 @@ page-edit-profil {
       margin: 0 auto;
       font-size: 2.9em;
       color: rgba(0, 0, 0, 0.44);
+    }
+
+    img{
+      height: 100%;
+      width: 100%;
     }
   }
 

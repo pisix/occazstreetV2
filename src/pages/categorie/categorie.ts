@@ -1,3 +1,4 @@
+///<reference path="../../components/categorie.component.d.ts"/>
 import {Component} from '@angular/core';
 import {NavController} from 'ionic-angular';
 import {CategorieService} from '../../services/categorie.service';
@@ -32,7 +33,7 @@ export class CategoriePage {
   }
 
   goToDetailsCategorie(event, laCategorie) {
-    let categorie = new Categorie();
+    let categorie = new Categorie(laCategorie);
     categorie.idCategorie = laCategorie.idcategorie;
     categorie.libelle = this.locale == 'fr' ? laCategorie.libelle : laCategorie.libelleEn;
     console.log(categorie);
