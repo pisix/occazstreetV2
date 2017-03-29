@@ -117,7 +117,8 @@ export class ConnexionModalPage {
     };
     GooglePlus.login(
       {
-        'webClientId': GlobalsConstants.GOOGLEWEBCLIENTID,
+        'webClientId': GlobalsConstants.REVERSEGOOGLECLIENTID,
+        'offline':false
       }
     )
       .then(res => {

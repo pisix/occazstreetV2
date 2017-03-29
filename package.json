@@ -24,7 +24,7 @@
     "@angular/platform-server": "2.4.8",
     "@ionic/storage": "2.0.0",
     "angular2-moment": "^1.0.0-beta.rc.1",
-    "ionic-angular": "2.2.0",
+    "ionic-angular": "2.3.0",
     "ionic-native": "^2.4.1",
     "ionicons": "3.0.0",
     "moment": "^2.16.0",
@@ -57,7 +57,7 @@
     },
     {
       "variables": {
-        "APP_ID": "360840357584353",
+        "APP_ID": "1899882610234503",
         "APP_NAME": "OccazStreet"
       },
       "locator": "cordova-plugin-facebook4",

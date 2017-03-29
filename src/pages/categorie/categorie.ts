@@ -1,4 +1,3 @@
-///<reference path="../../components/categorie.component.d.ts"/>
 import {Component} from '@angular/core';
 import {NavController} from 'ionic-angular';
 import {CategorieService} from '../../services/categorie.service';
