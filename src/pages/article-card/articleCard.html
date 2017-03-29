@@ -16,7 +16,9 @@
       <ion-icon name="heart-outline" class="icon-favorite" >&nbsp;&nbsp;{{article.nombreFavoris}}</ion-icon>
     </ion-col>
     <ion-col width-50 >
-      <ion-icon name="ios-eye-outline" class="icon-view" >&nbsp;&nbsp;{{article.nombreDeVue}}</ion-icon>
+      <ion-icon name="ios-eye-outline" class="icon-view" *ngIf="article.nombreDeVue < 100">&nbsp;&nbsp;{{article.nombreDeVue}}</ion-icon>
+      <ion-icon name="flame" color="primary" class="fire" *ngIf="article.nombreDeVue > 100"></ion-icon>
+
     </ion-col>
     <!--<span *ngIf="article.dateModification === null">{{'addedOn' | translate}} : {{article.dateAjout | occasStreetTimer}}</span>
     <span *ngIf="article.dateModification">{{'editedOn' | translate}} : {{article.dateModification | occasStreetTimer}}</span>-->
