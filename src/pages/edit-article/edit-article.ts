@@ -213,14 +213,14 @@ export class EditArticlePage {
       buttons: [
         {
           text: 'Gallerie photo',
-          cssClass: 'image-alert-btn',
+          //cssClass: 'image-alert-btn',
           handler: () => {
             this.loadImageFromCamara(imgIndex, Camera.PictureSourceType.PHOTOLIBRARY);
           }
         },
         {
           text: 'Appareil photo',
-          cssClass: 'image-alert-btn',
+         // cssClass: 'image-alert-btn',
           handler: () => {
             this.loadImageFromCamara(imgIndex, Camera.PictureSourceType.CAMERA);
           }

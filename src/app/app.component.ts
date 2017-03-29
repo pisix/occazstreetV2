@@ -276,9 +276,11 @@ export class App {
   /*Connectivity listener to check device connectivity*/
   addConnectivityListeners(){
     let onOnline = () => {
+      alert('online');
       this.events.publish('network',{state:'on'});
     };
     let onOffline = () => {
+      alert('offLine');
       this.events.publish('network',{state:'off'});
     };
     document.addEventListener('online', onOnline, false);

@@ -76,14 +76,14 @@ export class EditProfilModalPage implements OnInit {
       buttons: [
         {
           text: 'Gallerie photo',
-          cssClass: 'image-alert-btn',
+          //cssClass: 'image-alert-btn',
           handler: () => {
             this.loadImageFromCamara(Camera.PictureSourceType.PHOTOLIBRARY);
           }
         },
         {
           text: 'Appareil photo',
-          cssClass: 'image-alert-btn',
+          //cssClass: 'image-alert-btn',
           handler: () => {
             this.loadImageFromCamara(Camera.PictureSourceType.CAMERA);
           }
