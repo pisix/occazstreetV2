@@ -183,7 +183,9 @@ export class App {
                  }
                  if(push.additionalData['pushInfo'].type=='newPrice')
                  {
-
+                   self.nav.push(ArticleDetailsPage, {
+                     article: push.additionalData['data']
+                   });
                  }
                }
              }]
@@ -205,7 +207,9 @@ export class App {
            }
            if(push.additionalData['pushInfo'].type=='newPrice')
            {
-
+             self.nav.push(ArticleDetailsPage, {
+               article: push.additionalData['data']
+             });
            }
          }
        });
