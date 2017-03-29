@@ -1,6 +1,7 @@
 import {Component, ViewChild} from '@angular/core';
 import {Platform, MenuController, Nav,Events, AlertController,LoadingController } from 'ionic-angular';
 import {StatusBar,Push,Splashscreen,Badge,Network,InAppBrowser} from 'ionic-native';
+
 import {HomePage} from '../pages/home/home';
 import {HelpPage} from '../pages/help/help';
 import {CategoriePage} from '../pages/categorie/categorie';
@@ -128,7 +129,7 @@ export class App {
 
     this.addConnectivityListeners();
     this.platform.ready().then(() => {
-
+      Badge.clear();
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       StatusBar.styleDefault();
@@ -207,6 +208,7 @@ export class App {
            }
            if(push.additionalData['pushInfo'].type=='newPrice')
            {
+             Badge.increase(1);
              self.nav.push(ArticleDetailsPage, {
                article: push.additionalData['data']
              });
